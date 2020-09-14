@@ -1,0 +1,61 @@
+h1 {
+  font-family: Sitka Heading;
+  font-weight: bold;
+  top: 20px;
+  font-size: 30px;
+  color: #3B3B3B;
+}
+
+body {
+  margin: 0;
+  font-family: Segoe UI;
+  font-size: 20px;
+  color: #3B3B3B;
+}
+
+/* Logo style */
+#Smart_Exibit{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: none;
+  left: 60px;
+  top: 20px;
+  position: absolute;
+  overflow: hidden;
+  width: 472px;
+  height: 68px;
+  text-align: left;
+  font-family: Sitka Heading;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  color: rgba(255,255,255,1);
+}
+
+/* Navigation background color */
+.topnav {
+  background-color: #4F6367;
+  overflow: hidden;
+  font-family: Sitka Heading;
+  font-weight: bold;
+}
+
+/* Links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #ffffff;
+  text-align: center;
+  padding: 25px 25px;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+/* Change the color of links on hover */
+.linktopnav a:hover {
+  background-color: #FE5F55; 
+  transition: all 0.6s ease-in;
+  color: white;
+}
+
+
