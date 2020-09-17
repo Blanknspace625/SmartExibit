@@ -1,0 +1,43 @@
+
+
+div#page-container
+    div#content-wrap
+        nav(name='top' class='navbar navbar-expand-md navbar-light bg-light sticky-top shadow-sm')
+            .col-sm-6.py-0
+                a(class="navbar-brand" href="/") #{title}
+            .col-sm-6.py-0
+                button(class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar")
+                    span(class="navbar-toggler-icon")
+                div(class="collapse navbar-collapse" id="collapsibleNavbar")
+                    ul.navbar-nav.ml-auto
+                        li.nav-item
+                            a(href = "/register") Register
+                        li.nav-item
+                            a(href = "/login") Login
+                        li.nav-item
+                            a(href='/contact-us') Contact
+                        li.nav-item
+                            a(href='/about-us') About
+
+        div(id="slides" class="carousel slide" data-ride="carousel")
+            ul.carousel-indicators
+                li(data-target="#slides" data-slide-to="0" class="active")
+                li(data-target="#slides" data-slide-to="1")
+                li(data-target="#slides" data-slide-to="2")
+
+            .
+                .carousel-item.active
+                img(class="img-responsive mx-auto d-block" src="../img/mobile-shopping.png")
+                .carousel-caption
+                h3 Take control of your money, build a better life
+                h5 We help you find your best deals throughout the internet
+                br
+                a(href="/register" class="btn btn-primary btn-lg rounded-0") SIGN UP HERE
+                .carousel-item
+                img(class="img-responsive mx-auto d-block" src="../img/save-and-travel.png")
+                .carousel-caption
+                h3 Live without financial burden and be free to travel
+                .carousel-item
+                img(class="img-responsive mx-auto d-block" src="../img/online-shopping.png")
+                .carousel-caption
+                h3 Help us help you for a better online shopping experience
