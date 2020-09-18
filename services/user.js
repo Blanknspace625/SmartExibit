@@ -25,7 +25,7 @@ class User
 
     PushToDatabase()
     {
-        Database.CreateNewUser(this);
+        new Database().CreateNewUser(this);
     }
 
     IsValid()

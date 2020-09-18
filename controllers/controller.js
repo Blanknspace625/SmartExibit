@@ -55,7 +55,7 @@ exports.user_login = function(req, res){
 }
 
 exports.return_dashboard = function(req, res){
-    res.status(200).send('User Dashboard');
+    res.status(200).send(req.profileid +' User Dashboard');
 }
 
 exports.return_website = function(req, res){
