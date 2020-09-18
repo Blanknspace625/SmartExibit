@@ -21,8 +21,8 @@ class Database {
         const profileImg = User.GetUserProfilePic();
         const pwd = User.GetUserPassword();
 
-        var rec = "INSERT INTO User (firstName, lastName, email, profileImg, pwd, extLink) VALUES ("+firstName+", " +
-            ""+lastName+", "+email+", "+profileImg+", "+pwd+", '000')";
+        var rec = "INSERT INTO User (firstName, lastName, email, profileImg, pwd, extLink) VALUES ('"+firstName+"', " +
+            "'"+lastName+"', '"+email+"', '"+profileImg+"', '"+pwd+"', '000')";
         conn.query(rec, function (err, res) {
             if (err) throw err;
             console.log("1 record inserted");
