@@ -7,13 +7,13 @@ const pool = mysql.createConnection({
     database: 'eportfolio'
 });
 
-static class Database{
+class Database{
     constructor()
     {
 
     }
 
-    CreateNewUser()
+    static CreateNewUser(User)
     {
         
     }

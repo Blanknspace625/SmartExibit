@@ -23,9 +23,10 @@ exports.signup_new_user = function(req, res){
     var firstName = req.body.firstName;
     var lastName = req.body.lastName;
     var profilePictureRef = req.body.profilePictureRef;
+    var password = req.body.password;
 
     //populate user fields from req
-    let newUser = new User(email, firstName, lastName, profilePictureRef);
+    let newUser = new User(email, firstName, lastName, profilePictureRef, password);
 
     var FieldsValid  = newUser.IsValid();
 
@@ -33,11 +34,11 @@ exports.signup_new_user = function(req, res){
     if(FieldsValid == "OK")
     {
         newUser.PushToDatabase();
-        res.sendStatus(200).redirect('/signin');
+        res.redirect('/signin');
     }
     else
     {
-        res.sendStatus(400);
+        res.status(400).send(FieldsValid);
     }
 }
 
