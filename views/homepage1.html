@@ -3,12 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <!--bootstrap -->
   <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css'
         integrity='sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk'
         crossorigin='anonymous')>
-  <link rel="stylesheet" href="mystyle.css">
-  <link rel="stylesheet" href="slideshow.css">
-  <link rel="stylesheet" href="bootstrap-magic.css">
+  <link rel="stylesheet" href="../Public/StyleeSheet/mystyle.css">
+  <link rel="stylesheet" href="../Public/StyleeSheet/slideshow.css">
+  <link rel="stylesheet" href="../Public/StyleeSheet/bootstrap-magic.css">
 
 
   <!-- jQuery library -->
@@ -19,29 +22,33 @@
 
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </head>
 
-<body>
-  <body style="background-color:white;">
-
-  <!--Navigation Bar-->
-  <div id="page-container">
-    <div id="content-wrap">
-      <nav class="navbar navbar-expand-md navbar-light sticky-top shadow-sm" name="top">
-        <div class="col-sm-1 py-0"><a class="navbar-brand" href="/"></a></div>
-          <h1 id ="Smart_Exibit">Smart Exibit</h1>
-        <div class="col-sm-8 py-0"><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"><span class="navbar-toggler-icon"></span></button>
-          <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item"><a href="/register">Register</a></li>
-              <li class="nav-item"><a href="/login">Login</a></li>
-              <li class="nav-item"><a href="/contact-us">Contact</a></li>
-              <li class="nav-item"><a href="/about-us">About</a></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-  </div>
+<div id = "page-container">
+  <div id="content-wrap">
+  <nav class="navbar navbar-expand-lg navbar-light se-db bg-primary">
+    <a class="navbar-brand ml-sm-1" href="#" id="Smart_Exibit">Smart Exibit</a>
+    <button class="navbar-toggler ml-sm-1" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse " id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto ">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contract</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">login</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
   <!--Carousel slide show -->
   <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -49,7 +56,9 @@
       <div class="carousel-item active">
         <img class="d-block w-100" src="https://www.solidbackgrounds.com/images/950x350/950x350-sky-blue-solid-color-background.jpg" alt="First slide">
         <div class="carousel-caption">
-          <h5>We help you find your best deals throughout the internet</h5><br/><a class="btn btn-secondary btn-lg rounded-0" href="/register">SIGN UP HERE</a>
+          <h3>A Simple Organizing Tool Made for Managing and Showcasing Your Portfolios</h3>
+          <h5>We organize your portfolio in one place making it easy for anyone to see and manage.</h5>
+          <br/><a class="btn se-or btn-lg rounded-0" href="/register">SIGN UP HERE</a>
         </div>
       </div>
       <div class="carousel-item">
@@ -99,6 +108,7 @@
   <div style="padding-top:30px">
   </div>
 
-</body>
-  
+  </div>
+  </div>
+</div>
 </html>

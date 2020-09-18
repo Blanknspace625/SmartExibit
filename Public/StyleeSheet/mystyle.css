@@ -15,7 +15,10 @@ body {
 
 /* Logo style */
 #Smart_Exibit{
-
+  font-size: 25px;
+  color:white;
+  font-family:Sitka Heading;
+  font-weight:bold;
 }
 
 /*  Top Level Container */
@@ -31,6 +34,7 @@ body {
 .nav-item{
   padding-left: 20px;
   padding-right: 20px;
+  font-size: 20px;
 }
 
 .se-sb{
@@ -42,7 +46,8 @@ body {
 }
 
 .se-db{
-  color:#4F6367;
+  background-color:#4F6367;
+  color: white;
 }
 
 .se-wh{
@@ -50,5 +55,6 @@ body {
 }
 
 .se-or{
-  color:#FE5F55;
+  background-color:#FE5F55;
+  color:white;
 }
