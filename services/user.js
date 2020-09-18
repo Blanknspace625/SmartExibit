@@ -1,3 +1,5 @@
+var Database = require('../DataAccess/Database')
+
 class User
 {
     #UserID;
@@ -6,7 +8,7 @@ class User
     #Firstname;
     #LastName;
 
-    constructor(EmailAddress, FirstName, LastName, ProfilePictureRef, UserID)
+    constructor(EmailAddress, FirstName, LastName, ProfilePictureRef)
     {
         this.#EmailAddress = EmailAddress;
         this.#Firstname = FirstName;
@@ -14,15 +16,25 @@ class User
         this.#ProfilePictureRef = ProfilePictureRef;
 
         //UserID can be optinally included if the entry exists in the database
-        if(!UserID){ return; }
+        //if(!UserID){ return; }
 
-        this.#UserID = UserID;
+        //this.#UserID = UserID;
     }
 
     PushToDatabase()
     {
-        //TODO Handle creating or updating method calls on database layer
+        Database.CreateNewUser();
     }
 
+    IsValid()
+    {
+        console.log('Checking User is valid');
+        console.log(this.#Firstname);
+        console.log(this.#LastName);
+        console.log(this.#EmailAddress);
+        console.log(this.#ProfilePictureRef);
+    }
 
 }
+
+module.exports = User;

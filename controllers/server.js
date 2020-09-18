@@ -4,6 +4,12 @@ var express = require('express'),
 
 app.listen(port);
 
+
+
+var bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
+
 //register api routes
 var routes = require('./routes')
 routes(app);

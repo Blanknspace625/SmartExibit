@@ -1,23 +1,27 @@
-module.exports = function(app) {
-    var tasks = require('./controller');
 
+
+module.exports = function(app) {
+    var task = require('./controller');
+
+    app.route('/')
+        .get(task.return_website);
     
-    app.route('/home')
+    app.route('/homepage')
         .get(task.return_homepage);
         
     app.route('/signup')
-        .get() //TODO return signup page resource
-        .post();//TODO create new account
+        .get(task.return_signup)
+        .post(task.signup_new_user);
 
     app.route('/profile/:profileid')
-        .get();//TODO get profile page
+        .get(task.return_profile);
 
     app.route('/signin')
-        .get()//TODO Get sign in page
-        .post(); //TODO sign in to account
+        .get(task.return_signin)
+        .post(task.user_login);
 
     app.route('/dashboard/:profileid')
-        .get();//TODO get account dashboard for signed in account
+        .get(task.return_dashboard);
     
     app.route('/resources')
         .get(task.return_resource);
