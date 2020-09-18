@@ -13,11 +13,6 @@ conn.connect(function(err) {
 });
 
 class Database {
-    constructor()
-    {
-
-    }
-
     CreateNewUser(User)
     {
         const firstName = User.GetUserFirstName();
@@ -26,8 +21,8 @@ class Database {
         const profileImg = User.GetUserProfilePic();
         const pwd = User.GetUserPassword();
 
-        var rec = "INSERT INTO User (firstName, lastName, email, profileImg, pwd) VALUES ('+firstName+'," +
-            "'+lastName+', '+email+', '+profileImg+', '+pwd+')";
+        var rec = "INSERT INTO User (firstName, lastName, email, profileImg, pwd, extLink) VALUES ("+firstName+", " +
+            ""+lastName+", "+email+", "+profileImg+", "+pwd+", '000')";
         conn.query(rec, function (err, res) {
             if (err) throw err;
             console.log("1 record inserted");
