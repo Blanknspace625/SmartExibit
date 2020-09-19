@@ -1,11 +1,11 @@
 var express = require('express');
 var session = require('express-session');
-
-var User = require('../services/user.js')
+var User = require('../services/user.js');
+var path = require('path');
 
 
 exports.return_homepage = function(req, res){
-    res.status(200).send('Homepage');
+    res.sendFile(path.join('../views/homepage.html'));
 }
 
 exports.return_resource = function(req, res){

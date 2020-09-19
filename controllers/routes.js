@@ -1,4 +1,4 @@
-
+var path = require('path');
 
 module.exports = function(app) {
     var task = require('./controller');
