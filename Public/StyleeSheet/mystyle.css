@@ -1,0 +1,60 @@
+h1 {
+  font-family: Sitka Heading;
+  font-weight: bold;
+  top: 20px;
+  font-size: 30px;
+  color: #3B3B3B;
+}
+
+body {
+  margin: 0;
+  font-family: Segoe UI;
+  font-size: 20px;
+  color: #3B3B3B;
+}
+
+/* Logo style */
+#Smart_Exibit{
+  font-size: 25px;
+  color:white;
+  font-family:Sitka Heading;
+  font-weight:bold;
+}
+
+/*  Top Level Container */
+#page-container {
+  position: relative;
+  min-height: 10vh;
+}
+
+#content-wrap {
+  padding-bottom: 75px;
+}
+
+.nav-item{
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 20px;
+}
+
+.se-sb{
+  color:#B8D8D8;
+}
+
+.se-gb{
+  color: #3C787A;
+}
+
+.se-db{
+  background-color:#4F6367;
+  color: white;
+}
+
+.se-wh{
+  color:#FFFFFF;
+}
+
+.se-or{
+  background-color:#FE5F55;
+  color:white;
+}
