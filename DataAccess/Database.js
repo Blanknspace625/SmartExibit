@@ -9,10 +9,10 @@ const conn = mysql.createConnection({
 
 conn.connect(function(err) {
     if (err) throw err;
-    console.log("Connected!");
+    console.log("MariaDB Connected!");
 });
 
-class Database {
+class database {
     CreateNewUser(User)
     {
         const firstName = User.GetUserFirstName();
@@ -21,7 +21,7 @@ class Database {
         const profileImg = User.GetUserProfilePic();
         const pwd = User.GetUserPassword();
 
-        var rec = "INSERT INTO User (firstName, lastName, email, profileImg, pwd, extLink) VALUES ('"+firstName+"', " +
+        var rec = "INSERT INTO User (firstName, lastName, email, profileImg, pwd, extLink) VALUES ('"+firstName+"'," +
             "'"+lastName+"', '"+email+"', '"+profileImg+"', '"+pwd+"', '000')";
         conn.query(rec, function (err, res) {
             if (err) throw err;
@@ -30,4 +30,4 @@ class Database {
     }
 }
 
-module.exports = Database;
+module.exports = database;
