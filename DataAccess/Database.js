@@ -13,19 +13,32 @@ conn.connect(function(err) {
 });
 
 class database {
-    CreateNewUser(User)
-    {
+    CreateNewUser(User) {
         const firstName = User.GetUserFirstName();
         const lastName = User.GetUserLastName();
         const email = User.GetUserEmail();
         const profileImg = User.GetUserProfilePic();
         const pwd = User.GetUserPassword();
 
-        var rec = "INSERT INTO User (firstName, lastName, email, profileImg, pwd, extLink) VALUES ('"+firstName+"'," +
+        var sql = "INSERT INTO User (firstName, lastName, email, profileImg, pwd, extLink) VALUES ('"+firstName+"'," +
             "'"+lastName+"', '"+email+"', '"+profileImg+"', '"+pwd+"', '000')";
-        conn.query(rec, function (err, res) {
+        conn.query(sql, function (err, res) {
             if (err) throw err;
             console.log("1 record inserted");
+        });
+    }
+
+    // Pending encryption
+    VerifyUser(email, pwd) {
+        var sql = "SELECT pwd FROM Users WHERE email = ?";
+        conn.query(sql, [email], function (err, res) {
+            if (err) throw err;
+
+            if (res == pwd) {
+                console.log("OK")
+            } else {
+                console.log("Wrong password!");
+            }
         });
     }
 }
