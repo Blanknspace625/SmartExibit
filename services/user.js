@@ -1,4 +1,4 @@
-var Database = require('../DataAccess/database')
+var Database = require('../DataAccess/database');
 
 class User
 {

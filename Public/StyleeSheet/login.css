@@ -6,13 +6,11 @@
 .container {
     position: relative;
     border-radius: 5px;
-    background-color: #4F6367;
-    padding: 0 0 30% 0;
 
 }
 .inner_container{
-    padding-top: 30%;
-    background-color;
+    background-color:#4F6367 ;
+    padding: 0%  10% 100% 10%;
 }
 
 /* style inputs and link buttons */
