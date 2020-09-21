@@ -1,4 +1,3 @@
-var express = require('express');
 var path = require('path');
 var User = require('./services/user.js');
 
@@ -53,7 +52,7 @@ exports.user_login = function(req, res){
     let tempUser = new User(email, '', '', '', pwd);
 
     if (tempUser.EmailLogin()) {
-        req.session.userName = req.body.username;
+        req.session.userName = req.body.email;
         res.redirect('/homepage');
     }
     else {
