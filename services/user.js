@@ -23,6 +23,10 @@ class User
         //this.#UserID = UserID;
     }
 
+    EmailLogin() {
+        return new Database().VerifyUser(this);
+    }
+
     PushToDatabase()
     {
         new Database().CreateNewUser(this);
@@ -56,12 +60,24 @@ class User
         return this.#Firstname;
     }
 
+    SetUserFirstName(firstName) {
+        this.#Firstname = firstName;
+    }
+
     GetUserLastName(){
         return this.#LastName;
     }
 
+    SetUserLastName(lastName) {
+        this.#LastName = lastName;
+    }
+
     GetUserProfilePic(){
         return this.#ProfilePictureRef;
+    }
+
+    SetUserProfilePic(ref) {
+        this.#ProfilePictureRef = ref;
     }
 
     GetUserPassword(){

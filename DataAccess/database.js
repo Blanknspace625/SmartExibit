@@ -28,18 +28,38 @@ class database {
         });
     }
 
-    // Pending encryption
-    VerifyUser(email, pwd) {
-        var sql = "SELECT pwd FROM Users WHERE email = ?";
-        conn.query(sql, [email], function (err, res) {
+    LoadUser(User) {
+        const tmpEmail = User.GetUserEmail();
+
+        var sql = "SELECT firstName, lastName, profileImg FROM Users WHERE email = ?";
+        conn.query(sql, [tmpEmail], function (err, res) {
             if (err) throw err;
 
-            if (res == pwd) {
-                console.log("OK")
+            User.SetUserFirstName(res[0].firstName);
+            User.SetUserLastName(res[0].lastName);
+            User.SetUserProfilePic(res[0].profileImg);
+        });
+    }
+
+    // Pending encryption
+    VerifyUser(User) {
+        const tmpEmail = User.GetUserEmail();
+        const tmpPwd = User.GetUserPassword();
+        var stat = true;
+
+        var sql = "SELECT pwd FROM User WHERE email = ?";
+        conn.query(sql, [tmpEmail], function (err, res) {
+            if (err) throw err;
+
+            if (res[0].pwd == tmpPwd) {
+                console.log("Logged in.");
             } else {
                 console.log("Wrong password!");
+                stat = false; // >> not working <<
             }
         });
+
+        return stat;
     }
 }
 

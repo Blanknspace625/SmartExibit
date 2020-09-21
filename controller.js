@@ -1,5 +1,4 @@
 var express = require('express');
-var session = require('express-session');
 var path = require('path');
 var User = require('./services/user.js');
 
@@ -16,8 +15,6 @@ exports.return_signup = function(req, res){
 }
 
 exports.signup_new_user = function(req, res){
-    
-
     var email = req.body.email;
     var firstName = req.body.firstName;
     var lastName = req.body.lastName;
@@ -46,11 +43,22 @@ exports.return_profile = function(req, res){
 }
 
 exports.return_signin = function(req, res){
-    res.status(200).send('Sign in page');
+    res.sendFile(path.join(__dirname, '/views/login.html'));
 }
 
 exports.user_login = function(req, res){
-    res.status(200).send('Login attempt');
+    var email = req.body.email;
+    var pwd = req.body.password;
+
+    let tempUser = new User(email, '', '', '', pwd);
+
+    if (tempUser.EmailLogin()) {
+        req.session.userName = req.body.username;
+        res.redirect('/homepage');
+    }
+    else {
+        res.json({ret_code : 1, ret_msg : 'Login failed!'});
+    }
 }
 
 exports.return_dashboard = function(req, res){
