@@ -1,7 +1,6 @@
 var Database = require('../DataAccess/database');
 
-class User
-{
+class User {
     #UserID;
     #EmailAddress;
     #ProfilePictureRef;
@@ -9,8 +8,7 @@ class User
     #LastName;
     #Password;
 
-    constructor(EmailAddress, FirstName, LastName, ProfilePictureRef, Password)
-    {
+    constructor(EmailAddress, FirstName, LastName, ProfilePictureRef, Password) {
         this.#EmailAddress = EmailAddress;
         this.#Firstname = FirstName;
         this.#LastName = LastName;
@@ -22,41 +20,39 @@ class User
 
         //this.#UserID = UserID;
     }
-
+/*
     EmailLogin() {
         return new Database().VerifyUser(this);
     }
 
-    PushToDatabase()
-    {
+    PushToDatabase() {
         new Database().CreateNewUser(this);
     }
-
-    IsValid()
-    {
+*/
+    IsValid() {
         console.log('Checking User is valid');
 
         console.log(this.#Firstname);
-        if(this.#Firstname == ''){return "Must Include First Name!"}
+        if(this.#Firstname == ''){ return "Must Include First Name!" }
 
         console.log(this.#LastName);
-        if(this.#LastName == ''){return "Must Include Last Name!"}
+        if (this.#LastName == '') { return "Must Include Last Name!" }
 
         console.log(this.#EmailAddress);
-        if(this.#EmailAddress == ''){return "Must Include Email Address!"}
+        if (this.#EmailAddress == '') { return "Must Include Email Address!" }
 
         console.log(this.#ProfilePictureRef);
         console.log(this.#Password);
-        if(this.#Password == ''){return "Must Include Password!"}
+        if (this.#Password == '') { return "Must Include Password!" }
 
         return "OK";
     }
 
-    GetUserEmail(){
+    GetUserEmail() {
         return this.#EmailAddress;
     }
 
-    GetUserFirstName(){
+    GetUserFirstName() {
         return this.#Firstname;
     }
 
@@ -64,7 +60,7 @@ class User
         this.#Firstname = firstName;
     }
 
-    GetUserLastName(){
+    GetUserLastName() {
         return this.#LastName;
     }
 
@@ -72,7 +68,7 @@ class User
         this.#LastName = lastName;
     }
 
-    GetUserProfilePic(){
+    GetUserProfilePic() {
         return this.#ProfilePictureRef;
     }
 
@@ -80,7 +76,7 @@ class User
         this.#ProfilePictureRef = ref;
     }
 
-    GetUserPassword(){
+    GetUserPassword() {
         return this.#Password;
     }
 }
