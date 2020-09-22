@@ -1,5 +1,6 @@
 var path = require('path');
 var User = require('./services/user.js');
+var Media = require('./services/media.js');
 
 exports.return_homepage = function(req, res){
     res.sendFile(path.join(__dirname, '/views/homepage.html'));
@@ -7,6 +8,28 @@ exports.return_homepage = function(req, res){
 
 exports.return_resource = function(req, res){
     res.status(200).send('Resource requested');
+}
+
+exports.create_resource = function(req, res){
+
+    //generate mediaid - Might want to use something like UUID later?
+    var mediaid = Date.now();
+    var url = req.body.link;
+
+    //populate media fields
+    let newMedia = new Media(url, mediaid);
+
+    var urlValid = newMedia.urlValid;
+
+    //insert new media entry into database
+    if(urlValid)
+    {
+        newMedia.PushToDatabase();
+    }
+    else
+    {
+        res.status(400).send(urlValid);
+    }
 }
 
 exports.return_signup = function(req, res){

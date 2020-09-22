@@ -1,3 +1,6 @@
+var Database = require('../DataAccess/database');
+var validUrl = require('valid-url');
+
 class Media
 {
     #MediaID;
@@ -8,8 +11,35 @@ class Media
         this.#MediaLink = MediaLink;
 
         //MediaID can be optinally included if the entry exists in the database
-        if(!MediaID){return;}
+        // if(!MediaID){return;}
 
         this.#MediaID = MediaID;
     }
+
+    linkValid()
+    {
+        console.log('Checking media link is valid');
+        if (validUrl.isUri(this.#MediaLink)){
+            return true;
+        } else {
+            console.log('Not a valid URL');
+        }
+    }
+
+    PushToDatabase()
+    {
+        new Database().CreateNewMedia(this);
+    }
+
+    GetMediaURL()
+    {
+        return this.#MediaLink;
+    }
+
+    GetMediaID()
+    {
+        return this.#MediaID;
+    }
 }
+
+module.exports = Media;

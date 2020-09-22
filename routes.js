@@ -21,7 +21,10 @@ module.exports = function(app) {
     app.route('/dashboard/:profileid')
         .get(task.return_dashboard);
     
-    app.route('/resources')
+    app.route('/resources/:mediaid')
         .get(task.return_resource);
+
+    app.route('/resources/upload')
+        .post(task.create_resource);
 
 };

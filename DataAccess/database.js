@@ -61,6 +61,19 @@ class database {
 
         return stat;
     }
+
+    CreateNewMedia(Media) {
+        const URL = Media.GetMediaURL();
+        const showcaseID = "12345"; // What is the showcase id?
+        const mediaID = Media.GetMediaID();
+
+        var sql = "INSERT INTO Media (idMedia, idShowcase, content) VALUES ('"+URL+"'," + 
+            "'"+showcaseID+"', '"+mediaID+"')";
+        conn.query(sql, function (err, res) {
+            if (err) throw err;
+            console.log("1 record inserted");
+        });
+    }
 }
 
 module.exports = database;
