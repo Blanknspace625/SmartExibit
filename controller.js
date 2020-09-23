@@ -72,5 +72,4 @@ exports.return_website = function(req, res) {
 exports.create_showcase = function(req, res) {
     
     Database.newShowcase(req,res);
-    //res.status(200).send('request website -> Check if session');
 }

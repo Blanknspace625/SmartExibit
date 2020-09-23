@@ -53,18 +53,41 @@ exports.register = async function(req, res) {
 
 exports.newShowcase = async function(req, res){
     //TODO get userID from Session
-    const UserID = req.body.UserID;
-    const ShowcaseName = req.body.ShowcaseName;
-    const currentDate = new Date();
-    const privacyParam = req.body.privacyParam
-
-    var sql = "INSERT INTO Showcase (idUser, showcaseName, dateCreated, privacyParam) VALUES('"+UserID+"','"+ShowcaseName+"', CURDATE(),'"+privacyParam+"')"
-
-    conn.query(sql, function (err, results) {
+    var sql = "SELECT * FROM User WHERE email = ? ";
+    req.session.userName
+    var UserID;
+    conn.query(sql, [req.session.userName], async function (err, results) {
         if (err) throw err;
-        res.status(200).send('Showcase created successfully!');
-        res.redirect('/dashboard');
+
+        if (results.length > 0) {
+            //const isVerified = await bcrypt.compare(pwd, res[0].pwd);
+            if (req.session.userName.valueOf() == results[0].email.valueOf()) {
+                 UserID = results[0].idUser.valueOf();
+                 console.log(UserID);
+
+                 console.log(UserID);
+                 const ShowcaseName = req.body.ShowcaseName;
+                 const currentDate = new Date();
+                 const privacyParam = req.body.privacyParam
+             
+                 var sql = "INSERT INTO Showcase (idUser, showcaseName, dateCreated, privacyParam) VALUES('"+UserID+"','"+ShowcaseName+"', CURDATE(),'"+privacyParam+"')"
+             
+                 conn.query(sql, function (err, results) {
+                     if (err) throw err;
+                     res.status(200).send('Showcase created successfully!');
+                     //res.redirect('/dashboard');
+                 });
+            } else {
+                res.status(206).send('Not Authorised to create a showcase');
+                return;
+            }
+        } else {
+            res.status(206).send('User does not exist!');
+            return;
+        }
     });
+
+
 }
 /*
 class database {
