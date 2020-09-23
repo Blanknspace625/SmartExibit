@@ -18,10 +18,13 @@ module.exports = function(app) {
         .get(task.return_signin)
         .post(task.user_login);
 
-    app.route('/dashboard/:profileid')
+    app.route('/dashboard?:profileid')
         .get(task.return_dashboard);
     
     app.route('/resources')
         .get(task.return_resource);
+
+    app.route('/showcase')
+        .post(task.create_showcase);
 
 };

@@ -50,6 +50,22 @@ exports.register = async function(req, res) {
         res.redirect('/signin');
     });
 }
+
+exports.newShowcase = async function(req, res){
+    //TODO get userID from Session
+    const UserID = req.body.UserID;
+    const ShowcaseName = req.body.ShowcaseName;
+    const currentDate = new Date();
+    const privacyParam = req.body.privacyParam
+
+    var sql = "INSERT INTO Showcase (idUser, showcaseName, dateCreated, privacyParam) VALUES('"+UserID+"','"+ShowcaseName+"', CURDATE(),'"+privacyParam+"')"
+
+    conn.query(sql, function (err, results) {
+        if (err) throw err;
+        res.status(200).send('Showcase created successfully!');
+        res.redirect('/dashboard');
+    });
+}
 /*
 class database {
     CreateNewUser(User) {

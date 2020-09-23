@@ -68,3 +68,9 @@ exports.return_dashboard = function(req, res) {
 exports.return_website = function(req, res) {
     res.status(200).send('request website -> Check if session');
 }
+
+exports.create_showcase = function(req, res) {
+    
+    Database.newShowcase(req,res);
+    //res.status(200).send('request website -> Check if session');
+}
