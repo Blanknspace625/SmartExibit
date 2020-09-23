@@ -23,8 +23,8 @@ exports.login = async function(req, res) {
         if (results.length > 0) {
             //const isVerified = await bcrypt.compare(pwd, res[0].pwd);
             if (pwd.valueOf() == results[0].pwd.valueOf()) {
-                req.session.userName = req.body.email;
-                res.redirect('/homepage');
+                req.session.userId = results[0].idUser;
+                res.redirect('/dashboard/:' + req.session.userId);
             } else {
                 res.status(206).send('Email or password is incorrect!');
             }
