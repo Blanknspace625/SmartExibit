@@ -1,6 +1,9 @@
 * {
     box-sizing: border-box;
 }
+body{
+    color: #fff;
+}
 
 h1 {
     font-family: Segoe UI;
@@ -11,20 +14,29 @@ h1 {
 
 h3 {
     font-family: Segoe UI;
-    top: 20px;
-    font-size: 20px;
+    font-size: 12px;
+    padding-top: 15px;
+    text-align: center;
     color: #fff;
 }
 
+a {
+    color: #fff;
+    text-decoration: underline;
+}
+
+a:hover{
+    color: #FE5F55;
+}
 
 /* Padding for the logins and page */
 
 p.ex1 {
-    padding-top: 2%;
+    padding-top: 1%;
 }
 
 p.ex2 {
-    padding-bottom: 1%;
+    padding-bottom: 0%;
 }
 
 .container {
@@ -33,7 +45,7 @@ p.ex2 {
 
 .inner_container{
     background-color:#4F6367 ;
-    padding: 0%  30%  10%;
+    padding: 0%  25%  3% ;
     border-radius: 20px;
 
 }
@@ -42,11 +54,12 @@ p.ex2 {
 
 /* Login Logo style */
 #Smart_Exibit{
-    padding-top: 20%;
+    padding-top: 10%;
     font-size: 50px;
     color:white;
     font-family:Sitka Heading;
     font-weight:bold;
+    text-decoration: none;
 }
 
 /* style inputs and link buttons */
@@ -56,11 +69,11 @@ input,
     padding: 15px;
     border: none;
     border-radius: 20px;
-    margin: 5px 0;
+    margin: 8px 0;
     opacity: 0.85;
     display: inline-block;
     font-size: 17px;
-    line-height: 20px;
+    line-height: 19px;
     text-decoration: none; /* remove underline from anchors */
 }
 
