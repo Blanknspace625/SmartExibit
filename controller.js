@@ -11,7 +11,6 @@ exports.return_resource = function(req, res){
 }
 
 exports.create_resource = function(req, res){
-
     //generate mediaid - Might want to use something like UUID later?
     var mediaid = Date.now();
     var url = req.body.link;

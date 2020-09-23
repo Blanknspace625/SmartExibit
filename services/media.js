@@ -40,6 +40,11 @@ class Media
     {
         return this.#MediaID;
     }
+
+    SetMediaURL(url)
+    {
+        this.#MediaLink = url;
+    }
 }
 
 module.exports = Media;

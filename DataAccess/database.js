@@ -74,6 +74,17 @@ class database {
             console.log("1 record inserted");
         });
     }
+
+    RetrieveMediaURL(Media) {
+        var sql = "SELECT content FROM Media WHERE idMedia = ?";
+        conn.query(sql, [mediaid], function (err, res) {
+            if (err) throw err;
+
+            Media.SetMediaURL(res[0].content);
+        });
+
+        return url;
+    }
 }
 
 module.exports = database;
