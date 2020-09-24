@@ -1,8 +1,8 @@
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 body {
     font-family: 'Poppins', sans-serif;
-    background: #F7F7F7;
-    font-size: 15px;
+    background: #B8D8D8;
+
 }
 
 p {
@@ -12,8 +12,7 @@ p {
     font-size: 1.1em;
     font-weight: 300;
     line-height: 1.7em;
-    color: rgba(0, 0, 0, 0.795);
-    font-size: 17px;
+    color: #4F6367;
 }
 
 h2 {
@@ -32,8 +31,7 @@ h4 {
 
 /* Logo style */
 #Smart_Exibit{
-    font-size: 23px;
-    padding-left: 40px;
+    font-size: 35px;
     color:white;
     font-family:Sitka Heading;
     font-weight:bold;
@@ -83,7 +81,7 @@ a:focus {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #2A3F54;
+    background: #4F6367;
     color: #fff;
     transition: all 0.3s;
 }
@@ -94,7 +92,7 @@ a:focus {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #2A3F54;
+    background: #4F6367;
 }
 
 #sidebar ul.components {
@@ -114,14 +112,14 @@ a:focus {
 }
 
 #sidebar ul li a:hover {
-    color: #2A3F54;
+    color: #4F6367;
     background: #becbce;
 }
 
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
     color: #fff;
-    background: #2A3F54;
+    background: #4F6367;
 }
 
 a[data-toggle="collapse"] {
@@ -139,7 +137,7 @@ a[data-toggle="collapse"] {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background:#2A3F54;
+    background: #4F6367;
     color: #fff;
 }
 
@@ -156,10 +154,15 @@ ul.CTAs a {
 }
 
 a.signout {
-    background:#FE5F55;
+    background: #FE5F55;
     color: #fff;
 }
 
+a.article,
+a.article:hover {
+    background: #FE5F55 !important;
+    color: #fff !important;
+}
 
 /* ---------------------------------------------------
     CONTENT STYLE
@@ -201,13 +204,12 @@ a.signout {
 }
   
 .se-db{
-    background-color:#2A3F54;
+    background-color:#4F6367;
     color: white;
 }
   
 .se-wh{
-    background-color:#EDEDED;
-    color: rgba(0, 0, 0, 0.795);
+    color:#FFFFFF;
 }
   
 .se-or{
