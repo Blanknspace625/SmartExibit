@@ -42,7 +42,7 @@ exports.user_logoff = function(req, res)
 
 exports.return_dashboard = function(req, res) 
 {
-    res.status(200).send(req.session.userId + ' User Dashboard');
+    res.sendFile(path.join(__dirname, '/views/dashboard.html'));
 }
 
 exports.return_entry = function(req, res) 
