@@ -1,6 +1,8 @@
 var path = require('path');
-var User = require('./services/user');
+var User = require('./services/user.js');
+var Media = require('./services/media.js');
 var Database = require('./DataAccess/database');
+
 
 exports.return_homepage = function(req, res) {
     res.sendFile(path.join(__dirname, '/views/homepage.html'));
@@ -12,6 +14,9 @@ exports.return_resource = function(req, res) {
 
 exports.return_signup = function(req, res) {
     res.sendFile(path.join(__dirname, '/views/register.html'));
+}
+exports.create_resource = function(req, res){
+    Database.newMedia(req, res);
 }
 
 exports.signup_new_user = function(req, res) 
