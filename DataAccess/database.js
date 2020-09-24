@@ -102,6 +102,6 @@ exports.retrieveMedia = async function(req, res) {
     var sql = "SELECT content FROM Media WHERE idMedia = ?";
     conn.query(sql, [mediaid], function (err, res) {
         if (err) throw err;
-            return res[0].content;
+            res.redirect(res[0].content);
     });
 }
