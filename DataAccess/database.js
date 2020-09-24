@@ -24,7 +24,8 @@ exports.login = async function(req, res) {
             //const isVerified = await bcrypt.compare(pwd, res[0].pwd);
             if (pwd.valueOf() == results[0].pwd.valueOf()) {
                 req.session.userId = results[0].idUser;
-                res.redirect('/dashboard/:' + req.session.userId);
+                res.redirect('/homepage/:' + req.session.userId);
+
             } else {
                 res.status(206).send('Email or password is incorrect!');
             }
@@ -50,56 +51,27 @@ exports.register = async function(req, res) {
         res.redirect('/signin');
     });
 }
-/*
-class database {
-    CreateNewUser(User) {
-        const firstName = User.GetUserFirstName();
-        const lastName = User.GetUserLastName();
-        const email = User.GetUserEmail();
-        const profileImg = User.GetUserProfilePic();
-        const pwd = User.GetUserPassword();
 
-        var sql = "INSERT INTO User (firstName, lastName, email, profileImg, pwd, extLink) VALUES ('"+firstName+"'," +
-            "'"+lastName+"', '"+email+"', '"+profileImg+"', '"+pwd+"', 'https://www.facebook.com')";
-        conn.query(sql, function (err, res) {
+exports.newShowcase = async function(req, res){
+    if (req.session.userId) 
+    {
+        console.log(req.session.userId);
+        
+        var UserID = req.session.userId;
+        const ShowcaseName = req.body.ShowcaseName;
+        const privacyParam = req.body.privacyParam
+    
+        var sql = "INSERT INTO Showcase (idUser, showcaseName, dateCreated, privacyParam) VALUES('"+UserID+"','"+ShowcaseName+"', CURDATE(),'"+privacyParam+"')"
+    
+        conn.query(sql, function (err, results) {
             if (err) throw err;
-            console.log("1 record inserted");
+            res.redirect('/dashboard/:' + req.session.userId);
         });
-    }
+   } 
+   else 
+   {
+       res.status(206).send('Not Authorised to create a showcase');
+       return;
+   }
 
-    LoadUser(User) {
-        const tmpEmail = User.GetUserEmail();
-
-        var sql = "SELECT firstName, lastName, profileImg FROM Users WHERE email = ?";
-        conn.query(sql, [tmpEmail], function(err, res) {
-            if (err) throw err;
-
-            User.SetUserFirstName(res[0].firstName);
-            User.SetUserLastName(res[0].lastName);
-            User.SetUserProfilePic(res[0].profileImg);
-        });
-    }
-
-    // Pending encryption
-    VerifyUser(User) {
-        const tmpEmail = User.GetUserEmail();
-        const tmpPwd = User.GetUserPassword();
-        var stat = true;
-
-        var sql = "SELECT pwd FROM User WHERE email = ?";
-        conn.query(sql, [tmpEmail], function(err, res) {
-            if (err) throw err;
-
-            if (res[0].pwd == tmpPwd) {
-                console.log("Logged in.");
-            } else {
-                console.log("Wrong password!");
-                stat = false; // >> not working <<
-            }
-        });
-
-        return stat;
-    }
 }
-*/
-//module.exports = database;

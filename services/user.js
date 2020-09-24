@@ -1,7 +1,7 @@
 var Database = require('../DataAccess/database');
 
 class User {
-    #UserID;
+    //#UserID;
     #EmailAddress;
     #ProfilePictureRef;
     #Firstname;
