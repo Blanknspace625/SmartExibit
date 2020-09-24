@@ -35,10 +35,6 @@ routes(app);
 var httpServ = http.createServer(app);
 //var httpsServ = https.createServer(credentials, app);
 
-//httpServ.get('*', function(req, res) {
-//  res.redirect('https://' + req.headers.host + req.url);
-//});
-
 httpServ.listen(80, "::");
 //httpsServ.listen(443, "::");
-console.log('HTTP & HTTPS server started!');
+console.log('Web server started!');

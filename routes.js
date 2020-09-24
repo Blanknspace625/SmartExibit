@@ -4,7 +4,7 @@ module.exports = function(app) {
     app.route('/')
         .get(task.return_entry);
     
-    app.route('/homepage')
+    app.route('/index')
         .get(task.return_homepage);
         
     app.route('/signup')
@@ -13,6 +13,12 @@ module.exports = function(app) {
 
     app.route('/profile/:profileid')
         .get(task.return_profile);
+
+    app.route('/profile/:profileid/changedetail')
+        .post(task.change_reg_detail);
+
+    app.route('/profile/:profileid/changepassword')
+        .post(task.change_sens_detail);
 
     app.route('/signin')
         .get(task.return_signin)
