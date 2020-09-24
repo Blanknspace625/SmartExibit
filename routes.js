@@ -38,4 +38,5 @@ module.exports = function(app) {
 
     app.route('/signout')
         .get(task.user_logoff);
+
 };
