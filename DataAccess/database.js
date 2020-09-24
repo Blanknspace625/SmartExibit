@@ -116,3 +116,22 @@ exports.newShowcase = async function(req, res) {
         res.status(206).send('Not Authorised to create a showcase');
     }
 }
+
+exports.newMedia = async function(req, res) {
+    var URL = req.body.link;
+    var showcaseID = req.body.showcaseid;
+
+    var sql = "INSERT INTO Media (idShowcase, content) VALUES ('"+showcaseID+"','"+URL+"')";
+    conn.query(sql, function (err, results) {
+        if (err) throw err;
+        console.log("1 record inserted");
+    });
+}
+
+exports.retrieveMedia = async function(req, res) {
+    var sql = "SELECT content FROM Media WHERE idMedia = ?";
+    conn.query(sql, [mediaid], function (err, results) {
+        if (err) throw err;
+            res.redirect(results[0].content);
+    });
+}
