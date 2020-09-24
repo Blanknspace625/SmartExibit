@@ -20,7 +20,7 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <title>Login</title>
+    <title>Sign Up</title>
 
     <!-- Font Awesome JS -->
     <script src="https://kit.fontawesome.com/e564623181.js" crossorigin="anonymous"></script>
@@ -29,28 +29,30 @@
 </head>
 
 <body class = "bg-secondary">
+
 <div class="container">
     <div class="inner_container">
         <div class="my-auto">
-            <p class="text-center"><a class="navbar-brand" href="#" id="Smart_Exibit"><i class="fas fa-user-graduate"></i><br>Smart Exibit</a></p>
+            <p class="text-center"><a class="navbar-brand" href="#" id="Smart_Exhibit"><i class="fas fa-user-graduate"></i><br>Smart Exhibit</a></p>
             <form action ="/signup" method = "post">
                 <div class="row justify-content-center">
                     <div class="col-sm-12">
                         <div class="form-group">
-                            <label for="firstName"><h1>   First Name:</h1></label>
-                            <input id="firstName" type="text" name="firstName" placeholder="Frist Name" required>
+                            <label for="firstName"><h1><i class="fas fa-user"></i>   First Name:</h1></label>
+                            <input id="firstName" type="text" name="firstName" placeholder="First Name" required>
                         </div>
                         <div class="form-group">
-                            <label for="lastName"><h1>  Last Name:</h1></label>
+                            <label for="lastName"><h1><i class="fas fa-user"></i>  Last Name:</h1></label>
                             <input id="lastName" type="text" name="lastName" placeholder="Last Name" required>
                         </div>
                         <div class="form-group">
                             <label for="email"><h1><i class="fas fa-envelope"></i>   Email Address:</h1></label>
+                            <!-- type = "email"-->
                             <input id="email" type="text" name="email" placeholder="Email" required>
                         </div>
                         <div class="form-group">
                             <label for="password"><h1><i class="fas fa-key"></i>    Password:</h1></label>
-                            <input id="password" type="text" name="password" placeholder="Password" required>
+                            <input id="password" type="password" name="password" placeholder="Password" required>
                         </div>
                         <input type="submit" value="Login">
                     </div>
@@ -60,12 +62,12 @@
             <div class="row justify-content-center">
                 <div class="col-12">
                     <a href="#" class="fb btn">
-                        <i class="fa fa-facebook fa-fw"></i> SignUp with Facebook
+                        <i class="fa fa-facebook fa-fw"></i> Sign Up with Facebook
                     </a>
                     <a href="#" class="twitter btn">
-                        <i class="fa fa-twitter fa-fw"></i> SignUp with Twitter
+                        <i class="fa fa-twitter fa-fw"></i> Sign Up with Twitter
                     </a>
-                    <a href="#" class="google btn"><i class="fa fa-google fa-fw"></i> SignUp with Google+
+                    <a href="#" class="google btn"><i class="fa fa-google fa-fw"></i> Sign Up with Google+
                     </a>
                 </div>
             </div>
