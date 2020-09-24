@@ -24,8 +24,17 @@ module.exports = function(app) {
     app.route('/resources')
         .get(task.return_resource);
   
-    app.route('/showcase')
+    app.route('/newshowcase')
         .post(task.create_showcase);
+        
+    app.route('/showcase/:showcaseid')
+        .get(task.return_showcase_page);
+    
+    app.route('/showcasedata/:showcaseid')
+        .get(task.return_showcase_data);
+    
+    app.route('/updateshowcase')
+        .post(task.update_showcase);
 
     app.route('/signout')
         .get(task.user_logoff);

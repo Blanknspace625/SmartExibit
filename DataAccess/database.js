@@ -13,7 +13,7 @@ conn.connect(function(err) {
 });
 
 exports.login = async function(req, res) {
-    var email = req.body.email;
+    var email = req.body.username;
     var pwd = req.body.password;
 
     var sql = "SELECT * FROM User WHERE email = ?";
@@ -24,12 +24,13 @@ exports.login = async function(req, res) {
             //const isVerified = await bcrypt.compare(pwd, res[0].pwd);
             if (pwd.valueOf() == results[0].pwd.valueOf()) {
                 req.session.userId = results[0].idUser;
-                res.redirect('/homepage/:' + req.session.userId);
+                res.redirect('/dashboard/:' + req.session.userId);
 
             } else {
                 res.status(206).send('Email or password is incorrect!');
             }
         } else {
+            console.log("Login attempt: " + req.body.username + ", password provided: " + req.body.password);
             res.status(206).send('User does not exist!');
         }
     });

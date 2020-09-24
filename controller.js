@@ -58,3 +58,18 @@ exports.create_showcase = function(req, res)
 {
     Database.newShowcase(req,res);
 }
+
+exports.update_showcase = function(req, res)
+{
+
+}
+
+exports.return_showcase_data = function(req, res)
+{
+
+}
+
+exports.return_showcase_page = function(req, res)
+{
+
+}
