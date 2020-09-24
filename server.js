@@ -24,17 +24,20 @@ app.use(session({
   saveUninitialized: false,
   cookie: {
     httpOnly: true,
-    //secure: true,
+//    secure: true,
     maxAge : 1000 * 60 * 15
   }
 }));
 
-//register api routes
 var routes = require('./routes');
 routes(app);
 
 var httpServ = http.createServer(app);
 //var httpsServ = https.createServer(credentials, app);
+
+//httpServ.get('*', function(req, res) {
+//  res.redirect('https://' + req.headers.host + req.url);
+//});
 
 httpServ.listen(80, "::");
 //httpsServ.listen(443, "::");
