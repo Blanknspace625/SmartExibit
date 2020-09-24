@@ -15,7 +15,8 @@ exports.return_resource = function(req, res) {
 exports.return_signup = function(req, res) {
     res.sendFile(path.join(__dirname, '/views/register.html'));
 }
-exports.create_resource = function(req, res){
+
+exports.create_resource = function(req, res) {
     Database.newMedia(req, res);
 }
 

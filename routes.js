@@ -44,7 +44,7 @@ module.exports = function(app) {
 
     app.route('/signout')
         .get(task.user_logoff);
+
     app.route('/resources/upload')
         .post(task.create_resource);
-
 };
