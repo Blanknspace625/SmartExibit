@@ -2,7 +2,7 @@ module.exports = function(app) {
     var task = require('./controller');
 
     app.route('/')
-        .get(task.return_website);
+        .get(task.return_entry);
     
     app.route('/homepage')
         .get(task.return_homepage);
@@ -18,7 +18,7 @@ module.exports = function(app) {
         .get(task.return_signin)
         .post(task.user_login);
 
-    app.route('/dashboard?:profileid')
+    app.route('/dashboard/:profileid')
         .get(task.return_dashboard);
     
     app.route('/resources')
@@ -27,4 +27,6 @@ module.exports = function(app) {
     app.route('/showcase')
         .post(task.create_showcase);
 
+    app.route('/signout')
+        .get(task.user_logoff);
 };

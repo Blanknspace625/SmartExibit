@@ -38,7 +38,7 @@ exports.signup_new_user = function(req, res) {
 }
 
 exports.return_profile = function(req, res) {
-    res.status(200).send('profile');
+    res.status(200).send(req.session.userId + ' Profile');
 }
 
 exports.return_signin = function(req, res) {
@@ -61,12 +61,21 @@ exports.user_login = function(req, res) {
     }*/
 }
 
-exports.return_dashboard = function(req, res) {
-    res.status(200).send(req.profileid +' User Dashboard');
+exports.user_logoff = function(req, res) {
+    req.session.userId = null;
+    res.redirect('/homepage');
 }
 
-exports.return_website = function(req, res) {
-    res.status(200).send('request website -> Check if session');
+exports.return_dashboard = function(req, res) {
+    res.status(200).send(req.session.userId + ' User Dashboard');
+}
+
+exports.return_entry = function(req, res) {
+    if (req.session.userId) {
+        res.redirect('/dashboard/:' + req.session.userId);
+    } else {
+        res.redirect('/homepage');
+    }
 }
 
 exports.create_showcase = function(req, res) {

@@ -16,12 +16,15 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
 app.use(session({
-  secret : 'itsasecret',
-  resave : true,
+  name: 'default',
+  secret: 'itsasecret',
+  resave: true,
   saveUninitialized: false,
-  cookie : {
-    maxAge : 1000 * 60 * 3,
-  },
+  cookie: {
+    httpOnly: true,
+    //secure: true,
+    maxAge : 1000 * 60 * 15
+  }
 }));
 
 //register api routes
