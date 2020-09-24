@@ -1,10 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!--bootstrap -->
+    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css'
+          integrity='sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk'
+          crossorigin='anonymous')>
+    <link rel="stylesheet" href="../Public/StyleeSheet/mystyle.css">
+    <link rel="stylesheet" href="../Public/StyleeSheet/bootstrap-magic.css">
+    <link rel="stylesheet" href="../Public/StyleeSheet/login.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Sign Up</title>
+
+    <!-- Font Awesome JS -->
+    <script src="https://kit.fontawesome.com/e564623181.js" crossorigin="anonymous"></script>
+
+    <p class="ex1"></p>
+</head>
+
+<body class = "bg-secondary">
+    <div class="my-auto">
+        <div class="container">
+            <div class="inner_container">
+                    <p class="text-center"><a class="navbar-brand" href="#" id="Smart_Exibit"><i class="fas fa-user-graduate"></i><br>Smart Exibit</a></p>
+                    <form method = "post">
+                        <div class="row justify-content-center">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="first_name"><h1><i class="fas fa-user"></i>   First Name:</h1></label>
+                                    <input id="first_name" type="text" name="first_name" placeholder="First Name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="last_name"><h1><i class="fas fa-user"></i>  Last Name:</h1></label>
+                                    <input id="last_name" type="text" name="last_name" placeholder="Last Name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email"><h1><i class="fas fa-envelope"></i>   Email Address:</h1></label>
+                                    <input id="email" type="text" name="email" placeholder="Email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password"><h1><i class="fas fa-key"></i>    Password:</h1></label>
+                                    <input id="password" type="password" name="password" placeholder="Password" required>
+                                </div>
+                                <input type="submit" value="Create an Account">
+                            </div>
+                        </div>
+                    </form>
+                    <p class="ex1"></p>
+                    <div class="row justify-content-center">
+                        <div class="col-12">
+                            <a href="#" class="fb btn">
+                                <i class="fa fa-facebook fa-fw"></i> Sign Up with Facebook
+                            </a>
+                            <a href="#" class="twitter btn">
+                                <i class="fa fa-twitter fa-fw"></i> Sign Up with Twitter
+                            </a>
+                            <a href="#" class="google btn"><i class="fa fa-google fa-fw"></i> Sign Up with Google+
+                            </a>
+                        </div>
+                    </div>
+                    <h3>
+                        Already have an account? <a href="#register">Login</a>
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p class="ex2"></p>
 </body>
 </html>

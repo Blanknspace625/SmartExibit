@@ -23,7 +23,7 @@ module.exports = function(app) {
     
     app.route('/resources')
         .get(task.return_resource);
-
+  
     app.route('/showcase')
         .post(task.create_showcase);
 

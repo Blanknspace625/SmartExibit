@@ -28,20 +28,21 @@
     <p class="ex1"></p>
 </head>
 <body class = "bg-secondary">
-    <div class="container">
-        <div class="inner_container">
-            <div class="my-auto">
+    <div class="my-auto">
+        <div class="container">
+            <div class="inner_container">
                 <p class="text-center"><a class="navbar-brand" href="#" id="Smart_Exibit"><i class="fas fa-user-graduate"></i><br>Smart Exibit</a></p>
                 <form action ="/action_page.php" method = "post">
                     <div class="row justify-content-center">
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="username"><h1><i class="fas fa-envelope"></i>   Email Address:</h1></label>
+                                <!-- Change type = "email" later-->
                                 <input id="username" type="text" name="username" placeholder="Username" required>
                             </div>
                             <div class="form-group">
                                 <label for="password"><h1><i class="fas fa-key"></i>    Password:</h1></label>
-                                <input id="password" type="text" name="password" placeholder="Password" required>
+                                <input id="password" type="password" name="password" placeholder="Password" required>
                             </div>
                             <input type="submit" value="Login">
                         </div>
@@ -59,6 +60,9 @@
                         <a href="#" class="google btn"><i class="fa fa-google fa-fw"></i> Login with Google+
                         </a>
                     </div>
+                    <h3>
+                        New here? <a href="#register">Sign up</a>
+                    </h3>
                 </div>
             </div>
         </div>
