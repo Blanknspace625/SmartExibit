@@ -11,6 +11,7 @@ const fs = require('fs');
 //};
 
 var app = express();
+app.use(express.static(__dirname + '/'));
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());

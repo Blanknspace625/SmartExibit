@@ -67,7 +67,7 @@ exports.newShowcase = async function(req, res) {
             if (err) throw err;
             res.redirect('/dashboard/:' + req.session.userId);
         });
-   } else {
-       res.status(206).send('Not Authorised to create a showcase');
-   }
+    } else {
+        res.status(206).send('Not Authorised to create a showcase');
+    }
 }
