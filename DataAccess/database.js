@@ -146,7 +146,7 @@ exports.getShowcaseData = async function(req, res)
 {
     
 }
-=======
+
 exports.newMedia = async function(req, res) {
     var URL = req.body.link;
     var showcaseID = req.body.showcaseid;
