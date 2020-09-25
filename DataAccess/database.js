@@ -62,7 +62,7 @@ exports.changeRegularDetails = async function(req, res) {
             "email = '"+email+"' WHERE idUser = '"+userID+"'";
         conn.query(sql, function (err, results) {
             if (err) throw err;
-            res.status(200).send('User' + userID + 'detail(s) updated');
+            res.status(200).send('User ' + userID + ' detail(s) updated');
         });
     } else {
         res.status(401).send('Unauthorised');
@@ -87,7 +87,7 @@ exports.changeSensitiveDetails = async function(req, res) {
                     var sql = "UPDATE User SET pwd = '"+pwd+"' WHERE idUser = '"+userID+"'";
                     conn.query(sql, function (err, results) {
                         if (err) throw err;
-                        res.status(200).send('User' + userID + 'password updated');
+                        res.status(200).send('User ' + userID + ' password updated');
                     });
                 } else {
                     res.status(206).send('New passwords don\'t agree!');
@@ -96,6 +96,8 @@ exports.changeSensitiveDetails = async function(req, res) {
                 res.status(206).send('Old password is incorrect!');
             }
         });
+    } else {
+        res.status(401).send('Unauthorised');
     }
 }
 
