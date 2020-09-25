@@ -41,7 +41,7 @@ p.ex2 {
 
 
 /* Login Logo style */
-#Smart_Exibit{
+#Smart_Exhibit{
     padding-top: 20%;
     font-size: 50px;
     color:white;
@@ -87,13 +87,13 @@ input:hover,
 
 /* style the submit button */
 input[type=submit] {
-    background-color: #FE5F55;
+    background-color: #FE553E;
     color: white;
     cursor: pointer;
 }
 
 input[type=submit]:hover {
-    background-color: #FE5F55;
+    background-color: #FE553E;
     opacity: 1;
 }
 

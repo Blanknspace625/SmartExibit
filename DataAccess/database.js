@@ -10,15 +10,14 @@ const conn = mysql.createConnection({
 
 conn.connect(function(err) {
     if (err) throw err;
-    console.log("MariaDB Connected!");
+    console.log("Database server connected!");
 });
 
 exports.login = async function(req, res) {
     const email = req.body.email;
     const pwd = req.body.password;
 
-    var sql = "SELECT * FROM User WHERE email = ?";
-    conn.query(sql, [email], async function (err, results) {
+    conn.query("SELECT * FROM User WHERE email = ?", [email], async function (err, results) {
         if (err) throw err;
 
         if (results.length > 0) {
@@ -52,6 +51,54 @@ exports.register = async function(req, res) {
     });
 }
 
+exports.changeRegularDetails = async function(req, res) {
+    if (req.session.userId) {
+        const userID = req.session.userId;
+        const email = req.body.email;
+        const firstName = req.body.firstName;
+        const lastName = req.body.lastName;
+
+        var sql = "UPDATE User SET firstName = '"+firstName+"', lastName = '"+lastName+"'," +
+            "email = '"+email+"' WHERE idUser = '"+userID+"'";
+        conn.query(sql, function (err, results) {
+            if (err) throw err;
+            res.status(200).send('User' + userID + 'detail(s) updated');
+        });
+    } else {
+        res.status(401).send('Unauthorised');
+    }
+}
+
+exports.changeSensitiveDetails = async function(req, res) {
+    if (req.session.userId) {
+        const userID = req.session.userId;
+        const oldPwd = req.body.oldPassword;
+        const newPwd = req.body.newPassword;
+        const newPwdAgain = req.body.newPasswordAgain;
+
+        conn.query("SELECT * FROM User WHERE idUser = ?", [userID], async function (err, results) {
+            if (err) throw err;
+
+            const isVerified = await bcrypt.compare(oldPwd, results[0].pwd);
+            if (isVerified) {
+                if (newPwd.valueOf() == newPwdAgain.valueOf()) {
+                    const pwd = await bcrypt.hash(req.body.newPassword, 8);
+
+                    var sql = "UPDATE User SET pwd = '"+pwd+"' WHERE idUser = '"+userID+"'";
+                    conn.query(sql, function (err, results) {
+                        if (err) throw err;
+                        res.status(200).send('User' + userID + 'password updated');
+                    });
+                } else {
+                    res.status(206).send('New passwords don\'t agree!');
+                }
+            } else {
+                res.status(206).send('Old password is incorrect!');
+            }
+        });
+    }
+}
+
 exports.newShowcase = async function(req, res) {
     if (req.session.userId) {
         const userID = req.session.userId;
@@ -60,7 +107,6 @@ exports.newShowcase = async function(req, res) {
     
         var sql = "INSERT INTO Showcase (idUser, showcaseName, dateCreated, privacyParam) VALUES('"+userID+"'," +
             "'"+showcaseName+"', CURDATE(),'"+privacyParam+"')";
-    
         conn.query(sql, function (err, results) {
             if (err) throw err;
             res.redirect('/dashboard/:' + req.session.userId);
@@ -99,4 +145,23 @@ exports.updateShowcase = async function(req, res) {
 exports.getShowcaseData = async function(req, res)
 {
     
+}
+=======
+exports.newMedia = async function(req, res) {
+    var URL = req.body.link;
+    var showcaseID = req.body.showcaseid;
+
+    var sql = "INSERT INTO Media (idShowcase, content) VALUES ('"+showcaseID+"','"+URL+"')";
+    conn.query(sql, function (err, results) {
+        if (err) throw err;
+        console.log("1 record inserted");
+    });
+}
+
+exports.retrieveMedia = async function(req, res) {
+    var sql = "SELECT content FROM Media WHERE idMedia = ?";
+    conn.query(sql, [mediaid], function (err, results) {
+        if (err) throw err;
+            res.redirect(results[0].content);
+    });
 }

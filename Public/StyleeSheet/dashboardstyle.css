@@ -1,8 +1,13 @@
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 body {
     font-family: 'Poppins', sans-serif;
-    background: #B8D8D8;
+    background: #F7F7F7;
+    font-size: 14px;
 
+}
+
+p.ex1 {
+    padding-top: 5%;
 }
 
 p {
@@ -12,7 +17,8 @@ p {
     font-size: 1.1em;
     font-weight: 300;
     line-height: 1.7em;
-    color: #4F6367;
+    color: rgba(0, 0, 0, 0.795);
+    font-size: 17px;
 }
 
 h2 {
@@ -30,9 +36,10 @@ h4 {
 
 
 /* Logo style */
-#Smart_Exibit{
-    font-size: 35px;
+#Smart_Exhibit{
     color:white;
+    font-size: 23px;
+    padding-left: 35px;
     font-family:Sitka Heading;
     font-weight:bold;
 }
@@ -81,7 +88,7 @@ a:focus {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #4F6367;
+    background: #2A3F54;
     color: #fff;
     transition: all 0.3s;
 }
@@ -92,7 +99,7 @@ a:focus {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #4F6367;
+    background: #2A3F54;
 }
 
 #sidebar ul.components {
@@ -112,14 +119,14 @@ a:focus {
 }
 
 #sidebar ul li a:hover {
-    color: #4F6367;
+    color: #2A3F54;
     background: #becbce;
 }
 
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
     color: #fff;
-    background: #4F6367;
+    background: #2A3F54;
 }
 
 a[data-toggle="collapse"] {
@@ -137,7 +144,7 @@ a[data-toggle="collapse"] {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: #4F6367;
+    background:#2A3F54;
     color: #fff;
 }
 
@@ -154,15 +161,10 @@ ul.CTAs a {
 }
 
 a.signout {
-    background: #FE5F55;
+    background:#FE553E;
     color: #fff;
 }
 
-a.article,
-a.article:hover {
-    background: #FE5F55 !important;
-    color: #fff !important;
-}
 
 /* ---------------------------------------------------
     CONTENT STYLE
@@ -204,12 +206,13 @@ a.article:hover {
 }
   
 .se-db{
-    background-color:#4F6367;
+    background-color:#2A3F54;
     color: white;
 }
   
 .se-wh{
-    color:#FFFFFF;
+    background-color:#EDEDED;
+    color: rgba(0, 0, 0, 0.795);
 }
   
 .se-or{

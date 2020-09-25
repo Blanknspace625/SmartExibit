@@ -4,7 +4,7 @@ module.exports = function(app) {
     app.route('/')
         .get(task.return_entry);
     
-    app.route('/homepage')
+    app.route('/index')
         .get(task.return_homepage);
         
     app.route('/signup')
@@ -14,6 +14,12 @@ module.exports = function(app) {
     app.route('/profile/:profileid')
         .get(task.return_profile);
 
+    app.route('/profile/:profileid/changedetail')
+        .post(task.change_reg_detail);
+
+    app.route('/profile/:profileid/changepassword')
+        .post(task.change_sens_detail);
+
     app.route('/signin')
         .get(task.return_signin)
         .post(task.user_login);
@@ -21,7 +27,7 @@ module.exports = function(app) {
     app.route('/dashboard/:profileid')
         .get(task.return_dashboard);
     
-    app.route('/resources')
+    app.route('/resources/:mediaid')
         .get(task.return_resource);
   
     app.route('/newshowcase')
@@ -38,5 +44,8 @@ module.exports = function(app) {
 
     app.route('/signout')
         .get(task.user_logoff);
+
+    app.route('/resources/upload')
+        .post(task.create_resource);
 
 };

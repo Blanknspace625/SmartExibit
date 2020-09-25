@@ -1,6 +1,8 @@
 var path = require('path');
-var User = require('./services/user');
+var User = require('./services/user.js');
+var Media = require('./services/media.js');
 var Database = require('./DataAccess/database');
+
 
 exports.return_homepage = function(req, res) {
     res.sendFile(path.join(__dirname, '/views/homepage.html'));
@@ -14,16 +16,25 @@ exports.return_signup = function(req, res) {
     res.sendFile(path.join(__dirname, '/views/register.html'));
 }
 
-exports.signup_new_user = function(req, res) 
-{
+exports.create_resource = function(req, res) {
+    Database.newMedia(req, res);
+}
+
+exports.signup_new_user = function(req, res) {
     Database.register(req, res);
 }
 
-exports.return_profile = function(req, res) 
-{
+exports.return_profile = function(req, res) {
     res.status(200).send(req.session.userId + ' Profile');
 }
 
+exports.change_reg_detail = function(req, res) {
+    Database.changeRegularDetails(req, res);
+}
+
+exports.change_sens_detail = function(req, res) {
+    Database.changeSensitiveDetails(req, res);
+}
 exports.return_signin = function(req, res) {
     res.sendFile(path.join(__dirname, '/views/login.html'));
 }
@@ -34,7 +45,7 @@ exports.user_login = function(req, res) {
 
 exports.user_logoff = function(req, res) {
     req.session.userId = null;
-    res.redirect('/homepage');
+    res.redirect('/index');
 }
 
 exports.return_dashboard = function(req, res) {
@@ -45,7 +56,7 @@ exports.return_entry = function(req, res) {
     if (req.session.userId) {
         res.redirect('/dashboard/:' + req.session.userId);
     } else {
-        res.redirect('/homepage');
+        res.redirect('/index');
     }
 }
 

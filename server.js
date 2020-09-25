@@ -43,4 +43,4 @@ var httpServ = http.createServer(app);
 
 httpServ.listen(80, "::");
 //httpsServ.listen(443, "::");
-console.log('HTTP & HTTPS server started!');
+console.log('Web server started!');
