@@ -10,6 +10,11 @@ const fs = require('fs');
 //  key: privKey, cert: certificate
 //};
 
+//var httpRedirectServ = express();
+//httpRedirectServ.all('*', function(req, res) {
+//  res.redirect('https://' + req.headers.host + req.url);
+//});
+
 var app = express();
 app.use(express.static(__dirname + '/'));
 
@@ -32,9 +37,10 @@ app.use(session({
 var routes = require('./routes');
 routes(app);
 
-var httpServ = http.createServer(app);
+var httpServ = http.createServer(app); // -- to be removed
 //var httpsServ = https.createServer(credentials, app);
 
-httpServ.listen(80, "::");
+httpServ.listen(80, "::"); // -- to be removed
+//httpRedirectServ.listen(80, "::");
 //httpsServ.listen(443, "::");
 console.log('Web server started!');
