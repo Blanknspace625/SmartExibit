@@ -54,7 +54,7 @@ exports.create_showcase = function(req, res) {
 }
 
 exports.update_showcase = function(req, res) {
-
+    Database.updateShowcase(req, res);
 }
 
 exports.return_showcase_data = function(req, res) {

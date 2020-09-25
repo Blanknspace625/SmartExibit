@@ -72,7 +72,7 @@ exports.newShowcase = async function(req, res) {
 }
 
 exports.updateShowcase = async function(req, res) {
-    if(req.session.userID) //Check that user is logged in
+    if (req.session.userId) //Check that user is logged in
     {
         const showcaseID = req.body.showcaseID;
         const showcaseName = req.body.showcaseName;
@@ -81,38 +81,22 @@ exports.updateShowcase = async function(req, res) {
 
         if(ownerID == req.session.userID) //Check that logged in user owns the showcase being modified
         {
-            var sql = "UPDATE Showcase SET showcaseName = '"+showcaseName+"', privacyParam = '""'"
+            var sql = "UPDATE Showcase SET showcaseName = '"+showcaseName+"', privacyParam = '"+privacyParam+"' WHERE idShowcase = '"+showcaseID+"'";
+            conn.query(sql, function (err, results) 
+            {
+                if (err) throw err;
+                res.status(200).send('Showcase ' + showcaseName + ' detail(s) updated');
+            });
         }
-        else //User does not own the showcase
-        {
-            res.status(401).send('Unauthorised');
-            return;
-        }
-
-
-
-
-
-
-
-        sql = "SELECT * FROM User WHERE idUser = ?"
-
-        conn.query(sql, [req.session.userID], async function (err, results) {
-            if (err) throw err;
-    
-            if (results.length > 0) && results[0].idUser == re {
-                results[0]
-    
-                if (isVerified)
-                    req.session.userId = results[0].idUser;
-                    res.redirect('/dashboard/:' + req.session.userId);
-
-            } else {
-                res.status(206).send('User does not exist!');
-            }
-        });
-
-
-
     }
+    else //User does not own the showcase
+    {
+        res.status(401).send('Unauthorised');
+        return;
+    }
+}
+
+exports.getShowcaseData = async function(req, res)
+{
+    
 }
