@@ -17,6 +17,8 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(express.static(__dirname + '/Public'));
+
 app.use(session({
   name: 'default',
   secret: 'itsasecret',
@@ -34,6 +36,10 @@ routes(app);
 
 var httpServ = http.createServer(app);
 //var httpsServ = https.createServer(credentials, app);
+
+//httpServ.get('*', function(req, res) {
+//  res.redirect('https://' + req.headers.host + req.url);
+//});
 
 httpServ.listen(80, "::");
 //httpsServ.listen(443, "::");

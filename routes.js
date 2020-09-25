@@ -47,4 +47,5 @@ module.exports = function(app) {
 
     app.route('/resources/upload')
         .post(task.create_resource);
+
 };
