@@ -1,21 +1,25 @@
-h1 {
+p.ex1 {
+  line-height: 100px;
+}
+
+h3 {
   font-family: Sitka Heading;
   font-weight: bold;
   top: 20px;
   font-size: 30px;
-  color: #3B3B3B;
+  color: #4F6367;
 }
 
 body {
   margin: 0;
   font-family: Segoe UI;
   font-size: 20px;
-  color: #3B3B3B;
+  color: #fff;
 }
 
 /* Logo style */
-#Smart_Exibit{
-  font-size: 25px;
+#Smart_Exhibit{
+  font-size: 27px;
   color:white;
   font-family:Sitka Heading;
   font-weight:bold;
@@ -32,9 +36,21 @@ body {
 }
 
 .nav-item{
-  padding-left: 20px;
-  padding-right: 20px;
-  font-size: 20px;
+  padding-left: 40px;
+  padding-right: 40px;
+  font-size: 17px;
+  font-family:Sitka Heading;
+  color: #fff;
+}
+
+.nav-item:hover { 
+  text-decoration: none;
+  color: #fff;
+  text-align: center;
+  background-color: #FE5F55;
+  border-radius: 16px 16px 16px 16px;
+  transition: 0.4s;
+  padding: 14px 40px;
 }
 
 .se-sb{
@@ -47,8 +63,9 @@ body {
 
 .se-db{
   background-color:#4F6367;
-  color: white;
+  color: #fff;
 }
+
 
 .se-wh{
   color:#FFFFFF;

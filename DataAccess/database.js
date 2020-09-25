@@ -22,6 +22,7 @@ exports.login = async function(req, res) {
 
         if (results.length > 0) {
             const isVerified = await bcrypt.compare(pwd, results[0].pwd);
+
             if (isVerified) {
                 req.session.userId = results[0].idUser;
                 res.redirect('/dashboard/:' + req.session.userId);
@@ -100,8 +101,6 @@ exports.changeSensitiveDetails = async function(req, res) {
 
 exports.newShowcase = async function(req, res) {
     if (req.session.userId) {
-        console.log(req.session.userId);
-        
         const userID = req.session.userId;
         const showcaseName = req.body.showcaseName;
         const privacyParam = req.body.privacyParam;
@@ -112,9 +111,40 @@ exports.newShowcase = async function(req, res) {
             if (err) throw err;
             res.redirect('/dashboard/:' + req.session.userId);
         });
-    } else {
+    } 
+    else {
         res.status(206).send('Not Authorised to create a showcase');
     }
+}
+
+exports.updateShowcase = async function(req, res) {
+    if (req.session.userId) //Check that user is logged in
+    {
+        const showcaseID = req.body.showcaseID;
+        const showcaseName = req.body.showcaseName;
+        const privacyParam = req.body.privacyParam;
+        const ownerID = req.body.ownerID;
+
+        if(ownerID == req.session.userID) //Check that logged in user owns the showcase being modified
+        {
+            var sql = "UPDATE Showcase SET showcaseName = '"+showcaseName+"', privacyParam = '"+privacyParam+"' WHERE idShowcase = '"+showcaseID+"'";
+            conn.query(sql, function (err, results) 
+            {
+                if (err) throw err;
+                res.status(200).send('Showcase ' + showcaseName + ' detail(s) updated');
+            });
+        }
+    }
+    else //User does not own the showcase
+    {
+        res.status(401).send('Unauthorised');
+        return;
+    }
+}
+
+exports.getShowcaseData = async function(req, res)
+{
+    
 }
 
 exports.newMedia = async function(req, res) {

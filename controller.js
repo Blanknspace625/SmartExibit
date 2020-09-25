@@ -35,7 +35,6 @@ exports.change_reg_detail = function(req, res) {
 exports.change_sens_detail = function(req, res) {
     Database.changeSensitiveDetails(req, res);
 }
-
 exports.return_signin = function(req, res) {
     res.sendFile(path.join(__dirname, '/views/login.html'));
 }
@@ -66,7 +65,7 @@ exports.create_showcase = function(req, res) {
 }
 
 exports.update_showcase = function(req, res) {
-
+    Database.updateShowcase(req, res);
 }
 
 exports.return_showcase_data = function(req, res) {
