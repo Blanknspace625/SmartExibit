@@ -146,7 +146,32 @@ exports.updateShowcase = async function(req, res) {
 
 exports.getShowcaseData = async function(req, res)
 {
-    
+    const showcaseID = req.headers.showcaseid;
+
+    conn.query("SELECT * FROM Showcase WHERE idShowcase = ?", showcaseID, async function (err, results) {
+        if (err) throw err;
+        if(results.length > 0) //case: showcase found
+        {
+            if(results[0].privacyParam == "Only Me" && results[0].idUser != req.session.userID) //case: User not authorised 
+            {
+                res.status(401).send("Not Authorised to access this content!");
+                return;
+            }
+
+            //Return Data as a json format
+            res.json({
+                idShowcase : results[0].showcaseID,
+                showcaseName : results[0].showcaseName,
+                dateCreated : results[0].dateCreated,
+                privacyParam : results[0].privacyParam,
+                idUser : results[0].idUser
+            });
+        }
+        else //case: showcase not found
+        {
+            res.status(404).send("User showcase not found!")
+        }
+    });
 }
 
 exports.newMedia = async function(req, res) {
