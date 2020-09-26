@@ -69,7 +69,7 @@ exports.update_showcase = function(req, res) {
 }
 
 exports.return_showcase_data = function(req, res) {
-
+    Database.getShowcaseData(req, res);
 }
 
 exports.return_showcase_page = function(req, res) {

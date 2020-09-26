@@ -36,7 +36,7 @@ module.exports = function(app) {
     app.route('/showcase/:showcaseid')
         .get(task.return_showcase_page);
     
-    app.route('/showcasedata/:showcaseid')
+    app.route('/showcasedata')
         .get(task.return_showcase_data);
     
     app.route('/updateshowcase')
