@@ -15,6 +15,7 @@ module.exports = function(app) {
         .get(task.return_profile);
 
     app.route('/profile/:profileid/changedetail')
+        .get(task.return_profile_setting)
         .post(task.change_reg_detail);
 
     app.route('/profile/:profileid/changepassword')

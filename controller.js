@@ -75,3 +75,7 @@ exports.return_showcase_data = function(req, res) {
 exports.return_showcase_page = function(req, res) {
 
 }
+
+exports.return_profile_setting = function (req, res) {
+    res.sendFile(path.join(__dirname, '/views/settings.html'));
+}
