@@ -51,6 +51,32 @@ exports.register = async function(req, res) {
     });
 }
 
+exports.getUserData = async function(req, res)
+{
+    const userID = req.headers.userid;
+
+    conn.query("SELECT * FROM User WHERE idUser = ?", userID, async function (err, results) {
+        if (err) throw err;
+        if(results.length > 0) //case: User found
+        {
+            //Return Data as a json format
+            res.json({
+                idUser : results[0].idUser,
+                firstName : results[0].firstName,
+                lastName : results[0].lastName,
+                email : results[0].email,
+                socialAccounts : results[0].socialAccounts,
+                profileImg : results[0].profileImg,
+                extLink : results[0].extLink
+            });
+        }
+        else //case: User not found
+        {
+            res.status(404).send("User not found!")
+        }
+    });
+}
+
 exports.changeRegularDetails = async function(req, res) {
     if (req.session.userId) {
         const userID = req.session.userId;
