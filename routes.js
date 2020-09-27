@@ -14,6 +14,9 @@ module.exports = function(app) {
     app.route('/profile/:profileid')
         .get(task.return_profile);
 
+    app.route('/userdata')
+        .get(task.return_user_data);
+
     app.route('/profile/:profileid/changedetail')
         .get(task.return_profile_setting)
         .post(task.change_reg_detail);

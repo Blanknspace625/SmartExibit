@@ -28,6 +28,10 @@ exports.return_profile = function(req, res) {
     res.status(200).send(req.session.userId + ' Profile');
 }
 
+exports.return_user_data = function(req,res){
+    Database.getUserData(req,res)
+}
+
 exports.change_reg_detail = function(req, res) {
     Database.changeRegularDetails(req, res);
 }
