@@ -5,7 +5,7 @@ var Database = require('./DataAccess/database');
 
 exports.return_entry = function(req, res) {
     if (req.session.userId) {
-        res.redirect('/dashboard/:' + req.session.userId);
+        res.redirect('/dashboard');
     } else {
         res.redirect('/index');
     }
