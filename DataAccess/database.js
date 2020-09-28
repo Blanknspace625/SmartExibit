@@ -88,20 +88,49 @@ class database {
 }
 
 exports.newMedia = async function(req, res) {
-    var URL = req.body.link;
-    var showcaseID = req.body.showcaseid;
+    if (req.session.userId)
+    {
+        const URL = req.body.link;
+        const showcaseID = req.body.showcaseID;
+        const ownerID = req.body.ownerID
 
-    var sql = "INSERT INTO Media (idShowcase, content) VALUES ('"+showcaseID+"','"+URL+"')";
-    conn.query(sql, function (err, res) {
-        if (err) throw err;
-        console.log("1 record inserted");
-    });
+        if(ownerID == req.session.userID) //Check that logged in user owns the showcase which media is being added to
+        {
+            var sql = "INSERT INTO Media (idShowcase, content) VALUES ('"+showcaseID+"','"+URL+"')";
+            conn.query(sql, function (err, results) {
+                if (err) throw err;
+                console.log("Media inserted into showcase " + showcaseID);
+                res.redirect('/dashboard/:' + req.session.userId);
+            });
+        }
+    }
+    else //User does not own the showcase
+    {
+        res.status(401).send(req.session.userID);
+        return;
+    }
 }
 
 exports.retrieveMedia = async function(req, res) {
-    var sql = "SELECT content FROM Media WHERE idMedia = ?";
-    conn.query(sql, [mediaid], function (err, res) {
+    if (req.session.userId) //Check user logged in
+    {
+    const sql = "SELECT * FROM Media WHERE idMedia = ?";
+    conn.query(sql, [mediaid], function (err, results) {
         if (err) throw err;
-            res.redirect(res[0].content);
+        if(results.length > 0) //Media found
+        {
+            if(results[0].privacyParam == "Only Me" && results[0].idUser != req.session.userId) // Media is private
+            {
+                res.status(401).send("Not Authorised to access this content!");
+                return;
+            }
+            res.redirect(results[0].content);   
+        }
     });
+    }
+    else //User not logged in
+    {
+        res.status(401).send('Unauthorised');
+        return;
+    }
 }
