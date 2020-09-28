@@ -43,7 +43,7 @@ body {
   color: #fff;
 }
 
-.nav-item:hover { 
+.nav-item:hover {
   text-decoration: none;
   color: #fff;
   text-align: center;
@@ -77,13 +77,5 @@ body {
 }
 
 @media (min-width: 768px){
-  .nav-item:hover {
-    text-decoration: none;
-    color: #fff;
-    text-align: center;
-    background-color: #4F6367;
-    border-radius: 16px 16px 16px 16px;
-    transition: 0.4s;
-    padding: 5px 20px;
-  }
+
 }

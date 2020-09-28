@@ -64,6 +64,7 @@ exports.return_entry = function(req, res) {
     }
 }
 
+
 exports.create_showcase = function(req, res) {
     Database.newShowcase(req, res);
 }
@@ -76,8 +77,11 @@ exports.return_showcase_data = function(req, res) {
     Database.getShowcaseData(req, res);
 }
 
-exports.return_showcase_page = function(req, res) {
-
+exports.return_showcase_page = function(req,res){
+    res.sendFile(path.join(__dirname, '/views/upload-file.html'));
+}
+exports.create_showcase = function(req, res) {
+    res.sendFile(path.join(__dirname, '/views/upload-file.html'));
 }
 
 exports.return_profile_setting = function (req, res) {

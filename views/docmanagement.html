@@ -46,7 +46,7 @@
             <h4><a href="#">John Smith</a></h4>
             <!-- Sidebar tabs  -->
             <li>
-                <a href="/dashboard/:profileid"><i class="fas fa-home"></i>     Home</a>
+                <a href="/homepage"><i class="fas fa-home"></i>     Home</a>
             </li>
             <li>
                 <a href="#"><i class="fas fa-link"></i>     Copy Profile Link</a>
@@ -69,7 +69,7 @@
                         <a href="#">Manage Documents</a>
                     </li>
                     <li>
-                        <a href="/showcase/:showcaseid">Upload a New Document</a>
+                        <a href="#">Upload a New Document</a>
                     </li>
                 </ul>
             </li>
@@ -102,7 +102,7 @@
     <div id= "content"> -->
     <div id="page-container">
 
-        <nav class="navbar navbar-expand-lg navbar-light se-wh ">
+        <nav class="navbar navbar-expand-sm navbar-light se-wh ">
             <div class="container-fluid">
 
                 <!-- Sidebar button -->
@@ -110,10 +110,12 @@
                     <i class="fas fa-bars"></i><!--<i class="fas fa-align-left"></i> -->
                     <span></span>
                 </button>
-
+                <button class="btn btn-light d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-align-justify"></i>
+                </button>
 
                 <!-- Navigation tabs -->
-                <div id="navbarSupportedContent">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="nav navbar-expand-lg ml-auto navbar-light se-wh">
                         <li class="nav-item">
                             <a class="nav-link" href="#profile"><i class="fas fa-user-circle"></i>   John Smith</a>
@@ -129,25 +131,23 @@
             </div>
         </nav>
 
-        <p>ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
-            sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss</p>
-    </div>
-</div>
+        <h1>Hellsssssssssssssssssssssssssssssssssssssssssssssssssssssssssa</h1>
 
-<!-- jQuery CDN - Slim version (=without AJAX) -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<!-- Popper.JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-<!-- Bootstrap JS -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#sidebarCollapse').on('click', function () {
-            $('#sidebar').toggleClass('active');
-        });
-    });
-</script>
+        <!-- jQuery CDN - Slim version (=without AJAX) -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <!-- Popper.JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+        <!-- Bootstrap JS -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#sidebarCollapse').on('click', function () {
+                    $('#sidebar').toggleClass('active');
+                });
+            });
+        </script>
 </body>
 
 </html>

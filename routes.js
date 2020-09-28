@@ -50,6 +50,7 @@ module.exports = function(app) {
         .get(task.user_logoff);
 
     app.route('/resources/upload')
+        .get(task.return_showcase_page)
         .post(task.create_resource);
 
 };

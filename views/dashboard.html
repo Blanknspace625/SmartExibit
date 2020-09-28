@@ -46,7 +46,7 @@
                 <h4><a href="#">John Smith</a></h4>
                 <!-- Sidebar tabs  -->
                 <li>
-                    <a href="/homepage"><i class="fas fa-home"></i>     Home</a>
+                    <a href="/dashboard/:profileid"><i class="fas fa-home"></i>     Home</a>
                 </li>
                 <li>
                     <a href="#"><i class="fas fa-link"></i>     Copy Profile Link</a>
@@ -69,7 +69,7 @@
                             <a href="#">Manage Documents</a>
                         </li>
                         <li>
-                            <a href="#">Upload a New Document</a>
+                            <a href="/showcase/:showcaseid">Upload a New Document</a>
                         </li>
                     </ul>
                 </li>
@@ -110,12 +110,10 @@
                         <i class="fas fa-bars"></i><!--<i class="fas fa-align-left"></i> -->
                         <span></span>
                     </button>
-                    <button class="btn btn-light d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fas fa-align-justify"></i>
-                    </button>
+
                     
                     <!-- Navigation tabs -->
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div id="navbarSupportedContent">
                         <ul class="nav navbar-expand-lg ml-auto navbar-light se-wh">
                             <li class="nav-item">
                                 <a class="nav-link" href="#profile"><i class="fas fa-user-circle"></i>   John Smith</a>
