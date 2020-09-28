@@ -35,3 +35,11 @@
     white-space: nowrap;
     font-family: "Quicksand", sans-serif;
 }
+
+.file-upload-wrapper{
+    padding: 50%;
+}
+
+.fileuploadselector{
+    display:inline;
+}

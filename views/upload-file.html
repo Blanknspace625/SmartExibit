@@ -13,9 +13,11 @@
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="/Public/StyleeSheet/dashboardstyle.css">
     <link rel="stylesheet" href="/Public/StyleeSheet/profilepic.css">
+    <link rel="stylesheet" href="/Public/StyleeSheet/upload.css">
 
     <!-- Our Custom JS -->
     <script type="text/javascript" src="path-to-javascript-file.js"></script>
+    <script src="/Public/Scripts/uploaddoc.js"></script>
 
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
@@ -129,11 +131,11 @@
             </div>
         </nav>
 
-        <div class="file-upload">
-            <input class="file-upload__input" type="file" name="myFile[]" id="myFile" multiple>
-            <button class="file-upload__button" type="button">Choose File(s)</button>
-            <span class="file-upload__label"></span>
+        <div class="file-upload-wrapper">
+            <input type="file" id="input-file-now" class="file-upload" />
+            <input type="submit" value="Upload"/>
         </div>
+
 
 <!-- jQuery CDN - Slim version (=without AJAX) -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
