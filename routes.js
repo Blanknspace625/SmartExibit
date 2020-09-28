@@ -11,7 +11,7 @@ module.exports = function(app) {
         .get(task.return_signup)
         .post(task.signup_new_user);
 
-    app.route('/profile/:profileid')
+    app.route('/profile')
         .get(task.return_profile);
 
     app.route('/changedetail')

@@ -1,7 +1,11 @@
 var path = require('path');
-var User = require('./services/user.js');
-var Media = require('./services/media.js');
-var Database = require('./DataAccess/database');
+
+var userManagement = require('./DataAccess/user_management');
+var showcase = require('./DataAccess/showcase');
+var mediaResource = require('./DataAccess/resource');
+
+//var User = require('./services/user.js');
+//var Media = require('./services/media.js');
 
 exports.return_entry = function(req, res) {
     if (req.session.userId) {
@@ -20,7 +24,7 @@ exports.return_signin = function(req, res) {
 }
 
 exports.user_login = function(req, res) {
-    Database.login(req, res);
+    userManagement.login(req, res);
 }
 
 exports.user_logoff = function(req, res) {
@@ -33,7 +37,7 @@ exports.return_signup = function(req, res) {
 }
 
 exports.signup_new_user = function(req, res) {
-    Database.register(req, res);
+    userManagement.register(req, res);
 }
 
 exports.return_dashboard = function(req, res) {
@@ -41,7 +45,7 @@ exports.return_dashboard = function(req, res) {
 }
 
 exports.return_profile = function(req, res) {
-    res.status(200).send(req.session.userId + ' Profile');
+    res.render('profile', { userInfo: req.session.userInfo });
 }
 
 exports.return_settings = function (req, res) {
@@ -49,7 +53,7 @@ exports.return_settings = function (req, res) {
 }
 
 exports.change_reg_detail = function(req, res) {
-    Database.changeRegularDetails(req, res);
+    userManagement.changeRegularDetails(req, res);
 }
 
 exports.return_change_password = function (req, res) {
@@ -57,11 +61,11 @@ exports.return_change_password = function (req, res) {
 }
 
 exports.change_sens_detail = function(req, res) {
-    Database.changeSensitiveDetails(req, res);
+    userManagement.changeSensitiveDetails(req, res);
 }
 
 exports.create_resource = function(req, res) {
-    Database.newMedia(req, res);
+    mediaResource.newMedia(req, res);
 }
 
 exports.return_resource = function(req, res) {
@@ -73,15 +77,15 @@ exports.create_showcase = function(req, res) {
 }
 
 exports.create_showcase = function(req, res) {
-    Database.newShowcase(req, res);
+    showcase.newShowcase(req, res);
 }
 
 exports.update_showcase = function(req, res) {
-    Database.updateShowcase(req, res);
+    showcase.updateShowcase(req, res);
 }
 
 exports.return_showcase_data = function(req, res) {
-    Database.getShowcaseData(req, res);
+    showcase.getShowcaseData(req, res);
 }
 
 exports.return_showcase_page = function(req,res){
