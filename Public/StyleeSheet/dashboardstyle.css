@@ -59,6 +59,7 @@ a:focus {
     border-radius: 0;
     margin-bottom: 40px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0);
+    width:100%;
 }
 
 .navbar-btn {
@@ -198,7 +199,8 @@ a.signout {
     COLOR PALETTE
 ----------------------------------------------------- */
 .se-sb{
-    color:#B8D8D8;
+    background-color: #B8D8D8;
+
 }
   
 .se-gb{
