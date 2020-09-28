@@ -45,7 +45,7 @@ exports.return_dashboard = function(req, res) {
 }
 
 exports.return_profile = function(req, res) {
-    res.render('profile', { userInfo: req.session.userInfo });
+    res.render('portfolio', { userInfo: req.session.userInfo });
 }
 
 exports.return_settings = function (req, res) {

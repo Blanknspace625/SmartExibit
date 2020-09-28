@@ -39,7 +39,7 @@
                   <a class="nav-item" href="/dashboard">My Dashboard</a>
                 </li>
                 <li>
-                  <a class="nav-item" href="#">Settings</a>
+                  <a class="nav-item" href="/changedetail">Settings</a>
                 </li>
       
                 <li>
@@ -62,7 +62,7 @@
                           <div class="d-flex flex-column align-items-center text-center">
                             <img src="../Public/Images/default_avatar.png" alt="Admin" class="rounded-circle" width="150">
                             <div class="mt-3">
-                              <h4>John Smith</h4>
+                              <h4><%=userInfo.firstName %> <%=userInfo.lastName%></h4>
                               <p class="text-secondary mb-1">Occupation</p>
                               <p class="text-muted font-size-sm"><i class="fas fa-map-marker-alt"></i>   Parkville VIC 3010, Australia</p>
                               <button class="btn btn-outline-dark se-or">Message</button>
@@ -146,7 +146,7 @@
                               <h6 class="mb-0">Full Name</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                              John Smith
+                              <%=userInfo.firstName %> <%=userInfo.lastName%>
                             </div>
                           </div>
                           <hr>
@@ -155,7 +155,7 @@
                               <h6 class="mb-0">Email</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
-                              Optional to make this public
+                              <%=userInfo.email%>
                             </div>
                           </div>
                           <hr>
