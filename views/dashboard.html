@@ -36,14 +36,14 @@
             <div class="container">
                 <div class="picture-container">
                     <div class="picture">
-                        <img src="/Public/Images/default_avatar.png" class="picture-src" id="wizardPicturePreview" title="">
+                        <img src="<%=userInfo.profileImg%>" class="picture-src" id="wizardPicturePreview" title="">
                         <input type="file" id="wizard-picture" class="">
                     </div>
                 </div>
             </div>
             <!-- User name  -->
             <ul class="list-unstyled components">
-                <h4><a href="#">   <%=userInfo.firstName %> <%=userInfo.lastName %></a></h4>
+                <h4><a href="#">   <%=userInfo.firstName %> <%=userInfo.lastName%></a></h4>
                 <!-- Sidebar tabs  -->
                 <li>
                     <a href="/dashboard"><i class="fas fa-home"></i>     Home</a>
@@ -122,7 +122,7 @@
                                 <a class="nav-link" href="#"><i class="fas fa-bell"></i>    Notifications</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/profile/changedetail"><i class="fas fa-cog"></i>   Settings</a>
+                                <a class="nav-link" href="/changedetail"><i class="fas fa-cog"></i>   Settings</a>
                             </li>
                         </ul>
                     </div>

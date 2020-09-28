@@ -14,11 +14,11 @@ module.exports = function(app) {
     app.route('/profile/:profileid')
         .get(task.return_profile);
 
-    app.route('/profile/changedetail')
+    app.route('/changedetail')
         .get(task.return_settings)
         .post(task.change_reg_detail);
 
-    app.route('/profile/changepassword')
+    app.route('/changepassword')
         .get(task.return_change_password)
         .post(task.change_sens_detail);
 
