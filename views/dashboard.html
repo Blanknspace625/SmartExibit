@@ -43,10 +43,10 @@
             </div>
             <!-- User name  -->
             <ul class="list-unstyled components">
-                <h4><a href="#">John Smith</a></h4>
+                <h4><a href="#">   <%=userInfo.firstName %> <%=userInfo.lastName %></a></h4>
                 <!-- Sidebar tabs  -->
                 <li>
-                    <a href="/dashboard/:profileid"><i class="fas fa-home"></i>     Home</a>
+                    <a href="/dashboard"><i class="fas fa-home"></i>     Home</a>
                 </li>
                 <li>
                     <a href="#"><i class="fas fa-link"></i>     Copy Profile Link</a>
@@ -116,13 +116,13 @@
                     <div id="navbarSupportedContent">
                         <ul class="nav navbar-expand-lg ml-auto navbar-light se-wh">
                             <li class="nav-item">
-                                <a class="nav-link" href="#profile"><i class="fas fa-user-circle"></i>   John Smith</a>
+                                <a class="nav-link" href="#profile"><i class="fas fa-user-circle"></i>   <%=userInfo.firstName %> <%=userInfo.lastName %></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#"><i class="fas fa-bell"></i>    Notifications</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/profile/:profileid/changedetail"><i class="fas fa-cog"></i>   Settings</a>
+                                <a class="nav-link" href="/profile/changedetail"><i class="fas fa-cog"></i>   Settings</a>
                             </li>
                         </ul>
                     </div>

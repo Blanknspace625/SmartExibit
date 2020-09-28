@@ -14,21 +14,19 @@ module.exports = function(app) {
     app.route('/profile/:profileid')
         .get(task.return_profile);
 
-    app.route('/userdata')
-        .get(task.return_user_data);
-
-    app.route('/profile/:profileid/changedetail')
-        .get(task.return_profile_setting)
+    app.route('/profile/changedetail')
+        .get(task.return_settings)
         .post(task.change_reg_detail);
 
-    app.route('/profile/:profileid/changepassword')
+    app.route('/profile/changepassword')
+        .get(task.return_change_password)
         .post(task.change_sens_detail);
 
     app.route('/signin')
         .get(task.return_signin)
         .post(task.user_login);
 
-    app.route('/dashboard/:profileid')
+    app.route('/dashboard')
         .get(task.return_dashboard);
     
     app.route('/resources/:mediaid')

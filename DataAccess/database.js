@@ -25,7 +25,16 @@ exports.login = async function(req, res) {
 
             if (isVerified) {
                 req.session.userId = results[0].idUser;
-                res.redirect('/dashboard/:' + req.session.userId);
+                req.session.userInfo = ({
+                    firstName: results[0].firstName,
+                    lastName: results[0].lastName,
+                    email: results[0].email,
+                    socialAccounts: results[0].socialAccounts,
+                    profileImg: results[0].profileImg,
+                    extLink: results[0].extLink
+                });
+
+                res.redirect('/dashboard');
             } else {
                 res.status(206).send('Email or password is incorrect!');
             }
@@ -48,32 +57,6 @@ exports.register = async function(req, res) {
     conn.query(sql, function (err, results) {
         if (err) throw err;
         res.redirect('/signin');
-    });
-}
-
-exports.getUserData = async function(req, res)
-{
-    const userID = req.headers.userid;
-
-    conn.query("SELECT * FROM User WHERE idUser = ?", userID, async function (err, results) {
-        if (err) throw err;
-        if(results.length > 0) //case: User found
-        {
-            //Return Data as a json format
-            res.json({
-                idUser : results[0].idUser,
-                firstName : results[0].firstName,
-                lastName : results[0].lastName,
-                email : results[0].email,
-                socialAccounts : results[0].socialAccounts,
-                profileImg : results[0].profileImg,
-                extLink : results[0].extLink
-            });
-        }
-        else //case: User not found
-        {
-            res.status(404).send("User not found!")
-        }
     });
 }
 

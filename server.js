@@ -3,6 +3,7 @@ const https = require('https');
 const express = require('express');
 const session = require('express-session');
 const fs = require('fs');
+const bodyParser = require('body-parser');
 
 //const privKey = fs.readFileSync('/etc/letsencrypt/live/epf.johnnybread.com/privkey.pem', 'utf8');
 //const certificate = fs.readFileSync('/etc/letsencrypt/live/epf.johnnybread.com/fullchain.pem', 'utf8');
@@ -16,9 +17,12 @@ const fs = require('fs');
 //});
 
 var app = express();
+
 app.use(express.static(__dirname + '/'));
 
-var bodyParser = require('body-parser');
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
