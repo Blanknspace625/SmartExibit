@@ -1,4 +1,5 @@
 var db = require('./db_interface');
+var views = require('./view_statistics');
 
 exports.newShowcase = async function(req, res) {
     if (req.session.userId) {
@@ -63,10 +64,12 @@ exports.getShowcaseData = async function(req, res)
                 {
                     res.status(401).send("Not Authorised to access this content!");
                 }
+                
+                views.newView(results[0].idShowcase);
 
                 //Return Data as a json format
                 res.json({
-                    idShowcase: results[0].showcaseID,
+                    idShowcase: results[0].idShowcase,
                     showcaseName: results[0].showcaseName,
                     dateCreated: results[0].dateCreated,
                     privacyParam: results[0].privacyParam,
