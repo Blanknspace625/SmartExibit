@@ -15,10 +15,6 @@
     <link rel="stylesheet" href="/Public/StyleeSheet/profilepic.css">
     <link rel="stylesheet" href="/Public/StyleeSheet/upload.css">
 
-    <!-- Our Custom JS -->
-    <script type="text/javascript" src="path-to-javascript-file.js"></script>
-    <script src="/Public/Scripts/uploaddoc.js"></script>
-
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
@@ -71,7 +67,7 @@
                         <a href="#">Manage Documents</a>
                     </li>
                     <li>
-                        <a href="/showcase/:showcaseid">Upload a New Document</a>
+                        <a href="/upload">Upload a New Document</a>
                     </li>
                 </ul>
             </li>
@@ -118,7 +114,7 @@
                 <div id="navbarSupportedContent">
                     <ul class="nav navbar-expand-lg ml-auto navbar-light se-wh">
                         <li class="nav-item">
-                            <a class="nav-link" href="#profile"><i class="fas fa-user-circle"></i>   <%=userInfo.firstName %> <%=userInfo.lastName %></a>
+                            <a class="nav-link" href="/profile"><i class="fas fa-user-circle"></i>   <%=userInfo.firstName %> <%=userInfo.lastName %></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#"><i class="fas fa-bell"></i>    Notifications</a>
@@ -131,10 +127,11 @@
             </div>
         </nav>
 
-        <div class="file-upload-wrapper">
-            <input type="file" id="input-file-now" class="file-upload" />
-            <input type="submit" value="Upload"/>
-        </div>
+        <form action="/upload" enctype="multipart/form-data" method="POST">
+            <span>Upload A File:</span>
+            <input type="file" name="media" required/> <br>
+            <input type="submit" value="Upload">
+        </form>
 
 
 <!-- jQuery CDN - Slim version (=without AJAX) -->

@@ -1,14 +1,14 @@
 var db = require('./db_interface');
 
 exports.newMedia = async function(req, res) {
-    var URL = req.body.link;
-    var showcaseID = req.body.showcaseid;
+    var filePath = req.body.filePath;
+    var showcaseID = req.body.showcaseId;
 
     db.getConnection(function(err, conn) {
-        var sql = "INSERT INTO Media (idShowcase, content) VALUES ('" + showcaseID + "','" + URL + "')";
+        var sql = "INSERT INTO Media (idShowcase, content) VALUES ('" + showcaseID + "','" + filePath + "')";
         conn.query(sql, function (err, results) {
             if (err) throw err;
-            console.log("1 record inserted");
+
             conn.release();
         });
     });

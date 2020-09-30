@@ -26,11 +26,11 @@ module.exports = function(app) {
         .get(task.return_signin)
         .post(task.user_login);
 
+    app.route('/signout')
+        .get(task.user_logoff);
+
     app.route('/dashboard')
         .get(task.return_dashboard);
-    
-    app.route('/resources/:mediaid')
-        .get(task.return_resource);
   
     app.route('/newshowcase')
         .post(task.create_showcase);
@@ -44,11 +44,10 @@ module.exports = function(app) {
     app.route('/updateshowcase')
         .post(task.update_showcase);
 
-    app.route('/signout')
-        .get(task.user_logoff);
+    app.route('/resources/:mediaid')
+        .get(task.return_resource);
 
-    app.route('/resources/upload')
+    app.route('/upload')
         .get(task.return_showcase_page)
         .post(task.create_resource);
-
 };

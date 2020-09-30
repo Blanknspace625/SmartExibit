@@ -1,8 +1,10 @@
-var path = require('path');
+const path = require('path');
 
 var userManagement = require('./DataAccess/user_management');
 var showcase = require('./DataAccess/showcase');
 var mediaResource = require('./DataAccess/resource');
+
+var fileUpload = require('./services/file_upload');
 
 //var User = require('./services/user.js');
 //var Media = require('./services/media.js');
@@ -65,7 +67,14 @@ exports.change_sens_detail = function(req, res) {
 }
 
 exports.create_resource = function(req, res) {
-    mediaResource.newMedia(req, res);
+    //mediaResource.newMedia(req, res);
+    fileUpload.upload(req, res, function(err) {
+        if (err) {
+            res.status(404).send('File uploading failed!');
+        } else {
+            res.redirect('/dashboard');
+        }
+    });
 }
 
 exports.return_resource = function(req, res) {
