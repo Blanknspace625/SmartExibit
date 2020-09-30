@@ -2,21 +2,25 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
     <title>My Dashboard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS CDN -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-    <!-- Our Custom CSS -->
-    <link rel="stylesheet" href="/Public/StyleeSheet/dashboardstyle.css">
-    <link rel="stylesheet" href="/Public/StyleeSheet/profilepic.css">
-    <link rel="stylesheet" href="/Public/StyleeSheet/upload.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/Public/StyleeSheet/dashboard.css">
+
+    <!-- Font Awesome JS -->
+    <script src="https://kit.fontawesome.com/e564623181.js" crossorigin="anonymous"></script>
+    <script src="/Public/Scripts/jquery.min.js"></script>
+    <script src="/Public/Scripts/popper.js"></script>
+    <script src="/Public/Scripts/bootstrap.min.js"></script>
+    <script src="/Public/Scripts/main.js"></script>
 
     <!-- Our Custom JS -->
     <script type="text/javascript" src="path-to-javascript-file.js"></script>
+
     <script src="/Public/Scripts/uploaddoc.js"></script>
 
     <!-- Font Awesome JS -->
@@ -27,34 +31,30 @@
 </head>
 
 <body>
-<div class="wrapper">
-    <!-- Sidebar  -->
+<div class="wrapper d-flex align-items-stretch">
     <nav id="sidebar">
-        <!-- Logo  -->
-        <div class="sidebar-header">
-            <a class="navbar-brand" href="#" id="Smart_Exhibit">Smart Exhibit</a>
+        <div class="custom-menu">
+            <button type="button" id="sidebarCollapse" class="btn btn-primary">
+            </button>
         </div>
-        <!-- Profile Picture not working -->
-        <div class="container">
-            <div class="picture-container">
-                <div class="picture">
-                    <img src="<%=userInfo.profileImg%>" class="picture-src" id="wizardPicturePreview" title="">
-                    <input type="file" id="wizard-picture" class="">
+        <div class="img bg-wrap text-center py-4">
+            <div class="user-logo">
+                <div class="container">
+                    <div class="picture-container">
+                        <div class="picture">
+                            <a href="/profile" class="logo"><div class="img" style="background-image: url(/Public/Images/default_avatar.png);"></div></a>
+                        </div>
+                    </div>
                 </div>
+                <h1><a href="/profile" class="logo"><%=userInfo.firstName %> <%=userInfo.lastName%></a></h1><h3>Occupation</h3>
             </div>
         </div>
-        <!-- User name  -->
-        <ul class="list-unstyled components">
-            <h4><a href="#">   <%=userInfo.firstName %> <%=userInfo.lastName%></a></h4>
-            <!-- Sidebar tabs  -->
-            <li>
-                <a href="/dashboard"><i class="fas fa-home"></i>     Home</a>
+        <ul class="list-unstyled components mb-5">
+            <li class="active">
+                <a href="/dashboard"><span class="fa fa-home mr-3"></span> Home</a>
             </li>
             <li>
-                <a href="#"><i class="fas fa-link"></i>     Copy Profile Link</a>
-            </li>
-            <li>
-                <a href="#portfolioSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">   <i class="fas fa-clipboard"></i>           My Portfolio</a>
+                <a href="#portfolioSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span class="fas fa-clipboard mr-4"></span>My Portfolio</a>
                 <ul class="collapse list-unstyled" id="portfolioSubmenu">
                     <li>
                         <a href="#">Edit Portfolio</a>
@@ -65,76 +65,50 @@
                 </ul>
             </li>
             <li>
-                <a href="#documentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-file-image"></i>          Documents</a>
+                <a href="#documentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span class="fas fa-file-image mr-4"></span>Documents</a>
                 <ul class="collapse list-unstyled" id="documentSubmenu">
-                    <li>
-                        <a href="#">Manage Documents</a>
-                    </li>
                     <li>
                         <a href="/showcase/:showcaseid">Upload a New Document</a>
                     </li>
-                </ul>
-            </li>
-            <li>
-                <a href="#messageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fas fa-comments"></i> Messaging</a>
-                <ul class="collapse list-unstyled" id="messageSubmenu">
                     <li>
-                        <a href="#">View Messages</a>
-                    </li>
-                    <li>
-                        <a href="#">Send a Message</a>
+                        <a href="#">Manage Documents</a>
                     </li>
                 </ul>
             </li>
-        </ul>
-        <p class="ex1"></p>
-
-        <!-- Bottom buttons  -->
-        <ul class="list-unstyled CTAs">
+            <!-- BACKEND SET NUMBER OF NOTIFICATIONS HERE -->
             <li>
-                <a href="/signout" class="signout"><i class="fas fa-sign-out-alt"></i>    Sign Out</a>
+                <a href="#"><span class="fas fa-comments mr-3 notif"><small class="d-flex align-items-center justify-content-center">5</small></span> Messages</a>
+            </li>
+            <li>
+                <a href="#"><span class="fa fa-cog mr-3"></span> Settings</a>
+            </li>
+            <li>
+                <a href="#"><span class="fa fa-support mr-3"></span> Support</a>
+            </li>
+            <li>
+                <a href="#"><span class="fa fa-sign-out mr-3"></span> Sign Out</a>
             </li>
         </ul>
     </nav>
-
-    <!-- Navigation bar -->
-
     <!-- Page Content  -->
-    <!-- Or prefer this??
-    <div id= "content"> -->
-    <div id="page-container">
-
-        <nav class="navbar navbar-expand-lg navbar-light se-wh ">
-            <div class="container-fluid">
-
-                <!-- Sidebar button -->
-                <button type="button" id="sidebarCollapse" class="btn se-wh">
-                    <i class="fas fa-bars"></i><!--<i class="fas fa-align-left"></i> -->
-                    <span></span>
-                </button>
-
-
-                <!-- Navigation tabs -->
-                <div id="navbarSupportedContent">
-                    <ul class="nav navbar-expand-lg ml-auto navbar-light se-wh">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#profile"><i class="fas fa-user-circle"></i>   <%=userInfo.firstName %> <%=userInfo.lastName %></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fas fa-bell"></i>    Notifications</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/changedetail"><i class="fas fa-cog"></i>   Settings</a>
-                        </li>
-                    </ul>
+    <div id="content" class="p-5 p-md-5 pt-5">
+        <div class="row gutters-sm">
+            <div class="col-md-12 mb-10">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-left">
+                            <div class="mt-10">
+                                <h3 class="p-md-2 mb-4"><b>Upload a file</b></h3>
+                                <div class="file-upload-wrapper">
+                                    <input type="file" id="input-file-now" class="file-upload" />
+                                    <input type="submit" value="Upload"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </nav>
 
-        <div class="file-upload-wrapper">
-            <input type="file" id="input-file-now" class="file-upload" />
-            <input type="submit" value="Upload"/>
-        </div>
 
 
 <!-- jQuery CDN - Slim version (=without AJAX) -->
