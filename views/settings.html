@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Dashboard</title>
+    <title>Settings</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -21,11 +21,6 @@
     <script type="text/javascript" src="path-to-javascript-file.js"></script>
 
     <script src="/Public/Scripts/uploaddoc.js"></script>
-
-    <!-- Font Awesome JS -->
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/e564623181.js" crossorigin="anonymous"></script>
 
 </head>
 
@@ -99,14 +94,14 @@
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-left">
                             <div class="mt-10">
-                                <h3 class="p-md-2 mb-4"><b>Setting</b></h3>
+                                <h3 class="p-md-2 mb-4"><b>Settings</b></h3>
                                 <hr>
                                 <form action= "/changeSensitiveDetails" method="post" onsubmit="return confirm('Save Change?')">
                                     <label for="fname">First name:</label><br>
                                     <input type="text" id="fname" name="fname" value= <%=userInfo.firstName%>><br>
                                     <label for="lname">Last name:</label><br>
                                     <input type="text" id="lname" name="lname" value=<%=userInfo.lastName%>><br>
-                                    <label for="email">email:</label><br>
+                                    <label for="email">Email:</label><br>
                                     <input type="text" id="email" name="email"  value=<%userInfo.email%>><br>
                                     <label for="password">Password:</label><br>
                                     <input type="text" id="password" name="password" value=<%userInfo.password%>><br>
