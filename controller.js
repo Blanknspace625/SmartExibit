@@ -72,7 +72,7 @@ exports.create_resource = function(req, res) {
         if (err) {
             res.status(404).send('File uploading failed!');
         } else {
-            res.redirect('/dashboard');
+            res.status(200).send('File uploaded successfully');
         }
     });
 }
