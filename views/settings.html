@@ -96,15 +96,13 @@
                             <div class="mt-10">
                                 <h3 class="p-md-2 mb-4"><b>Settings</b></h3>
                                 <hr>
-                                <form action= "/changeSensitiveDetails" method="post" onsubmit="return confirm('Save Change?')">
-                                    <label for="fname">First name:</label><br>
-                                    <input type="text" id="fname" name="fname" value= <%=userInfo.firstName%>><br>
-                                    <label for="lname">Last name:</label><br>
-                                    <input type="text" id="lname" name="lname" value=<%=userInfo.lastName%>><br>
+                                <form action= "/changedetail" method="post" onsubmit="return confirm('Save Change?')">
+                                    <label for="firstName">First name:</label><br>
+                                    <input type="text" id="firstName" name="firstName" value= <%=userInfo.firstName%>><br>
+                                    <label for="lastName">Last name:</label><br>
+                                    <input type="text" id="lastName" name="lastName" value=<%=userInfo.lastName%>><br>
                                     <label for="email">Email:</label><br>
-                                    <input type="text" id="email" name="email"  value=<%userInfo.email%>><br>
-                                    <label for="password">Password:</label><br>
-                                    <input type="text" id="password" name="password" value=<%userInfo.password%>><br>
+                                    <input type="text" id="email" name="email"  value=<%=userInfo.email%>><br>
                                     <hr>
                                     <input type="submit" value="Update">
                                 </form>
