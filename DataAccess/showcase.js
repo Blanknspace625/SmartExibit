@@ -63,6 +63,15 @@ exports.getShowcaseData = async function(req, res)
                 {
                     res.status(401).send("Not Authorised to access this content!");
                 }
+                
+                //Record view on the showcase if not owning user
+                if(results[0].idUser != req.session.userID)
+                {
+                    conn.query("INSERT INTO View (idShowcase) VALUES ('"+showcaseID+"')", {
+                        
+                    });
+                }
+
 
                 //Return Data as a json format
                 res.json({
