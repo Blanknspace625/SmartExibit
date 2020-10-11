@@ -1,3 +1,4 @@
+const { json } = require('body-parser');
 var db = require('./db_interface');
 
 exports.newShowcase = async function(req, res) {
@@ -63,6 +64,15 @@ exports.getShowcaseData = async function(req, res)
                 {
                     res.status(401).send("Not Authorised to access this content!");
                 }
+                
+                //Record view on the showcase if not owning user
+                if(results[0].idUser != req.session.userID)
+                {
+                    conn.query("INSERT INTO View (idShowcase) VALUES ('"+showcaseID+"')", {
+                        
+                    });
+                }
+
 
                 //Return Data as a json format
                 res.json({
@@ -80,5 +90,34 @@ exports.getShowcaseData = async function(req, res)
 
             conn.release();
         });
+    });
+}
+
+exports.getShowcaseStatistics = async function(req)
+{
+    var showcaseID = req.showcaseID;
+    
+    conn.query("SELECT " + 
+	                "count(case WHEN timestamp_ >= DATE_SUB(NOW(), INTERVAL 7 DAY) THEN 1 ELSE null end) AS lastWeekViews ," +
+                    "count(*) AS allTimeViews" +
+                "FROM View " + 
+                "WHERE idShowcase = ?",
+                this.showcaseID,
+                async function(err, results){
+
+        if(err) throw err;
+
+        //TODO return Data in correct format
+        if(results.length > 0)
+        {
+            return json({
+                allTimeViews: results[0].allTimeViews,
+                lastWeekViews: results[0].lastWeekViews
+            });
+        }
+        else
+        {
+            return;
+        }
     });
 }
