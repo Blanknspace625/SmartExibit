@@ -1,5 +1,8 @@
 var db = require('./db_interface');
 var bcrypt = require('bcrypt');
+var nodemailer = require('nodemailer');
+var crypto = require('crypto');
+const { validRange } = require('semver');
 
 exports.login = async function(req, res) {
     const email = req.body.email;
@@ -49,10 +52,73 @@ exports.register = async function(req, res) {
         conn.query(sql, function (err, results) {
             if (err) throw err;
 
+            exports.verifyEmail(req,res);
             conn.release();
             res.redirect('/signin');
         });
     });
+
+
+}
+
+exports.verifyEmail = async function(req, res) {
+    const email = req.body.email;
+
+    //Generate a random string for email
+    const code = crypto.randomBytes(128).toString('hex').slice(0,128);
+
+    db.getConnection(function(err, conn) {
+        // Get user id from db
+        conn.query("SELECT * FROM User WHERE email = ?", [email], async function (err, results) {
+            if (err) throw err;
+            
+            // Insert user id and verify code into db
+            var userId = results[0].idUser;
+            var sql = "INSERT INTO Code (userId, code) VALUES ('" + userId + "'," + "'" + code + "')";
+            conn.query(sql, [email], async function (err, results) {
+                if (err) throw err;
+                
+                // Send verify link to email
+                const url = 'localhost/verify-email/:' + userId + '/:' + code;
+
+                var transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                        user: 'smartexibit@gmail.com',
+                        pass: 'rXg8d$61n7%z'
+                    }
+                });
+            
+                var mailOptions = {
+                    from: 'smartexibit@gmail.com',
+                    to: email,
+                    subject: 'Verify Your Email',
+                    text: 'You are receiving this email if you need to verify your email for your Smart Exhibit account. Please click the link below:\n\n' + 
+                        url
+                };
+            
+                transporter.sendMail(mailOptions, function(error, info) {
+                    if(error) 
+                    {
+                        console.log(error);
+                    }
+                    else
+                    {
+                        console.log('Email sent: ' + info.response);
+                    }
+                });
+
+                conn.release();
+            });
+        });
+    });
+}
+
+exports.verifyEmailResponse = async function(req, res)
+{
+    const {userid, code} = req.params;
+
+    console.log('Verifying user' + req.params.userid);
 }
 
 exports.changeRegularDetails = async function(req, res) {

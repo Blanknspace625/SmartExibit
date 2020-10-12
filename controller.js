@@ -42,6 +42,14 @@ exports.signup_new_user = function(req, res) {
     userManagement.register(req, res);
 }
 
+exports.verify_user_email = function(req,res) {
+    userManagement.verifyEmail(req,res);
+}
+
+exports.verify_email_response = function(req,res) {
+    userManagement.verifyEmailResponse(req,res);
+}
+
 exports.return_dashboard = function(req, res) {
     res.render('dashboard', { userInfo: req.session.userInfo });
 }

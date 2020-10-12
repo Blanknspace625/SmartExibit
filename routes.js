@@ -29,6 +29,12 @@ module.exports = function(app) {
     app.route('/signout')
         .get(task.user_logoff);
 
+    app.route('/verify')
+        .post(task.verify_user_email);
+
+    app.route('/verify-email/:userid/:code')
+        .post(task.verify_email_response);
+
     app.route('/dashboard')
         .get(task.return_dashboard);
   
