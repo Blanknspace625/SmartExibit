@@ -33,7 +33,7 @@ module.exports = function(app) {
         .post(task.verify_user_email);
 
     app.route('/verify-email/:userid/:code')
-        .post(task.verify_email_response);
+        .get(task.verify_email_response);
 
     app.route('/dashboard')
         .get(task.return_dashboard);

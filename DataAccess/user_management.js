@@ -79,7 +79,7 @@ exports.verifyEmail = async function(req, res) {
                 if (err) throw err;
                 
                 // Send verify link to email
-                const url = 'localhost/verify-email/:' + userId + '/:' + code;
+                const url = 'localhost/verify-email/' + userId + '/' + code;
 
                 var transporter = nodemailer.createTransport({
                     service: 'gmail',
@@ -116,9 +116,47 @@ exports.verifyEmail = async function(req, res) {
 
 exports.verifyEmailResponse = async function(req, res)
 {
-    const {userid, code} = req.params;
+    const userID = req.params.userid;
+    const code = req.params.code;
 
-    console.log('Verifying user' + req.params.userid);
+    db.getConnection(function(err, conn) {
+        conn.query("SELECT * FROM User WHERE idUser = ?", [userID], async function (err, results) {
+            if (err) throw err;
+
+            // Check if user is not verified
+            const status = results[0].status;
+            if(status == 'pending')
+            {
+                // Check if user has matching code
+                conn.query("SELECT * FROM Code WHERE userid = ?", [userID], async function (err, results) {
+                    if (err) throw err;
+                    
+                    const dbCode = results[0].code;
+                    if(code == dbCode)
+                    {
+                        // Change status to verified
+                        var sql = "UPDATE User SET status = 'verified' WHERE idUser = '" + userID + "'";
+                        conn.query(sql, function (err, results) {
+                            if (err) throw err;
+                        });
+                        
+                        // Delete code entry from db as no longer needed
+                        var sql = "DELETE FROM Code WHERE userid = '" + userID + "'";
+                        conn.query(sql, function (err, results) {
+                            if (err) throw err;
+
+                            conn.release();
+                            res.redirect('/signin');
+                        });
+                    }
+                });
+            }
+            else
+            {
+                res.status(206).send('User email already verified');
+            }
+        });
+    });
 }
 
 exports.changeRegularDetails = async function(req, res) {
