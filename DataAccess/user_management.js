@@ -16,18 +16,23 @@ exports.login = async function(req, res) {
                 const isVerified = await bcrypt.compare(pwd, results[0].pwd);
 
                 if (isVerified) {
-                    req.session.userId = results[0].idUser;
-                    req.session.userInfo = ({
-                        firstName: results[0].firstName,
-                        lastName: results[0].lastName,
-                        email: results[0].email,
-                        socialAccounts: results[0].socialAccounts,
-                        profileImg: results[0].profileImg,
-                        extLink: results[0].extLink
-                    });
-
-                    conn.release();
-                    res.redirect('/dashboard');
+                    if(results[0].status == 'verified') {
+                        req.session.userId = results[0].idUser;
+                        req.session.userInfo = ({
+                            firstName: results[0].firstName,
+                            lastName: results[0].lastName,
+                            email: results[0].email,
+                            socialAccounts: results[0].socialAccounts,
+                            profileImg: results[0].profileImg,
+                            extLink: results[0].extLink
+                        });
+    
+                        conn.release();
+                        res.redirect('/dashboard');
+                    } else {
+                        res.status(206).send('Your account must be verified before you can login');
+                    }
+                    
                 } else {
                     res.status(206).send('Email or password is incorrect!');
                 }
@@ -63,6 +68,7 @@ exports.register = async function(req, res) {
 
 exports.verifyEmail = async function(req, res) {
     const email = req.body.email;
+    const time = new Date();
 
     //Generate a random string for email
     const code = crypto.randomBytes(128).toString('hex').slice(0,128);
@@ -71,10 +77,12 @@ exports.verifyEmail = async function(req, res) {
         // Get user id from db
         conn.query("SELECT * FROM User WHERE email = ?", [email], async function (err, results) {
             if (err) throw err;
-            
-            // Insert user id and verify code into db
+
             var userId = results[0].idUser;
-            var sql = "INSERT INTO Code (userId, code) VALUES ('" + userId + "'," + "'" + code + "')";
+            const current = new Date(new Date().toUTCString());
+
+            // Insert user id and verify code into db
+            var sql = "INSERT INTO Code (userId, code) VALUES ('" + userId + "','" + code + "') ON DUPLICATE KEY UPDATE code = '" + code + "', createDate = UTC_TIMESTAMP()";
             conn.query(sql, [email], async function (err, results) {
                 if (err) throw err;
                 
@@ -94,7 +102,8 @@ exports.verifyEmail = async function(req, res) {
                     to: email,
                     subject: 'Verify Your Email',
                     text: 'You are receiving this email if you need to verify your email for your Smart Exhibit account. Please click the link below:\n\n' + 
-                        url
+                        url +
+                        '\n\nThis link expires in 10 minutes from the time you recieved this email.'
                 };
             
                 transporter.sendMail(mailOptions, function(error, info) {
@@ -123,37 +132,58 @@ exports.verifyEmailResponse = async function(req, res)
         conn.query("SELECT * FROM User WHERE idUser = ?", [userID], async function (err, results) {
             if (err) throw err;
 
-            // Check if user is not verified
-            const status = results[0].status;
-            if(status == 'pending')
-            {
-                // Check if user has matching code
-                conn.query("SELECT * FROM Code WHERE userid = ?", [userID], async function (err, results) {
-                    if (err) throw err;
-                    
-                    const dbCode = results[0].code;
-                    if(code == dbCode)
-                    {
-                        // Change status to verified
-                        var sql = "UPDATE User SET status = 'verified' WHERE idUser = '" + userID + "'";
-                        conn.query(sql, function (err, results) {
-                            if (err) throw err;
-                        });
+            if(results.length > 0) {
+                // Check if user is not verified
+                const status = results[0].status;
+                if(status == 'pending') {
+                    // Check if user has matching code
+                    conn.query("SELECT * FROM Code WHERE userid = ?", [userID], async function (err, results) {
+                        if (err) throw err;
                         
-                        // Delete code entry from db as no longer needed
-                        var sql = "DELETE FROM Code WHERE userid = '" + userID + "'";
-                        conn.query(sql, function (err, results) {
-                            if (err) throw err;
+                        const dbCode = results[0].code;
+                        const create = results[0].createDate;
+                        const current = new Date(new Date().toUTCString());
+                        const diff = current.getTime() - create.getTime();
 
-                            conn.release();
-                            res.redirect('/signin');
-                        });
-                    }
-                });
-            }
-            else
-            {
-                res.status(206).send('User email already verified');
+                        if(code == dbCode) {
+                            // Link expires after 10 minutes
+                            if(diff/60000 < 10) {
+                                // Change status to verified
+                                var sql = "UPDATE User SET status = 'verified' WHERE idUser = '" + userID + "'";
+                                conn.query(sql, function (err, results) {
+                                    if (err) throw err;
+                                });
+
+                                // Delete code entry from db as no longer needed
+                                var sql = "DELETE FROM Code WHERE userid = '" + userID + "'";
+                                conn.query(sql, function (err, results) {
+                                    if (err) throw err;
+
+                                    conn.release();
+                                    res.redirect('/signin');
+                                });
+                            }
+                            else {
+                                // Delete code entry from db as no longer needed
+                                var sql = "DELETE FROM Code WHERE userid = '" + userID + "'";
+                                conn.query(sql, function (err, results) {
+                                    if (err) throw err;
+
+                                    conn.release();
+                                });
+                                res.status(206).send('Verification link expired');
+                            }
+                        }
+                        else {
+                            res.redirect('/verify');
+                        }
+                    });
+                }
+                else {
+                    res.status(206).send('User email already verified');
+                }
+            } else {
+                res.status(206).send('Verification link does no exist');
             }
         });
     });

@@ -15,7 +15,8 @@ const pool = mysql.createPool({
     host: 'epf.johnnybread.com',
     user:'js_user',
     password: 'smartexhibit',
-    database: 'eportfolio'
+    database: 'eportfolio',
+    timezone: 'utc'
 });
 
 exports.getConnection = function(callback) {
