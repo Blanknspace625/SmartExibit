@@ -9,13 +9,28 @@ h1 {
     color: #fff;
 }
 
-h3 {
+h2{
     font-family: Segoe UI;
-    top: 20px;
-    font-size: 20px;
+    text-align: center;
+    font-size: 30px;
     color: #fff;
 }
 
+h3 {
+    font-family: Segoe UI;
+    top: 20px;
+    font-size: 17px;
+    padding-top: 10%;
+    color: #fff;
+}
+a {
+    color: #fff;
+    padding-left: 3%;
+}
+
+a:hover {
+    color: #fff;
+}
 
 /* Padding for the logins and page */
 
@@ -25,6 +40,10 @@ p.ex1 {
 
 p.ex2 {
     padding-bottom: 1%;
+}
+
+p.ex3{
+    padding-top: 8%;
 }
 
 .container {
@@ -38,14 +57,18 @@ p.ex2 {
 
 }
 
-
-
 /* Login Logo style */
 #Smart_Exhibit{
     padding-top: 20%;
     font-size: 50px;
     color:white;
     font-family:Sitka Heading;
+    font-weight:bold;
+}
+
+#ForgotPassword{
+    font-size: 89px;
+    color:white;
     font-weight:bold;
 }
 
