@@ -41,6 +41,9 @@ body {
   font-size: 17px;
   font-family:Sitka Heading;
   color: #fff;
+  outline: none;
+  text-decoration: none;  
+
 }
 
 .nav-item:hover {

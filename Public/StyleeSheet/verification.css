@@ -4,8 +4,10 @@
 html,body{
     display: grid;
     height: 100%;
+    place-items: center;
+    text-align: center;
+    background: #B8D8D8;
 }
-
 h1 {
     font-family: Segoe UI;
     top: 20px;
@@ -15,8 +17,7 @@ h1 {
 
 h2{
     font-family: Segoe UI;
-    text-align: center;
-    font-size: 30px;
+    font-size: 35px;
     color: #fff;
 }
 
