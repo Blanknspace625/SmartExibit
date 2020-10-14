@@ -70,6 +70,14 @@ exports.return_change_password = function (req, res) {
     res.render('settings', { userInfo: req.session.userInfo });
 }
 
+exports.return_forgot_password = function (req, res) {
+    res.sendFile(path.join(__dirname, '/views/enteremail.html'));
+}
+
+exports.forgot_password = function(req, res) {
+    userManagement.forgotPassword(req, res);
+}
+
 exports.change_sens_detail = function(req, res) {
     userManagement.changeSensitiveDetails(req, res);
 }

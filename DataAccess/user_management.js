@@ -68,7 +68,6 @@ exports.register = async function(req, res) {
 
 exports.verifyEmail = async function(req, res) {
     const email = req.body.email;
-    const time = new Date();
 
     //Generate a random string for email
     const code = crypto.randomBytes(128).toString('hex').slice(0,128);
@@ -209,6 +208,67 @@ exports.changeRegularDetails = async function(req, res) {
     } else {
         res.status(401).send('Unauthorised');
     }
+}
+
+exports.forgotPassword = async function (req, res) {
+    const email = req.body.email;
+
+    //Generate a random string for email
+    const code = crypto.randomBytes(128).toString('hex').slice(0,128);
+
+    db.getConnection(function(err, conn) {
+        // Get user id from db
+        conn.query("SELECT * FROM User WHERE email = ?", [email], async function (err, results) {
+            if (err) throw err;
+
+            if(results.length > 0) {
+                if(results[0].status == 'verified') {
+                    var userId = results[0].idUser;
+
+                    // Insert user id and reset code into db
+                    var sql = "INSERT INTO ResetCode (userId, code) VALUES ('" + userId + "','" + code + "') ON DUPLICATE KEY UPDATE code = '" + code + "', createDate = UTC_TIMESTAMP()";
+                    conn.query(sql, [email], async function (err, results) {
+                        if (err) throw err;
+                        
+                        // Send reset link to email
+                        const url = 'localhost/resetpassword/' + userId + '/' + code;
+    
+                        var transporter = nodemailer.createTransport({
+                            service: 'gmail',
+                            auth: {
+                                user: 'smartexibit@gmail.com',
+                                pass: 'rXg8d$61n7%z'
+                            }
+                        });
+                    
+                        var mailOptions = {
+                            from: 'smartexibit@gmail.com',
+                            to: email,
+                            subject: 'Reset Your Password',
+                            text: 'You are receiving this email if you have forgotten your password to your Smart Exhibit account. Please click the link below to reset your password:\n\n' + 
+                                url +
+                                '\n\nThis link expires in 10 minutes from the time you recieved this email.'
+                        };
+                    
+                        transporter.sendMail(mailOptions, function(error, info) {
+                            if(error) 
+                            {
+                                console.log(error);
+                            }
+                            else
+                            {
+                                console.log('Email sent: ' + info.response);
+                            }
+                        });
+    
+                        conn.release();
+                    });
+                }
+            }
+            // Regardless of whether an email is sent or not, display message
+            res.status(200).send('Reset password link sent to email.');
+        });
+    });
 }
 
 exports.changeSensitiveDetails = async function(req, res) {
