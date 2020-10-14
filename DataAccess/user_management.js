@@ -188,28 +188,6 @@ exports.verifyEmailResponse = async function(req, res)
     });
 }
 
-exports.changeRegularDetails = async function(req, res) {
-    if (req.session.userId) {
-        const userID = req.session.userId;
-        const email = req.body.email;
-        const firstName = req.body.firstName;
-        const lastName = req.body.lastName;
-
-        db.getConnection(function(err, conn) {
-            var sql = "UPDATE User SET firstName = '" + firstName + "', lastName = '" + lastName + "'," +
-                "email = '" + email + "' WHERE idUser = '" + userID + "'";
-            conn.query(sql, function (err, results) {
-                if (err) throw err;
-
-                conn.release();
-                res.status(200).send('User ' + userID + ' detail(s) updated');
-            });
-        });
-    } else {
-        res.status(401).send('Unauthorised');
-    }
-}
-
 exports.forgotPassword = async function (req, res) {
     const email = req.body.email;
 
@@ -260,7 +238,6 @@ exports.forgotPassword = async function (req, res) {
                                 console.log('Email sent: ' + info.response);
                             }
                         });
-    
                         conn.release();
                     });
                 }
@@ -269,6 +246,93 @@ exports.forgotPassword = async function (req, res) {
             res.status(200).send('Reset password link sent to email.');
         });
     });
+}
+
+exports.resetPassword = async function(req, res) {
+    const userID = req.params.userid;
+    const code = req.params.code;
+    const newPwd = req.body.newPassword;
+    const newPwdAgain = req.body.newPasswordAgain;
+
+    db.getConnection(function(err, conn) {
+        conn.query("SELECT * FROM User WHERE idUser = ?", [userID], async function (err, results) {
+            if (err) throw err;
+
+            if(results.length > 0) {
+                    // Check if user has matching code
+                    conn.query("SELECT * FROM ResetCode WHERE userid = ?", [userID], async function (err, results) {
+                        if (err) throw err;
+                        
+                        const dbCode = results[0].code;
+                        const create = results[0].createDate;
+                        const current = new Date(new Date().toUTCString());
+                        const diff = current.getTime() - create.getTime();
+
+                        if(code == dbCode) {
+                            // Link expires after 10 minutes
+                            if(diff/60000 < 10) {
+                                // Change password to new
+                                if (newPwd.valueOf() == newPwdAgain.valueOf()) {
+                                    const pwd = await bcrypt.hash(req.body.newPassword, 8);
+            
+                                    var sql = "UPDATE User SET pwd = '" + pwd + "' WHERE idUser = '" + userID + "'";
+                                    conn.query(sql, function (err, results) {
+                                        if (err) throw err;
+                                    });
+                                } else {
+                                    res.status(206).send('New passwords don\'t agree!');
+                                    return;
+                                }
+
+                                // Delete code entry from db as no longer needed
+                                var sql = "DELETE FROM ResetCode WHERE userid = '" + userID + "'";
+                                conn.query(sql, function (err, results) {
+                                    if (err) throw err;
+
+                                    conn.release();
+                                    res.redirect('/signin');
+                                });
+                            } else {
+                                // Delete code entry from db as no longer needed
+                                var sql = "DELETE FROM ResetCode WHERE userid = '" + userID + "'";
+                                conn.query(sql, function (err, results) {
+                                    if (err) throw err;
+
+                                    conn.release();
+                                });
+                                res.status(206).send('Reset password link expired');
+                            }
+                        } else {
+                            res.redirect('/forgotpassword');
+                        }
+                    });
+            } else {
+                res.status(206).send('Reset password link does no exist');
+            }
+        });
+    });
+}
+
+exports.changeRegularDetails = async function(req, res) {
+    if (req.session.userId) {
+        const userID = req.session.userId;
+        const email = req.body.email;
+        const firstName = req.body.firstName;
+        const lastName = req.body.lastName;
+
+        db.getConnection(function(err, conn) {
+            var sql = "UPDATE User SET firstName = '" + firstName + "', lastName = '" + lastName + "'," +
+                "email = '" + email + "' WHERE idUser = '" + userID + "'";
+            conn.query(sql, function (err, results) {
+                if (err) throw err;
+
+                conn.release();
+                res.status(200).send('User ' + userID + ' detail(s) updated');
+            });
+        });
+    } else {
+        res.status(401).send('Unauthorised');
+    }
 }
 
 exports.changeSensitiveDetails = async function(req, res) {

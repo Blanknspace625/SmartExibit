@@ -78,6 +78,10 @@ exports.forgot_password = function(req, res) {
     userManagement.forgotPassword(req, res);
 }
 
+exports.reset_password = function(req, res) {
+    userManagement.resetPassword(req, res);
+}
+
 exports.change_sens_detail = function(req, res) {
     userManagement.changeSensitiveDetails(req, res);
 }
