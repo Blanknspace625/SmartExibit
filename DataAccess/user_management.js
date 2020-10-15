@@ -424,6 +424,10 @@ exports.getProfileInformation = async function(req, userID, res){
                 {
                     profileInfo.email = results[0].email;
                 }
+                else
+                {
+                    profileInfo.email = "";
+                }
                 
                 res.render('portfolio', { userInfo: profileInfo});
                 return;
