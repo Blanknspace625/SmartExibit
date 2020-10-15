@@ -22,6 +22,13 @@ module.exports = function(app) {
         .get(task.return_change_password)
         .post(task.change_sens_detail);
 
+    app.route('/forgotpassword')
+        .get(task.return_forgot_password)
+        .post(task.forgot_password);
+
+    app.route('/resetpassword/:userid/:code')
+        .post(task.reset_password);
+
     app.route('/signin')
         .get(task.return_signin)
         .post(task.user_login);
