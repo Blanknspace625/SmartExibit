@@ -67,10 +67,14 @@ exports.verify_email_response = function(req,res) {
 }
 
 exports.return_dashboard = function(req, res) {
-    res.render('dashboard', { userInfo: req.session.userInfo });
+    res.render('dashboard', { userInfo: req.session.userInfo});
 }
 
 exports.return_profile = function(req, res) {
+    userManagement.getProfileInformation(req, req.query.profileID, res);
+}
+
+exports.return_my_profile = function(req, res) {
     res.render('portfolio', { userInfo: req.session.userInfo });
 }
 

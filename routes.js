@@ -17,6 +17,9 @@ module.exports = function(app) {
     app.route('/profile')
         .get(task.return_profile);
 
+    app.route('/myprofile')
+        .get(task.return_my_profile);
+
     app.route('/settings')
         .get(task.return_settings)
 

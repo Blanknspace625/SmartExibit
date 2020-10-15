@@ -318,7 +318,8 @@ exports.changeRegularDetails = async function(req, res) {
                 if (err) throw err;
 
                 conn.release();
-                res.status(200).send('User ' + userID + ' detail(s) updated');
+
+                res.redirect('/dashboard')
             });
         });
     } else {
@@ -360,4 +361,77 @@ exports.changeSensitiveDetails = async function(req, res) {
     } else {
         res.status(401).send('Unauthorised');
     }
+}
+
+exports.getProfileInformation = async function(req, userID, res){
+    
+    
+    db.getConnection(function(err, conn) {
+        conn.query("SELECT * FROM User WHERE idUser = ?", [userID], async function (err, results) {
+            if (err) throw err;
+
+            if (results.length > 0) {
+            //TODO collect all info that is permitted and return as json
+            if(req.session.idUser == userID) //CASE: all information is avaliable
+            {
+                var profileInfo = ({
+                    firstName: results[0].firstName,
+                    lastName: results[0].lastName,
+                    email: results[0].email,
+                    displayEmail: results[0].displayEmail,
+                    socialAccounts: results[0].socialAccounts,
+                    profileImg: results[0].profileImg,
+                    extLink: results[0].extLink,
+                    mobileNumber: results[0].mobileNumber,
+                    phoneNumber: results[0].phoneNumber,
+                    aboutMe: results[0].aboutMe,
+                    workExperience: results[0].workExperience,
+                    education: results[0].education,
+                    address: results[0].address,
+                    document1: results[0].document1,
+                    document2: results[0].document2,
+                    document3: results[0].document3,
+                    document4: results[0].document4,
+                    document5: results[0].document5
+                });
+                
+                res.render('portfolio', { userInfo: profileInfo});
+                return;
+            }
+            else if(true) //CASE: profile is not private
+            {
+                var profileInfo = ({
+                    firstName: results[0].firstName,
+                    lastName: results[0].lastName,
+                    email: results[0].email,
+                    displayEmail: results[0].displayEmail,
+                    socialAccounts: results[0].socialAccounts,
+                    profileImg: results[0].profileImg,
+                    extLink: results[0].extLink,
+                    mobileNumber: results[0].mobileNumber,
+                    phoneNumber: results[0].phoneNumber,
+                    aboutMe: results[0].aboutMe,
+                    workExperience: results[0].workExperience,
+                    education: results[0].education,
+                    address: results[0].address,
+                    document1: results[0].document1,
+                    document2: results[0].document2,
+                    document3: results[0].document3,
+                    document4: results[0].document4,
+                    document5: results[0].document5
+                });
+                
+                res.render('portfolio', { userInfo: profileInfo});
+                return;
+            }
+            else //CASE: profile is private
+            {
+                return;
+            }
+        }
+
+        res.status(404).send('Profile not found');
+
+        });
+    });
 }
