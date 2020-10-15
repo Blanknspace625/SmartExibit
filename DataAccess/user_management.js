@@ -364,7 +364,7 @@ exports.changeSensitiveDetails = async function(req, res) {
 }
 
 exports.getProfileInformation = async function(req, userID, res){
-    
+    console.log("requested profile " + userID);
     
     db.getConnection(function(err, conn) {
         conn.query("SELECT * FROM User WHERE idUser = ?", [userID], async function (err, results) {
@@ -434,12 +434,14 @@ exports.getProfileInformation = async function(req, userID, res){
             }
             else //CASE: profile is private
             {
-                res.status(401).send('Profile is Private');
+                res.redirect(401, '/');
+                //res.status(401).send('Profile is Private');
                 return;
             }
         }
 
-        res.status(404).send('Profile not found');
+        res.redirect(404, '/');
+        //res.status(404).send('Profile not found');
 
         });
     });

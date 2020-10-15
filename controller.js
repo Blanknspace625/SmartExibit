@@ -75,7 +75,7 @@ exports.return_profile = function(req, res) {
 }
 
 exports.return_my_profile = function(req, res) {
-    res.render('portfolio', { userInfo: req.session.userInfo });
+    userManagement.getProfileInformation(req, req.session.userId, res);
 }
 
 exports.return_settings = function (req, res) {
