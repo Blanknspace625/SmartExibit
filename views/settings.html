@@ -76,7 +76,7 @@
                 <a href="#"><span class="fas fa-comments mr-3 notif"><small class="d-flex align-items-center justify-content-center">5</small></span> Messages</a>
             </li>
             <li>
-                <a href="/changedetail"><span class="fa fa-cog mr-3"></span> Settings</a>
+                <a href="/settings"><span class="fa fa-cog mr-3"></span> Settings</a>
             </li>
             <li>
                 <a href="#"><span class="fa fa-support mr-3"></span> Support</a>
@@ -135,21 +135,20 @@
                                     <form action ="/changepassword" method = "post">
                                         <div class="row justify-content-center">
                                             <div class="form-group">
-                                                <label for="password"><h1><i class="fas fa-key"></i>   Old Password:</h1></label>
-                                                <input id="password" type="password" name="password" placeholder="Password" required>
+                                                <label for="oldPassword"><h1><i class="fas fa-key"></i>   Old Password:</h1></label>
+                                                <input id="oldPassword" type="password" name="oldPassword" placeholder="Enter Old Password" required>
                                                 <!--<progress max="100" value="0" id="strength" style="width: 440px;"></progress>-->
                                             </div>
                                             <div class="form-group">
-                                                <label for="cpassword"><h1><i class="fas fa-key"></i>   New Password:</h1></label>
-                                                <input id="password" type="password" name="cpassword" placeholder="Password" required>
+                                                <label for="newPassword"><h1><i class="fas fa-key"></i>   New Password:</h1></label>
+                                                <input id="newPassword" type="password" name="newPassword" placeholder="Enter New Password" required>
                                             </div>
                                             <div class="form-group">
-                                                <label for="cpassword"><h1><i class="fas fa-key"></i>   Confirm New Password:</h1></label>
-                                                <input id="cpassword" type="password" name="cpassword" placeholder="Password" required>
+                                                <label for="newPasswordAgain"><h1><i class="fas fa-key"></i>   Confirm New Password:</h1></label>
+                                                <input id="newPasswordAgain" type="password" name="newPasswordAgain" placeholder="Confirm New Password" required>
                                             </div>
-                                            <input type="submit" value="Submit">
+                                            <input type="submit" value="Update">
                                             </div>
-                                        </div>
                                     </form>
                                 </div>
 
@@ -163,7 +162,6 @@
                     </div>
                 </div>
             </div>
-        </div>
         </nav>
     </div>
 

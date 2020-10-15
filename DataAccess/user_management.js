@@ -2,7 +2,6 @@ var db = require('./db_interface');
 var bcrypt = require('bcrypt');
 var nodemailer = require('nodemailer');
 var crypto = require('crypto');
-const { validRange } = require('semver');
 
 exports.login = async function(req, res) {
     const email = req.body.email;
@@ -16,7 +15,7 @@ exports.login = async function(req, res) {
                 const isVerified = await bcrypt.compare(pwd, results[0].pwd);
 
                 if (isVerified) {
-                    if(results[0].status == 'verified') {
+                    if (results[0].status == 'verified') {
                         req.session.userId = results[0].idUser;
                         req.session.userInfo = ({
                             firstName: results[0].firstName,
@@ -30,9 +29,8 @@ exports.login = async function(req, res) {
                         conn.release();
                         res.redirect('/dashboard');
                     } else {
-                        res.status(206).send('Your account must be verified before you can login');
+                        res.status(206).send('Your account must be verified before you can login!');
                     }
-                    
                 } else {
                     res.status(206).send('Email or password is incorrect!');
                 }
@@ -49,21 +47,26 @@ exports.register = async function(req, res) {
     const lastName = req.body.lastName;
     const profilePicRef = '/Public/Images/default_avatar.png';
     //const socialAccounts;
-    const pwd = await bcrypt.hash(req.body.password, 8);
+    const pwd = req.body.password;
+    const pwdAgain = req.body.confirmPassword;
 
-    db.getConnection(function(err, conn) {
-        var sql = "INSERT INTO User (firstName, lastName, email, profileImg, pwd, extLink) VALUES ('" + firstName + "'," +
-            "'" + lastName + "', '" + email + "', '" + profilePicRef + "', '" + pwd + "', 'https://www.facebook.com')";
-        conn.query(sql, function (err, results) {
-            if (err) throw err;
+    db.getConnection(async function(err, conn) {
+        if (pwd.valueOf() == pwdAgain.valueOf()) {
+            const pwd_ = await bcrypt.hash(req.body.password, 8);
 
-            exports.verifyEmail(req,res);
-            conn.release();
-            res.redirect('/signin');
-        });
+            var sql = "INSERT INTO User (firstName, lastName, email, profileImg, pwd, extLink) VALUES " +
+                "('" + firstName + "', '" + lastName + "', '" + email + "', '" + profilePicRef + "'," +
+                "'" + pwd_ + "', 'https://www.facebook.com')";
+            conn.query(sql, async function (err, results) {
+                if (err) throw err;
+
+                conn.release();
+
+                exports.verifyEmail(req, res);
+                res.redirect('/proceed-register');
+            });
+        }
     });
-
-
 }
 
 exports.verifyEmail = async function(req, res) {

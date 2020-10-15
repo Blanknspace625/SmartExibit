@@ -11,15 +11,19 @@ module.exports = function(app) {
         .get(task.return_signup)
         .post(task.signup_new_user);
 
+    app.route('/dashboard')
+        .get(task.return_dashboard);
+
     app.route('/profile')
         .get(task.return_profile);
 
-    app.route('/changedetail')
+    app.route('/settings')
         .get(task.return_settings)
+
+    app.route('/changedetail')
         .post(task.change_reg_detail);
 
     app.route('/changepassword')
-        .get(task.return_change_password)
         .post(task.change_sens_detail);
 
     app.route('/signin')
@@ -29,14 +33,21 @@ module.exports = function(app) {
     app.route('/signout')
         .get(task.user_logoff);
 
+    app.route('/iforgot')
+        .get(task.return_iforgot)
+        /*.post(task.forgot_password)*/;
+
+    app.route('/proceed-register')
+        .get(task.verification_email_sent);
+
+    app.route('/proceed-reset')
+        .get(task.reset_email_sent);
+
     app.route('/verify')
         .post(task.verify_user_email);
 
     app.route('/verify-email/:userid/:code')
         .get(task.verify_email_response);
-
-    app.route('/dashboard')
-        .get(task.return_dashboard);
   
     app.route('/newshowcase')
         .post(task.create_showcase);

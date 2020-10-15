@@ -42,8 +42,22 @@ exports.signup_new_user = function(req, res) {
     userManagement.register(req, res);
 }
 
+exports.return_iforgot = function(req, res) {
+    res.sendFile(path.join(__dirname, '/views/passwordreset.html'));
+}
+/*
+exports.forgot_password = function(req, res)
+*/
+exports.verification_email_sent = function(req, res) {
+    res.sendFile(path.join(__dirname, '/views/verificationsent.html'));
+}
+
+exports.reset_email_sent = function(req, res) {
+    res.sendFile(path.join(__dirname, '/views/passwordchangesent.html'));
+}
+
 exports.verify_user_email = function(req,res) {
-    userManagement.verifyEmail(req,res);
+    userManagement.verifyEmail(req, res);
 }
 
 exports.verify_email_response = function(req,res) {
@@ -64,10 +78,6 @@ exports.return_settings = function (req, res) {
 
 exports.change_reg_detail = function(req, res) {
     userManagement.changeRegularDetails(req, res);
-}
-
-exports.return_change_password = function (req, res) {
-    res.render('settings', { userInfo: req.session.userInfo });
 }
 
 exports.change_sens_detail = function(req, res) {
