@@ -90,7 +90,7 @@ exports.verifyEmail = async function(req, res) {
                 if (err) throw err;
                 
                 // Send verify link to email
-                const url = 'localhost/verify-email/' + userId + '/' + code;
+                const url = 'localhost/verifyemail?id=' + userId + '&code=' + code;
 
                 var transporter = nodemailer.createTransport({
                     service: 'gmail',
@@ -128,8 +128,8 @@ exports.verifyEmail = async function(req, res) {
 
 exports.verifyEmailResponse = async function(req, res)
 {
-    const userID = req.params.userid;
-    const code = req.params.code;
+    const userID = req.query.id;
+    const code = req.query.code;
 
     db.getConnection(function(err, conn) {
         conn.query("SELECT * FROM User WHERE idUser = ?", [userID], async function (err, results) {
@@ -174,11 +174,11 @@ exports.verifyEmailResponse = async function(req, res)
 
                                     conn.release();
                                 });
-                                res.status(206).send('Verification link expired');
+                                res.status(206).send('Verification link expired!');
                             }
                         }
                         else {
-                            res.redirect('/verify');
+                            res.status(206).send('Verification failed!');
                         }
                     });
                 }
@@ -186,7 +186,7 @@ exports.verifyEmailResponse = async function(req, res)
                     res.status(206).send('User email already verified');
                 }
             } else {
-                res.status(206).send('Verification link does no exist');
+                res.status(401).send('Unauthorised');
             }
         });
     });
@@ -213,7 +213,7 @@ exports.forgotPassword = async function (req, res) {
                         if (err) throw err;
 
                         // Send reset link to email
-                        const url = 'localhost/resetpassword/' + userId + '/' + code;
+                        const url = 'localhost/resetpassword?id=' + userId + '&code=' + code;
 
                         var transporter = nodemailer.createTransport({
                             service: 'gmail',
@@ -244,6 +244,8 @@ exports.forgotPassword = async function (req, res) {
                         });
                         conn.release();
                     });
+                } else {
+                    res.status(206).send('User email is not yet verified');
                 }
             }
             // Regardless of whether an email is sent or not, display message
@@ -253,15 +255,15 @@ exports.forgotPassword = async function (req, res) {
 }
 
 exports.resetPassword = async function(req, res) {
-    const userID = req.params.userid;
-    const code = req.params.code;
+    const userID = req.query.id;
+    const code = req.query.code;
     const newPwd = req.body.newPassword;
     const newPwdAgain = req.body.newPasswordAgain;
 
     db.getConnection(function(err, conn) {
         conn.query("SELECT * FROM User WHERE idUser = ?", [userID], async function (err, results) {
             if (err) throw err;
-
+            console.log(userID, results);
             if (results.length > 0) {
                 conn.query("SELECT * FROM ResetCode WHERE userid = ?", [userID], async function (err, results) {
                     if (err) throw err;
@@ -287,18 +289,19 @@ exports.resetPassword = async function(req, res) {
 
                         // Delete code entry from db as no longer needed
                         var sql = "DELETE FROM ResetCode WHERE userid = '" + userID + "'";
-                        conn.query(sql, function (err, results) {
+                        conn.query(sql, function(err, results) {
                             if (err) throw err;
 
                             conn.release();
+
                             res.redirect('/signin');
                         });
                     } else {
-                        res.redirect('/iforgot');
+                        res.status(206).send('Verification failed!');
                     }
                 });
             } else {
-                res.status(206).send('Reset password link does no exist');
+                res.status(401).send('Unauthorised');
             }
         });
     });

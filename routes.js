@@ -37,17 +37,18 @@ module.exports = function(app) {
         .get(task.return_iforgot)
         .post(task.forgot_password);
 
+    app.route('/resetpassword')
+        .get(task.return_reset_password)
+        .post(task.reset_password);
+
     app.route('/proceed-register')
         .get(task.verification_email_sent);
 
     app.route('/proceed-reset')
         .get(task.reset_email_sent);
 
-    app.route('/verify')
-        .post(task.verify_user_email);
-
-    app.route('/verify-email/:userid/:code')
-        .get(task.verify_email_response);
+    app.route('/verifyemail')
+        .get(task.verify_email);
   
     app.route('/newshowcase')
         .post(task.create_showcase);

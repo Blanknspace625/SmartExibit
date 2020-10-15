@@ -51,19 +51,23 @@ exports.forgot_password = function(req, res) {
     userManagement.forgotPassword(req, res);
 }
 
-exports.verification_email_sent = function(req, res) {
-    res.sendFile(path.join(__dirname, '/views/verificationsent.html'));
-}
-
 exports.reset_email_sent = function(req, res) {
     res.sendFile(path.join(__dirname, '/views/passwordchangesent.html'));
 }
 
-exports.verify_user_email = function(req,res) {
-    userManagement.verifyEmail(req, res);
+exports.return_reset_password = function(req, res) {
+    res.sendFile(path.join(__dirname, '/views/passwordresetform.html'));
 }
 
-exports.verify_email_response = function(req,res) {
+exports.reset_password = function(req, res) {
+    userManagement.resetPassword(req, res);
+}
+
+exports.verification_email_sent = function(req, res) {
+    res.sendFile(path.join(__dirname, '/views/verificationsent.html'));
+}
+
+exports.verify_email = function(req,res) {
     userManagement.verifyEmailResponse(req,res);
 }
 
