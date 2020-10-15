@@ -1,0 +1,5 @@
+This folder is used to store the media files uploaded by users.
+
+Files from different users will be store in sub-folders named as their unique UserID.
+
+Files will be named as the original filename on the local machine.

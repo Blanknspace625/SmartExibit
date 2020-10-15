@@ -5,6 +5,7 @@ var showcase = require('./DataAccess/showcase');
 var mediaResource = require('./DataAccess/resource');
 
 var fileUpload = require('./services/file_upload');
+var fileBrowser = require('./services/file_browser');
 
 //var User = require('./services/user.js');
 //var Media = require('./services/media.js');
@@ -86,6 +87,10 @@ exports.change_sens_detail = function(req, res) {
     userManagement.changeSensitiveDetails(req, res);
 }
 
+exports.return_resource_upload = function(req, res) {
+    res.render('upload-file', { userInfo: req.session.userInfo });
+}
+
 exports.create_resource = function(req, res) {
     //mediaResource.newMedia(req, res);
     fileUpload.upload(req, res, function(err) {
@@ -98,11 +103,15 @@ exports.create_resource = function(req, res) {
 }
 
 exports.return_resource = function(req, res) {
-    res.status(200).send('Resource requested');
+    res.redirect('/views/showcaselocal.html');
 }
 
-exports.create_showcase = function(req, res) {
-    res.sendFile(path.join(__dirname, '/views/upload-file.html'));
+exports.resource_handler = function(req, res) {
+    fileBrowser.fileInterface(req, res);
+}
+
+exports.retrive_resource = function(req, res) {
+    fileBrowser.retriveFile(req, res);
 }
 
 exports.create_showcase = function(req, res) {
@@ -116,11 +125,11 @@ exports.update_showcase = function(req, res) {
 exports.return_showcase_data = function(req, res) {
     showcase.getShowcaseData(req, res);
 }
-
+/*
 exports.return_showcase_page = function(req, res){
     res.render('upload-file', { userInfo: req.session.userInfo });
 }
-
+*/
 exports.return_contact = function(req, res) {
     res.sendFile(path.join(__dirname, '/views/contact-us.html'));
 }
