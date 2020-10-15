@@ -403,7 +403,6 @@ exports.getProfileInformation = async function(req, userID, res){
                 var profileInfo = ({
                     firstName: results[0].firstName,
                     lastName: results[0].lastName,
-                    email: results[0].email,
                     displayEmail: results[0].displayEmail,
                     socialAccounts: results[0].socialAccounts,
                     profileImg: results[0].profileImg,
@@ -420,6 +419,11 @@ exports.getProfileInformation = async function(req, userID, res){
                     document4: results[0].document4,
                     document5: results[0].document5
                 });
+
+                if(profileInfo.displayEmail != 0) //CASE: Check if a user wants their email publicly visible
+                {
+                    profileInfo.email = results[0].email;
+                }
                 
                 res.render('portfolio', { userInfo: profileInfo});
                 return;
