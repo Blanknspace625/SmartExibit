@@ -1,10 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!--bootstrap -->
+    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css'
+          integrity='sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk'
+          crossorigin='anonymous')>
+    <link rel="stylesheet" href="../Public/StyleeSheet/mystyle.css">
+    <link rel="stylesheet" href="../Public/StyleeSheet/slideshow.css">
+    <link rel="stylesheet" href="../Public/StyleeSheet/contact-us.css">
+
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Font Awesome JS -->
+    <script src="https://kit.fontawesome.com/e564623181.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
+<div id = "page-container">
+    <div id="content-wrap">
+        <nav class="navbar navbar-expand-lg navbar-light se-db">
+            <a class="navbar-brand ml-sm-1" href="/index" id="Smart_Exhibit"><i class="fas fa-user-graduate"></i>       Smart Exhibit</a>
+            <div id="navbarSupportedContent">
+                <ul class="navbar-nav mr-0">
+                    <li>
+                        <a class="nav-item" href="#">Go Back</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
 
+    <div class="container px-4 mt-32px">
+        <div class="row jumbotron">
+            <div class="col-12">
+                <h1>Contact Us</h1>
+                <hr>
+                <p class="lead"></p>Our Campus
+                <p class="lead"></p>You can find us at The University of Melbourne
+                <p class="lead"></p>Postal address: The University of Melbourne Victoria 3010
+                <p class="lead"></p>Phone: Domestic: 13 MELB (13 6352) | International:+(61 3) 9035 5511
+                <p class="lead"></p>
+                <div id="googleMap" style="width:70%;height:500px;"></div>
+            </div>
+        </div>
+        <div id="map"></div>
+        <script>
+            function myMap() {
+                var myLatLng = {
+                    lat: -37.7983,
+                    lng: 144.9610
+                };
+                var map = new google.maps.Map(document.getElementById('googleMap'), {
+                    zoom: 16,
+                    center: myLatLng
+                });
+                var marker = new google.maps.Marker({
+                    position: myLatLng,
+                });
+                var map = new google.maps.Map(document.getElementById("googleMap"), map);
+            }
+        </script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8yP3nTexwjMShuCeoLOsQlqdiXoYMMH4&amp;callback=myMap"></script>
+    </div>
+
+</div>
 </body>
 </html>

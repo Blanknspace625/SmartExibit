@@ -9,6 +9,7 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/Public/StyleeSheet/dashboard.css">
+    <link rel="stylesheet" href="/Public/StyleeSheet/settings.css">
 
 
     <!-- Font Awesome JS -->
@@ -96,28 +97,67 @@
                         <div class="d-flex flex-column align-items-center text-left">
                             <div class="mt-10">
                                 <h3 class="p-md-2 mb-4"><b>Settings</b></h3>
-                                <hr>
-                                <form action ="/changedetail" method = "post" onSubmit="return confirm('Save changes?')">
-                                    <div class="row justify-content-center">
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label for="firstName">  First Name:</label> <br>
-                                                <input id="firstName" type="text" name="firstName" value=<%=userInfo.firstName%> require><br>
+                                <!-- Tab links -->
+                                <div class="tab">
+                                    <button class="tablinks" onclick="settingTabs(event, 'accountsettings')">Account Settings</button>
+                                    <button class="tablinks" onclick="settingTabs(event, 'passwordsettings')">Change Password</button>
+                                    <button class="tablinks" onclick="settingTabs(event, 'privacysettings')">Privacy Settings</button>
+                                </div>
+
+                                <!-- Tab content -->
+                                <div id="accountsettings" class="tabcontent">
+                                    <h3>Account Settings</h3>
+                                    <form action ="/changedetail" method = "post" onSubmit="return confirm('Save changes?')">
+                                        <div class="row justify-content-center">
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <label for="firstName">  First Name:</label> <br>
+                                                    <input id="firstName" type="text" name="firstName" value=<%=userInfo.firstName%> require><br>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="lastName">  Last Name:</label><br>
+                                                    <input id="lastName" type="text" name="lastName" value= <%=userInfo.lastName%> require><br>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="email">   Email Address:</label><br>
+                                                    <!-- type = "email"-->
+                                                    <input id="email" type="text" name="email" value=<%=userInfo.email%> require><br>
+                                                </div>
+                                                <hr>
+                                                <input type="submit" value="Update"><br>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="lastName">  Last Name:</label><br>
-                                                <input id="lastName" type="text" name="lastName" value= <%=userInfo.lastName%> require><br>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="email">   Email Address:</label><br>
-                                                <!-- type = "email"-->
-                                                <input id="email" type="text" name="email" value=<%=userInfo.email%> require><br>
-                                            </div>
-                                            <hr>
-                                            <input type="submit" value="Update"><br>
                                         </div>
-                                    </div>
-                                </form>
+                                    </form>
+                                </div>
+
+                                <div id="passwordsettings" class="tabcontent">
+                                    <h3>Change Password</h3>
+                                    <form action ="/changepassword" method = "post">
+                                        <div class="row justify-content-center">
+                                            <div class="form-group">
+                                                <label for="password"><h1><i class="fas fa-key"></i>   Old Password:</h1></label>
+                                                <input id="password" type="password" name="password" placeholder="Password" required>
+                                                <!--<progress max="100" value="0" id="strength" style="width: 440px;"></progress>-->
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="cpassword"><h1><i class="fas fa-key"></i>   New Password:</h1></label>
+                                                <input id="password" type="password" name="cpassword" placeholder="Password" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="cpassword"><h1><i class="fas fa-key"></i>   Confirm New Password:</h1></label>
+                                                <input id="cpassword" type="password" name="cpassword" placeholder="Password" required>
+                                            </div>
+                                            <input type="submit" value="Submit">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div id="privacysettings" class="tabcontent">
+                                    <h3>Privacy Settings</h3>
+                                    <input type="submit" value="show email">
+                                </div>
+                                <hr>
                             </div>
                         </div>
                     </div>
@@ -135,6 +175,27 @@
             $('#sidebar').toggleClass('active');
         });
     });
+
+    function settingTabs(evt, cityName) {
+        // Declare all variables
+        var i, tabcontent, tablinks;
+
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
 </script>
 </body>
 
