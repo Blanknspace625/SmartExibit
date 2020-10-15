@@ -67,4 +67,7 @@ module.exports = function(app) {
     app.route('/upload')
         .get(task.return_showcase_page)
         .post(task.create_resource);
+
+    app.route('/contact')
+        .get(task.return_contact);
 };

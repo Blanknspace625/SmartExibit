@@ -118,3 +118,7 @@ exports.return_showcase_data = function(req, res) {
 exports.return_showcase_page = function(req, res){
     res.render('upload-file', { userInfo: req.session.userInfo });
 }
+
+exports.return_contact = function(req, res) {
+    res.sendFile(path.join(__dirname, '/views/contact-us.html'));
+}
