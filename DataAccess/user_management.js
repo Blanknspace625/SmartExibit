@@ -398,7 +398,7 @@ exports.getProfileInformation = async function(req, userID, res){
                 res.render('portfolio', { userInfo: profileInfo});
                 return;
             }
-            else if(true) //CASE: profile is not private
+            else if(results[0].profilePrivate == 0) //CASE: profile is not private
             {
                 var profileInfo = ({
                     firstName: results[0].firstName,
@@ -426,6 +426,7 @@ exports.getProfileInformation = async function(req, userID, res){
             }
             else //CASE: profile is private
             {
+                res.status(401).send('Profile is Private');
                 return;
             }
         }
