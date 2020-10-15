@@ -45,9 +45,11 @@ exports.signup_new_user = function(req, res) {
 exports.return_iforgot = function(req, res) {
     res.sendFile(path.join(__dirname, '/views/passwordreset.html'));
 }
-/*
-exports.forgot_password = function(req, res)
-*/
+
+exports.forgot_password = function(req, res) {
+    userManagement.forgotPassword(req, res);
+}
+
 exports.verification_email_sent = function(req, res) {
     res.sendFile(path.join(__dirname, '/views/verificationsent.html'));
 }

@@ -35,7 +35,7 @@ module.exports = function(app) {
 
     app.route('/iforgot')
         .get(task.return_iforgot)
-        /*.post(task.forgot_password)*/;
+        .post(task.forgot_password);
 
     app.route('/proceed-register')
         .get(task.verification_email_sent);
