@@ -59,7 +59,6 @@ exports.register = async function(req, res) {
 
             exports.verifyEmail(req,res);
             conn.release();
-            res.redirect('/signin');
         });
     });
 
@@ -120,6 +119,8 @@ exports.verifyEmail = async function(req, res) {
             });
         });
     });
+
+    res.redirect('/verifyemailsent');
 }
 
 exports.verifyEmailResponse = async function(req, res)
@@ -243,7 +244,7 @@ exports.forgotPassword = async function (req, res) {
                 }
             }
             // Regardless of whether an email is sent or not, display message
-            res.status(200).send('Reset password link sent to email.');
+            res.redirect('/resetemailsent');
         });
     });
 }

@@ -29,6 +29,9 @@ module.exports = function(app) {
     app.route('/resetpassword/:userid/:code')
         .post(task.reset_password);
 
+    app.route('/resetemailsent')
+        .get(task.reset_email_sent);
+
     app.route('/signin')
         .get(task.return_signin)
         .post(task.user_login);
@@ -41,6 +44,9 @@ module.exports = function(app) {
 
     app.route('/verify-email/:userid/:code')
         .get(task.verify_email_response);
+
+    app.route('/verifyemailsent')
+        .get(task.verify_sent);
 
     app.route('/dashboard')
         .get(task.return_dashboard);

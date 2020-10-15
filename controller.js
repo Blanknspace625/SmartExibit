@@ -50,6 +50,10 @@ exports.verify_email_response = function(req,res) {
     userManagement.verifyEmailResponse(req,res);
 }
 
+exports.verify_sent = function(req, res) {
+    res.sendFile(path.join(__dirname, '/views/verificationsent.html'));
+}
+
 exports.return_dashboard = function(req, res) {
     res.render('dashboard', { userInfo: req.session.userInfo });
 }
@@ -80,6 +84,10 @@ exports.forgot_password = function(req, res) {
 
 exports.reset_password = function(req, res) {
     userManagement.resetPassword(req, res);
+}
+
+exports.reset_email_sent = function(req, res) {
+    res.sendFile(path.join(__dirname, '/views/passwordchangesent.html'));
 }
 
 exports.change_sens_detail = function(req, res) {
