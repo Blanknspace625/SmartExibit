@@ -263,7 +263,7 @@ exports.resetPassword = async function(req, res) {
     db.getConnection(function(err, conn) {
         conn.query("SELECT * FROM User WHERE idUser = ?", [userID], async function (err, results) {
             if (err) throw err;
-            console.log(userID, results);
+
             if (results.length > 0) {
                 conn.query("SELECT * FROM ResetCode WHERE userid = ?", [userID], async function (err, results) {
                     if (err) throw err;
