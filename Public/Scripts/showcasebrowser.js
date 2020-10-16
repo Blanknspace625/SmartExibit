@@ -74,15 +74,4 @@
         table.fnClearTable();
         table.fnAddData(data);
     });
-
-    $(".up").bind("click", function(e) {
-        if (!currentPath) return;
-        var idx = currentPath.lastIndexOf("/");
-        var path =currentPath.substr(0, idx);
-        $.get('/files?path='+ path).then(function(data) {
-            table.fnClearTable();
-            table.fnAddData(data);
-            currentPath = path;
-        });
-    });
 })(jQuery);

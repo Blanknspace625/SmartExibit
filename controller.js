@@ -123,7 +123,7 @@ exports.create_resource = function(req, res) {
 }
 
 exports.return_resource = function(req, res) {
-    res.redirect('/views/showcaselocal.html');
+    res.render('showcaselocal', { userInfo: req.session.userInfo });
 }
 
 exports.resource_handler = function(req, res) {
