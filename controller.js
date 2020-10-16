@@ -72,15 +72,27 @@ exports.verify_email = function(req,res) {
 }
 
 exports.return_dashboard = function(req, res) {
-    res.render('dashboard', { userInfo: req.session.userInfo });
+    if (req.session.userId) {
+        res.render('dashboard', { userInfo: req.session.userInfo });
+    } else {
+        res.redirect('/signin');
+    }
 }
 
 exports.return_profile = function(req, res) {
-    res.render('portfolio', { userInfo: req.session.userInfo });
+    if (req.session.userId) {
+        res.render('portfolio', { userInfo: req.session.userInfo });
+    } else {
+        res.redirect('/signin');
+    }
 }
 
 exports.return_settings = function (req, res) {
-    res.render('settings', { userInfo: req.session.userInfo });
+    if (req.session.userId) {
+        res.render('settings', { userInfo: req.session.userInfo });
+    } else {
+        res.redirect('/signin');
+    }
 }
 
 exports.change_reg_detail = function(req, res) {
@@ -92,7 +104,11 @@ exports.change_sens_detail = function(req, res) {
 }
 
 exports.return_resource_upload = function(req, res) {
-    res.render('upload-file', { userInfo: req.session.userInfo });
+    if (req.session.userId) {
+        res.render('upload-file', { userInfo: req.session.userInfo });
+    } else {
+        res.redirect('/signin');
+    }
 }
 
 exports.create_resource = function(req, res) {

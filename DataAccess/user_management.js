@@ -1,7 +1,9 @@
 var db = require('./db_interface');
-var bcrypt = require('bcrypt');
-var nodemailer = require('nodemailer');
-var crypto = require('crypto');
+
+const fs = require('fs');
+const bcrypt = require('bcrypt');
+const nodemailer = require('nodemailer');
+const crypto = require('crypto');
 
 exports.login = async function(req, res) {
     const email = req.body.email;
@@ -25,8 +27,13 @@ exports.login = async function(req, res) {
                             profileImg: results[0].profileImg,
                             extLink: results[0].extLink
                         });
-    
+
                         conn.release();
+
+                        fs.mkdir("./Resources/" + results[0].idUser, function(err) {
+                            if (err && err.code != 'EEXIST') throw err;
+                        });
+
                         res.redirect('/dashboard');
                     } else {
                         res.status(206).send('Your account must be verified before you can login!');
@@ -85,12 +92,14 @@ exports.verifyEmail = async function(req, res) {
             const current = new Date(new Date().toUTCString());
 
             // Insert user id and verify code into db
-            var sql = "INSERT INTO Code (userId, code) VALUES ('" + userId + "','" + code + "') ON DUPLICATE KEY UPDATE code = '" + code + "', createDate = UTC_TIMESTAMP()";
+            var sql = "INSERT INTO Code (userId, code) VALUES ('" + userId + "','" + code + "') " +
+                "ON DUPLICATE KEY UPDATE code = '" + code + "', createDate = UTC_TIMESTAMP()";
             conn.query(sql, [email], async function (err, results) {
                 if (err) throw err;
                 
                 // Send verify link to email
-                const url = 'localhost/verifyemail?id=' + userId + '&code=' + code;
+                const url = 'localhost/verifyemail?id=' + userId + '&code=' + code; // -- to be removed
+                //const url = 'https://epf.johnnybread.com/verifyemail?id=' + userId + '&code=' + code;
 
                 var transporter = nodemailer.createTransport({
                     service: 'gmail',
@@ -104,21 +113,12 @@ exports.verifyEmail = async function(req, res) {
                     from: 'smartexibit@gmail.com',
                     to: email,
                     subject: 'Verify Your Email',
-                    text: 'You are receiving this email if you need to verify your email for your Smart Exhibit account. Please click the link below:\n\n' + 
-                        url +
+                    text: 'You are receiving this email if you need to verify your email for your ' +
+                        'Smart Exhibit account. Please click the link below:\n\n' + url +
                         '\n\nThis link expires in 10 minutes from the time you recieved this email.'
                 };
             
-                transporter.sendMail(mailOptions, function(error, info) {
-                    if(error) 
-                    {
-                        console.log(error);
-                    }
-                    else
-                    {
-                        console.log('Email sent: ' + info.response);
-                    }
-                });
+                transporter.sendMail(mailOptions, function(err, info) { if(err) console.log(err); });
 
                 conn.release();
             });
@@ -208,12 +208,14 @@ exports.forgotPassword = async function (req, res) {
                     var userId = results[0].idUser;
 
                     // Insert user id and reset code into db
-                    var sql = "INSERT INTO ResetCode (userId, code) VALUES ('" + userId + "','" + code + "') ON DUPLICATE KEY UPDATE code = '" + code + "', createDate = UTC_TIMESTAMP()";
+                    var sql = "INSERT INTO ResetCode (userId, code) VALUES ('" + userId + "','" + code + "') " +
+                        "ON DUPLICATE KEY UPDATE code = '" + code + "', createDate = UTC_TIMESTAMP()";
                     conn.query(sql, [email], async function (err, results) {
                         if (err) throw err;
 
                         // Send reset link to email
-                        const url = 'localhost/resetpassword?id=' + userId + '&code=' + code;
+                        const url = 'localhost/resetpassword?id=' + userId + '&code=' + code; // -- to be removed
+                        //const url = 'https://epf.johnnybread.com/resetpassword?id=' + userId + '&code=' + code;
 
                         var transporter = nodemailer.createTransport({
                             service: 'gmail',
@@ -227,21 +229,13 @@ exports.forgotPassword = async function (req, res) {
                             from: 'smartexibit@gmail.com',
                             to: email,
                             subject: 'Reset Your Password',
-                            text: 'You are receiving this email if you have forgotten your password to your Smart Exhibit account. Please click the link below to reset your password:\n\n' +
-                                url +
-                                '\n\nThis link expires in 10 minutes from the time you recieved this email.'
+                            text: 'You are receiving this email if you have forgotten your password to ' +
+                                'your Smart Exhibit account. Please click the link below to reset your password:\n\n' +
+                                url + '\n\nThis link expires in 10 minutes from the time you recieved this email.'
                         };
 
-                        transporter.sendMail(mailOptions, function(error, info) {
-                            if(error)
-                            {
-                                console.log(error);
-                            }
-                            else
-                            {
-                                console.log('Email sent: ' + info.response);
-                            }
-                        });
+                        transporter.sendMail(mailOptions, function(err, info) { if (err) console.log(err); });
+
                         conn.release();
                     });
                 } else {

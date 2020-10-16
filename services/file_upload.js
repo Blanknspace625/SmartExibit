@@ -3,12 +3,7 @@ const fs = require('fs');
 
 var storage = multer.diskStorage({
     destination: function(req, file, callback) {
-        fs.mkdir("./Resources/" + req.session.userId, function(err) {
-            if (err) {
-                if (err.code != 'EEXIST') throw err;
-            }
-            callback(null, "./Resources/" + req.session.userId);
-        });
+        callback(null, "./Resources/" + req.session.userId);
     },
     filename: function(req, file, callback) {
         callback(null, file.originalname);
