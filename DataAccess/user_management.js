@@ -255,8 +255,8 @@ exports.forgotPassword = async function (req, res) {
 }
 
 exports.resetPassword = async function(req, res) {
-    const userID = req.query.id;
-    const code = req.query.code;
+    const userID = req.body.id;
+    const code = req.body.code;
     const newPwd = req.body.newPassword;
     const newPwdAgain = req.body.newPasswordAgain;
 
