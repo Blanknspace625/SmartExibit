@@ -4,7 +4,7 @@ body {
 
 .mainpanel { 
     height:90%;
-    min-height:400px;
+    min-height:275px;
 }
 
 .linksholder ul { 
@@ -39,12 +39,4 @@ body {
 .dataTables_info { 
     margin-top: 10px; 
     background: ghostwhite; 
-}
-
-.up { 
-    margin-left: 20px; 
-    border:solid 1px black; 
-    cursor:pointer; width:100px; 
-    padding-left: 10px; 
-    padding-right:10px; 
 }
