@@ -99,6 +99,16 @@ exports.change_reg_detail = function(req, res) {
     userManagement.changeRegularDetails(req, res);
 }
 
+exports.change_profile_pic = function(req, res) {
+    fileUpload.uploadProfileImg(req, res, function(err) {
+        if (err) {
+            res.status(404).send(err);
+        } else {
+            userManagement.changeAvatar(req, res);
+        }
+    });
+}
+
 exports.change_sens_detail = function(req, res) {
     userManagement.changeSensitiveDetails(req, res);
 }
@@ -112,12 +122,12 @@ exports.return_resource_upload = function(req, res) {
 }
 
 exports.create_resource = function(req, res) {
-    //mediaResource.newMedia(req, res);
     fileUpload.upload(req, res, function(err) {
         if (err) {
             res.status(404).send(err);
         } else {
-            res.status(200).send('File uploaded successfully');
+            //mediaResource.newMedia(req, res);
+            res.redirect('/media');
         }
     });
 }

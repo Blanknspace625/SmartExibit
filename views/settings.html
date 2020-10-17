@@ -94,6 +94,7 @@
                         <!-- Tab links -->
                         <div class="tab">
                             <button class="tablinks" onclick="settingTabs(event, 'accountsettings') ">Account Settings</button>
+                            <button class="tablinks" onclick="settingTabs(event, 'uploadavatar') ">Change Profile Picture</button>
                             <button class="tablinks" onclick="settingTabs(event, 'passwordsettings')">Change Password</button>
                             <button class="tablinks" onclick="settingTabs(event, 'privacysettings')">Privacy Settings</button>
                             <button class="tablinks" onclick="settingTabs(event, 'linkaccounts')">Link Social Accounts</button>
@@ -122,6 +123,16 @@
                                         <input type="submit" value="Update">
                                     </div>
                                 </div>
+                            </form>
+                            <br>
+                        </div>
+
+                        <div id="uploadavatar" class="tabcontent col-sm-6">
+                            <form action="/changeavatar" enctype="multipart/form-data" method="POST">
+                                <br>
+                                <input type="file" name="profileImg" required/><br>
+                                <hr>
+                                <input type="submit" value="Upload">
                             </form>
                             <br>
                         </div>

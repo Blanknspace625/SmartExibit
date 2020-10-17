@@ -1,7 +1,7 @@
 var db = require('./db_interface');
 
 exports.newMedia = async function(req, res) {
-    var filePath = req.body.filePath;
+    var filePath = req.file.path.replace(/\\/g, "/");
     var showcaseID = req.body.showcaseId;
 
     db.getConnection(function(err, conn) {

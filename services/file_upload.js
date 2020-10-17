@@ -1,7 +1,8 @@
 const multer = require('multer');
 const fs = require('fs');
+const path = require('path');
 
-var storage = multer.diskStorage({
+const storage = multer.diskStorage({
     destination: function(req, file, callback) {
         callback(null, "./Resources/" + req.session.userId);
     },
@@ -22,12 +23,21 @@ exports.upload = multer({
             callback(null, true);
         }
     }
-}).single('media');
+}).array('media');
+
+const profileImgStorage = multer.diskStorage({
+    destination: function(req, file, callback) {
+        callback(null, "./Resources/avatar");
+    },
+    filename: function(req, file, callback) {
+        callback(null, "avatar_" + Date.now() + path.extname(file.originalname));
+    }
+});
 
 const profileImgMaxSize = 5 * 1000 * 1000;
 
 exports.uploadProfileImg = multer({
-    storage: storage,
+    storage: profileImgStorage,
     limits: { fileSize: profileImgMaxSize },
     fileFilter: function(req, file, callback) {
         if (!file.originalname.match(/\.(jpg|jpeg|png|bmp)$/)) {

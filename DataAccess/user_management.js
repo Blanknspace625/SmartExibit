@@ -51,8 +51,7 @@ exports.register = async function(req, res) {
     const email = req.body.email;
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
-    const profilePicRef = '/Public/Images/default_avatar.png';
-    //const socialAccounts;
+    const profilePicRef = '/Resources/avatar/default_avatar.png';
     const pwd = req.body.password;
     const pwdAgain = req.body.confirmPassword;
 
@@ -61,8 +60,7 @@ exports.register = async function(req, res) {
             const pwd_ = await bcrypt.hash(req.body.password, 8);
 
             var sql = "INSERT INTO User (firstName, lastName, email, profileImg, pwd, extLink) VALUES " +
-                "('" + firstName + "', '" + lastName + "', '" + email + "', '" + profilePicRef + "'," +
-                "'" + pwd_ + "', 'https://www.facebook.com')";
+                "('" + firstName + "', '" + lastName + "', '" + email + "', '" + profilePicRef + "', '" + pwd_ + "')";
             conn.query(sql, async function (err, results) {
                 if (err) throw err;
 
@@ -320,6 +318,28 @@ exports.changeRegularDetails = async function(req, res) {
                     lastName: lastName,
                     email: email
                 };
+
+                res.redirect('/settings');
+            });
+        });
+    } else {
+        res.status(401).send('Unauthorised');
+    }
+}
+
+exports.changeAvatar = async function(req, res) {
+    if (req.session.userId) {
+        const userID = req.session.userId;
+        const ref = req.file.path.replace(/\\/g, "/");
+
+        db.getConnection(function(err, conn) {
+            var sql = "UPDATE User SET profileImg = '" + ref + "' WHERE idUser = '" + userID + "'";
+            conn.query(sql, function (err, results) {
+                if (err) throw err;
+
+                conn.release();
+
+                global.userInfo.profileImg = ref;
 
                 res.redirect('/settings');
             });

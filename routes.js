@@ -23,6 +23,9 @@ module.exports = function(app) {
     app.route('/changedetail')
         .post(task.change_reg_detail);
 
+    app.route('/changeavatar')
+        .post(task.change_profile_pic);
+
     app.route('/changepassword')
         .post(task.change_sens_detail);
 
