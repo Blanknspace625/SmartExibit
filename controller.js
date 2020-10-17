@@ -73,7 +73,7 @@ exports.verify_email = function(req,res) {
 
 exports.return_dashboard = function(req, res) {
     if (req.session.userId) {
-        res.render('dashboard', { userInfo: req.session.userInfo });
+        res.render('dashboard');
     } else {
         res.redirect('/signin');
     }
@@ -81,7 +81,7 @@ exports.return_dashboard = function(req, res) {
 
 exports.return_profile = function(req, res) {
     if (req.session.userId) {
-        res.render('portfolio', { userInfo: req.session.userInfo });
+        res.render('portfolio');
     } else {
         res.redirect('/signin');
     }
@@ -89,7 +89,7 @@ exports.return_profile = function(req, res) {
 
 exports.return_settings = function (req, res) {
     if (req.session.userId) {
-        res.render('settings', { userInfo: req.session.userInfo });
+        res.render('settings');
     } else {
         res.redirect('/signin');
     }
@@ -105,7 +105,7 @@ exports.change_sens_detail = function(req, res) {
 
 exports.return_resource_upload = function(req, res) {
     if (req.session.userId) {
-        res.render('upload-file', { userInfo: req.session.userInfo });
+        res.render('upload-file');
     } else {
         res.redirect('/signin');
     }
@@ -124,7 +124,7 @@ exports.create_resource = function(req, res) {
 
 exports.return_resource = function(req, res) {
     if (req.session.userId) {
-        res.render('showcaselocal', { userInfo: req.session.userInfo });
+        res.render('showcaselocal');
     } else {
         res.redirect('/signin');
     }
@@ -149,11 +149,7 @@ exports.update_showcase = function(req, res) {
 exports.return_showcase_data = function(req, res) {
     showcase.getShowcaseData(req, res);
 }
-/*
-exports.return_showcase_page = function(req, res){
-    res.render('upload-file', { userInfo: req.session.userInfo });
-}
-*/
+
 exports.return_contact = function(req, res) {
     res.sendFile(path.join(__dirname, '/views/contact-us.html'));
 }

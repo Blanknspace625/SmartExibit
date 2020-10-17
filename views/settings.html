@@ -96,49 +96,52 @@
                             <button class="tablinks" onclick="settingTabs(event, 'accountsettings') ">Account Settings</button>
                             <button class="tablinks" onclick="settingTabs(event, 'passwordsettings')">Change Password</button>
                             <button class="tablinks" onclick="settingTabs(event, 'privacysettings')">Privacy Settings</button>
+                            <button class="tablinks" onclick="settingTabs(event, 'linkaccounts')">Link Social Accounts</button>
                         </div>
 
                         <!-- Tab content -->
                         <div id="accountsettings" class="tabcontent col-sm-6">
                             <form action ="/changedetail" method = "post" onSubmit="return confirm('Save changes?')">
+                                <br>
                                 <div class="row justify-content-center">
                                     <div class="col-sm-8">
                                         <div class="form-group">
-                                            <label for="firstName">  First Name:</label> <br>
+                                            <label for="firstName">  First Name</label><br>
                                             <input id="firstName" type="text" name="firstName" value=<%=userInfo.firstName%> require><br>
                                         </div>
                                         <div class="form-group">
-                                            <label for="lastName">  Last Name:</label><br>
+                                            <label for="lastName">  Last Name</label><br>
                                             <input id="lastName" type="text" name="lastName" value= <%=userInfo.lastName%> require><br>
                                         </div>
                                         <div class="form-group">
-                                            <label for="email">   Email Address:</label><br>
+                                            <label for="email">   Email Address</label><br>
                                             <!-- type = "email"-->
                                             <input id="email" type="text" name="email" value=<%=userInfo.email%> require><br>
                                         </div>
                                         <hr>
-                                        <input type="submit" value="Update"><br>
+                                        <input type="submit" value="Update">
                                     </div>
                                 </div>
                             </form>
                         </div>
 
                         <div id="passwordsettings" class="tabcontent col-sm-6">
-                            <form action ="/changepassword" method = "post">
+                            <form action ="/changepassword" method = "post" onSubmit="return confirm('Save changes?')">
+                                <br>
                                 <div class="row justify-content-center">
                                     <div class="col-sm-8">
                                         <div class="form-group">
-                                            <label for="oldPassword"><h5>   Old Password:</h5></label>
-                                            <input id="oldPassword" type="password" name="oldPassword" placeholder="Enter Old Password" required>
+                                            <label for="oldPassword"><h5>   Old Password</h5></label><br>
+                                            <input id="oldPassword" type="password" name="oldPassword" placeholder="Enter Old Password" required><br>
                                             <!--<progress max="100" value="0" id="strength" style="width: 440px;"></progress>-->
                                         </div>
                                         <div class="form-group">
-                                            <label for="newPassword"><h5>   New Password:</h5></label>
-                                            <input id="newPassword" type="password" name="newPassword" placeholder="Enter New Password" required>
+                                            <label for="newPassword"><h5>   New Password</h5></label><br>
+                                            <input id="newPassword" type="password" name="newPassword" placeholder="Enter New Password" required><br>
                                         </div>
                                         <div class="form-group">
-                                            <label for="newPasswordAgain"> Confirm New Password:</h5></label>
-                                            <input id="newPasswordAgain" type="password" name="newPasswordAgain" placeholder="Confirm New Password" required>
+                                            <label for="newPasswordAgain"> Confirm New Password</h5></label><br>
+                                            <input id="newPasswordAgain" type="password" name="newPasswordAgain" placeholder="Confirm New Password" required><br>
                                         </div>
                                         <hr>
                                         <input type="submit" value="Update">
@@ -148,55 +151,60 @@
                         </div>
 
                         <div id="privacysettings" class="tabcontent col-sm-12">
-                            <form>
-                                <h5>Show to public</h5>
-                                <hr>
+                            <form action ="/privacy" method = "post" onSubmit="return confirm('Save changes?')">
+                                <br>
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="showporfolio">
-                                    <label class="form-check-label" for="showporfolio">Make portfolio public</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="showemail">
-                                    <label class="form-check-label" for="showemail">Make email public</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="showphone">
-                                    <label class="form-check-label" for="showphone">Make phone number public</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="showmobile">
-                                    <label class="form-check-label" for="showmobile">Make mobile number public</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="showaddress">
-                                    <label class="form-check-label" for="showaddress">Make address public</label>
+                                    <input type="checkbox" class="form-check-input" id="showPortfolio">
+                                    <label class="form-check-label" for="showPortfolio">Personal Portfolio</label>
                                 </div>
                                 <br>
-                                <h5>link social media</h5>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="showEmail">
+                                    <label class="form-check-label" for="showEmail">Email</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="showLandline">
+                                    <label class="form-check-label" for="showLandline">Landline</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="showMobile">
+                                    <label class="form-check-label" for="showMobile">Mobile</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="showAddress">
+                                    <label class="form-check-label" for="showAddress">Address</label>
+                                </div>
                                 <hr>
+                                <input type="submit" value="Update">
+                            </form>
+                        </div>
+
+                        <div id="linkaccounts" class="tabcontent col-sm-12">
+                            <form action ="/linkaccounts" method = "post" onSubmit="return confirm('Save changes?')">
+                                <br>
                                 <div class="form-group">
-                                    <label for="newPasswordAgain"> Link Facebook:</label>
-                                    <input id="newPasswordAgain" type="text" name="newPasswordAgain" placeholder="Enter Facebook url" required>
+                                    <label for="facebook"> Facebook</label><br>
+                                    <input id="facebook" type="text" name="facebook" placeholder="Facebook Account"><br>
                                 </div>
                                 <div class="form-group">
-                                    <label for="newPasswordAgain"> Link Instragram:</label>
-                                    <input id="newPasswordAgain" type="text" name="newPasswordAgain" placeholder="Enter Instragram url" required>
+                                    <label for="instagram"> Instagram</label><br>
+                                    <input id="instagram" type="text" name="instagram" placeholder="Instagram Account"><br>
                                 </div>
                                 <div class="form-group">
-                                    <label for="newPasswordAgain"> Link Twitter:</label>
-                                    <input id="newPasswordAgain" type="text" name="newPasswordAgain" placeholder="Ender Twitter url" required>
+                                    <label for="twitter"> Twitter</label><br>
+                                    <input id="twitter" type="text" name="twitter" placeholder="Twitter Account"><br>
                                 </div>
                                 <div class="form-group">
-                                    <label for="newPasswordAgain"> Link Github:</label>
-                                    <input id="newPasswordAgain" type="text" name="newPasswordAgain" placeholder="Ender Github url" required>
+                                    <label for="github"> Github</label><br>
+                                    <input id="github" type="text" name="github" placeholder="Github Account"><br>
                                 </div>
                                 <div class="form-group">
-                                    <label for="newPasswordAgain"> Link personal website:</label>
-                                    <input id="newPasswordAgain" type="text" name="newPasswordAgain" placeholder="Ender personal website url" required>
+                                    <label for="linkedin"> Linkedin</label><br>
+                                    <input id="linkedin" type="text" name="linkedin" placeholder="LinkedIn Account"><br>
                                 </div>
                                 <div class="form-group">
-                                    <label for="newPasswordAgain"> Link Linkedin:</label>
-                                    <input id="newPasswordAgain" type="text" name="newPasswordAgain" placeholder="Ender Linkedin" required>
+                                    <label for="website"> Personal Website</label><br>
+                                    <input id="website" type="text" name="website" placeholder="Website URL"><br>
                                 </div>
                                 <hr>
                                 <input type="submit" value="Update">

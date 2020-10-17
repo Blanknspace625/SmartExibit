@@ -19,14 +19,13 @@ exports.login = async function(req, res) {
                 if (isVerified) {
                     if (results[0].status == 'verified') {
                         req.session.userId = results[0].idUser;
-                        req.session.userInfo = ({
+                        global.userInfo = {
                             firstName: results[0].firstName,
                             lastName: results[0].lastName,
                             email: results[0].email,
-                            socialAccounts: results[0].socialAccounts,
                             profileImg: results[0].profileImg,
                             extLink: results[0].extLink
-                        });
+                        };
 
                         conn.release();
 
@@ -315,7 +314,14 @@ exports.changeRegularDetails = async function(req, res) {
                 if (err) throw err;
 
                 conn.release();
-                res.status(200).send('User ' + userID + ' detail(s) updated');
+
+                global.userInfo = {
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: email
+                };
+
+                res.redirect('/settings');
             });
         });
     } else {
@@ -344,7 +350,8 @@ exports.changeSensitiveDetails = async function(req, res) {
                             if (err) throw err;
 
                             conn.release();
-                            res.status(200).send('User ' + userID + ' password updated');
+
+                            res.redirect('/settings');
                         });
                     } else {
                         res.status(206).send('New passwords don\'t agree!');
