@@ -115,7 +115,7 @@ exports.create_resource = function(req, res) {
     //mediaResource.newMedia(req, res);
     fileUpload.upload(req, res, function(err) {
         if (err) {
-            res.status(404).send('File uploading failed!');
+            res.status(404).send(err);
         } else {
             res.status(200).send('File uploaded successfully');
         }
@@ -123,7 +123,11 @@ exports.create_resource = function(req, res) {
 }
 
 exports.return_resource = function(req, res) {
-    res.render('showcaselocal', { userInfo: req.session.userInfo });
+    if (req.session.userId) {
+        res.render('showcaselocal', { userInfo: req.session.userInfo });
+    } else {
+        res.redirect('/signin');
+    }
 }
 
 exports.resource_handler = function(req, res) {
