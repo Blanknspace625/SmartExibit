@@ -153,3 +153,9 @@ exports.return_showcase_page = function(req, res){
 exports.return_contact = function(req, res) {
     res.sendFile(path.join(__dirname, '/views/contact-us.html'));
 }
+
+exports.message_profile = function(req, res) {
+    // Get message page
+    userManagement.messageProfile(req, res);
+}
+ 

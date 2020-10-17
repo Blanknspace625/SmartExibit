@@ -77,4 +77,7 @@ module.exports = function(app) {
 
     app.route('/contact')
         .get(task.return_contact);
+
+    app.route('/message')
+        .post(task.message_profile);
 };
