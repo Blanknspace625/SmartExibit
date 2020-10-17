@@ -3,7 +3,7 @@ const path = require('path');
 const util = require('underscore');
 
 exports.fileInterface = function(req, res) {
-    var currDir = "./Resources/" + req.session.userId;
+    var currDir = "./Resources/" + req.session.userInfo.userId;
     fs.readdir(currDir, function(err, files) {
         if (err) throw err;
 
@@ -37,7 +37,7 @@ exports.fileInterface = function(req, res) {
 exports.retriveFile = function(req, res) {
     const filePath = req.query.p;
 
-    if (req.session.userId) {
+    if (req.session.userInfo) {
         res.redirect(filePath);
     } else {
         res.status(401).send('Unauthorised');

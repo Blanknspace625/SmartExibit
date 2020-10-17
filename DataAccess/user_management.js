@@ -18,8 +18,8 @@ exports.login = async function(req, res) {
 
                 if (isVerified) {
                     if (results[0].status == 'verified') {
-                        req.session.userId = results[0].idUser;
-                        global.userInfo = {
+                        req.session.userInfo = {
+                            userId: results[0].idUser,
                             firstName: results[0].firstName,
                             lastName: results[0].lastName,
                             email: results[0].email,
@@ -135,7 +135,7 @@ exports.verifyEmailResponse = async function(req, res)
             if(results.length > 0) {
                 // Check if user is not verified
                 const status = results[0].status;
-                if(status == 'pending') {
+                if(status == 'pending') {
                     // Check if user has matching code
                     conn.query("SELECT * FROM Code WHERE userid = ?", [userID], async function (err, results) {
                         if (err) throw err;
@@ -299,8 +299,8 @@ exports.resetPassword = async function(req, res) {
 }
 
 exports.changeRegularDetails = async function(req, res) {
-    if (req.session.userId) {
-        const userID = req.session.userId;
+    if (req.session.userInfo) {
+        const userID = req.session.userInfo.userId;
         const email = req.body.email;
         const firstName = req.body.firstName;
         const lastName = req.body.lastName;
@@ -313,11 +313,9 @@ exports.changeRegularDetails = async function(req, res) {
 
                 conn.release();
 
-                global.userInfo = {
-                    firstName: firstName,
-                    lastName: lastName,
-                    email: email
-                };
+                req.session.userInfo.firstName = firstName;
+                req.session.userInfo.lastName = lastName;
+                req.session.userInfo.email = email;
 
                 res.redirect('/settings');
             });
@@ -328,8 +326,8 @@ exports.changeRegularDetails = async function(req, res) {
 }
 
 exports.changeAvatar = async function(req, res) {
-    if (req.session.userId) {
-        const userID = req.session.userId;
+    if (req.session.userInfo) {
+        const userID = req.session.userInfo.userId;
         const ref = req.file.path.replace(/\\/g, "/");
 
         db.getConnection(function(err, conn) {
@@ -339,7 +337,7 @@ exports.changeAvatar = async function(req, res) {
 
                 conn.release();
 
-                global.userInfo.profileImg = ref;
+                req.session.userInfo.profileImg = ref;
 
                 res.redirect('/settings');
             });
@@ -350,8 +348,8 @@ exports.changeAvatar = async function(req, res) {
 }
 
 exports.changeSensitiveDetails = async function(req, res) {
-    if (req.session.userId) {
-        const userID = req.session.userId;
+    if (req.session.userInfo) {
+        const userID = req.session.userInfo.userId;
         const oldPwd = req.body.oldPassword;
         const newPwd = req.body.newPassword;
         const newPwdAgain = req.body.newPasswordAgain;

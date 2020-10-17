@@ -11,7 +11,7 @@ var fileBrowser = require('./services/file_browser');
 //var Media = require('./services/media.js');
 
 exports.return_entry = function(req, res) {
-    if (req.session.userId) {
+    if (req.session.userInfo) {
         res.redirect('/dashboard');
     } else {
         res.redirect('/index');
@@ -23,7 +23,11 @@ exports.return_homepage = function(req, res) {
 }
 
 exports.return_signin = function(req, res) {
-    res.sendFile(path.join(__dirname, '/views/login.html'));
+    if (req.session.userInfo) {
+        res.redirect('/dashboard');
+    } else {
+        res.sendFile(path.join(__dirname, '/views/login.html'));
+    }
 }
 
 exports.user_login = function(req, res) {
@@ -31,7 +35,7 @@ exports.user_login = function(req, res) {
 }
 
 exports.user_logoff = function(req, res) {
-    req.session.userId = null;
+    req.session.userInfo = null;
     res.redirect('/index');
 }
 
@@ -72,24 +76,24 @@ exports.verify_email = function(req,res) {
 }
 
 exports.return_dashboard = function(req, res) {
-    if (req.session.userId) {
-        res.render('dashboard');
+    if (req.session.userInfo) {
+        res.render('dashboard', req.session);
     } else {
         res.redirect('/signin');
     }
 }
 
 exports.return_profile = function(req, res) {
-    if (req.session.userId) {
-        res.render('portfolio');
+    if (req.session.userInfo) {
+        res.render('portfolio', req.session);
     } else {
         res.redirect('/signin');
     }
 }
 
 exports.return_settings = function (req, res) {
-    if (req.session.userId) {
-        res.render('settings');
+    if (req.session.userInfo) {
+        res.render('settings', req.session);
     } else {
         res.redirect('/signin');
     }
@@ -114,8 +118,8 @@ exports.change_sens_detail = function(req, res) {
 }
 
 exports.return_resource_upload = function(req, res) {
-    if (req.session.userId) {
-        res.render('upload-file');
+    if (req.session.userInfo) {
+        res.render('upload-file', req.session);
     } else {
         res.redirect('/signin');
     }
@@ -133,8 +137,8 @@ exports.create_resource = function(req, res) {
 }
 
 exports.return_resource = function(req, res) {
-    if (req.session.userId) {
-        res.render('showcaselocal');
+    if (req.session.userInfo) {
+        res.render('showcaselocal', req.session);
     } else {
         res.redirect('/signin');
     }
