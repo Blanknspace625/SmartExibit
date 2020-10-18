@@ -532,22 +532,12 @@ exports.getProfileInformation = async function(req, userID, res){
                 //res.status(401).send('Profile is Private');
                 return;
             }
+        
+
+            //res.redirect(404, '/');
+            //res.status(404).send('Profile not found'
         }
-
-        //res.redirect(404, '/');
-        //res.status(404).send('Profile not found');
-
-
-                    res.render('portfolio', { userInfo: profileInfo });
-                } else {
-                    //CASE: profile is private
-                    res.redirect(401, '/');
-                    //res.status(401).send('Profile is Private');
-                }
-            } else {
-                res.redirect(404, '/');
-                //res.status(404).send('Profile not found');
-            }
+            
         });
     });
 }
