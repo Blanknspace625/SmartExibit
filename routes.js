@@ -89,4 +89,7 @@ module.exports = function(app) {
 
     app.route('/linkaccounts')
         .post(task.link_social_media)
+
+    app.route('/profileedit')
+        .post(task.update_profile)
 };
