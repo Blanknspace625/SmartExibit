@@ -35,7 +35,13 @@ exports.login = async function(req, res) {
                             linkedinLink: results[0].linkedinLink,
                             twitterLink: results[0].twitterLink,
                             instagramLink: results[0].instagramLink,
-                            githubLink: results[0].githubLink
+                            githubLink: results[0].githubLink,      
+                            phoneNumber: results[0].phoneNumber,
+                            mobileNumber: results[0].mobileNumber,
+                            address: results[0].address,
+                            aboutMe: results[0].aboutMe,
+                            workExperience: results[0].workExperience,
+                            education: results[0].education
                         };
 
                         conn.release();
@@ -367,6 +373,8 @@ exports.changePrivacySettings = async function(req,res){
             req.session.userInfo.showAddress = showAddress;
 
             res.redirect('/settings');
+
+            conn.release();
         });
     });
 }
@@ -402,10 +410,57 @@ exports.changeSocialMediaLinks = async function(req, res){
             req.session.userInfo.githubLink = githubLink;
 
             res.redirect('/settings');
+
+            conn.release();
         });
     });
 
 
+}
+
+exports.updateProfile = async function(req, res){
+    const userID = req.session.userInfo.userId;
+
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+    const email = req.body.email;
+    const phoneNumber = req.body.phoneNumber;
+    const mobileNumber = req.body.mobileNumber;
+    const address = req.body.address;
+    const aboutMe = req.body.aboutMe;
+    const workExperience = req.body.workExperience;
+    const education = req.body.education;
+
+    db.getConnection(function(err, conn){
+        var sql = "UPDATE User SET " +
+                "firstName = '"+firstName+"', " +
+                "lastName = '"+lastName+"', " +
+                "email = '"+email+"', " +
+                "phoneNumber = '"+phoneNumber+"', " +
+                "mobileNumber = '"+mobileNumber+"', " +
+                "address = '"+address+"', " +
+                "aboutMe = '"+aboutMe+"', " +
+                "workExperience = '"+workExperience+"', " +
+                "education = '"+education+"' " +
+                "WHERE idUser = '"+userID+"'"
+        conn.query(sql, function (err, results){
+            if (err) throw err;
+
+            req.session.userInfo.firstName = firstName;
+            req.session.userInfo.lastName = lastName;
+            req.session.userInfo.email = email;
+            req.session.userInfo.phoneNumber = phoneNumber;
+            req.session.userInfo.mobileNumber = mobileNumber;
+            req.session.userInfo.address = address;
+            req.session.userInfo.aboutMe = aboutMe;
+            req.session.userInfo.workExperience = workExperience;
+            req.session.userInfo.education = education;
+
+            res.redirect('/settings');
+
+            conn.release();
+        });
+    });
 }
 
 exports.changeAvatar = async function(req, res) {
