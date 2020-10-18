@@ -24,7 +24,12 @@ exports.login = async function(req, res) {
                             lastName: results[0].lastName,
                             email: results[0].email,
                             profileImg: results[0].profileImg,
-                            extLink: results[0].extLink
+                            extLink: results[0].extLink,
+                            privatePortfolio: results[0].profilePrivate,
+                            showEmail: results[0].displayEmail,
+                            showPhone: results[0].showPhoneNumber,
+                            showMobile: results[0].showMobileNumber,
+                            showAddress: results[0].showAddress
                         };
 
                         conn.release();
@@ -325,6 +330,41 @@ exports.changeRegularDetails = async function(req, res) {
     }
 }
 
+exports.changePrivacySettings = async function(req,res){
+    const userID = req.session.userInfo.userId;
+    
+    var privatePortfolio = "";
+
+    var showEmail = "";
+    var showPhone = "";
+    var showMobile = "";
+    var showAddress = "";
+
+    //Set privacy values
+    if(req.body.privatePortfolio == 'on'){privatePortfolio = "checked";}
+
+    if(req.body.showEmail == 'on'){showEmail = "checked";}
+    if(req.body.showPhone =='on'){showPhone = "checked";}
+    if(req.body.showMobile == 'on'){showMobile = "checked";}
+    if(req.body.showAddress == 'on'){showAddress = "checked";}
+
+    //Update database
+    db.getConnection(function(err, conn) {
+        var sql = "UPDATE User SET profilePrivate = '" + privatePortfolio + "', displayEmail = '" + showEmail + "', showPhoneNumber = '"+showPhone+"', showMobileNumber = '"+showMobile+"', showAddress = '"+showAddress+"' WHERE idUser = '" + userID + "'";
+        conn.query(sql, function (err, results) {
+            if (err) throw err;
+
+            req.session.userInfo.privatePortfolio = privatePortfolio;
+            req.session.userInfo.showEmail = showEmail;
+            req.session.userInfo.showPhone = showPhone;
+            req.session.userInfo.showMobile = showMobile;
+            req.session.userInfo.showAddress = showAddress;
+
+            res.redirect('/settings');
+        });
+    });
+}
+
 exports.changeAvatar = async function(req, res) {
     if (req.session.userInfo) {
         const userID = req.session.userInfo.userId;
@@ -390,6 +430,63 @@ exports.getProfileInformation = async function(req, userID, res){
             if (err) throw err;
 
             if (results.length > 0) {
+                
+                //Get social media info
+                profileInfo.website = "";
+                profileInfo.websiteLink = "#"
+                profileInfo.github = "";
+                profileInfo.githubLink = "#"
+                profileInfo.twitter = "";
+                profileInfo.twitterLink = "#";
+                profileInfo.instagram = "";
+                profileInfo.instagramLink = "#";
+                profileInfo.facebook = "";
+                profileInfo.facebookLink = "#";
+                profileInfo.linkedin = "";
+                profileInfo.linkedinLink = "#";
+
+                //website
+                if(results[0].websiteLink != null)
+                {
+                    profileInfo.website = profileInfo.firstName + "'s Website";
+                    profileInfo.websiteLink = results[0].websiteLink;
+                }
+
+                //github
+                if(results[0].githubLink != null)
+                {
+                    profileInfo.github = profileInfo.firstName + "'s GitHub";
+                    profileInfo.githubLink = results[0].githubLink;
+                }
+
+                //twitter
+                if(results[0].twitterLink != null)
+                {
+                    profileInfo.twitter = profileInfo.firstName + "'s Twitter";
+                    profileInfo.twitterLink = results[0].twitterLink;
+                }
+
+                //Instagram
+                if(results[0].instagramLink != null)
+                {
+                    profileInfo.instagram = profileInfo.firstName + "'s Instagram";
+                    profileInfo.instagramLink = results[0].instagramLink;
+                }
+
+                //Facebook
+                if(results[0].facebookLink != null)
+                {
+                    profileInfo.facebook = profileInfo.firstName + "'s Facebook";
+                    profileInfo.facebookLink = results[0].facebookLink;
+                }
+
+                //LinkedIn
+                if(results[0].linkedinLink != null)
+                {
+                    profileInfo.linkedin = profileInfo.firstName + "'s LinkedIn";
+                    profileInfo.linkedinLink = results[0].linkedinLink;
+                }
+
 
             if(req.session.idUser == userID) //CASE: all information is avaliable
             {
@@ -467,61 +564,6 @@ exports.getProfileInformation = async function(req, userID, res){
                     profileInfo.address = ""
                 }
 
-
-                profileInfo.website = "";
-                profileInfo.websiteLink = "#"
-                profileInfo.github = "";
-                profileInfo.githubLink = "#"
-                profileInfo.twitter = "";
-                profileInfo.twitterLink = "#";
-                profileInfo.instagram = "";
-                profileInfo.instagramLink = "#";
-                profileInfo.facebook = "";
-                profileInfo.facebookLink = "#";
-                profileInfo.linkedin = "";
-                profileInfo.linkedinLink = "#";
-
-                //website
-                if(results[0].websiteLink != null)
-                {
-                    profileInfo.website = profileInfo.firstName + "'s Website";
-                    profileInfo.websiteLink = results[0].websiteLink;
-                }
-
-                //github
-                if(results[0].githubLink != null)
-                {
-                    profileInfo.github = profileInfo.firstName + "'s GitHub";
-                    profileInfo.githubLink = results[0].githubLink;
-                }
-
-                //twitter
-                if(results[0].twitterLink != null)
-                {
-                    profileInfo.twitter = profileInfo.firstName + "'s Twitter";
-                    profileInfo.twitterLink = results[0].twitterLink;
-                }
-
-                //Instagram
-                if(results[0].instagramLink != null)
-                {
-                    profileInfo.instagram = profileInfo.firstName + "'s Instagram";
-                    profileInfo.instagramLink = results[0].instagramLink;
-                }
-
-                //Facebook
-                if(results[0].facebookLink != null)
-                {
-                    profileInfo.facebook = profileInfo.firstName + "'s Facebook";
-                    profileInfo.facebookLink = results[0].facebookLink;
-                }
-
-                //LinkedIn
-                if(results[0].linkedinLink != null)
-                {
-                    profileInfo.linkedin = profileInfo.firstName + "'s LinkedIn";
-                    profileInfo.linkedinLink = results[0].linkedinLink;
-                }
                 res.render('portfolio', { userInfo: profileInfo});
                 return;
 
