@@ -88,7 +88,11 @@ exports.return_profile = function(req, res) {
 }
 
 exports.return_my_profile = function(req, res) {
-    userManagement.getProfileInformation(req, req.session.userId, res);
+    if (req.session.userInfo) {
+        userManagement.getProfileInformation(req, req.session.userInfo.userId, res);
+    } else {
+        res.redirect('/signin');
+    }
 }
 
 exports.return_settings = function (req, res) {

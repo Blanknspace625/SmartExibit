@@ -313,7 +313,6 @@ exports.changeRegularDetails = async function(req, res) {
 
                 conn.release();
 
-
                 req.session.userInfo.firstName = firstName;
                 req.session.userInfo.lastName = lastName;
                 req.session.userInfo.email = email;
@@ -386,16 +385,15 @@ exports.changeSensitiveDetails = async function(req, res) {
 }
 
 exports.getProfileInformation = async function(req, userID, res){
-    console.log("requested profile " + userID);
-    
     db.getConnection(function(err, conn) {
         conn.query("SELECT * FROM User WHERE idUser = ?", [userID], async function (err, results) {
             if (err) throw err;
 
             if (results.length > 0) {
-            
+
             if(req.session.idUser == userID) //CASE: all information is avaliable
             {
+
                 var profileInfo = ({
                     firstName: results[0].firstName,
                     lastName: results[0].lastName,
@@ -416,6 +414,7 @@ exports.getProfileInformation = async function(req, userID, res){
                     document4: results[0].document4,
                     document5: results[0].document5
                 });
+
                 
                 res.render('portfolio', { userInfo: profileInfo});
                 return;
@@ -538,6 +537,17 @@ exports.getProfileInformation = async function(req, userID, res){
         //res.redirect(404, '/');
         //res.status(404).send('Profile not found');
 
+
+                    res.render('portfolio', { userInfo: profileInfo });
+                } else {
+                    //CASE: profile is private
+                    res.redirect(401, '/');
+                    //res.status(401).send('Profile is Private');
+                }
+            } else {
+                res.redirect(404, '/');
+                //res.status(404).send('Profile not found');
+            }
         });
     });
 }

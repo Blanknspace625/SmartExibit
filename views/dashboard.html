@@ -9,29 +9,22 @@
 		
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/Public/StyleeSheet/dashboard.css">
-    
-     <!-- Font Awesome JS -->
-     <script src="https://kit.fontawesome.com/e564623181.js" crossorigin="anonymous"></script>
+
+      <!-- Font Awesome JS -->
+      <script src="https://kit.fontawesome.com/e564623181.js" crossorigin="anonymous"></script>
       <script src="/Public/Scripts/jquery.min.js"></script>
       <script src="/Public/Scripts/popper.js"></script>
       <script src="/Public/Scripts/bootstrap.min.js"></script>
       <script src="/Public/Scripts/main.js"></script>
+
+
       <!-- Our Custom JS -->
       <script type="text/javascript" src="path-to-javascript-file.js"></script>
       <!-- jQuery library -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       <!-- Popper JS -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-      <!-- Latest compiled JavaScript -->
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-      <!-- Sidebar button-->
-      <script type="text/javascript">
-          $(document).ready(function () {
-              $('#sidebarCollapse').on('click', function () {
-                  $('#sidebar').toggleClass('active');
-              });
-          });
-      </script>
+
 
   </head>
   <body>
@@ -59,8 +52,8 @@
             <a href="/dashboard"><span class="fa fa-home mr-3"></span> Home</a>
           </li>
           <li>
-            <a href="#portfolioSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span class="fas fa-clipboard mr-4"></span>My Portfolio</a>
-            <ul class="collapse list-unstyled" id="portfolioSubmenu">
+              <a href="#portfolioSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span class="fas fa-clipboard mr-4"></span>My Portfolio</a>
+              <ul class="collapse list-unstyled" id="portfolioSubmenu">
                 <li>
                     <a href="#">Edit Portfolio</a>
                 </li>
@@ -135,5 +128,13 @@
      </div>
         </div>
 
+        <!-- Sidebar button-->
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#sidebarCollapse').on('click', function () {
+                    $('#sidebar').toggleClass('active');
+                });
+            });
+        </script>
   </body>
 </html>
