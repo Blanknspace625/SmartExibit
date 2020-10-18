@@ -393,7 +393,7 @@ exports.getProfileInformation = async function(req, userID, res){
             if (err) throw err;
 
             if (results.length > 0) {
-            //TODO collect all info that is permitted and return as json
+            
             if(req.session.idUser == userID) //CASE: all information is avaliable
             {
                 var profileInfo = ({
@@ -468,35 +468,64 @@ exports.getProfileInformation = async function(req, userID, res){
                     profileInfo.address = ""
                 }
 
-                //Handle Social Media links
-                db.getConnection(function(err, conn) {
-                    conn.query("SELECT * FROM SocialMedia WHERE idUser = ?", [userID], async function (err, results) {
-                        if (err) throw err;
 
-                        profileInfo.website = "";
-                        profileInfo.websiteLink = ""
-                        profileInfo.github = "";
-                        profileInfo.twitter = "";
-                        profileInfo.instagram = "";
-                        profileInfo.facebook = "";
-                        profileInfo.linkedin = "";
+                profileInfo.website = "";
+                profileInfo.websiteLink = "#"
+                profileInfo.github = "";
+                profileInfo.githubLink = "#"
+                profileInfo.twitter = "";
+                profileInfo.twitterLink = "#";
+                profileInfo.instagram = "";
+                profileInfo.instagramLink = "#";
+                profileInfo.facebook = "";
+                profileInfo.facebookLink = "#";
+                profileInfo.linkedin = "";
+                profileInfo.linkedinLink = "#";
 
-                        var i;
-                        for(i = 0; i < results.length; i++)
-                        {
-                            if(results[0].socialMediaType == "Website")
-                            {
-                                profileInfo.websiteLink = results[0].socialMediaLink;
-                                profileInfo.website = "test"
-                            }
-                        }
+                //website
+                if(results[0].websiteLink != null)
+                {
+                    profileInfo.website = profileInfo.firstName + "'s Website";
+                    profileInfo.websiteLink = results[0].websiteLink;
+                }
 
+                //github
+                if(results[0].githubLink != null)
+                {
+                    profileInfo.github = profileInfo.firstName + "'s GitHub";
+                    profileInfo.githubLink = results[0].githubLink;
+                }
 
+                //twitter
+                if(results[0].twitterLink != null)
+                {
+                    profileInfo.twitter = profileInfo.firstName + "'s Twitter";
+                    profileInfo.twitterLink = results[0].twitterLink;
+                }
 
-                        res.render('portfolio', { userInfo: profileInfo});
-                        return;
-                    })
-                });
+                //Instagram
+                if(results[0].instagramLink != null)
+                {
+                    profileInfo.instagram = profileInfo.firstName + "'s Instagram";
+                    profileInfo.instagramLink = results[0].instagramLink;
+                }
+
+                //Facebook
+                if(results[0].facebookLink != null)
+                {
+                    profileInfo.facebook = profileInfo.firstName + "'s Facebook";
+                    profileInfo.facebookLink = results[0].facebookLink;
+                }
+
+                //LinkedIn
+                if(results[0].linkedinLink != null)
+                {
+                    profileInfo.linkedin = profileInfo.firstName + "'s LinkedIn";
+                    profileInfo.linkedinLink = results[0].linkedinLink;
+                }
+                res.render('portfolio', { userInfo: profileInfo});
+                return;
+
             }
             else //CASE: profile is private
             {
