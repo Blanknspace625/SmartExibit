@@ -83,4 +83,10 @@ module.exports = function(app) {
 
     app.route('/contact')
         .get(task.return_contact);
+
+    app.route('/privacy')
+        .post(task.update_privacy_settings)
+
+    app.route('/linkaccounts')
+        .post(task.link_social_media)
 };

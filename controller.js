@@ -107,6 +107,14 @@ exports.change_reg_detail = function(req, res) {
     userManagement.changeRegularDetails(req, res);
 }
 
+exports.update_privacy_settings = function(req,res){
+    userManagement.changePrivacySettings(req,res);
+}
+
+exports.link_social_media = function(req, res){
+    userManagement.changeSocialMediaLinks(req, res);
+}
+
 exports.change_profile_pic = function(req, res) {
     fileUpload.uploadProfileImg(req, res, function(err) {
         if (err) {
