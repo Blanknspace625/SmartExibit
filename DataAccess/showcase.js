@@ -52,7 +52,7 @@ exports.updateShowcase = async function(req, res) {
 
 exports.getShowcaseData = async function(req, res)
 {
-    const showcaseID = req.headers.showcaseid;
+    const showcaseID = req.query.showcaseid;
 
     db.getConnection(function(err, conn) {
         conn.query("SELECT * FROM Showcase WHERE idShowcase = ?", showcaseID, async function (err, results) {

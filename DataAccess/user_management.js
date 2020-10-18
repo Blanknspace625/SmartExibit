@@ -390,7 +390,10 @@ exports.getProfileInformation = async function(req, userID, res){
             if (err) throw err;
 
             if (results.length > 0) {
-                //TODO collect all info that is permitted and return as json
+
+            if(req.session.idUser == userID) //CASE: all information is avaliable
+            {
+
                 var profileInfo = ({
                     firstName: results[0].firstName,
                     lastName: results[0].lastName,
@@ -412,17 +415,128 @@ exports.getProfileInformation = async function(req, userID, res){
                     document5: results[0].document5
                 });
 
-                conn.release();
+                
+                res.render('portfolio', { userInfo: profileInfo});
+                return;
+            }
+            else if(results[0].profilePrivate == 0) //CASE: profile is not private
+            {
+                var profileInfo = ({
+                    firstName: results[0].firstName,
+                    lastName: results[0].lastName,
+                    displayEmail: results[0].displayEmail,
+                    displayMobileNumber: results[0].showMobileNumber,
+                    displayPhoneNumber: results[0].showPhoneNumber,
+                    displayAddress: results[0].showAddress,
+                    socialAccounts: results[0].socialAccounts,
+                    profileImg: results[0].profileImg,
+                    extLink: results[0].extLink,
+                    aboutMe: results[0].aboutMe,
+                    workExperience: results[0].workExperience,
+                    education: results[0].education,
+                    
+                    email: results[0].email,
+                    mobileNumber: results[0].mobileNumber,
+                    phoneNumber: results[0].phoneNumber,
+                    address: results[0].address,
 
-                if (req.session.userInfo.userId == userID) { //CASE: all information is avaliable
-                    res.render('portfolio', { userInfo: profileInfo });
-                } else if (results[0].profilePrivate == 0) { //CASE: profile is not private
-                    //CASE: Check if a user wants their email publicly visible
-                    if (profileInfo.displayEmail != 0) {
-                        profileInfo.email = results[0].email;
-                    } else {
-                        profileInfo.email = "";
-                    }
+                    document1: results[0].document1,
+                    document2: results[0].document2,
+                    document3: results[0].document3,
+                    document4: results[0].document4,
+                    document5: results[0].document5
+                });
+
+                if(profileInfo.displayEmail == 0) //CASE: Check if a user wants their email publicly visible
+                {
+                    profileInfo.email = "";
+                }
+
+                if(profileInfo.displayMobileNumber == 0) //CASE check mobile visibility
+                {
+                    profileInfo.mobileNumber = ""
+                }
+
+                if(profileInfo.displayPhoneNumber == 0) //CASE check phone visibility
+                {
+                    profileInfo.phoneNumber = ""
+                }
+
+                if(profileInfo.showAddress == 0) //CASE check Address visibility
+                {
+                    profileInfo.address = ""
+                }
+
+
+                profileInfo.website = "";
+                profileInfo.websiteLink = "#"
+                profileInfo.github = "";
+                profileInfo.githubLink = "#"
+                profileInfo.twitter = "";
+                profileInfo.twitterLink = "#";
+                profileInfo.instagram = "";
+                profileInfo.instagramLink = "#";
+                profileInfo.facebook = "";
+                profileInfo.facebookLink = "#";
+                profileInfo.linkedin = "";
+                profileInfo.linkedinLink = "#";
+
+                //website
+                if(results[0].websiteLink != null)
+                {
+                    profileInfo.website = profileInfo.firstName + "'s Website";
+                    profileInfo.websiteLink = results[0].websiteLink;
+                }
+
+                //github
+                if(results[0].githubLink != null)
+                {
+                    profileInfo.github = profileInfo.firstName + "'s GitHub";
+                    profileInfo.githubLink = results[0].githubLink;
+                }
+
+                //twitter
+                if(results[0].twitterLink != null)
+                {
+                    profileInfo.twitter = profileInfo.firstName + "'s Twitter";
+                    profileInfo.twitterLink = results[0].twitterLink;
+                }
+
+                //Instagram
+                if(results[0].instagramLink != null)
+                {
+                    profileInfo.instagram = profileInfo.firstName + "'s Instagram";
+                    profileInfo.instagramLink = results[0].instagramLink;
+                }
+
+                //Facebook
+                if(results[0].facebookLink != null)
+                {
+                    profileInfo.facebook = profileInfo.firstName + "'s Facebook";
+                    profileInfo.facebookLink = results[0].facebookLink;
+                }
+
+                //LinkedIn
+                if(results[0].linkedinLink != null)
+                {
+                    profileInfo.linkedin = profileInfo.firstName + "'s LinkedIn";
+                    profileInfo.linkedinLink = results[0].linkedinLink;
+                }
+                res.render('portfolio', { userInfo: profileInfo});
+                return;
+
+            }
+            else //CASE: profile is private
+            {
+                res.redirect(401, '/');
+                //res.status(401).send('Profile is Private');
+                return;
+            }
+        }
+
+        //res.redirect(404, '/');
+        //res.status(404).send('Profile not found');
+
 
                     res.render('portfolio', { userInfo: profileInfo });
                 } else {
