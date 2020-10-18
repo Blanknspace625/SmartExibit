@@ -14,10 +14,10 @@ module.exports = function(app) {
     app.route('/dashboard')
         .get(task.return_dashboard);
 
-    app.route('/profile')
+    app.route('/ext-profile')
         .get(task.return_profile);
 
-    app.route('/myprofile')
+    app.route('/profile')
         .get(task.return_my_profile);
 
     app.route('/settings')

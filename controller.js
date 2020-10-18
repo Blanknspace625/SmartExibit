@@ -88,7 +88,7 @@ exports.return_profile = function(req, res) {
 }
 
 exports.return_my_profile = function(req, res) {
-    userManagement.getProfileInformation(req, req.session.userId, res);
+    userManagement.getProfileInformation(req, req.session.userInfo.userId, res);
 }
 
 exports.return_settings = function (req, res) {
