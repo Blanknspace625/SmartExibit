@@ -1,3 +1,5 @@
+//const { link } = require("fs");
+
 //Script used to hide unused elements on a users profile
 $(document).ready(function () {
 
@@ -36,29 +38,53 @@ $(document).ready(function () {
         $("#education").hide();
     }
 
+    var website = true;
+    var github = true;
+    var twitter = true;
+    var instagram = true;
+    var facebook = true;
+    var linkedin = true;
+
     //Website
     if( $.trim($("#websiteContent").text()) == ''){
-        $("#website").hide();
+        $("#website").removeClass("list-group-item d-flex justify-content-between align-items-center flex-wrap").hide();
+        website = false;
     }
 
     //Github
     if( $.trim($("#githubContent").text()) == ''){
-        $("#github").hide();
+        $("#github").removeClass("list-group-item d-flex justify-content-between align-items-center flex-wrap").hide();
+        github = false;
     }
 
     //Twitter
     if( $.trim($("#twitterContent").text()) == ''){
-        $("#twitter").hide();
+        $("#twitter").removeClass("list-group-item d-flex justify-content-between align-items-center flex-wrap").hide();
+        twitter = false;
     }
 
     //Instagram
     if( $.trim($("#instagramContent").text()) == ''){
-        $("#instagram").hide();
+        $("#instagram").removeClass("list-group-item d-flex justify-content-between align-items-center flex-wrap").hide();
+        instagram = false;
     }
 
     //Facebook
     if( $.trim($("#facebookContent").text()) == ''){
-        $("#facebook").hide();
+        $("#facebook").removeClass("list-group-item d-flex justify-content-between align-items-center flex-wrap").hide();
+        facebook = false;
+    }
+
+    //LinkedIn
+    if( $.trim($("#linkedinContent").text()) == ''){
+        $("#linkedin").removeClass("list-group-item d-flex justify-content-between align-items-center flex-wrap").hide();
+        linkedin = false;
+    }
+
+    //remove pannel
+    if(!(website || github || twitter || instagram || facebook || linkedin))
+    {
+        $("#socialMedia").hide();
     }
 
     //Check all showcases
