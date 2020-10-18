@@ -1,19 +1,25 @@
 /* Style the tab */
 .tab {
     overflow: hidden;
-    border: 1px solid #ccc;
     background-color: #f1f1f1;
+    float: left;
+    border: 1px solid #ccc;
 }
 
 /* Style the buttons that are used to open the tab content */
 .tab button {
+    display: block;
     background-color: inherit;
-    float: left;
+    color: black;
+    padding: 15px 15px;
+    width: 100%;
     border: none;
     outline: none;
+    text-align: left;
     cursor: pointer;
-    padding: 14px 16px;
     transition: 0.3s;
+    font-size: 17px;
+    height:100%;
 }
 
 /* Change background color of buttons on hover */
@@ -29,7 +35,9 @@
 /* Style the tab content */
 .tabcontent {
     display: none;
-    padding: 6px 12px;
+    float:left;
+    padding: 0px 12px;
+    width: 70%;
+    border-left: none;
     border: 1px solid #ccc;
-    border-top: none;
 }

@@ -1,12 +1,13 @@
 const multer = require('multer');
+const fs = require('fs');
 const path = require('path');
 
-var storage = multer.diskStorage({
+const storage = multer.diskStorage({
     destination: function(req, file, callback) {
-        callback(null, 'Resources');
+        callback(null, "./Resources/" + req.session.userInfo.userId);
     },
     filename: function(req, file, callback) {
-        callback(null, file.fieldname + '_' + Date.now() + path.extname(file.originalname));
+        callback(null, file.originalname);
     }
 });
 
@@ -16,30 +17,33 @@ exports.upload = multer({
     storage: storage,
     limits: { fileSize: generalMaxSize },
     fileFilter: function(req, file, callback) {
-        //var allowedFileType = /pdf|docx|pptx/;
-        //var mimetype = allowedFileType.test(file.mimetype);
-        //var ext = allowedFileType.test(path.extname(file.originalname).toLowerCase());
-
-        //if (mimetype && ext) {
+        if (!file.originalname.match(/\.(pdf|docx|pptx)$/)) {
+            callback(new Error('Error: Only PDF, PowerPoint and Word files are allowed!'));
+        } else {
             callback(null, true);
-        //}
-        //callback(new Error('Error: File upload only supports the ' + 'following filetypes - ' + allowedFileType));
+        }
     }
-}).single('media');
+}).array('media');
+
+const profileImgStorage = multer.diskStorage({
+    destination: function(req, file, callback) {
+        callback(null, "./Resources/avatar");
+    },
+    filename: function(req, file, callback) {
+        callback(null, "avatar_" + Date.now() + path.extname(file.originalname));
+    }
+});
 
 const profileImgMaxSize = 5 * 1000 * 1000;
 
 exports.uploadProfileImg = multer({
-    storage: storage,
+    storage: profileImgStorage,
     limits: { fileSize: profileImgMaxSize },
     fileFilter: function(req, file, callback) {
-        var allowedFileType = /bmp|jpg|jpeg|png/;
-        var mimetype = allowedFileType.test(file.mimetype);
-        var ext = allowedFileType.test(path.extname(file.originalname).toLowerCase());
-
-        if (mimetype && ext) {
+        if (!file.originalname.match(/\.(jpg|jpeg|png|bmp)$/)) {
+            callback(new Error('Error: Profile picture does not support files other than images!'));
+        } else {
             callback(null, true);
         }
-        callback(new Error('Error: File upload only supports the ' + 'following filetypes - ' + allowedFileType));
     }
 }).single('profileImg');

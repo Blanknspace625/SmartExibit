@@ -1,7 +1,9 @@
 var db = require('./db_interface');
-var bcrypt = require('bcrypt');
-var nodemailer = require('nodemailer');
-var crypto = require('crypto');
+
+const fs = require('fs');
+const bcrypt = require('bcrypt');
+const nodemailer = require('nodemailer');
+const crypto = require('crypto');
 
 exports.login = async function(req, res) {
     const email = req.body.email;
@@ -16,17 +18,21 @@ exports.login = async function(req, res) {
 
                 if (isVerified) {
                     if (results[0].status == 'verified') {
-                        req.session.userId = results[0].idUser;
-                        req.session.userInfo = ({
+                        req.session.userInfo = {
+                            userId: results[0].idUser,
                             firstName: results[0].firstName,
                             lastName: results[0].lastName,
                             email: results[0].email,
-                            socialAccounts: results[0].socialAccounts,
                             profileImg: results[0].profileImg,
                             extLink: results[0].extLink
-                        });
-    
+                        };
+
                         conn.release();
+
+                        fs.mkdir("./Resources/" + results[0].idUser, function(err) {
+                            if (err && err.code != 'EEXIST') throw err;
+                        });
+
                         res.redirect('/dashboard');
                     } else {
                         res.status(206).send('Your account must be verified before you can login!');
@@ -45,8 +51,7 @@ exports.register = async function(req, res) {
     const email = req.body.email;
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
-    const profilePicRef = '/Public/Images/default_avatar.png';
-    //const socialAccounts;
+    const profilePicRef = '/Resources/avatar/default_avatar.png';
     const pwd = req.body.password;
     const pwdAgain = req.body.confirmPassword;
 
@@ -55,8 +60,7 @@ exports.register = async function(req, res) {
             const pwd_ = await bcrypt.hash(req.body.password, 8);
 
             var sql = "INSERT INTO User (firstName, lastName, email, profileImg, pwd, extLink) VALUES " +
-                "('" + firstName + "', '" + lastName + "', '" + email + "', '" + profilePicRef + "'," +
-                "'" + pwd_ + "', 'https://www.facebook.com')";
+                "('" + firstName + "', '" + lastName + "', '" + email + "', '" + profilePicRef + "', '" + pwd_ + "')";
             conn.query(sql, async function (err, results) {
                 if (err) throw err;
 
@@ -85,12 +89,14 @@ exports.verifyEmail = async function(req, res) {
             const current = new Date(new Date().toUTCString());
 
             // Insert user id and verify code into db
-            var sql = "INSERT INTO Code (userId, code) VALUES ('" + userId + "','" + code + "') ON DUPLICATE KEY UPDATE code = '" + code + "', createDate = UTC_TIMESTAMP()";
+            var sql = "INSERT INTO Code (userId, code) VALUES ('" + userId + "','" + code + "') " +
+                "ON DUPLICATE KEY UPDATE code = '" + code + "', createDate = UTC_TIMESTAMP()";
             conn.query(sql, [email], async function (err, results) {
                 if (err) throw err;
                 
                 // Send verify link to email
-                const url = 'localhost/verify-email/' + userId + '/' + code;
+                const url = 'localhost/verifyemail?id=' + userId + '&code=' + code; // -- to be removed
+                //const url = 'https://epf.johnnybread.com/verifyemail?id=' + userId + '&code=' + code;
 
                 var transporter = nodemailer.createTransport({
                     service: 'gmail',
@@ -104,21 +110,12 @@ exports.verifyEmail = async function(req, res) {
                     from: 'smartexibit@gmail.com',
                     to: email,
                     subject: 'Verify Your Email',
-                    text: 'You are receiving this email if you need to verify your email for your Smart Exhibit account. Please click the link below:\n\n' + 
-                        url +
+                    text: 'You are receiving this email if you need to verify your email for your ' +
+                        'Smart Exhibit account. Please click the link below:\n\n' + url +
                         '\n\nThis link expires in 10 minutes from the time you recieved this email.'
                 };
             
-                transporter.sendMail(mailOptions, function(error, info) {
-                    if(error) 
-                    {
-                        console.log(error);
-                    }
-                    else
-                    {
-                        console.log('Email sent: ' + info.response);
-                    }
-                });
+                transporter.sendMail(mailOptions, function(err, info) { if(err) console.log(err); });
 
                 conn.release();
             });
@@ -128,8 +125,8 @@ exports.verifyEmail = async function(req, res) {
 
 exports.verifyEmailResponse = async function(req, res)
 {
-    const userID = req.params.userid;
-    const code = req.params.code;
+    const userID = req.query.id;
+    const code = req.query.code;
 
     db.getConnection(function(err, conn) {
         conn.query("SELECT * FROM User WHERE idUser = ?", [userID], async function (err, results) {
@@ -138,7 +135,7 @@ exports.verifyEmailResponse = async function(req, res)
             if(results.length > 0) {
                 // Check if user is not verified
                 const status = results[0].status;
-                if(status == 'pending') {
+                if(status == 'pending') {
                     // Check if user has matching code
                     conn.query("SELECT * FROM Code WHERE userid = ?", [userID], async function (err, results) {
                         if (err) throw err;
@@ -174,11 +171,11 @@ exports.verifyEmailResponse = async function(req, res)
 
                                     conn.release();
                                 });
-                                res.status(206).send('Verification link expired');
+                                res.status(206).send('Verification link expired!');
                             }
                         }
                         else {
-                            res.redirect('/verify');
+                            res.status(206).send('Verification failed!');
                         }
                     });
                 }
@@ -186,7 +183,7 @@ exports.verifyEmailResponse = async function(req, res)
                     res.status(206).send('User email already verified');
                 }
             } else {
-                res.status(206).send('Verification link does no exist');
+                res.status(401).send('Unauthorised');
             }
         });
     });
@@ -208,12 +205,14 @@ exports.forgotPassword = async function (req, res) {
                     var userId = results[0].idUser;
 
                     // Insert user id and reset code into db
-                    var sql = "INSERT INTO ResetCode (userId, code) VALUES ('" + userId + "','" + code + "') ON DUPLICATE KEY UPDATE code = '" + code + "', createDate = UTC_TIMESTAMP()";
+                    var sql = "INSERT INTO ResetCode (userId, code) VALUES ('" + userId + "','" + code + "') " +
+                        "ON DUPLICATE KEY UPDATE code = '" + code + "', createDate = UTC_TIMESTAMP()";
                     conn.query(sql, [email], async function (err, results) {
                         if (err) throw err;
 
                         // Send reset link to email
-                        const url = 'localhost/resetpassword/' + userId + '/' + code;
+                        const url = 'localhost/resetpassword?id=' + userId + '&code=' + code; // -- to be removed
+                        //const url = 'https://epf.johnnybread.com/resetpassword?id=' + userId + '&code=' + code;
 
                         var transporter = nodemailer.createTransport({
                             service: 'gmail',
@@ -227,23 +226,17 @@ exports.forgotPassword = async function (req, res) {
                             from: 'smartexibit@gmail.com',
                             to: email,
                             subject: 'Reset Your Password',
-                            text: 'You are receiving this email if you have forgotten your password to your Smart Exhibit account. Please click the link below to reset your password:\n\n' +
-                                url +
-                                '\n\nThis link expires in 10 minutes from the time you recieved this email.'
+                            text: 'You are receiving this email if you have forgotten your password to ' +
+                                'your Smart Exhibit account. Please click the link below to reset your password:\n\n' +
+                                url + '\n\nThis link expires in 10 minutes from the time you recieved this email.'
                         };
 
-                        transporter.sendMail(mailOptions, function(error, info) {
-                            if(error)
-                            {
-                                console.log(error);
-                            }
-                            else
-                            {
-                                console.log('Email sent: ' + info.response);
-                            }
-                        });
+                        transporter.sendMail(mailOptions, function(err, info) { if (err) console.log(err); });
+
                         conn.release();
                     });
+                } else {
+                    res.status(206).send('User email is not yet verified');
                 }
             }
             // Regardless of whether an email is sent or not, display message
@@ -253,8 +246,8 @@ exports.forgotPassword = async function (req, res) {
 }
 
 exports.resetPassword = async function(req, res) {
-    const userID = req.params.userid;
-    const code = req.params.code;
+    const userID = req.body.id;
+    const code = req.body.code;
     const newPwd = req.body.newPassword;
     const newPwdAgain = req.body.newPasswordAgain;
 
@@ -287,26 +280,27 @@ exports.resetPassword = async function(req, res) {
 
                         // Delete code entry from db as no longer needed
                         var sql = "DELETE FROM ResetCode WHERE userid = '" + userID + "'";
-                        conn.query(sql, function (err, results) {
+                        conn.query(sql, function(err, results) {
                             if (err) throw err;
 
                             conn.release();
+
                             res.redirect('/signin');
                         });
                     } else {
-                        res.redirect('/iforgot');
+                        res.status(206).send('Verification failed!');
                     }
                 });
             } else {
-                res.status(206).send('Reset password link does no exist');
+                res.status(401).send('Unauthorised');
             }
         });
     });
 }
 
 exports.changeRegularDetails = async function(req, res) {
-    if (req.session.userId) {
-        const userID = req.session.userId;
+    if (req.session.userInfo) {
+        const userID = req.session.userInfo.userId;
         const email = req.body.email;
         const firstName = req.body.firstName;
         const lastName = req.body.lastName;
@@ -319,7 +313,34 @@ exports.changeRegularDetails = async function(req, res) {
 
                 conn.release();
 
-                res.redirect('/dashboard')
+
+                req.session.userInfo.firstName = firstName;
+                req.session.userInfo.lastName = lastName;
+                req.session.userInfo.email = email;
+
+                res.redirect('/settings');
+            });
+        });
+    } else {
+        res.status(401).send('Unauthorised');
+    }
+}
+
+exports.changeAvatar = async function(req, res) {
+    if (req.session.userInfo) {
+        const userID = req.session.userInfo.userId;
+        const ref = req.file.path.replace(/\\/g, "/");
+
+        db.getConnection(function(err, conn) {
+            var sql = "UPDATE User SET profileImg = '" + ref + "' WHERE idUser = '" + userID + "'";
+            conn.query(sql, function (err, results) {
+                if (err) throw err;
+
+                conn.release();
+
+                req.session.userInfo.profileImg = ref;
+
+                res.redirect('/settings');
             });
         });
     } else {
@@ -328,8 +349,8 @@ exports.changeRegularDetails = async function(req, res) {
 }
 
 exports.changeSensitiveDetails = async function(req, res) {
-    if (req.session.userId) {
-        const userID = req.session.userId;
+    if (req.session.userInfo) {
+        const userID = req.session.userInfo.userId;
         const oldPwd = req.body.oldPassword;
         const newPwd = req.body.newPassword;
         const newPwdAgain = req.body.newPasswordAgain;
@@ -348,7 +369,8 @@ exports.changeSensitiveDetails = async function(req, res) {
                             if (err) throw err;
 
                             conn.release();
-                            res.status(200).send('User ' + userID + ' password updated');
+
+                            res.redirect('/settings');
                         });
                     } else {
                         res.status(206).send('New passwords don\'t agree!');

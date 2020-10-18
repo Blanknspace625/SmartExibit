@@ -16,6 +16,7 @@ h1 {
 }
 
 h2{
+    padding-top: 10%;
     font-family: Segoe UI;
     font-size: 35px;
     color: #fff;
@@ -63,6 +64,11 @@ p.ex2 {
 p.ex3{
     padding-top: 8%;
 }
+
+p.ex4{
+    padding-bottom: 30%;
+}
+
 
 .container {
     position: relative;

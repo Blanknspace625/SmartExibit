@@ -32,7 +32,7 @@
                 <div class="container">
                     <div class="picture-container">
                         <div class="picture">
-                            <a href="/profile" class="logo"><div class="img" style="background-image: url(/Public/Images/default_avatar.png);"></div></a>
+                            <a href="/profile" class="logo"><div class="img" style="background-image: url(<%=userInfo.profileImg%>);"></div></a>
                         </div>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                         <a href="/upload">Upload a New Document</a>
                     </li>
                     <li>
-                        <a href="#">Manage Documents</a>
+                        <a href="/media">Manage Documents</a>
                     </li>
                 </ul>
             </li>
@@ -91,8 +91,7 @@
                                 <h3 class="p-md-2 mb-4"><b>Upload Files</b></h3>
                                 <hr>
                                     <form action="/upload" enctype="multipart/form-data" method="POST">
-
-                                        <input type="file" name="media" required/> <br>
+                                        <input type="file" name="media" required multiple/><br>
                                         <hr>
                                         <input type="submit" value="Upload">
                                     </form>

@@ -5,12 +5,13 @@ var showcase = require('./DataAccess/showcase');
 var mediaResource = require('./DataAccess/resource');
 
 var fileUpload = require('./services/file_upload');
+var fileBrowser = require('./services/file_browser');
 
 //var User = require('./services/user.js');
 //var Media = require('./services/media.js');
 
 exports.return_entry = function(req, res) {
-    if (req.session.userId) {
+    if (req.session.userInfo) {
         res.redirect('/dashboard');
     } else {
         res.redirect('/index');
@@ -22,7 +23,11 @@ exports.return_homepage = function(req, res) {
 }
 
 exports.return_signin = function(req, res) {
-    res.sendFile(path.join(__dirname, '/views/login.html'));
+    if (req.session.userInfo) {
+        res.redirect('/dashboard');
+    } else {
+        res.sendFile(path.join(__dirname, '/views/login.html'));
+    }
 }
 
 exports.user_login = function(req, res) {
@@ -30,7 +35,7 @@ exports.user_login = function(req, res) {
 }
 
 exports.user_logoff = function(req, res) {
-    req.session.userId = null;
+    req.session.userInfo = null;
     res.redirect('/index');
 }
 
@@ -50,24 +55,32 @@ exports.forgot_password = function(req, res) {
     userManagement.forgotPassword(req, res);
 }
 
-exports.verification_email_sent = function(req, res) {
-    res.sendFile(path.join(__dirname, '/views/verificationsent.html'));
-}
-
 exports.reset_email_sent = function(req, res) {
     res.sendFile(path.join(__dirname, '/views/passwordchangesent.html'));
 }
 
-exports.verify_user_email = function(req,res) {
-    userManagement.verifyEmail(req, res);
+exports.return_reset_password = function(req, res) {
+    res.sendFile(path.join(__dirname, '/views/passwordresetform.html'));
 }
 
-exports.verify_email_response = function(req,res) {
+exports.reset_password = function(req, res) {
+    userManagement.resetPassword(req, res);
+}
+
+exports.verification_email_sent = function(req, res) {
+    res.sendFile(path.join(__dirname, '/views/verificationsent.html'));
+}
+
+exports.verify_email = function(req,res) {
     userManagement.verifyEmailResponse(req,res);
 }
 
 exports.return_dashboard = function(req, res) {
-    res.render('dashboard', { userInfo: req.session.userInfo});
+    if (req.session.userInfo) {
+        res.render('dashboard', req.session);
+    } else {
+        res.redirect('/signin');
+    }
 }
 
 exports.return_profile = function(req, res) {
@@ -79,34 +92,64 @@ exports.return_my_profile = function(req, res) {
 }
 
 exports.return_settings = function (req, res) {
-    res.render('settings', { userInfo: req.session.userInfo });
+    if (req.session.userInfo) {
+        res.render('settings', req.session);
+    } else {
+        res.redirect('/signin');
+    }
 }
 
 exports.change_reg_detail = function(req, res) {
     userManagement.changeRegularDetails(req, res);
 }
 
+exports.change_profile_pic = function(req, res) {
+    fileUpload.uploadProfileImg(req, res, function(err) {
+        if (err) {
+            res.status(404).send(err);
+        } else {
+            userManagement.changeAvatar(req, res);
+        }
+    });
+}
+
 exports.change_sens_detail = function(req, res) {
     userManagement.changeSensitiveDetails(req, res);
 }
 
+exports.return_resource_upload = function(req, res) {
+    if (req.session.userInfo) {
+        res.render('upload-file', req.session);
+    } else {
+        res.redirect('/signin');
+    }
+}
+
 exports.create_resource = function(req, res) {
-    //mediaResource.newMedia(req, res);
     fileUpload.upload(req, res, function(err) {
         if (err) {
-            res.status(404).send('File uploading failed!');
+            res.status(404).send(err);
         } else {
-            res.status(200).send('File uploaded successfully');
+            //mediaResource.newMedia(req, res);
+            res.redirect('/media');
         }
     });
 }
 
 exports.return_resource = function(req, res) {
-    res.status(200).send('Resource requested');
+    if (req.session.userInfo) {
+        res.render('showcaselocal', req.session);
+    } else {
+        res.redirect('/signin');
+    }
 }
 
-exports.create_showcase = function(req, res) {
-    res.sendFile(path.join(__dirname, '/views/upload-file.html'));
+exports.resource_handler = function(req, res) {
+    fileBrowser.fileInterface(req, res);
+}
+
+exports.retrive_resource = function(req, res) {
+    fileBrowser.retriveFile(req, res);
 }
 
 exports.create_showcase = function(req, res) {
@@ -119,10 +162,6 @@ exports.update_showcase = function(req, res) {
 
 exports.return_showcase_data = function(req, res) {
     showcase.getShowcaseData(req, res);
-}
-
-exports.return_showcase_page = function(req, res){
-    res.render('upload-file', { userInfo: req.session.userInfo });
 }
 
 exports.return_contact = function(req, res) {
