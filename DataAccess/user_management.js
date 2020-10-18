@@ -29,7 +29,13 @@ exports.login = async function(req, res) {
                             showEmail: results[0].displayEmail,
                             showPhone: results[0].showPhoneNumber,
                             showMobile: results[0].showMobileNumber,
-                            showAddress: results[0].showAddress
+                            showAddress: results[0].showAddress,
+                            websiteLink: results[0].websiteLink,
+                            facebookLink: results[0].facebookLink,
+                            linkedinLink: results[0].linkedinLink,
+                            twitterLink: results[0].twitterLink,
+                            instagramLink: results[0].instagramLink,
+                            githubLink: results[0].githubLink
                         };
 
                         conn.release();
@@ -365,6 +371,43 @@ exports.changePrivacySettings = async function(req,res){
     });
 }
 
+exports.changeSocialMediaLinks = async function(req, res){
+    const userID = req.session.userInfo.userId;
+
+    const websiteLink = req.body.website;
+    const facebookLink = req.body.facebook;
+    const linkedinLink = req.body.linkedin;
+    const twitterLink = req.body.twitter;
+    const instagramLink = req.body.instagram;
+    const githubLink = req.body.github;
+
+    db.getConnection(function(err, conn){
+        var sql = "UPDATE User SET " +
+                "websiteLink = '"+websiteLink+"', " +
+                "facebookLink = '"+facebookLink+"', " +
+                "linkedinLink = '"+linkedinLink+"', " +
+                "twitterLink = '"+twitterLink+"', " +
+                "instagramLink = '"+instagramLink+"', " +
+                "githubLink = '"+githubLink+"' " +
+                "WHERE idUser = '"+userID+"'";
+
+        conn.query(sql, function (err, results){
+            if (err) throw err;
+
+            req.session.userInfo.websiteLink = websiteLink;
+            req.session.userInfo.facebookLink = facebookLink;
+            req.session.userInfo.linkedinLink = linkedinLink;
+            req.session.userInfo.twitterLink = twitterLink;
+            req.session.userInfo.instagramLink = instagramLink;
+            req.session.userInfo.githubLink = githubLink;
+
+            res.redirect('/settings');
+        });
+    });
+
+
+}
+
 exports.changeAvatar = async function(req, res) {
     if (req.session.userInfo) {
         const userID = req.session.userInfo.userId;
@@ -462,7 +505,7 @@ exports.getProfileInformation = async function(req, userID, res){
                 
                 
             }
-            else if(results[0].profilePrivate == 0) //CASE: profile is not private
+            else if(results[0].profilePrivate == "") //CASE: profile is not private
             {
                 var profileInfo = ({
                     firstName: results[0].firstName,
@@ -490,24 +533,24 @@ exports.getProfileInformation = async function(req, userID, res){
                     document5: results[0].document5
                 });
 
-                if(profileInfo.displayEmail == 0) //CASE: Check if a user wants their email publicly visible
+                if(profileInfo.displayEmail == "") //CASE: Check if a user wants their email publicly visible
                 {
                     profileInfo.email = "";
                 }
 
-                if(profileInfo.displayMobileNumber == 0) //CASE check mobile visibility
+                if(profileInfo.displayMobileNumber == "") //CASE check mobile visibility
                 {
-                    profileInfo.mobileNumber = ""
+                    profileInfo.mobileNumber = "";
                 }
 
-                if(profileInfo.displayPhoneNumber == 0) //CASE check phone visibility
+                if(profileInfo.displayPhoneNumber == "") //CASE check phone visibility
                 {
-                    profileInfo.phoneNumber = ""
+                    profileInfo.phoneNumber = "";
                 }
 
-                if(profileInfo.showAddress == 0) //CASE check Address visibility
+                if(profileInfo.showAddress == "") //CASE check Address visibility
                 {
-                    profileInfo.address = ""
+                    profileInfo.address = "";
                 }
 
                 
@@ -521,7 +564,7 @@ exports.getProfileInformation = async function(req, userID, res){
             }
         
 
-                            //Get social media info
+            //Get social media info
                 profileInfo.website = "";
                 profileInfo.websiteLink = "#"
                 profileInfo.github = "";
@@ -536,218 +579,46 @@ exports.getProfileInformation = async function(req, userID, res){
                 profileInfo.linkedinLink = "#";
 
                 //website
-                if(results[0].websiteLink != null)
+                if(results[0].websiteLink != null && results[0].websiteLink != "")
                 {
                     profileInfo.website = profileInfo.firstName + "'s Website";
                     profileInfo.websiteLink = results[0].websiteLink;
                 }
 
                 //github
-                if(results[0].githubLink != null)
+                if(results[0].githubLink != null && results[0].githubLink != "")
                 {
                     profileInfo.github = profileInfo.firstName + "'s GitHub";
                     profileInfo.githubLink = results[0].githubLink;
                 }
 
                 //twitter
-                if(results[0].twitterLink != null)
+                if(results[0].twitterLink != null && results[0].twitterLink != "")
                 {
                     profileInfo.twitter = profileInfo.firstName + "'s Twitter";
                     profileInfo.twitterLink = results[0].twitterLink;
                 }
 
                 //Instagram
-                if(results[0].instagramLink != null)
+                if(results[0].instagramLink != null && results[0].instagramLink != "")
                 {
                     profileInfo.instagram = profileInfo.firstName + "'s Instagram";
                     profileInfo.instagramLink = results[0].instagramLink;
                 }
 
                 //Facebook
-                if(results[0].facebookLink != null)
+                if(results[0].facebookLink != null && results[0].facebookLink != "")
                 {
                     profileInfo.facebook = profileInfo.firstName + "'s Facebook";
                     profileInfo.facebookLink = results[0].facebookLink;
                 }
 
                 //LinkedIn
-                if(results[0].linkedinLink != null)
+                if(results[0].linkedinLink != null && results[0].linkedinLink != "")
                 {
                     profileInfo.linkedin = profileInfo.firstName + "'s LinkedIn";
                     profileInfo.linkedinLink = results[0].linkedinLink;
                 }
-
-
-                                //Get social media info
-                profileInfo.website = "";
-                profileInfo.websiteLink = "#"
-                profileInfo.github = "";
-                profileInfo.githubLink = "#"
-                profileInfo.twitter = "";
-                profileInfo.twitterLink = "#";
-                profileInfo.instagram = "";
-                profileInfo.instagramLink = "#";
-                profileInfo.facebook = "";
-                profileInfo.facebookLink = "#";
-                profileInfo.linkedin = "";
-                profileInfo.linkedinLink = "#";
-
-                //website
-                if(results[0].websiteLink != null)
-                {
-                    profileInfo.website = profileInfo.firstName + "'s Website";
-                    profileInfo.websiteLink = results[0].websiteLink;
-                }
-
-                //github
-                if(results[0].githubLink != null)
-                {
-                    profileInfo.github = profileInfo.firstName + "'s GitHub";
-                    profileInfo.githubLink = results[0].githubLink;
-                }
-
-                //twitter
-                if(results[0].twitterLink != null)
-                {
-                    profileInfo.twitter = profileInfo.firstName + "'s Twitter";
-                    profileInfo.twitterLink = results[0].twitterLink;
-                }
-
-                //Instagram
-                if(results[0].instagramLink != null)
-                {
-                    profileInfo.instagram = profileInfo.firstName + "'s Instagram";
-                    profileInfo.instagramLink = results[0].instagramLink;
-                }
-
-                //Facebook
-                if(results[0].facebookLink != null)
-                {
-                    profileInfo.facebook = profileInfo.firstName + "'s Facebook";
-                    profileInfo.facebookLink = results[0].facebookLink;
-                }
-
-                //LinkedIn
-                if(results[0].linkedinLink != null)
-                {
-                    profileInfo.linkedin = profileInfo.firstName + "'s LinkedIn";
-                    profileInfo.linkedinLink = results[0].linkedinLink;
-                }
-
-                //Get social media info
-                profileInfo.website = "";
-                profileInfo.websiteLink = "#"
-                profileInfo.github = "";
-                profileInfo.githubLink = "#"
-                profileInfo.twitter = "";
-                profileInfo.twitterLink = "#";
-                profileInfo.instagram = "";
-                profileInfo.instagramLink = "#";
-                profileInfo.facebook = "";
-                profileInfo.facebookLink = "#";
-                profileInfo.linkedin = "";
-                profileInfo.linkedinLink = "#";
-
-                //website
-                if(results[0].websiteLink != null)
-                {
-                    profileInfo.website = profileInfo.firstName + "'s Website";
-                    profileInfo.websiteLink = results[0].websiteLink;
-                }
-
-                //github
-                if(results[0].githubLink != null)
-                {
-                    profileInfo.github = profileInfo.firstName + "'s GitHub";
-                    profileInfo.githubLink = results[0].githubLink;
-                }
-
-                //twitter
-                if(results[0].twitterLink != null)
-                {
-                    profileInfo.twitter = profileInfo.firstName + "'s Twitter";
-                    profileInfo.twitterLink = results[0].twitterLink;
-                }
-
-                //Instagram
-                if(results[0].instagramLink != null)
-                {
-                    profileInfo.instagram = profileInfo.firstName + "'s Instagram";
-                    profileInfo.instagramLink = results[0].instagramLink;
-                }
-
-                //Facebook
-                if(results[0].facebookLink != null)
-                {
-                    profileInfo.facebook = profileInfo.firstName + "'s Facebook";
-                    profileInfo.facebookLink = results[0].facebookLink;
-                }
-
-                //LinkedIn
-                if(results[0].linkedinLink != null)
-                {
-                    profileInfo.linkedin = profileInfo.firstName + "'s LinkedIn";
-                    profileInfo.linkedinLink = results[0].linkedinLink;
-                }
-
-
-                //Get social media info
-                profileInfo.website = "";
-                profileInfo.websiteLink = "#"
-                profileInfo.github = "";
-                profileInfo.githubLink = "#"
-                profileInfo.twitter = "";
-                profileInfo.twitterLink = "#";
-                profileInfo.instagram = "";
-                profileInfo.instagramLink = "#";
-                profileInfo.facebook = "";
-                profileInfo.facebookLink = "#";
-                profileInfo.linkedin = "";
-                profileInfo.linkedinLink = "#";
-                
-                //website
-                if(results[0].websiteLink != null)
-                {
-                    profileInfo.website = profileInfo.firstName + "'s Website";
-                    profileInfo.websiteLink = results[0].websiteLink;
-                }
-                
-                //github
-                if(results[0].githubLink != null)
-                {
-                    profileInfo.github = profileInfo.firstName + "'s GitHub";
-                    profileInfo.githubLink = results[0].githubLink;
-                }
-                
-                //twitter
-                if(results[0].twitterLink != null)
-                {
-                    profileInfo.twitter = profileInfo.firstName + "'s Twitter";
-                    profileInfo.twitterLink = results[0].twitterLink;
-                }
-                
-                //Instagram
-                if(results[0].instagramLink != null)
-                {
-                    profileInfo.instagram = profileInfo.firstName + "'s Instagram";
-                    profileInfo.instagramLink = results[0].instagramLink;
-                }
-                
-                //Facebook
-                if(results[0].facebookLink != null)
-                {
-                    profileInfo.facebook = profileInfo.firstName + "'s Facebook";
-                    profileInfo.facebookLink = results[0].facebookLink;
-                }
-                
-                //LinkedIn
-                if(results[0].linkedinLink != null)
-                {
-                    profileInfo.linkedin = profileInfo.firstName + "'s LinkedIn";
-                    profileInfo.linkedinLink = results[0].linkedinLink;
-                }
-
-
 
                 res.render('portfolio', { userInfo: profileInfo});
                 return;

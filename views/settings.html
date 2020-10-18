@@ -177,25 +177,25 @@
                                 <div class="col-sm-8">
                                 <br>
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="showPortfolio">
-                                    <label class="form-check-label" for="showPortfolio">Personal Portfolio</label>
+                                    <input type="checkbox" class="form-check-input" id="showPortfolio" name = "showPortfolio" <%=userInfo.privatePortfolio%>>
+                                    <label class="form-check-label" for="showPortfolio">Make Portfolio Private</label>
                                 </div>
                                 <br>
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="showEmail">
-                                    <label class="form-check-label" for="showEmail">Email</label>
+                                    <input type="checkbox" class="form-check-input" id="showEmail" name = "showEmail" <%=userInfo.showEmail%>>
+                                    <label class="form-check-label" for="showEmail">Make email public</label>
                                 </div>
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="showLandline">
-                                    <label class="form-check-label" for="showLandline">Landline</label>
+                                    <input type="checkbox" class="form-check-input" id="showLandline" name = "showPhone" <%=userInfo.showPhone%>>
+                                    <label class="form-check-label" for="showLandline">Make phone public</label>
                                 </div>
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="showMobile">
-                                    <label class="form-check-label" for="showMobile">Mobile</label>
+                                    <input type="checkbox" class="form-check-input" id="showMobile" name ="showMobile" <%=userInfo.showMobile%>>
+                                    <label class="form-check-label" for="showMobile">Make mobile public</label>
                                 </div>
                                 <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="showAddress">
-                                    <label class="form-check-label" for="showAddress">Address</label>
+                                    <input type="checkbox" class="form-check-input" id="showAddress" name="showAddress" <%=userInfo.showAddress%>>
+                                    <label class="form-check-label" for="showAddress">Make address public</label>
                                 </div>
                                 <hr>
                                 <input type="submit" value="Update">
@@ -210,27 +210,27 @@
                                 <br>
                                 <div class="form-group">
                                     <label for="facebook"> Facebook</label><br>
-                                    <input id="facebook" type="text" name="facebook" placeholder="Facebook Account"><br>
+                                    <input id="facebook" type="text" name="facebook" placeholder="Facebook Account" value=<%=userInfo.facebookLink%>><br>
                                 </div>
                                 <div class="form-group">
                                     <label for="instagram"> Instagram</label><br>
-                                    <input id="instagram" type="text" name="instagram" placeholder="Instagram Account"><br>
+                                    <input id="instagram" type="text" name="instagram" placeholder="Instagram Account" value=<%=userInfo.instagramLink%>><br>
                                 </div>
                                 <div class="form-group">
                                     <label for="twitter"> Twitter</label><br>
-                                    <input id="twitter" type="text" name="twitter" placeholder="Twitter Account"><br>
+                                    <input id="twitter" type="text" name="twitter" placeholder="Twitter Account" value=<%=userInfo.twitterLink%>><br>
                                 </div>
                                 <div class="form-group">
                                     <label for="github"> Github</label><br>
-                                    <input id="github" type="text" name="github" placeholder="Github Account"><br>
+                                    <input id="github" type="text" name="github" placeholder="Github Account" value=<%=userInfo.githubLink%>><br>
                                 </div>
                                 <div class="form-group">
                                     <label for="linkedin"> Linkedin</label><br>
-                                    <input id="linkedin" type="text" name="linkedin" placeholder="LinkedIn Account"><br>
+                                    <input id="linkedin" type="text" name="linkedin" placeholder="LinkedIn Account" value=<%=userInfo.linkedinLink%>><br>
                                 </div>
                                 <div class="form-group">
                                     <label for="website"> Personal Website</label><br>
-                                    <input id="website" type="text" name="website" placeholder="Website URL"><br>
+                                    <input id="website" type="text" name="website" placeholder="Website URL" value=<%=userInfo.websiteLink%>><br>
                                 </div>
                                 <hr>
                                 <input type="submit" value="Update">
