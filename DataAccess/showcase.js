@@ -31,6 +31,8 @@ exports.updateShowcase = async function(req, res) {
         const privacyParam = req.body.privacyParam;
         const ownerID = req.body.ownerID;
 
+    
+
         if (ownerID == req.session.userID) //Check that logged in user owns the showcase being modified
         {
             db.getConnection(function(err, conn) {
