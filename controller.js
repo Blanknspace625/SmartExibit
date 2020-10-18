@@ -115,6 +115,10 @@ exports.link_social_media = function(req, res){
     userManagement.changeSocialMediaLinks(req, res);
 }
 
+exports.update_profile = function(req, res){
+    userManagement.updateProfile(req, res);
+}
+
 exports.change_profile_pic = function(req, res) {
     fileUpload.uploadProfileImg(req, res, function(err) {
         if (err) {
