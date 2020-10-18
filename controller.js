@@ -84,11 +84,11 @@ exports.return_dashboard = function(req, res) {
 }
 
 exports.return_profile = function(req, res) {
-    if (req.session.userInfo) {
-        res.render('portfolio', req.session);
-    } else {
-        res.redirect('/signin');
-    }
+    userManagement.getProfileInformation(req, req.query.profileID, res);
+}
+
+exports.return_my_profile = function(req, res) {
+    userManagement.getProfileInformation(req, req.session.userId, res);
 }
 
 exports.return_settings = function (req, res) {
