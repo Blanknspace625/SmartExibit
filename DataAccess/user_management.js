@@ -426,15 +426,21 @@ exports.getProfileInformation = async function(req, userID, res){
                     firstName: results[0].firstName,
                     lastName: results[0].lastName,
                     displayEmail: results[0].displayEmail,
+                    displayMobileNumber: results[0].showMobileNumber,
+                    displayPhoneNumber: results[0].showPhoneNumber,
+                    displayAddress: results[0].showAddress,
                     socialAccounts: results[0].socialAccounts,
                     profileImg: results[0].profileImg,
                     extLink: results[0].extLink,
-                    mobileNumber: results[0].mobileNumber,
-                    phoneNumber: results[0].phoneNumber,
                     aboutMe: results[0].aboutMe,
                     workExperience: results[0].workExperience,
                     education: results[0].education,
+                    
+                    email: results[0].email,
+                    mobileNumber: results[0].mobileNumber,
+                    phoneNumber: results[0].phoneNumber,
                     address: results[0].address,
+
                     document1: results[0].document1,
                     document2: results[0].document2,
                     document3: results[0].document3,
@@ -442,17 +448,55 @@ exports.getProfileInformation = async function(req, userID, res){
                     document5: results[0].document5
                 });
 
-                if(profileInfo.displayEmail != 0) //CASE: Check if a user wants their email publicly visible
-                {
-                    profileInfo.email = results[0].email;
-                }
-                else
+                if(profileInfo.displayEmail == 0) //CASE: Check if a user wants their email publicly visible
                 {
                     profileInfo.email = "";
                 }
-                
-                res.render('portfolio', { userInfo: profileInfo});
-                return;
+
+                if(profileInfo.displayMobileNumber == 0) //CASE check mobile visibility
+                {
+                    profileInfo.mobileNumber = ""
+                }
+
+                if(profileInfo.displayPhoneNumber == 0) //CASE check phone visibility
+                {
+                    profileInfo.phoneNumber = ""
+                }
+
+                if(profileInfo.showAddress == 0) //CASE check Address visibility
+                {
+                    profileInfo.address = ""
+                }
+
+                //Handle Social Media links
+                db.getConnection(function(err, conn) {
+                    conn.query("SELECT * FROM SocialMedia WHERE idUser = ?", [userID], async function (err, results) {
+                        if (err) throw err;
+
+                        profileInfo.website = "";
+                        profileInfo.websiteLink = ""
+                        profileInfo.github = "";
+                        profileInfo.twitter = "";
+                        profileInfo.instagram = "";
+                        profileInfo.facebook = "";
+                        profileInfo.linkedin = "";
+
+                        var i;
+                        for(i = 0; i < results.length; i++)
+                        {
+                            if(results[0].socialMediaType == "Website")
+                            {
+                                profileInfo.websiteLink = results[0].socialMediaLink;
+                                profileInfo.website = "test"
+                            }
+                        }
+
+
+
+                        res.render('portfolio', { userInfo: profileInfo});
+                        return;
+                    })
+                });
             }
             else //CASE: profile is private
             {
@@ -462,7 +506,7 @@ exports.getProfileInformation = async function(req, userID, res){
             }
         }
 
-        res.redirect(404, '/');
+        //res.redirect(404, '/');
         //res.status(404).send('Profile not found');
 
         });
