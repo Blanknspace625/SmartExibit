@@ -166,7 +166,12 @@ figure {
 
 img {
   vertical-align: middle;
-  border-style: none; }
+  border-style: none; 
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+}
 
 svg {
   overflow: hidden;
@@ -8200,11 +8205,13 @@ h1, h2, h3, h4, h5,
   #sidebar h1 {
     margin-bottom: 0px;
     font-weight: 700;
-    font-size: 20px; }
+    font-size: 20px; 
+    text-align: center;}
     #sidebar h1 .logo {
       color: #fff;
       display: block;
-      padding: 8px 30px;
+      padding: 8px 20px;
+      text-align: center;
       /*background: #363c3d;*/ }
   #sidebar ul.components {
     padding: 0; }

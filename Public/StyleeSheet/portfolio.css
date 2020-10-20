@@ -1,4 +1,10 @@
- 
+h3{
+    font-family: Segoe UI;
+    font-size: 16px;
+    position: center;
+    color: rgb(68, 68, 68);
+}
+
 h6 {
     font-family: Sitka Heading;
     top: 20px;
@@ -52,7 +58,14 @@ p.ex1 {
     transition: 0.4s;
     padding: 14px 40px;
 }
-  
+
+img{
+    width: 175px;
+    height: 175px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
 .se-sb{
     color:#B8D8D8;
 }
