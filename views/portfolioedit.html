@@ -24,17 +24,13 @@
   <!-- Font Awesome JS -->
   <script src="https://kit.fontawesome.com/e564623181.js" crossorigin="anonymous"></script>
 
-  <script src="/Public/Scripts/profiledisplay.js"></script>
-
-  <script src="Public/Scripts/modal.js"></script>
-
-  <title><%=userInfo.firstName %> <%=userInfo.lastName%> - SmartExhibit</title>
+  <title>My Profile - SmartExhibit</title>
 </head>
 <body>
     <div id = "page-container">
         <div id="content-wrap">
           <nav class="navbar navbar-expand-lg navbar-light se-db">
-            <a class="navbar-brand ml-sm-1" href="/" id="Smart_Exhibit"><i class="fas fa-user-graduate"></i>       Smart Exhibit</a>
+            <a class="navbar-brand ml-sm-1" href="/index" id="Smart_Exhibit"><i class="fas fa-user-graduate"></i>       Smart Exhibit</a>
             <button class="navbar-toggler ml-sm-1" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -69,55 +65,10 @@
                               <img src="<%=userInfo.profileImg%>"/>
                             </div>
                             <div class="mt-3">
-                              <h4><%=userInfo.firstName %> <%=userInfo.lastName%></h4>
-                              <p class="text-secondary mb-1">Occupation</p>
-                              <p class="text-muted font-size-sm"><i class="fas fa-map-marker-alt"></i>   Parkville VIC 3010, Australia</p>
-                              <!-- Button trigger modal -->
-                              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
-                                Message
-                              </button>
-
-                              <!-- Modal -->
-                              <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="exampleModalLongTitle">Message <%=userInfo.firstName %> <%=userInfo.lastName%></h5>
-                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                      </button>
-                                    </div>
-                                    <div class="modal-body">
-                                      <div class="md-form mb-5">
-                                        <i class="fas fa-user prefix grey-text"></i>
-                                        <label for="recipantname">Your name</label>
-                                        <input type="text" id="recipantname" class="form-control validate">
-                                      </div>
-
-                                      <div class="md-form mb-4">
-                                        <i class="fas fa-envelope prefix grey-text"></i>
-                                        <label for="recipantemail">Your email</label>
-                                        <input type="email" id="recipantemail" class="form-control validate">
-                                      </div>
-                                      <div class="form-group">
-                                        <i class="fas fa-comment-alt"></i>
-                                        <label for="message-text" class="col-form-label">Message</label>
-                                        <textarea class="form-control" id="message-text"></textarea>
-                                      </div>
-                                      </form>
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                      <button type="button" class="btn btn-primary">send message</button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-
+                              <h4><%=userInfo.firstName%> <%=userInfo.lastName%></h4>
                               <p class="text-secondary mb-1"><%=userInfo.occupation%></p>
                               <p class="text-muted font-size-sm"><i class="fas fa-map-marker-alt"></i>   <%=userInfo.address%></p>
                               <button class="btn btn-outline-dark se-or">Message</button>
-
                             </div>
                           </div>
                         </div>
@@ -151,23 +102,23 @@
                           </li>
                         </ul>
                       </div>
-                      <div class="card mt-3 showcases">
+                      <div class="card mt-3">
                         <div class="card h-100">
                           <div class="card-body">
-                            <h6 class="d-flex align-items-center mb-3">Showcase Documents</h6>
+                            <h6 class="d-flex align-items-center mb-3">Showcase Documents <div style="padding-left: 43%"><h3><i class="fas fa-edit"></i></h3></div></h6>
                             <hr>
-                            <h5 id="showcase1"><i class="fas fa-folder"></i>          <a class="document-item" id="showcase1Content" href="#">Document1</h5><br></a>
-                            <h5 id="showcase2"><i class="fas fa-folder"></i>          <a class="document-item" id="showcase2Content" href="#">Document2</h5><br></a>
-                            <h5 id="showcase3"><i class="fas fa-folder"></i>          <a class="document-item" id="showcase3Content" href="#">Document3</h5><br></a>
-                            <h5 id="showcase4"><i class="fas fa-folder"></i>          <a class="document-item" id="showcase4Content" href="#">Document4</h5><br></a>
-                            <h5 id="showcase5"><i class="fas fa-folder"></i>          <a class="document-item" id="showcase5Content" href="#">Document5</h5></a>
+                            <h5><i class="fas fa-folder"></i>          <a class="document-item" href="#">Document1</h5><br></a>
+                            <h5><i class="fas fa-folder"></i>          <a class="document-item" href="#">Document2</h5><br></a>
+                            <h5><i class="fas fa-folder"></i>          <a class="document-item" href="#">Document3</h5><br></a>
+                            <h5><i class="fas fa-folder"></i>          <a class="document-item" href="#">Document4</h5><br></a>
+                            <h5><i class="fas fa-folder"></i>          <a class="document-item" href="#">Document5</h5></a>
                           </div>
                         </div>
                     </div>
-                        <div class="card mt-3 userSkills">
+                        <div class="card mt-3">
                             <div class="card h-100">
                               <div class="card-body">
-                                <h6 class="d-flex align-items-center mb-3">Personal Skills</h6>
+                                <h6 class="d-flex align-items-center mb-3">Personal Skills <div style="padding-left: 59%"><h3><i class="fas fa-edit"></i></h3></div></h6>
                                 <hr>
                                 <h5>Web Design</h5>
                                 <div class="progress mb-3" style="height: 5px">
@@ -198,80 +149,80 @@
                       <div class="card mb-3">
                         <div class="card-body">
                           <div class="row">
-                            <div class="col-sm-3">
-                              <h6 class="mb-0">Full Name</h6>
+                            <div class="d-flex col-sm-3">
+                              <h6 class="d-flex mb-0">Name<div style="padding-left:54%"><h3><i class="fas fa-edit"></i></h3></div>
                             </div>
-                            <div class="col-sm-9 text-secondary">
-                              <%=userInfo.firstName %> <%=userInfo.lastName%>
+                            <div class="d-flex col-sm-9">
+                              <%=userInfo.firstName%> <%=userInfo.lastName%>
                             </div>
                           </div>
-                          <hr class="email">
-                          <div class="row email" >
-                            <div class="col-sm-3">
-                              <h6 class="mb-0">Email</h6>
+                          <hr>
+                          <div class="row">
+                            <div class="d-flex col-sm-3">
+                              <h6 class="d-flex mb-0">Email <div style="padding-left:56%"><h3><i class="fas fa-edit"></i></h3></div>
                             </div>
-                            <div class="col-sm-9 text-secondary" id="emailContent">
+                            <div class="d-flex col-sm-9">
                               <%=userInfo.email%>
                             </div>
                           </div>
-                          <hr class="phoneNumber">
-                          <div class="row phoneNumber">
-                            <div class="col-sm-3">
-                              <h6 class="mb-0">Phone</h6>
+                          <hr>
+                          <div class="row">
+                            <div class="d-flex col-sm-3">
+                              <h6 class="d-flex mb-0">Phone <div style="padding-left: 50%"><h3><i class="fas fa-edit"></i></h3></div></h6>
                             </div>
-                            <div class="col-sm-9 text-secondary" id="phoneNumberContent">
+                            <div class="d-flex col-sm-9">
                               <%=userInfo.phoneNumber %>
                             </div>
                           </div>
-                          <hr class="mobileNumber">
-                          <div class="row mobileNumber">
-                            <div class="col-sm-3">
-                              <h6 class="mb-0">Mobile</h6>
+                          <hr>
+                          <div class="row">
+                            <div class="d-flex col-sm-3">
+                              <h6 class="d-flex mb-0">Mobile <div style="padding-left: 41%"><h3><i class="fas fa-edit"></i></h3></div></h6>
                             </div>
-                            <div class="col-sm-9 text-secondary" id="mobileNumberContent">
+                            <div class="d-flex col-sm-9">
                               <%=userInfo.mobileNumber %>
                             </div>
                           </div>
-                          <hr class="address">
-                          <div class="row address">
-                            <div class="col-sm-3">
-                              <h6 class="mb-0" >Address</h6>
+                          <hr>
+                          <div class="row">
+                            <div class="d-flex col-sm-3">
+                              <h6 class="d-flex mb-0">Address <div style="padding-left: 27%"><h3><i class="fas fa-edit"></i></h3></div></h6></h6>
                             </div>
-                            <div class="col-sm-9 text-secondary" id="addressContent">
+                            <div class="d-flex col-sm-9">
                               <%=userInfo.address %>
                             </div>
                           </div>
                         </div>
                       </div>
                       <!-- About Me Card -->
-                      <div class="card mb-3" id="aboutMe">
+                      <div class="card mb-3">
                         <div class="card-body">
-                            <div class="row" >
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">About Me</h6>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                  <h6 class="d-flex mb-0">About Me <div style="padding-left: 85%"><h3><i class="fas fa-edit"></i></h3></div></h6>
                                 </div>
                               </div>
                               <hr>
-                              <div class="text-secondary" id="aboutMeContent">
-                                <%=userInfo.aboutMe%>
+                              <div class="text-secondary">
+                                <%=userInfo.aboutMe %>
                               </div>
                             </div>
                         </div>
-                        <div class="card mb-3" id="workExperience">
+                        <div class="card mb-3">
                             <div class="card-body">
-                                <h6 class="mb-0">Work Experience</h6>
+                                <h6 class="d-flex mb-0">Work Experience <div style="padding-left: 76.5%"><h3><i class="fas fa-edit"></i></h3></div></h6>
                               <hr>
-                              <div class="text-secondary" id="workExperienceContent">
+                              <div class="text-secondary">
                                 <%=userInfo.workExperience%>
                               </div>
                             </div>
                         </div>
-                        <div class="card mb-3" id="education">
+                        <div class="card mb-3">
                             <div class="card-body">
-                                <h6 class="mb-0">Education</h6>
+                              <h6 class="d-flex mb-0">Education <div style="padding-left: 84%"><h3><i class="fas fa-edit"></i></h3></div></h6>
                               <hr>
-                              <div class="text-secondary" id="educationContent">
-                                <%=userInfo.education %>
+                              <div class="text-secondary">
+                                <%=userInfo.education%>
                               </div>
                             </div>
                         </div>
@@ -281,21 +232,5 @@
             </div>
         </div>
     </div>
-
-<script>
-  $('#myModal').on('shown.bs.modal', function () {
-    $('#myInput').trigger('focus')
-  })
-
-  $('#exampleModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget) // Button that triggered the modal
-    var recipient = button.data('whatever') // Extract info from data-* attributes
-    // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-    // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-    var modal = $(this)
-    modal.find('.modal-title').text('New message to ' + recipient)
-    modal.find('.modal-body input').val(recipient)
-  })
-</script>
 </body>
 </html>
