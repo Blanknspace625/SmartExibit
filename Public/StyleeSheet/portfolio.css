@@ -148,3 +148,8 @@ body{
 .document-item:hover{
     color: #465052;
 }
+
+#recipantemail,#recipantname{
+    position: relative;
+
+}
