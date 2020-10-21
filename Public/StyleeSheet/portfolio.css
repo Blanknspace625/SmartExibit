@@ -20,7 +20,7 @@ h5 {
 }
 
 p.ex1 {
-    padding-left: 0px;
+    padding-top: 1px;
 }
   
 /* Logo style */
@@ -166,3 +166,5 @@ body{
     position: relative;
 
 }
+
+textarea { height: 100px; }
