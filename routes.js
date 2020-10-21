@@ -92,4 +92,6 @@ module.exports = function(app) {
 
     app.route('/profileedit')
         .post(task.update_profile)
+    app.route('/message')
+        .post(task.message_profile);
 };
