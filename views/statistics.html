@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Statistics</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/Public/StyleeSheet/dashboard.css">
+
+    <!-- Font Awesome JS -->
+    <script src="https://kit.fontawesome.com/e564623181.js" crossorigin="anonymous"></script>
+    <script src="/Public/Scripts/jquery.min.js"></script>
+    <script src="/Public/Scripts/popper.js"></script>
+    <script src="/Public/Scripts/bootstrap.min.js"></script>
+    <script src="/Public/Scripts/main.js"></script>
+
+
+    <!-- Our Custom JS -->
+    <script type="text/javascript" src="path-to-javascript-file.js"></script>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+</head>
+<body>
+<body>
+<div class="wrapper d-flex align-items-stretch">
+    <nav id="sidebar">
+        <div class="custom-menu">
+            <button type="button" id="sidebarCollapse" class="btn btn-primary">
+            </button>
+        </div>
+        <div class="img bg-wrap text-center py-4">
+            <div class="user-logo">
+                <div class="container">
+                    <div class="picture-container">
+                        <div class="picture">
+                            <a href="/profile" class="logo"><div class="mask"><img src="<%=userInfo.profileImg%>"/></div></a>
+                        </div>
+                    </div>
+                </div>
+                <h1><a href="/profile" class="logo"><%=userInfo.firstName%> <%=userInfo.lastName%></a></h1><h3>Occupation</h3>
+            </div>
+        </div>
+        <ul class="list-unstyled components mb-5">
+            <li class="active">
+                <a href="/dashboard"><span class="fa fa-home mr-3"></span> Home</a>
+            </li>
+            <li>
+                <a href="#portfolioSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span class="fas fa-clipboard mr-4"></span>My Portfolio</a>
+                <ul class="collapse list-unstyled" id="portfolioSubmenu">
+                    <li>
+                        <a href="#">Edit Portfolio</a>
+                    </li>
+                    <li>
+                        <a href="#">View Profile Publicly</a>
+                    </li>
+                    <li>
+                        <a href="#">Statistics</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#documentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span class="fas fa-file-image mr-4"></span>Documents</a>
+                <ul class="collapse list-unstyled" id="documentSubmenu">
+                    <li>
+                        <a href="/upload">Upload a New Document</a>
+                    </li>
+                    <li>
+                        <a href="/media">Manage Documents</a>
+                    </li>
+                </ul>
+            </li>
+            <!-- BACKEND SET NUMBER OF NOTIFICATIONS HERE -->
+            <li>
+                <a href="#"><span class="fas fa-comments mr-3 notif"><small class="d-flex align-items-center justify-content-center">5</small></span> Messages</a>
+            </li>
+            <li>
+                <a href="/settings"><span class="fa fa-cog mr-3"></span> Settings</a>
+            </li>
+            <li>
+                <a href="#"><span class="fa fa-support mr-3"></span> Support</a>
+            </li>
+            <li>
+                <a href="/signout"><span class="fa fa-sign-out mr-3"></span> Sign Out</a>
+            </li>
+        </ul>
+    </nav>
+</body>
+</html>
