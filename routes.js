@@ -98,4 +98,7 @@ module.exports = function(app) {
 
     app.route('/getmedia')
         .get(task.retrieve_media);
+
+    app.route('/stats')
+        .get(task.return_stats_page);
 }

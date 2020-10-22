@@ -43,7 +43,7 @@
                             </div>
                         </div>
                     </div>
-                    <h1><a href="/profile" class="logo"><%=userInfo.firstName%> <%=userInfo.lastName%></a></h1><h3>Occupation</h3>
+                    <h1><a href="/profile" class="logo"><%=userInfo.firstName%> <%=userInfo.lastName%></a></h1>
 	  			</div>
 	  		</div>
         <ul class="list-unstyled components mb-5">
@@ -138,11 +138,11 @@
 
             var greet;
 
-            if (hrs> 5 && hrs < 12)
+            if (hrs> 4 && hrs < 12)
                 greet = 'Good Morning';
             else if (hrs >= 12 && hrs <= 17)
                 greet = 'Good Afternoon';
-            else if (hrs >= 17 && hrs <= 5)
+            else if (hrs >= 17 || hrs <= 4)
                 greet = 'Good Evening';
 
             document.getElementById('greetings').innerHTML =

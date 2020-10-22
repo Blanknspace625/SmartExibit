@@ -198,4 +198,16 @@ exports.retrieve_media = function(req, res) {
         console.log(list[i]);
     }
 }
+
+exports.return_stats_page = function(req, res){
+    if(req.session.userInfo)
+    {
+        //TODO render with statistics data
+        res.sendFile(path.join(__dirname, '/views/statistics.html'));
+    }
+    else
+    {
+        res.redirect('/signin');
+    }
+}
  
