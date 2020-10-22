@@ -522,7 +522,6 @@ exports.changeSensitiveDetails = async function(req, res) {
     }
 }
 
-<<<<<<< HEAD
 exports.getProfileInformation = async function(req, userID, res){
     db.getConnection(function(err, conn) {
         conn.query("SELECT * FROM User WHERE idUser = ?", [userID], async function (err, results) {
@@ -683,7 +682,6 @@ exports.getProfileInformation = async function(req, userID, res){
         });
     });
 }
-=======
 exports.messageProfile = async function(req, res) {
 
     const profileID = req.query.id;
@@ -722,4 +720,3 @@ exports.messageProfile = async function(req, res) {
 
     res.status(200).send('Email sent to user');
 }
->>>>>>> BACKEND_US16_MICHAEL

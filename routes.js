@@ -85,13 +85,17 @@ module.exports = function(app) {
         .get(task.return_contact);
 
     app.route('/privacy')
-        .post(task.update_privacy_settings)
+        .post(task.update_privacy_settings);
 
     app.route('/linkaccounts')
-        .post(task.link_social_media)
+        .post(task.link_social_media);
 
     app.route('/profileedit')
-        .post(task.update_profile)
+        .post(task.update_profile);
+
     app.route('/message')
         .post(task.message_profile);
-};
+
+    app.route('/getmedia')
+        .get(task.retrieve_media);
+}
