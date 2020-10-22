@@ -1,26 +1,59 @@
 const { json } = require('body-parser');
 var db = require('./db_interface');
 
-exports.newShowcase = async function(req, res) {
-    if (req.session.userId) {
-        const userID = req.session.userId;
+// Insert new media into showcase
+exports.newMedia = async function(req, res) {
+    if (req.session.userInfo) {
+        const userID = req.session.userInfo.userId;
         const showcaseName = req.body.showcaseName;
         const privacyParam = req.body.privacyParam;
+        const link = "./Resources/" + userID + "/" + req.files.originalname;
 
         db.getConnection(function(err, conn) {
-            var sql = "INSERT INTO Showcase (idUser, showcaseName, dateCreated, privacyParam) VALUES('" + userID + "'," +
-                "'" + showcaseName + "', CURDATE(),'" + privacyParam + "')";
+            var sql = "INSERT INTO Showcase (idUser, showcaseName, dateCreated, privacyParam, link) VALUES('" + userID + "'," +
+                "'" + showcaseName + "', CURDATE(),'" + privacyParam + "', '" + link + "')";
             conn.query(sql, function (err, results) {
                 if (err) throw err;
 
                 conn.release();
-                res.redirect('/dashboard/:' + req.session.userId);
+                res.redirect('/dashboard/:' + req.session.userInfo.userId);
             });
         });
     }
     else {
         res.status(206).send('Not Authorised to create a showcase');
     }
+}
+
+// Recieve all uploaded media for an acount
+exports.retrieveAll = function(req, res) {
+    var links = [];
+
+    if (req.session.userInfo) {
+        const userID = req.session.userInfo.userId;
+        const showcaseName = req.body.showcaseName;
+
+        db.getConnection(function(err, conn) {
+            conn.query("SELECT link FROM  Showcase WHERE idUser = ?", [userID], function (err, results) {
+                if (err) throw err;
+
+                if (results.length > 0) {
+                    var i;
+                    for(i = 0; results[i] != null; i++) {
+                        links[i] = results[i].link;
+                    }
+                } else {
+                    res.status(206).send('No documents found');
+                }
+
+                conn.release();
+            });
+        });
+    }
+    else {
+        res.status(206).send('Not Authorised to create a showcase');
+    }
+    return links;
 }
 
 exports.updateShowcase = async function(req, res) {
@@ -30,8 +63,6 @@ exports.updateShowcase = async function(req, res) {
         const showcaseName = req.body.showcaseName;
         const privacyParam = req.body.privacyParam;
         const ownerID = req.body.ownerID;
-
-    
 
         if (ownerID == req.session.userID) //Check that logged in user owns the showcase being modified
         {

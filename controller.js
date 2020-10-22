@@ -146,8 +146,8 @@ exports.create_resource = function(req, res) {
         if (err) {
             res.status(404).send(err);
         } else {
-            //mediaResource.newMedia(req, res);
-            res.redirect('/media');
+            showcase.newMedia(req,res);
+            //res.redirect('/media');
         }
     });
 }
@@ -183,3 +183,19 @@ exports.return_showcase_data = function(req, res) {
 exports.return_contact = function(req, res) {
     res.sendFile(path.join(__dirname, '/views/contact-us.html'));
 }
+
+exports.message_profile = function(req, res) {
+    // Get message page
+    userManagement.messageProfile(req, res);
+}
+
+exports.retrieve_media = function(req, res) {
+    var list = showcase.retrieveAll(req, res);
+
+    console.log(list);
+    var i;
+    for (i=0; i  < list.length; i++) {
+        console.log(list[i]);
+    }
+}
+ 

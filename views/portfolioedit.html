@@ -150,7 +150,7 @@
                         <div class="card-body">
                           <div class="row">
                             <div class="d-flex col-sm-3">
-                              <h6 class="d-flex mb-0">Name<div style="padding-left:54%"><h3><i class="fas fa-edit"></i></h3></div>
+                              <h6 class="d-flex mb-0">Name</h6>
                             </div>
                             <div class="d-flex col-sm-9">
                               <%=userInfo.firstName%> <%=userInfo.lastName%>
@@ -159,7 +159,7 @@
                           <hr>
                           <div class="row">
                             <div class="d-flex col-sm-3">
-                              <h6 class="d-flex mb-0">Email <div style="padding-left:56%"><h3><i class="fas fa-edit"></i></h3></div>
+                              <h6 class="d-flex mb-0">Email</h6>
                             </div>
                             <div class="d-flex col-sm-9">
                               <%=userInfo.email%>
@@ -168,28 +168,28 @@
                           <hr>
                           <div class="row">
                             <div class="d-flex col-sm-3">
-                              <h6 class="d-flex mb-0">Phone <div style="padding-left: 50%"><h3><i class="fas fa-edit"></i></h3></div></h6>
+                              <h6 class="d-flex mb-0">Phone</h6>
                             </div>
                             <div class="d-flex col-sm-9">
-                              <%=userInfo.phoneNumber %>
+                              <%=userInfo.phoneNumber%>
                             </div>
                           </div>
                           <hr>
                           <div class="row">
                             <div class="d-flex col-sm-3">
-                              <h6 class="d-flex mb-0">Mobile <div style="padding-left: 41%"><h3><i class="fas fa-edit"></i></h3></div></h6>
+                              <h6 class="d-flex mb-0">Mobile </h6>
                             </div>
                             <div class="d-flex col-sm-9">
-                              <%=userInfo.mobileNumber %>
+                              <%=userInfo.mobileNumber%>
                             </div>
                           </div>
                           <hr>
                           <div class="row">
                             <div class="d-flex col-sm-3">
-                              <h6 class="d-flex mb-0">Address <div style="padding-left: 27%"><h3><i class="fas fa-edit"></i></h3></div></h6></h6>
+                              <h6 class="d-flex mb-0">Address </h6>
                             </div>
                             <div class="d-flex col-sm-9">
-                              <%=userInfo.address %>
+                              <%=userInfo.address%>
                             </div>
                           </div>
                         </div>
@@ -204,7 +204,7 @@
                               </div>
                               <hr>
                               <div class="text-secondary">
-                                <%=userInfo.aboutMe %>
+                                <textarea rows="11" class="form-control" id="validationDefault03" placeholder="About Me" value="<%=userInfo.aboutMe%>"></textarea>
                               </div>
                             </div>
                         </div>
@@ -213,7 +213,7 @@
                                 <h6 class="d-flex mb-0">Work Experience <div style="padding-left: 76.5%"><h3><i class="fas fa-edit"></i></h3></div></h6>
                               <hr>
                               <div class="text-secondary">
-                                <%=userInfo.workExperience%>
+                                <textarea rows="11" class="form-control" id="validationDefault03" placeholder="Work Experience" value="<%=userInfo.workExperience%"></textarea>
                               </div>
                             </div>
                         </div>
@@ -222,13 +222,25 @@
                               <h6 class="d-flex mb-0">Education <div style="padding-left: 84%"><h3><i class="fas fa-edit"></i></h3></div></h6>
                               <hr>
                               <div class="text-secondary">
-                                <%=userInfo.education%>
+                                <textarea rows="11" class="form-control" id="validationDefault03" placeholder="Education" value="<%=userInfo.education%>"></textarea>
                               </div>
                             </div>
                         </div>
-                      </div>
+                      </div>        
                   </div>
                 </div>
+            </div>
+            <div class="container my-4">
+              <hr>                            
+                <div class="text-center">
+                  <button class="btn se-or" type="submit">Save Profile</button>
+                </div>
+                <p class="ex1"></p>
+
+                <div class="text-center">
+                  <button class="btn btn-secondary" type="button">Discard Changes</button>
+                </div>
+              </div>
             </div>
         </div>
     </div>

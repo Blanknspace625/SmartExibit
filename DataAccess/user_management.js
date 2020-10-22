@@ -682,3 +682,41 @@ exports.getProfileInformation = async function(req, userID, res){
         });
     });
 }
+exports.messageProfile = async function(req, res) {
+
+    const profileID = req.query.id;
+    const senderEmail = req.body.email;
+    const message = req.body.message;
+
+    db.getConnection(function(err, conn) {
+        conn.query("SELECT * FROM User WHERE idUser = ?", [profileID], async function (err, results) {
+            if (err) throw err;
+
+            const profileEmail = results[0].email;
+            const name = results[0].firstName;
+
+            var transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: 'smartexibit@gmail.com',
+                    pass: 'rXg8d$61n7%z'
+                }
+            });
+
+            var mailOptions = {
+                from: 'smartexibit@gmail.com',
+                to: profileEmail,
+                subject: 'New Message',
+                text: 'Dear ' + name +  ', you have a new message on your SmartExhibit profile.\n\n' +
+                    message + '\n\nIf you wish to respond to this message, please email the messenger at:\n\n'
+                    + senderEmail
+            };
+
+            transporter.sendMail(mailOptions, function(err, info) { if (err) console.log(err); });
+
+            conn.release();
+        });
+    });
+
+    res.status(200).send('Email sent to user');
+}
