@@ -24,10 +24,12 @@
   <!-- Font Awesome JS -->
   <script src="https://kit.fontawesome.com/e564623181.js" crossorigin="anonymous"></script>
 
+
   <title>My Profile - SmartExhibit</title>
 </head>
 <body>
     <div id = "page-container">
+      <form action ="/profileedit" method = "post">
         <div id="content-wrap">
           <nav class="navbar navbar-expand-lg navbar-light se-db">
             <a class="navbar-brand ml-sm-1" href="/index" id="Smart_Exhibit"><i class="fas fa-user-graduate"></i>       Smart Exhibit</a>
@@ -213,7 +215,7 @@
                                 <h6 class="d-flex mb-0">Work Experience <div style="padding-left: 76.5%"><h3><i class="fas fa-edit"></i></h3></div></h6>
                               <hr>
                               <div class="text-secondary">
-                                <textarea rows="11" class="form-control" id="validationDefault03" placeholder="Work Experience" value="<%=userInfo.workExperience%"></textarea>
+                                <textarea rows="11" class="form-control" id="validationDefault03" placeholder="Work Experience" value="<%=userInfo.workExperience%>"></textarea>
                               </div>
                             </div>
                         </div>
@@ -243,6 +245,7 @@
               </div>
             </div>
         </div>
+      </form>
     </div>
 </body>
 </html>

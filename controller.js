@@ -115,6 +115,10 @@ exports.link_social_media = function(req, res){
     userManagement.changeSocialMediaLinks(req, res);
 }
 
+exports.get_profile_edit = function(req, res){
+    userManagement.getProfileEdit(req, res);
+}
+
 exports.update_profile = function(req, res){
     userManagement.updateProfile(req, res);
 }

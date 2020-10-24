@@ -91,6 +91,7 @@ module.exports = function(app) {
         .post(task.link_social_media);
 
     app.route('/profileedit')
+        .get(task.get_profile_edit)
         .post(task.update_profile);
 
     app.route('/message')
