@@ -126,31 +126,39 @@ exports.getShowcaseData = async function(req, res)
     });
 }
 
-exports.getShowcaseStatistics = async function(req)
+exports.getShowcaseStatistics = async function(req, res)
 {
-    var showcaseID = req.showcaseID;
-    
-    conn.query("SELECT " + 
-	                "count(case WHEN timestamp_ >= DATE_SUB(NOW(), INTERVAL 7 DAY) THEN 1 ELSE null end) AS lastWeekViews ," +
-                    "count(*) AS allTimeViews" +
-                "FROM View " + 
-                "WHERE idShowcase = ?",
-                this.showcaseID,
+    //var showcaseID = req.showcaseID;
+    db.getConnection(function(err, conn) {
+        conn.query("SELECT " + 
+	                "count(case WHEN View.timestamp_ >= DATE_SUB(NOW(), INTERVAL 7 DAY) THEN 1 ELSE null end) AS lastWeekViews, " +
+                    "count(*) AS allTimeViews " +
+                "FROM View "+
+                "INNER JOIN Showcase " +
+                "ON View.idShowcase = Showcase.idUpload " +
+                "WHERE Showcase.idUser = ? ",
+                req.session.userInfo.userId,
                 async function(err, results){
 
-        if(err) throw err;
+            if(err) throw err;
 
-        //TODO return Data in correct format
-        if(results.length > 0)
-        {
-            return json({
-                allTimeViews: results[0].allTimeViews,
-                lastWeekViews: results[0].lastWeekViews
-            });
-        }
-        else
-        {
-            return;
-        }
+            //TODO return Data in correct format
+            if(results.length > 0)
+            {
+            
+                res.render('statistics', req.session);
+            
+                /*
+                return json({
+                    allTimeViews: results[0].allTimeViews,
+                    lastWeekViews: results[0].lastWeekViews
+                });
+                */
+            }
+            else
+            {
+                res.redirect('/dashboard');
+            }
+        });
     });
 }

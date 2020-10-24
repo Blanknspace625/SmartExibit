@@ -203,7 +203,9 @@ exports.return_stats_page = function(req, res){
     if(req.session.userInfo)
     {
         //TODO render with statistics data
-        res.sendFile(path.join(__dirname, '/views/statistics.html'));
+        //res.sendFile(path.join(__dirname, '/views/statistics.html'));
+
+        showcase.getShowcaseStatistics(req, res);
     }
     else
     {

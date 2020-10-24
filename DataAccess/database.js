@@ -2,7 +2,7 @@ var mysql = require('mysql');
 var bcrypt = require('bcrypt');
 
 const conn = mysql.createConnection({
-    host: 'epf.johnnybread.com',
+    host: 'src.johnnybread.com',
     user:'js_user',
     password: 'smartexhibit',
     database: 'eportfolio'
