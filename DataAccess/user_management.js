@@ -533,10 +533,11 @@ exports.getProfileInformation = async function(req, userID, res){
 
 
 
-            if(req.session.userInfo.userId == userID) //CASE: all information is avaliable
+            if(req.session.userInfo && req.session.userInfo.userId == userID) //CASE: all information is avaliable
             {
 
                 var profileInfo = ({
+                    userID: userID,
                     firstName: results[0].firstName,
                     lastName: results[0].lastName,
                     email: results[0].email,
@@ -563,6 +564,7 @@ exports.getProfileInformation = async function(req, userID, res){
             else if(results[0].profilePrivate == "") //CASE: profile is not private
             {
                 var profileInfo = ({
+                    userID: userID,
                     firstName: results[0].firstName,
                     lastName: results[0].lastName,
                     displayEmail: results[0].displayEmail,
@@ -690,6 +692,7 @@ exports.getProfileEdit = async function(req, res){
                 if (err) throw err;
     
                 var profileInfo = ({
+                    userID: req.session.userInfo.userId,
                     firstName: results[0].firstName,
                     lastName: results[0].lastName,
                     displayEmail: results[0].displayEmail,
@@ -782,13 +785,19 @@ exports.getProfileEdit = async function(req, res){
 
 exports.messageProfile = async function(req, res) {
 
-    const profileID = req.query.id;
+    const profileID = req.body.id;
     const senderEmail = req.body.email;
     const message = req.body.message;
+    const senderName = req.body.senderName;
 
     db.getConnection(function(err, conn) {
         conn.query("SELECT * FROM User WHERE idUser = ?", [profileID], async function (err, results) {
             if (err) throw err;
+
+            console.log(profileID);
+            console.log(senderEmail);
+            console.log(message);
+            console.log(senderName);
 
             const profileEmail = results[0].email;
             const name = results[0].firstName;
@@ -816,5 +825,5 @@ exports.messageProfile = async function(req, res) {
         });
     });
 
-    res.status(200).send('Email sent to user');
+    res.redirect("/ext-profile/?profileID=" + profileID);
 }
