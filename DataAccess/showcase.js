@@ -3,29 +3,26 @@ var db = require('./db_interface');
 
 // Insert new media into showcase
 exports.newMedia = async function(req, res) {
-    if (req.session.userInfo) {
-        const userID = req.session.userInfo.userId;
-        const showcaseName = req.body.showcaseName;
-        const privacyParam = req.body.privacyParam;
-        const link = "./Resources/" + userID + "/" + req.files.originalname;
+    const userID = req.session.userInfo.userId;
+    const showcaseName = req.body.showcaseName;
+    //const privacyParam = req.body.privacyParam;
+    const privacyParam = 'Public';
+    const link = "./Resources/" + userID + "/" + req.file.originalname;
 
-        db.getConnection(function(err, conn) {
-            var sql = "INSERT INTO Showcase (idUser, showcaseName, dateCreated, privacyParam, link) VALUES('" + userID + "'," +
-                "'" + showcaseName + "', CURDATE(),'" + privacyParam + "', '" + link + "')";
-            conn.query(sql, function (err, results) {
-                if (err) throw err;
+    db.getConnection(function(err, conn) {
+        var sql = "INSERT INTO Showcase (idUser, showcaseName, dateCreated, privacyParam, link) VALUES('" + userID + "'," +
+            "'" + showcaseName + "', CURDATE(),'" + privacyParam + "', '" + link + "')";
+        conn.query(sql, function (err, results) {
+            if (err) throw err;
 
-                conn.release();
-                res.redirect('/dashboard/:' + req.session.userInfo.userId);
-            });
+            conn.release();
+
+            res.redirect('/media');
         });
-    }
-    else {
-        res.status(206).send('Not Authorised to create a showcase');
-    }
+    });
 }
 
-// Recieve all uploaded media for an acount
+// Recieve all uploaded media for an account
 exports.retrieveAll = function(req, res) {
     var links = [];
 

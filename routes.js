@@ -55,13 +55,7 @@ module.exports = function(app) {
 
     app.route('/verifyemail')
         .get(task.verify_email);
-  
-    app.route('/newshowcase')
-        .post(task.create_showcase);
-/*
-    app.route('/showcase/:showcaseid')
-        .get(task.return_showcase_page);
-*/
+
     app.route('/showcasedata')
         .get(task.return_showcase_data);
     

@@ -24,7 +24,7 @@ exports.upload = multer({
             callback(null, true);
         }
     }
-}).array('media');
+}).single('media');
 
 const profileImgStorage = multer.diskStorage({
     destination: function(req, file, callback) {

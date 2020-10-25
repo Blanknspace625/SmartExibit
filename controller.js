@@ -1,8 +1,8 @@
 const path = require('path');
 
 var userManagement = require('./DataAccess/user_management');
+var mailer = require('./DataAccess/mail_provisioning');
 var showcase = require('./DataAccess/showcase');
-var mediaResource = require('./DataAccess/resource');
 
 var fileUpload = require('./services/file_upload');
 var fileBrowser = require('./services/file_browser');
@@ -52,7 +52,7 @@ exports.return_iforgot = function(req, res) {
 }
 
 exports.forgot_password = function(req, res) {
-    userManagement.forgotPassword(req, res);
+    mailer.forgotPassword(req, res);
 }
 
 exports.reset_email_sent = function(req, res) {
@@ -64,7 +64,7 @@ exports.return_reset_password = function(req, res) {
 }
 
 exports.reset_password = function(req, res) {
-    userManagement.resetPassword(req, res);
+    mailer.resetPassword(req, res);
 }
 
 exports.verification_email_sent = function(req, res) {
@@ -72,7 +72,7 @@ exports.verification_email_sent = function(req, res) {
 }
 
 exports.verify_email = function(req,res) {
-    userManagement.verifyEmailResponse(req,res);
+    mailer.verifyEmailResponse(req,res);
 }
 
 exports.return_dashboard = function(req, res) {
@@ -101,6 +101,10 @@ exports.return_settings = function (req, res) {
     } else {
         res.redirect('/signin');
     }
+}
+
+exports.message_profile = function(req, res) {
+    mailer.messageProfile(req, res);
 }
 
 exports.change_reg_detail = function(req, res) {
@@ -150,8 +154,7 @@ exports.create_resource = function(req, res) {
         if (err) {
             res.status(404).send(err);
         } else {
-            showcase.newMedia(req,res);
-            //res.redirect('/media');
+            showcase.newMedia(req, res);
         }
     });
 }
@@ -172,10 +175,6 @@ exports.retrive_resource = function(req, res) {
     fileBrowser.retriveFile(req, res);
 }
 
-exports.create_showcase = function(req, res) {
-    showcase.newShowcase(req, res);
-}
-
 exports.update_showcase = function(req, res) {
     showcase.updateShowcase(req, res);
 }
@@ -186,11 +185,6 @@ exports.return_showcase_data = function(req, res) {
 
 exports.return_contact = function(req, res) {
     res.sendFile(path.join(__dirname, '/views/contact-us.html'));
-}
-
-exports.message_profile = function(req, res) {
-    // Get message page
-    userManagement.messageProfile(req, res);
 }
 
 exports.retrieve_media = function(req, res) {
@@ -204,15 +198,10 @@ exports.retrieve_media = function(req, res) {
 }
 
 exports.return_stats_page = function(req, res){
-    if(req.session.userInfo)
-    {
+    if (req.session.userInfo) {
         //TODO render with statistics data
-        //res.sendFile(path.join(__dirname, '/views/statistics.html'));
-
         showcase.getShowcaseStatistics(req, res);
-    }
-    else
-    {
+    } else {
         res.redirect('/signin');
     }
 }

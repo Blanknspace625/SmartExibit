@@ -24,8 +24,7 @@
   <!-- Font Awesome JS -->
   <script src="https://kit.fontawesome.com/e564623181.js" crossorigin="anonymous"></script>
 
-  <!--<script src="../Public/Scripts/profiledisplay.js"></script>-->
-
+  <script src="../Public/Scripts/profiledisplay.js"></script>
   <script src="../Public/Scripts/modal.js"></script>
 
   <title><%=userInfo.firstName %> <%=userInfo.lastName%> - SmartExhibit</title>
@@ -110,10 +109,10 @@
                                         <label for="validationDefault03">Enter your message:</label>
                                         <textarea rows="8" class="form-control" id="message" name="message" placeholder="Message" required></textarea>
                                       </div>
-                                      
+
                                       <input type="hidden" name="id" value=<%= userInfo.userID%> />
 
-                                      
+
                                     </div>
                                     <div class="modal-footer">
                                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -123,8 +122,6 @@
                                   </div>
                                 </div>
                               </div>
-
-
                             </div>
                           </div>
                         </div>
@@ -228,15 +225,6 @@
                             </div>
                             <div class="col-sm-9 text-secondary" id="phoneNumberContent">
                               <%=userInfo.phoneNumber%>
-                            </div>
-                          </div>
-                          <hr class="mobileNumber">
-                          <div class="row mobileNumber">
-                            <div class="col-sm-3">
-                              <h6 class="mb-0">Mobile</h6>
-                            </div>
-                            <div class="col-sm-9 text-secondary" id="mobileNumberContent">
-                              <%=userInfo.mobileNumber%>
                             </div>
                           </div>
                           <hr class="address">
