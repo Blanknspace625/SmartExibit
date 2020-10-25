@@ -12,7 +12,8 @@ conn.connect(function(err) {
     console.log("Database server connected!");
 }); */
 const pool = mysql.createPool({
-    host: 'src.johnnybread.com',
+    host: 'src.johnnybread.com',// pending removal
+    //host: 'localhost',
     user:'js_user',
     password: 'smartexhibit',
     database: 'eportfolio',

@@ -76,7 +76,7 @@ exports.register = async function(req, res) {
         if (pwd.valueOf() == pwdAgain.valueOf()) {
             const pwd_ = await bcrypt.hash(req.body.password, 8);
 
-            var sql = "INSERT INTO User (firstName, lastName, email, profileImg, pwd, extLink) VALUES " +
+            var sql = "INSERT INTO User (firstName, lastName, email, profileImg, pwd) VALUES " +
                 "('" + firstName + "', '" + lastName + "', '" + email + "', '" + profilePicRef + "', '" + pwd_ + "')";
             conn.query(sql, async function (err, results) {
                 if (err) throw err;
@@ -162,13 +162,17 @@ exports.verifyEmailResponse = async function(req, res)
                         const current = new Date(new Date().toUTCString());
                         const diff = current.getTime() - create.getTime();
 
-                        if(code == dbCode) {
+                        if (code == dbCode) {
                             // Link expires after 10 minutes
-                            if(diff/60000 < 10) {
-                                // Change status to verified
-                                var sql = "UPDATE User SET status = 'verified' WHERE idUser = '" + userID + "'";
+                            if (diff/60000 < 10) {
+                                extLink = "epf.johnnybread.com/ext-profile/?profileID=" + userID;
+
+                                var sql = "UPDATE User SET status = 'verified', extLink = '" + extLink + "' " +
+                                    "WHERE idUser = '" + userID + "'";
                                 conn.query(sql, function (err, results) {
                                     if (err) throw err;
+
+                                    conn.release();
                                 });
 
                                 // Delete code entry from db as no longer needed
@@ -177,26 +181,25 @@ exports.verifyEmailResponse = async function(req, res)
                                     if (err) throw err;
 
                                     conn.release();
+
                                     res.redirect('/signin');
                                 });
-                            }
-                            else {
+                            } else {
                                 // Delete code entry from db as no longer needed
                                 var sql = "DELETE FROM Code WHERE userid = '" + userID + "'";
                                 conn.query(sql, function (err, results) {
                                     if (err) throw err;
 
                                     conn.release();
+
+                                    res.status(206).send('Verification link expired!');
                                 });
-                                res.status(206).send('Verification link expired!');
                             }
-                        }
-                        else {
+                        } else {
                             res.status(206).send('Verification failed!');
                         }
                     });
-                }
-                else {
+                } else {
                     res.status(206).send('User email already verified');
                 }
             } else {

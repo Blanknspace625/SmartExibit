@@ -1,8 +1,6 @@
 const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
-const { Console } = require('console');
-var showcase = require('../DataAccess/showcase');
 
 
 const storage = multer.diskStorage({
@@ -23,7 +21,6 @@ exports.upload = multer({
         if (!file.originalname.match(/\.(pdf|docx|pptx)$/)) {
             callback(new Error('Error: Only PDF, PowerPoint and Word files are allowed!'));
         } else {
-            req.files = file;
             callback(null, true);
         }
     }
