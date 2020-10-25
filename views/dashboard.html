@@ -43,7 +43,7 @@
                             </div>
                         </div>
                     </div>
-                    <h1><a href="/profile" class="logo"><%=userInfo.firstName%> <%=userInfo.lastName%></a></h1><h3>Occupation</h3>
+                    <h1><a href="/profile" class="logo"><%=userInfo.firstName%> <%=userInfo.lastName%></a></h1>
 	  			</div>
 	  		</div>
         <ul class="list-unstyled components mb-5">
@@ -54,13 +54,13 @@
               <a href="#portfolioSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><span class="fas fa-clipboard mr-4"></span>My Portfolio</a>
               <ul class="collapse list-unstyled" id="portfolioSubmenu">
                 <li>
-                    <a href="#">Edit Portfolio</a>
+                    <a href="/profileedit">Edit Portfolio</a>
                 </li>
                 <li>
-                    <a href="#">View Profile Publicly</a>
+                    <a href="/profile">View Profile Publicly</a>
                 </li>
                 <li>
-                    <a href="#">Statistic</a>
+                    <a href="/stats">Statistic</a>
                 </li>
             </ul>
           </li>
@@ -75,10 +75,6 @@
                 </li>
             </ul>
         </li>
-        <!-- BACKEND SET NUMBER OF NOTIFICATIONS HERE -->
-          <li>
-              <a href="#"><span class="fas fa-comments mr-3 notif"><small class="d-flex align-items-center justify-content-center">5</small></span> Messages</a>
-          </li>
           <li>
             <a href="/settings"><span class="fa fa-cog mr-3"></span> Settings</a>
           </li>
@@ -138,11 +134,11 @@
 
             var greet;
 
-            if (hrs> 5 && hrs < 12)
+            if (hrs> 4 && hrs < 12)
                 greet = 'Good Morning';
-            else if (hrs >= 12 && hrs <= 17)
+            else if (hrs >= 12 && hrs < 17)
                 greet = 'Good Afternoon';
-            else if (hrs >= 17 && hrs <= 5)
+            else if (hrs >= 17 || hrs <= 4)
                 greet = 'Good Evening';
 
             document.getElementById('greetings').innerHTML =

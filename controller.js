@@ -115,6 +115,10 @@ exports.link_social_media = function(req, res){
     userManagement.changeSocialMediaLinks(req, res);
 }
 
+exports.get_profile_edit = function(req, res){
+    userManagement.getProfileEdit(req, res);
+}
+
 exports.update_profile = function(req, res){
     userManagement.updateProfile(req, res);
 }
@@ -196,6 +200,20 @@ exports.retrieve_media = function(req, res) {
     var i;
     for (i=0; i  < list.length; i++) {
         console.log(list[i]);
+    }
+}
+
+exports.return_stats_page = function(req, res){
+    if(req.session.userInfo)
+    {
+        //TODO render with statistics data
+        //res.sendFile(path.join(__dirname, '/views/statistics.html'));
+
+        showcase.getShowcaseStatistics(req, res);
+    }
+    else
+    {
+        res.redirect('/signin');
     }
 }
  
