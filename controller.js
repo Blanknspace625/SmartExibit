@@ -199,7 +199,6 @@ exports.retrieve_media = function(req, res) {
 
 exports.return_stats_page = function(req, res){
     if (req.session.userInfo) {
-        //TODO render with statistics data
         showcase.getShowcaseStatistics(req, res);
     } else {
         res.redirect('/signin');
