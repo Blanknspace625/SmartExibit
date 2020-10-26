@@ -117,79 +117,6 @@ exports.changeRegularDetails = async function(req, res) {
     }
 }
 
-exports.changePrivacySettings = async function(req,res){
-    const userID = req.session.userInfo.userId;
-    
-    var privatePortfolio = "";
-
-    var showEmail = "";
-    var showPhone = "";
-    var showAddress = "";
-
-    //Set privacy values
-    if (req.body.privatePortfolio == 'on') { privatePortfolio = "checked"; }
-
-    if (req.body.showEmail == 'on') { showEmail = "checked"; }
-    if (req.body.showPhone =='on') { showPhone = "checked"; }
-    if (req.body.showAddress == 'on') { showAddress = "checked"; }
-
-    //Update database
-    db.getConnection(function(err, conn) {
-        var sql = "UPDATE User SET profilePrivate = '" + privatePortfolio + "', displayEmail = " +
-            "'" + showEmail + "', showPhoneNumber = '"+showPhone+"', " +
-            "showAddress = '"+showAddress+"' WHERE idUser = '" + userID + "'";
-        conn.query(sql, function (err, results) {
-            if (err) throw err;
-
-            req.session.userInfo.privatePortfolio = privatePortfolio;
-            req.session.userInfo.showEmail = showEmail;
-            req.session.userInfo.showPhone = showPhone;
-            req.session.userInfo.showAddress = showAddress;
-
-            res.redirect('/settings');
-
-            conn.release();
-        });
-    });
-}
-
-exports.changeSocialMediaLinks = async function(req, res){
-    const userID = req.session.userInfo.userId;
-
-    const websiteLink = req.body.website;
-    const facebookLink = req.body.facebook;
-    const linkedinLink = req.body.linkedin;
-    const twitterLink = req.body.twitter;
-    const instagramLink = req.body.instagram;
-    const githubLink = req.body.github;
-
-    db.getConnection(function(err, conn){
-        var sql = "UPDATE User SET " +
-                "websiteLink = '"+websiteLink+"', " +
-                "facebookLink = '"+facebookLink+"', " +
-                "linkedinLink = '"+linkedinLink+"', " +
-                "twitterLink = '"+twitterLink+"', " +
-                "instagramLink = '"+instagramLink+"', " +
-                "githubLink = '"+githubLink+"' " +
-                "WHERE idUser = '"+userID+"'";
-
-        conn.query(sql, function (err, results){
-            if (err) throw err;
-
-            req.session.userInfo.websiteLink = websiteLink;
-            req.session.userInfo.facebookLink = facebookLink;
-            req.session.userInfo.linkedinLink = linkedinLink;
-            req.session.userInfo.twitterLink = twitterLink;
-            req.session.userInfo.instagramLink = instagramLink;
-            req.session.userInfo.githubLink = githubLink;
-
-            res.redirect('/settings');
-
-            conn.release();
-        });
-    });
-}
-
 exports.changeAvatar = async function(req, res) {
     if (req.session.userInfo) {
         const userID = req.session.userInfo.userId;
@@ -247,6 +174,79 @@ exports.changeSensitiveDetails = async function(req, res) {
     } else {
         res.status(401).send('Unauthorised');
     }
+}
+
+exports.changePrivacySettings = async function(req,res){
+    const userID = req.session.userInfo.userId;
+
+    var privatePortfolio = "";
+
+    var showEmail = "";
+    var showPhone = "";
+    var showAddress = "";
+
+    //Set privacy values
+    if (req.body.privatePortfolio) { privatePortfolio = "checked"; }
+
+    if (req.body.showEmail) { showEmail = "checked"; }
+    if (req.body.showPhone) { showPhone = "checked"; }
+    if (req.body.showAddress) { showAddress = "checked"; }
+
+    //Update database
+    db.getConnection(function(err, conn) {
+        var sql = "UPDATE User SET profilePrivate = '" + privatePortfolio + "', displayEmail = " +
+            "'" + showEmail + "', showPhoneNumber = '"+showPhone+"', " +
+            "showAddress = '"+showAddress+"' WHERE idUser = '" + userID + "'";
+        conn.query(sql, function (err, results) {
+            if (err) throw err;
+
+            req.session.userInfo.privatePortfolio = privatePortfolio;
+            req.session.userInfo.showEmail = showEmail;
+            req.session.userInfo.showPhone = showPhone;
+            req.session.userInfo.showAddress = showAddress;
+
+            res.redirect('/settings');
+
+            conn.release();
+        });
+    });
+}
+
+exports.changeSocialMediaLinks = async function(req, res){
+    const userID = req.session.userInfo.userId;
+
+    const websiteLink = req.body.website;
+    const facebookLink = req.body.facebook;
+    const linkedinLink = req.body.linkedin;
+    const twitterLink = req.body.twitter;
+    const instagramLink = req.body.instagram;
+    const githubLink = req.body.github;
+
+    db.getConnection(function(err, conn){
+        var sql = "UPDATE User SET " +
+            "websiteLink = '"+websiteLink+"', " +
+            "facebookLink = '"+facebookLink+"', " +
+            "linkedinLink = '"+linkedinLink+"', " +
+            "twitterLink = '"+twitterLink+"', " +
+            "instagramLink = '"+instagramLink+"', " +
+            "githubLink = '"+githubLink+"' " +
+            "WHERE idUser = '"+userID+"'";
+
+        conn.query(sql, function (err, results){
+            if (err) throw err;
+
+            req.session.userInfo.websiteLink = websiteLink;
+            req.session.userInfo.facebookLink = facebookLink;
+            req.session.userInfo.linkedinLink = linkedinLink;
+            req.session.userInfo.twitterLink = twitterLink;
+            req.session.userInfo.instagramLink = instagramLink;
+            req.session.userInfo.githubLink = githubLink;
+
+            res.redirect('/settings');
+
+            conn.release();
+        });
+    });
 }
 
 exports.updateProfile = async function(req, res) {

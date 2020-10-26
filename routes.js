@@ -32,6 +32,12 @@ module.exports = function(app) {
     app.route('/changepassword')
         .post(task.change_sens_detail);
 
+    app.route('/changeprivacy')
+        .post(task.change_profile_privacy);
+
+    app.route('/linkaccounts')
+        .post(task.link_social_media);
+
     app.route('/signin')
         .get(task.return_signin)
         .post(task.user_login);
@@ -77,12 +83,6 @@ module.exports = function(app) {
 
     app.route('/contact')
         .get(task.return_contact);
-
-    app.route('/privacy')
-        .post(task.update_privacy_settings);
-
-    app.route('/linkaccounts')
-        .post(task.link_social_media);
 
     app.route('/profileedit')
         .get(task.get_profile_edit)

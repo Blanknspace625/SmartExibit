@@ -111,7 +111,21 @@ exports.change_reg_detail = function(req, res) {
     userManagement.changeRegularDetails(req, res);
 }
 
-exports.update_privacy_settings = function(req,res){
+exports.change_profile_pic = function(req, res) {
+    fileUpload.uploadProfileImg(req, res, function(err) {
+        if (err) {
+            res.status(404).send(err);
+        } else {
+            userManagement.changeAvatar(req, res);
+        }
+    });
+}
+
+exports.change_sens_detail = function(req, res) {
+    userManagement.changeSensitiveDetails(req, res);
+}
+
+exports.change_profile_privacy = function(req,res){
     userManagement.changePrivacySettings(req,res);
 }
 
@@ -125,20 +139,6 @@ exports.get_profile_edit = function(req, res){
 
 exports.update_profile = function(req, res){
     userManagement.updateProfile(req, res);
-}
-
-exports.change_profile_pic = function(req, res) {
-    fileUpload.uploadProfileImg(req, res, function(err) {
-        if (err) {
-            res.status(404).send(err);
-        } else {
-            userManagement.changeAvatar(req, res);
-        }
-    });
-}
-
-exports.change_sens_detail = function(req, res) {
-    userManagement.changeSensitiveDetails(req, res);
 }
 
 exports.return_resource_upload = function(req, res) {
