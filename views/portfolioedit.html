@@ -155,7 +155,7 @@
                               <h6 class="d-flex mb-0">Name</h6>
                             </div>
                             <div class="d-flex col-sm-9">
-                              <textarea rows="1" class="form-control" id="fullName" placeholder="Full Name" ><%=userInfo.firstName%> <%=userInfo.lastName%></textarea>
+                              <%=userInfo.firstName%> <%=userInfo.lastName%>
                             </div>
                           </div>
                           <hr>
@@ -164,7 +164,7 @@
                               <h6 class="d-flex mb-0">Email</h6>
                             </div>
                             <div class="d-flex col-sm-9">
-                              <textarea rows="1" class="form-control" id="email" placeholder="Email Address" ><%=userInfo.email%></textarea>
+                              <textarea rows="1" class="form-control" name="email" id="email" placeholder="Email Address" ><%=userInfo.email%></textarea>
                             </div>
                           </div>
                           <hr>
@@ -173,7 +173,7 @@
                               <h6 class="d-flex mb-0">Phone</h6>
                             </div>
                             <div class="d-flex col-sm-9">
-                              <textarea rows="1" class="form-control" id="phoneNumber" placeholder="Phone Number" ><%=userInfo.phoneNumber%></textarea>
+                              <input class="form-control" name="phoneNumber" id="phoneNumber" placeholder="Phone Number" type="number" value="<%=userInfo.phoneNumber%>" min="10000000" max="9999999999"></textarea>
                             </div>
                           </div>
                           <hr>
@@ -183,7 +183,7 @@
                             </div>
                             <div class="d-flex col-sm-9">
                               <!--<%=userInfo.address%>-->
-                              <textarea rows="1" class="form-control" id="address" placeholder="Address" ><%=userInfo.address%></textarea>
+                              <textarea rows="1" class="form-control" name="address" id="address" placeholder="Address" ><%=userInfo.address%></textarea>
                             </div>
                           </div>
                         </div>
@@ -198,7 +198,7 @@
                               </div>
                               <hr>
                               <div class="text-secondary">
-                                <textarea rows="11" class="form-control" id="aboutMe" placeholder="About Me" ><%=userInfo.aboutMe%></textarea>
+                                <textarea rows="11" class="form-control" name="aboutMe" id="aboutMe" placeholder="About Me" ><%=userInfo.aboutMe%></textarea>
                               </div>
                             </div>
                         </div>
@@ -207,7 +207,7 @@
                                 <h6 class="d-flex mb-0">Work Experience <div style="padding-left: 76.5%"><h3><i class="fas fa-edit"></i></h3></div></h6>
                               <hr>
                               <div class="text-secondary">
-                                <textarea rows="11" class="form-control" id="workExperience" placeholder="Work Experience" ><%=userInfo.workExperience%></textarea>
+                                <textarea rows="11" class="form-control" name="workExperience" id="workExperience" placeholder="Work Experience" ><%=userInfo.workExperience%></textarea>
                               </div>
                             </div>
                         </div>
@@ -216,7 +216,7 @@
                               <h6 class="d-flex mb-0">Education <div style="padding-left: 84%"><h3><i class="fas fa-edit"></i></h3></div></h6>
                               <hr>
                               <div class="text-secondary">
-                                <textarea rows="11" class="form-control" id="education" placeholder="Education" ><%=userInfo.education%></textarea>
+                                <textarea rows="11" class="form-control" name="education" id="education" placeholder="Education" ><%=userInfo.education%></textarea>
                               </div>
                             </div>
                         </div>

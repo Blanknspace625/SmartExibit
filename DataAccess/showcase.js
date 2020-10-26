@@ -142,15 +142,10 @@ exports.getShowcaseStatistics = async function(req, res)
             //TODO return Data in correct format
             if(results.length > 0)
             {
-            
+                req.session.userInfo.allTimeViews = results[0].allTimeViews;
+                req.session.userInfo.lastWeekViews = results[0].lastWeekViews;
+
                 res.render('statistics', req.session);
-            
-                /*
-                return json({
-                    allTimeViews: results[0].allTimeViews,
-                    lastWeekViews: results[0].lastWeekViews
-                });
-                */
             }
             else
             {
