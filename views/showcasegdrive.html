@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Showcase Documents</title>
+        <title>Documents - SmartExhibit</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
       
       
@@ -28,7 +28,7 @@
     <div id = "page-container">
         <div id="content-wrap">
           <nav class="navbar navbar-expand-lg navbar-light se-db">
-            <a class="navbar-brand ml-sm-1" href="/index" id="Smart_Exhibit"><i class="fas fa-user-graduate"></i>       Smart Exhibit</a>
+            <a class="navbar-brand ml-sm-1" href="/" id="Smart_Exhibit"><i class="fas fa-user-graduate"></i>       Smart Exhibit</a>
             <button class="navbar-toggler ml-sm-1" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -55,11 +55,11 @@
                   <div class="card">
                     <div class="card-body">
                       <div class="d-flex flex-column align-items-center text-center">
-                        <img src="/Public/Images/default_avatar.png" alt="Admin" class="rounded-circle" width="100">
+                          <img src="<%=userInfo.profileImg%>" alt="Admin" class="rounded-circle" width="100">
                         <div class="mt-3">
                           <h4><%=userInfo.firstName%> <%=userInfo.lastName%></h4>
-                          <p class="text-secondary mb-1">Occupation</p>
-                          <p class="text-muted font-size-sm"><i class="fas fa-map-marker-alt"></i>   Parkville VIC 3010, Australia</p>
+                          <p class="text-secondary mb-1"><%=userInfo.occupation%></p>
+                          <p class="text-muted font-size-sm"><i class="fas fa-map-marker-alt"></i> <%=userInfo.address%></p>
                           <button class="btn btn-outline-dark se-or">Message</button>
                         </div>
                       </div>
@@ -71,7 +71,7 @@
                 <div class="card h-100">
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center"></div>
-                            <h4>Documents (if user chose to use google drive) </h4>
+                            <h4>Documents</h4>
                             <hr>
                             <!-- Change ID of folder to the user's shared folder on google drive -->
                             <iframe src="https://drive.google.com/embeddedfolderview?id=1yclBZDVMBWxe395v7_b_V9wvTVZeJltR#list" style="width:100%; height:350px; border:0;"></iframe>

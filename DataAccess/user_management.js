@@ -299,17 +299,21 @@ exports.getProfileInformation = async function(req, res){
                             userID: userID,
                             firstName: results[0].firstName,
                             lastName: results[0].lastName,
-                            email: results[0].email,
-                            displayEmail: results[0].displayEmail,
-                            socialAccounts: results[0].socialAccounts,
                             profileImg: results[0].profileImg,
-                            extLink: results[0].extLink,
+
+                            displayEmail: results[0].displayEmail,
+                            displayPhoneNumber: results[0].showPhoneNumber,
+                            displayAddress: results[0].showAddress,
+
+                            email: results[0].email,
                             phoneNumber: results[0].phoneNumber,
+                            address: results[0].address,
+
                             occupation: results[0].occupation,
                             aboutMe: results[0].aboutMe,
                             workExperience: results[0].workExperience,
                             education: results[0].education,
-                            address: results[0].address,
+
                             document1: results[0].document1,
                             document2: results[0].document2,
                             document3: results[0].document3,
@@ -323,10 +327,8 @@ exports.getProfileInformation = async function(req, res){
                             firstName: results[0].firstName,
                             lastName: results[0].lastName,
                             displayEmail: results[0].displayEmail,
-                            displayMobileNumber: results[0].showMobileNumber,
                             displayPhoneNumber: results[0].showPhoneNumber,
                             displayAddress: results[0].showAddress,
-                            socialAccounts: results[0].socialAccounts,
                             profileImg: results[0].profileImg,
                             extLink: results[0].extLink,
                             occupation: results[0].occupation,
@@ -379,42 +381,42 @@ exports.getProfileInformation = async function(req, res){
                     profileInfo.linkedinLink = "#";
 
                     //website
-                    if (results[0].websiteLink != null && results[0].websiteLink != "") {
+                    if (results[0].websiteLink) {
                         profileInfo.website = profileInfo.firstName + "'s Website";
                         profileInfo.websiteLink = results[0].websiteLink;
                     }
 
                     //github
-                    if (results[0].githubLink != null && results[0].githubLink != "") {
+                    if (results[0].githubLink) {
                         profileInfo.github = profileInfo.firstName + "'s GitHub";
                         profileInfo.githubLink = results[0].githubLink;
                     }
 
                     //twitter
-                    if (results[0].twitterLink != null && results[0].twitterLink != "") {
+                    if (results[0].twitterLink) {
                         profileInfo.twitter = profileInfo.firstName + "'s Twitter";
                         profileInfo.twitterLink = results[0].twitterLink;
                     }
 
                     //Instagram
-                    if (results[0].instagramLink != null && results[0].instagramLink != "") {
+                    if (results[0].instagramLink) {
                         profileInfo.instagram = profileInfo.firstName + "'s Instagram";
                         profileInfo.instagramLink = results[0].instagramLink;
                     }
 
                     //Facebook
-                    if (results[0].facebookLink != null && results[0].facebookLink != "") {
+                    if (results[0].facebookLink) {
                         profileInfo.facebook = profileInfo.firstName + "'s Facebook";
                         profileInfo.facebookLink = results[0].facebookLink;
                     }
 
                     //LinkedIn
-                    if (results[0].linkedinLink != null && results[0].linkedinLink != "") {
+                    if (results[0].linkedinLink) {
                         profileInfo.linkedin = profileInfo.firstName + "'s LinkedIn";
                         profileInfo.linkedinLink = results[0].linkedinLink;
                     }
 
-                    res.render('portfolio', {userInfo: profileInfo});
+                    res.render('portfolio', { userInfo: profileInfo });
                 }
             });
         });
