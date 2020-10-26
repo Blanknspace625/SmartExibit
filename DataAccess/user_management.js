@@ -265,7 +265,7 @@ exports.updateProfile = async function(req, res) {
             "address = '"+address+"', " +
             "aboutMe = '"+aboutMe+"', " +
             "workExperience = '"+workExperience+"', " +
-            "education = '"+education+"' " +
+            "education = '"+education+"', " +
             "occupation = '"+occupation+"' " +
             "WHERE idUser = '"+userID+"'"
         conn.query(sql, function (err, results){
@@ -278,7 +278,7 @@ exports.updateProfile = async function(req, res) {
             req.session.userInfo.workExperience = workExperience;
             req.session.userInfo.education = education;
 
-            res.redirect('/settings');
+            res.redirect('/profileedit');
 
             conn.release();
         });
@@ -295,7 +295,6 @@ exports.getProfileInformation = async function(req, userID, res){
 
                 if(req.session.userInfo && req.session.userInfo.userId == userID) //CASE: all information is avaliable
                 {
-
                     var profileInfo = ({
                         userID: userID,
                         firstName: results[0].firstName,
@@ -317,9 +316,6 @@ exports.getProfileInformation = async function(req, userID, res){
                         document4: results[0].document4,
                         document5: results[0].document5
                     });
-
-
-
                 }
                 else if(results[0].profilePrivate == "") //CASE: profile is not private
                 {
@@ -364,9 +360,6 @@ exports.getProfileInformation = async function(req, userID, res){
                     {
                         profileInfo.address = "";
                     }
-
-
-
                 }
                 else //CASE: profile is private
                 {
@@ -374,7 +367,6 @@ exports.getProfileInformation = async function(req, userID, res){
                     //res.status(401).send('Profile is Private');
                     return;
                 }
-
 
                 //Get social media info
                 profileInfo.website = "";
@@ -433,9 +425,7 @@ exports.getProfileInformation = async function(req, userID, res){
                 }
 
                 res.render('portfolio', { userInfo: profileInfo });
-                return;
             }
-
         });
     });
 }

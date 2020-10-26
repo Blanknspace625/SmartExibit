@@ -78,7 +78,8 @@ exports.verifyEmailResponse = async function(req, res) {
                         if (code == dbCode) {
                             // Link expires after 10 minutes
                             if (diff/60000 < 10) {
-                                extLink = "epf.johnnybread.com/ext-profile/?profileID=" + userID;
+                                // Create public link to profiles
+                                extLink = "epf.johnnybread.com/ext-profile?profileID=" + userID;
 
                                 var sql = "UPDATE User SET status = 'verified', extLink = '" + extLink + "' " +
                                     "WHERE idUser = '" + userID + "'";
