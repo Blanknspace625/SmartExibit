@@ -84,9 +84,9 @@ exports.register = async function(req, res) {
         if (pwd.valueOf() == pwdAgain.valueOf()) {
             const pwd_ = await bcrypt.hash(req.body.password, 8);
 
-            var sql = "INSERT INTO User (firstName, lastName, email, profileImg, pwd, extLink) VALUES " +
+            var sql = "INSERT INTO User (firstName, lastName, email, profileImg, pwd) VALUES " +
                 "('" + firstName + "', '" + lastName + "', '" + email + "', '" + profilePicRef + "', " +
-                "'" + pwd_ + "', 'epf.johnnybread.com')";
+                "'" + pwd_ + "')";
             conn.query(sql, async function (err, results) {
                 if (err) throw err;
 
