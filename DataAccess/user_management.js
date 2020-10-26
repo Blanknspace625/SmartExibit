@@ -254,6 +254,7 @@ exports.updateProfile = async function(req, res) {
 
     const phoneNumber = req.body.phoneNumber;
     const address = req.body.address;
+    const occupation = req.body.occupation;
     const aboutMe = req.body.aboutMe;
     const workExperience = req.body.workExperience;
     const education = req.body.education;
@@ -265,12 +266,14 @@ exports.updateProfile = async function(req, res) {
             "aboutMe = '"+aboutMe+"', " +
             "workExperience = '"+workExperience+"', " +
             "education = '"+education+"' " +
+            "occupation = '"+occupation+"' " +
             "WHERE idUser = '"+userID+"'"
         conn.query(sql, function (err, results){
             if (err) throw err;
 
             req.session.userInfo.phoneNumber = phoneNumber;
             req.session.userInfo.address = address;
+            req.session.userInfo.occupation = occupation;
             req.session.userInfo.aboutMe = aboutMe;
             req.session.userInfo.workExperience = workExperience;
             req.session.userInfo.education = education;
@@ -303,6 +306,7 @@ exports.getProfileInformation = async function(req, userID, res){
                         profileImg: results[0].profileImg,
                         extLink: results[0].extLink,
                         phoneNumber: results[0].phoneNumber,
+                        occupation: results[0].occupation,
                         aboutMe: results[0].aboutMe,
                         workExperience: results[0].workExperience,
                         education: results[0].education,
@@ -330,6 +334,7 @@ exports.getProfileInformation = async function(req, userID, res){
                         socialAccounts: results[0].socialAccounts,
                         profileImg: results[0].profileImg,
                         extLink: results[0].extLink,
+                        occupation: results[0].occupation,
                         aboutMe: results[0].aboutMe,
                         workExperience: results[0].workExperience,
                         education: results[0].education,
@@ -451,6 +456,7 @@ exports.getProfileEdit = async function(req, res){
                     socialAccounts: results[0].socialAccounts,
                     profileImg: results[0].profileImg,
                     extLink: results[0].extLink,
+                    occupation: results[0].occupation,
                     aboutMe: results[0].aboutMe,
                     workExperience: results[0].workExperience,
                     education: results[0].education,

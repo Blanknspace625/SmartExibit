@@ -32,11 +32,11 @@
                 <div class="container">
                     <div class="picture-container">
                         <div class="picture">
-                            <a href="/profile" class="logo"><div class="img" style="background-image: url(<%=userInfo.profileImg%>);"></div></a>
+                            <div class="mask"><img src="<%=userInfo.profileImg%>"/></div>
                         </div>
                     </div>
                 </div>
-                <h1><a href="/profile" class="logo"><%=userInfo.firstName %> <%=userInfo.lastName%></a></h1><h3>Occupation</h3>
+                <h1><a href="/" class="logo"><%=userInfo.firstName%> <%=userInfo.lastName%></a></h1>
             </div>
         </div>
         <ul class="list-unstyled components mb-5">
@@ -51,6 +51,9 @@
                     </li>
                     <li>
                         <a href="/profile">View Profile Publicly</a>
+                    </li>
+                    <li>
+                        <a href="/stats">Statistics</a>
                     </li>
                 </ul>
             </li>
@@ -69,7 +72,7 @@
                 <a href="/settings"><span class="fa fa-cog mr-3"></span> Settings</a>
             </li>
             <li>
-                <a href="#"><span class="fa fa-support mr-3"></span> Support</a>
+                <a href="/contact"><span class="fa fa-support mr-3"></span> Support</a>
             </li>
             <li>
                 <a href="/signout"><span class="fa fa-sign-out mr-3"></span> Sign Out</a>
