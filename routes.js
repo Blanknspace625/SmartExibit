@@ -18,7 +18,8 @@ module.exports = function(app) {
         .get(task.return_profile);
 
     app.route('/profile')
-        .get(task.return_my_profile);
+        .get(task.return_my_profile)
+        .post(task.edit_profile_info);
 
     app.route('/settings')
         .get(task.return_settings)
@@ -84,12 +85,11 @@ module.exports = function(app) {
     app.route('/contact')
         .get(task.return_contact);
 
-    app.route('/profileedit')
-        .get(task.get_profile_edit)
-        .post(task.update_profile);
-
     app.route('/message')
         .post(task.message_profile);
+
+    app.route('/proceed-message')
+        .get(task.message_sent);
 
     app.route('/getmedia')
         .get(task.retrieve_media);

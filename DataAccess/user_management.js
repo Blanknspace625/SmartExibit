@@ -24,23 +24,32 @@ exports.login = async function(req, res) {
                             email: results[0].email,
                             profileImg: results[0].profileImg,
                             extLink: results[0].extLink,
+
+                            occupation: results[0].occupation,
+                            phoneNumber: results[0].phoneNumber,
+                            address: results[0].address,
+
                             privatePortfolio: results[0].profilePrivate,
                             showEmail: results[0].displayEmail,
                             showPhone: results[0].showPhoneNumber,
-                            showMobile: results[0].showMobileNumber,
                             showAddress: results[0].showAddress,
+
                             websiteLink: results[0].websiteLink,
                             facebookLink: results[0].facebookLink,
                             linkedinLink: results[0].linkedinLink,
                             twitterLink: results[0].twitterLink,
                             instagramLink: results[0].instagramLink,
                             githubLink: results[0].githubLink,
-                            phoneNumber: results[0].phoneNumber,
-                            mobileNumber: results[0].mobileNumber,
-                            address: results[0].address,
+
                             aboutMe: results[0].aboutMe,
                             workExperience: results[0].workExperience,
-                            education: results[0].education
+                            education: results[0].education,
+
+                            showcase1: results[0].document1,
+                            showcase2: results[0].document2,
+                            showcase3: results[0].document3,
+                            showcase4: results[0].document4,
+                            showcase5: results[0].document5
                         };
 
                         conn.release();
@@ -91,89 +100,77 @@ exports.register = async function(req, res) {
 }
 
 exports.changeRegularDetails = async function(req, res) {
-    if (req.session.userInfo) {
-        const userID = req.session.userInfo.userId;
-        const email = req.body.email;
-        const firstName = req.body.firstName;
-        const lastName = req.body.lastName;
+    const userID = req.session.userInfo.userId;
+    const email = req.body.email;
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
 
-        db.getConnection(function(err, conn) {
-            var sql = "UPDATE User SET firstName = '" + firstName + "', lastName = '" + lastName + "'," +
-                "email = '" + email + "' WHERE idUser = '" + userID + "'";
-            conn.query(sql, function (err, results) {
-                if (err) throw err;
+    db.getConnection(function(err, conn) {
+        var sql = "UPDATE User SET firstName = '" + firstName + "', lastName = '" + lastName + "'," +
+            "email = '" + email + "' WHERE idUser = '" + userID + "'";
+        conn.query(sql, function (err, results) {
+            if (err) throw err;
 
-                conn.release();
+            conn.release();
 
-                req.session.userInfo.firstName = firstName;
-                req.session.userInfo.lastName = lastName;
-                req.session.userInfo.email = email;
+            req.session.userInfo.firstName = firstName;
+            req.session.userInfo.lastName = lastName;
+            req.session.userInfo.email = email;
 
-                res.redirect('/settings');
-            });
+            res.redirect('/settings');
         });
-    } else {
-        res.status(401).send('Unauthorised');
-    }
+    });
 }
 
 exports.changeAvatar = async function(req, res) {
-    if (req.session.userInfo) {
-        const userID = req.session.userInfo.userId;
-        const ref = req.file.path.replace(/\\/g, "/");
+    const userID = req.session.userInfo.userId;
+    const ref = req.file.path.replace(/\\/g, "/");
 
-        db.getConnection(function(err, conn) {
-            var sql = "UPDATE User SET profileImg = '" + ref + "' WHERE idUser = '" + userID + "'";
-            conn.query(sql, function (err, results) {
-                if (err) throw err;
+    db.getConnection(function(err, conn) {
+        var sql = "UPDATE User SET profileImg = '" + ref + "' WHERE idUser = '" + userID + "'";
+        conn.query(sql, function (err, results) {
+            if (err) throw err;
 
-                conn.release();
+            conn.release();
 
-                req.session.userInfo.profileImg = ref;
+            req.session.userInfo.profileImg = ref;
 
-                res.redirect('/settings');
-            });
+            res.redirect('/settings');
         });
-    } else {
-        res.status(401).send('Unauthorised');
-    }
+    });
 }
 
 exports.changeSensitiveDetails = async function(req, res) {
-    if (req.session.userInfo) {
-        const userID = req.session.userInfo.userId;
-        const oldPwd = req.body.oldPassword;
-        const newPwd = req.body.newPassword;
-        const newPwdAgain = req.body.newPasswordAgain;
+    const userID = req.session.userInfo.userId;
+    const oldPwd = req.body.oldPassword;
+    const newPwd = req.body.newPassword;
+    const newPwdAgain = req.body.newPasswordAgain;
 
-        db.getConnection(function(err, conn) {
-            conn.query("SELECT * FROM User WHERE idUser = ?", [userID], async function (err, results) {
-                if (err) throw err;
+    db.getConnection(function(err, conn) {
+        conn.query("SELECT * FROM User WHERE idUser = ?", [userID], async function (err, results) {
+            if (err) throw err;
 
-                const isVerified = await bcrypt.compare(oldPwd, results[0].pwd);
-                if (isVerified) {
-                    if (newPwd.valueOf() == newPwdAgain.valueOf()) {
-                        const pwd = await bcrypt.hash(req.body.newPassword, 8);
+            const isVerified = await bcrypt.compare(oldPwd, results[0].pwd);
+            if (isVerified) {
+                if (newPwd.valueOf() == newPwdAgain.valueOf()) {
+                    const pwd = await bcrypt.hash(req.body.newPassword, 8);
 
-                        var sql = "UPDATE User SET pwd = '" + pwd + "' WHERE idUser = '" + userID + "'";
-                        conn.query(sql, function (err, results) {
-                            if (err) throw err;
+                    var sql = "UPDATE User SET pwd = '" + pwd + "' WHERE idUser = '" + userID + "'";
+                    conn.query(sql, function (err, results) {
+                        if (err) throw err;
 
-                            conn.release();
+                        conn.release();
 
-                            res.redirect('/settings');
-                        });
-                    } else {
-                        res.status(206).send('New passwords don\'t agree!');
-                    }
+                        res.redirect('/settings');
+                    });
                 } else {
-                    res.status(206).send('Old password is incorrect!');
+                    res.status(206).send('New passwords don\'t agree!');
                 }
-            });
+            } else {
+                res.status(206).send('Old password is incorrect!');
+            }
         });
-    } else {
-        res.status(401).send('Unauthorised');
-    }
+    });
 }
 
 exports.changePrivacySettings = async function(req,res){
@@ -249,7 +246,7 @@ exports.changeSocialMediaLinks = async function(req, res){
     });
 }
 
-exports.updateProfile = async function(req, res) {
+exports.editProfile = async function(req, res) {
     const userID = req.session.userInfo.userId;
 
     const phoneNumber = req.body.phoneNumber;
@@ -278,252 +275,150 @@ exports.updateProfile = async function(req, res) {
             req.session.userInfo.workExperience = workExperience;
             req.session.userInfo.education = education;
 
-            res.redirect('/profileedit');
+            res.redirect('/profile');
 
             conn.release();
         });
     });
 }
 
-exports.getProfileInformation = async function(req, userID, res){
-    db.getConnection(function(err, conn) {
-        conn.query("SELECT * FROM User WHERE idUser = ?", [userID], async function (err, results) {
-            if (err) throw err;
+exports.getProfileInformation = async function(req, res){
+    const userID = req.query.profileID;
 
-            if (results.length > 0) {
-                var profileInfo;
-
-                if(req.session.userInfo && req.session.userInfo.userId == userID) //CASE: all information is avaliable
-                {
-                    var profileInfo = ({
-                        userID: userID,
-                        firstName: results[0].firstName,
-                        lastName: results[0].lastName,
-                        email: results[0].email,
-                        displayEmail: results[0].displayEmail,
-                        socialAccounts: results[0].socialAccounts,
-                        profileImg: results[0].profileImg,
-                        extLink: results[0].extLink,
-                        phoneNumber: results[0].phoneNumber,
-                        occupation: results[0].occupation,
-                        aboutMe: results[0].aboutMe,
-                        workExperience: results[0].workExperience,
-                        education: results[0].education,
-                        address: results[0].address,
-                        document1: results[0].document1,
-                        document2: results[0].document2,
-                        document3: results[0].document3,
-                        document4: results[0].document4,
-                        document5: results[0].document5
-                    });
-                }
-                else if(results[0].profilePrivate == "") //CASE: profile is not private
-                {
-                    var profileInfo = ({
-                        userID: userID,
-                        firstName: results[0].firstName,
-                        lastName: results[0].lastName,
-                        displayEmail: results[0].displayEmail,
-                        displayMobileNumber: results[0].showMobileNumber,
-                        displayPhoneNumber: results[0].showPhoneNumber,
-                        displayAddress: results[0].showAddress,
-                        socialAccounts: results[0].socialAccounts,
-                        profileImg: results[0].profileImg,
-                        extLink: results[0].extLink,
-                        occupation: results[0].occupation,
-                        aboutMe: results[0].aboutMe,
-                        workExperience: results[0].workExperience,
-                        education: results[0].education,
-
-                        email: results[0].email,
-                        phoneNumber: results[0].phoneNumber,
-                        address: results[0].address,
-
-                        document1: results[0].document1,
-                        document2: results[0].document2,
-                        document3: results[0].document3,
-                        document4: results[0].document4,
-                        document5: results[0].document5
-                    });
-
-                    if(profileInfo.displayEmail == "") //CASE: Check if a user wants their email publicly visible
-                    {
-                        profileInfo.email = "";
-                    }
-
-                    if(profileInfo.displayPhoneNumber == "") //CASE check phone visibility
-                    {
-                        profileInfo.phoneNumber = "";
-                    }
-
-                    if(profileInfo.showAddress == "") //CASE check Address visibility
-                    {
-                        profileInfo.address = "";
-                    }
-                }
-                else //CASE: profile is private
-                {
-                    res.redirect(401, '/');
-                    //res.status(401).send('Profile is Private');
-                    return;
-                }
-
-                //Get social media info
-                profileInfo.website = "";
-                profileInfo.websiteLink = "#"
-                profileInfo.github = "";
-                profileInfo.githubLink = "#"
-                profileInfo.twitter = "";
-                profileInfo.twitterLink = "#";
-                profileInfo.instagram = "";
-                profileInfo.instagramLink = "#";
-                profileInfo.facebook = "";
-                profileInfo.facebookLink = "#";
-                profileInfo.linkedin = "";
-                profileInfo.linkedinLink = "#";
-
-                //website
-                if(results[0].websiteLink != null && results[0].websiteLink != "")
-                {
-                    profileInfo.website = profileInfo.firstName + "'s Website";
-                    profileInfo.websiteLink = results[0].websiteLink;
-                }
-
-                //github
-                if(results[0].githubLink != null && results[0].githubLink != "")
-                {
-                    profileInfo.github = profileInfo.firstName + "'s GitHub";
-                    profileInfo.githubLink = results[0].githubLink;
-                }
-
-                //twitter
-                if(results[0].twitterLink != null && results[0].twitterLink != "")
-                {
-                    profileInfo.twitter = profileInfo.firstName + "'s Twitter";
-                    profileInfo.twitterLink = results[0].twitterLink;
-                }
-
-                //Instagram
-                if(results[0].instagramLink != null && results[0].instagramLink != "")
-                {
-                    profileInfo.instagram = profileInfo.firstName + "'s Instagram";
-                    profileInfo.instagramLink = results[0].instagramLink;
-                }
-
-                //Facebook
-                if(results[0].facebookLink != null && results[0].facebookLink != "")
-                {
-                    profileInfo.facebook = profileInfo.firstName + "'s Facebook";
-                    profileInfo.facebookLink = results[0].facebookLink;
-                }
-
-                //LinkedIn
-                if(results[0].linkedinLink != null && results[0].linkedinLink != "")
-                {
-                    profileInfo.linkedin = profileInfo.firstName + "'s LinkedIn";
-                    profileInfo.linkedinLink = results[0].linkedinLink;
-                }
-
-                res.render('portfolio', { userInfo: profileInfo });
-            }
-        });
-    });
-}
-
-exports.getProfileEdit = async function(req, res){
-    if(req.session.userInfo){
-        db.getConnection(function(err, conn) {
-            conn.query("SELECT * FROM User WHERE idUser = ?", [req.session.userInfo.userId], async function (err, results) {
+    if (userID) {
+        db.getConnection(function (err, conn) {
+            conn.query("SELECT * FROM User WHERE idUser = ?", [userID], async function (err, results) {
                 if (err) throw err;
 
-                var profileInfo = ({
-                    userID: req.session.userInfo.userId,
-                    firstName: results[0].firstName,
-                    lastName: results[0].lastName,
-                    displayEmail: results[0].displayEmail,
-                    displayPhoneNumber: results[0].showPhoneNumber,
-                    displayAddress: results[0].showAddress,
-                    socialAccounts: results[0].socialAccounts,
-                    profileImg: results[0].profileImg,
-                    extLink: results[0].extLink,
-                    occupation: results[0].occupation,
-                    aboutMe: results[0].aboutMe,
-                    workExperience: results[0].workExperience,
-                    education: results[0].education,
+                if (results.length > 0) {
+                    var profileInfo;
 
-                    email: results[0].email,
-                    mobileNumber: results[0].mobileNumber,
-                    phoneNumber: results[0].phoneNumber,
-                    address: results[0].address,
+                    if (req.session.userInfo && req.session.userInfo.userId == userID) //CASE: all information is avaliable
+                    {
+                        var profileInfo = ({
+                            userID: userID,
+                            firstName: results[0].firstName,
+                            lastName: results[0].lastName,
+                            email: results[0].email,
+                            displayEmail: results[0].displayEmail,
+                            socialAccounts: results[0].socialAccounts,
+                            profileImg: results[0].profileImg,
+                            extLink: results[0].extLink,
+                            phoneNumber: results[0].phoneNumber,
+                            occupation: results[0].occupation,
+                            aboutMe: results[0].aboutMe,
+                            workExperience: results[0].workExperience,
+                            education: results[0].education,
+                            address: results[0].address,
+                            document1: results[0].document1,
+                            document2: results[0].document2,
+                            document3: results[0].document3,
+                            document4: results[0].document4,
+                            document5: results[0].document5
+                        });
+                    } else if (results[0].profilePrivate == "") //CASE: profile is not private
+                    {
+                        var profileInfo = ({
+                            userID: userID,
+                            firstName: results[0].firstName,
+                            lastName: results[0].lastName,
+                            displayEmail: results[0].displayEmail,
+                            displayMobileNumber: results[0].showMobileNumber,
+                            displayPhoneNumber: results[0].showPhoneNumber,
+                            displayAddress: results[0].showAddress,
+                            socialAccounts: results[0].socialAccounts,
+                            profileImg: results[0].profileImg,
+                            extLink: results[0].extLink,
+                            occupation: results[0].occupation,
+                            aboutMe: results[0].aboutMe,
+                            workExperience: results[0].workExperience,
+                            education: results[0].education,
 
-                    document1: results[0].document1,
-                    document2: results[0].document2,
-                    document3: results[0].document3,
-                    document4: results[0].document4,
-                    document5: results[0].document5
-                });
+                            email: results[0].email,
+                            phoneNumber: results[0].phoneNumber,
+                            address: results[0].address,
 
-                //Get social media info
-                profileInfo.website = "";
-                profileInfo.websiteLink = "#"
-                profileInfo.github = "";
-                profileInfo.githubLink = "#"
-                profileInfo.twitter = "";
-                profileInfo.twitterLink = "#";
-                profileInfo.instagram = "";
-                profileInfo.instagramLink = "#";
-                profileInfo.facebook = "";
-                profileInfo.facebookLink = "#";
-                profileInfo.linkedin = "";
-                profileInfo.linkedinLink = "#";
+                            document1: results[0].document1,
+                            document2: results[0].document2,
+                            document3: results[0].document3,
+                            document4: results[0].document4,
+                            document5: results[0].document5
+                        });
 
-                //website
-                if(results[0].websiteLink != null && results[0].websiteLink != "")
-                {
-                    profileInfo.website = profileInfo.firstName + "'s Website";
-                    profileInfo.websiteLink = results[0].websiteLink;
+                        if (profileInfo.displayEmail == "") //CASE: Check if a user wants their email publicly visible
+                        {
+                            profileInfo.email = "";
+                        }
+
+                        if (profileInfo.displayPhoneNumber == "") //CASE check phone visibility
+                        {
+                            profileInfo.phoneNumber = "";
+                        }
+
+                        if (profileInfo.showAddress == "") //CASE check Address visibility
+                        {
+                            profileInfo.address = "";
+                        }
+                    } else //CASE: profile is private
+                    {
+                        res.status(401).send('This profile is set to private');
+                    }
+
+                    //Get social media info
+                    profileInfo.website = "";
+                    profileInfo.websiteLink = "#"
+                    profileInfo.github = "";
+                    profileInfo.githubLink = "#"
+                    profileInfo.twitter = "";
+                    profileInfo.twitterLink = "#";
+                    profileInfo.instagram = "";
+                    profileInfo.instagramLink = "#";
+                    profileInfo.facebook = "";
+                    profileInfo.facebookLink = "#";
+                    profileInfo.linkedin = "";
+                    profileInfo.linkedinLink = "#";
+
+                    //website
+                    if (results[0].websiteLink != null && results[0].websiteLink != "") {
+                        profileInfo.website = profileInfo.firstName + "'s Website";
+                        profileInfo.websiteLink = results[0].websiteLink;
+                    }
+
+                    //github
+                    if (results[0].githubLink != null && results[0].githubLink != "") {
+                        profileInfo.github = profileInfo.firstName + "'s GitHub";
+                        profileInfo.githubLink = results[0].githubLink;
+                    }
+
+                    //twitter
+                    if (results[0].twitterLink != null && results[0].twitterLink != "") {
+                        profileInfo.twitter = profileInfo.firstName + "'s Twitter";
+                        profileInfo.twitterLink = results[0].twitterLink;
+                    }
+
+                    //Instagram
+                    if (results[0].instagramLink != null && results[0].instagramLink != "") {
+                        profileInfo.instagram = profileInfo.firstName + "'s Instagram";
+                        profileInfo.instagramLink = results[0].instagramLink;
+                    }
+
+                    //Facebook
+                    if (results[0].facebookLink != null && results[0].facebookLink != "") {
+                        profileInfo.facebook = profileInfo.firstName + "'s Facebook";
+                        profileInfo.facebookLink = results[0].facebookLink;
+                    }
+
+                    //LinkedIn
+                    if (results[0].linkedinLink != null && results[0].linkedinLink != "") {
+                        profileInfo.linkedin = profileInfo.firstName + "'s LinkedIn";
+                        profileInfo.linkedinLink = results[0].linkedinLink;
+                    }
+
+                    res.render('portfolio', {userInfo: profileInfo});
                 }
-
-                //github
-                if(results[0].githubLink != null && results[0].githubLink != "")
-                {
-                    profileInfo.github = profileInfo.firstName + "'s GitHub";
-                    profileInfo.githubLink = results[0].githubLink;
-                }
-
-                //twitter
-                if(results[0].twitterLink != null && results[0].twitterLink != "")
-                {
-                    profileInfo.twitter = profileInfo.firstName + "'s Twitter";
-                    profileInfo.twitterLink = results[0].twitterLink;
-                }
-
-                //Instagram
-                if(results[0].instagramLink != null && results[0].instagramLink != "")
-                {
-                    profileInfo.instagram = profileInfo.firstName + "'s Instagram";
-                    profileInfo.instagramLink = results[0].instagramLink;
-                }
-
-                //Facebook
-                if(results[0].facebookLink != null && results[0].facebookLink != "")
-                {
-                    profileInfo.facebook = profileInfo.firstName + "'s Facebook";
-                    profileInfo.facebookLink = results[0].facebookLink;
-                }
-
-                //LinkedIn
-                if(results[0].linkedinLink != null && results[0].linkedinLink != "")
-                {
-                    profileInfo.linkedin = profileInfo.firstName + "'s LinkedIn";
-                    profileInfo.linkedinLink = results[0].linkedinLink;
-                }
-
-                res.render('portfolioedit', { userInfo: profileInfo });
             });
         });
-    }
-    else{
-        res.redirect('/signin');
+    } else {
+        res.status(404).send('Invalid profile link!');
     }
 }

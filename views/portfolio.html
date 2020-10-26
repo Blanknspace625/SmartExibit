@@ -40,14 +40,7 @@
             <div class="collapse navbar-collapse " id="navbarSupportedContent">
               <ul class="navbar-nav ml-auto">
                 <li>
-                  <a class="nav-item" href="/dashboard">My Dashboard</a>
-                </li>
-                <li>
-                  <a class="nav-item" href="/settings">Settings</a>
-                </li>
-      
-                <li>
-                  <a class="nav-item" href="/signout">Sign Out</a>
+                  <a class="nav-item" href="/">Go Back</a>
                 </li>
               </ul>
             </div>
@@ -68,9 +61,9 @@
                               <img src="<%=userInfo.profileImg%>"/>
                             </div>
                             <div class="mt-3">
-                              <h4><%=userInfo.firstName %> <%=userInfo.lastName%></h4>
+                              <h4><%=userInfo.firstName%> <%=userInfo.lastName%></h4>
                               <p class="text-secondary mb-1"><%=userInfo.occupation%></p>
-                              <p class="text-muted font-size-sm"><i class="fas fa-map-marker-alt"></i><%=userInfo.address%></p>
+                              <p class="text-muted font-size-sm"><i class="fas fa-map-marker-alt"></i> <%=userInfo.address%></p>
                               <!-- Button trigger modal -->
                               <button type="button" class="btn btn-outline-dark se-or" data-toggle="modal" data-target="#exampleModalLong">
                                 Message
@@ -110,7 +103,7 @@
                                         <textarea rows="8" class="form-control" id="message" name="message" placeholder="Message" required></textarea>
                                       </div>
 
-                                      <input type="hidden" name="id" value=<%= userInfo.userID%> />
+                                      <input type="hidden" name="id" value=<%=userInfo.userID%> />
 
 
                                     </div>

@@ -224,24 +224,25 @@ exports.resetPassword = async function(req, res) {
 
 exports.messageProfile = async function(req, res) {
     const profileID = req.body.id;
+    const senderName = req.body.senderName;
     const senderEmail = req.body.email;
     const message = req.body.message;
-    const senderName = req.body.senderName;
 
     db.getConnection(function(err, conn) {
         conn.query("SELECT * FROM User WHERE idUser = ?", [profileID], async function (err, results) {
             if (err) throw err;
 
-            const profileEmail = results[0].email;
-            const name = results[0].firstName;
+            const recipientEmail = results[0].email;
+            const recipientName = results[0].firstName;
 
             var mailOptions = {
                 from: 'smartexibit@gmail.com',
-                to: profileEmail,
+                to: recipientEmail,
                 subject: 'New Message from your ePortfolio',
-                text: 'Dear ' + name +  ', you have received a new message on your SmartExhibit profile.\n\n' +
-                    message + '\n\nIf you wish to respond to this message, please email the sender at:\n\n'
-                    + senderEmail
+                text: 'Dear ' + recipientName +  ', you have received a new message from ' + senderName
+                    + ' on SmartExhibit.\n\n' + message
+                    + '\n\nIf you wish to respond to this message, please email ' + senderName
+                    + ' at:\n\n' + senderEmail
             };
 
             transporter.sendMail(mailOptions, function(err, info) { if (err) console.log(err); });
@@ -250,5 +251,5 @@ exports.messageProfile = async function(req, res) {
         });
     });
 
-    res.redirect("/ext-profile/?profileID=" + profileID);
+    res.redirect("/proceed-message");
 }

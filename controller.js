@@ -84,15 +84,19 @@ exports.return_dashboard = function(req, res) {
 }
 
 exports.return_profile = function(req, res) {
-    userManagement.getProfileInformation(req, req.query.profileID, res);
+    userManagement.getProfileInformation(req, res);
 }
 
 exports.return_my_profile = function(req, res) {
     if (req.session.userInfo) {
-        userManagement.getProfileInformation(req, req.session.userInfo.userId, res);
+        res.render('portfolioedit', req.session);
     } else {
         res.redirect('/signin');
     }
+}
+
+exports.edit_profile_info = function(req, res){
+    userManagement.editProfile(req, res);
 }
 
 exports.return_settings = function (req, res) {
@@ -105,6 +109,10 @@ exports.return_settings = function (req, res) {
 
 exports.message_profile = function(req, res) {
     mailer.messageProfile(req, res);
+}
+
+exports.message_sent = function(req, res) {
+    res.sendFile(path.join(__dirname, '/views/messagesent.html'));
 }
 
 exports.change_reg_detail = function(req, res) {
@@ -131,14 +139,6 @@ exports.change_profile_privacy = function(req,res){
 
 exports.link_social_media = function(req, res){
     userManagement.changeSocialMediaLinks(req, res);
-}
-
-exports.get_profile_edit = function(req, res){
-    userManagement.getProfileEdit(req, res);
-}
-
-exports.update_profile = function(req, res){
-    userManagement.updateProfile(req, res);
 }
 
 exports.return_resource_upload = function(req, res) {
