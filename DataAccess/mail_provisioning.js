@@ -225,7 +225,7 @@ exports.resetPassword = async function(req, res) {
 exports.messageProfile = async function(req, res) {
     const profileID = req.body.id;
     const senderName = req.body.senderName;
-    const senderEmail = req.body.email;
+    const senderEmail = req.body.senderEmail;
     const message = req.body.message;
 
     db.getConnection(function(err, conn) {
@@ -242,7 +242,7 @@ exports.messageProfile = async function(req, res) {
                 text: 'Dear ' + recipientName +  ', you have received a new message from ' + senderName
                     + ' on SmartExhibit.\n\n' + message
                     + '\n\nIf you wish to respond to this message, please email ' + senderName
-                    + ' at:\n\n' + senderEmail
+                    + ' at: ' + senderEmail
             };
 
             transporter.sendMail(mailOptions, function(err, info) { if (err) console.log(err); });

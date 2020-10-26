@@ -12,7 +12,7 @@
               integrity='sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk'
               crossorigin='anonymous')>
         <link rel="stylesheet" href="/Public/StyleeSheet/showcase.css">  
-        <link rel="stylesheet" href="/Public/StyleeSheet/showcasefile.css">  
+        <link rel="stylesheet" href="/Public/StyleeSheet/showcasefile.css">
       
         <!-- jQuery library -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -58,7 +58,9 @@
                   <div class="card">
                     <div class="card-body">
                       <div class="d-flex flex-column align-items-center text-center">
-                        <img src="<%=userInfo.profileImg%>" alt="Admin" class="rounded-circle" width="100">
+                        <div class="mask">
+                          <img src="<%=userInfo.profileImg%>"/>
+                        </div>
                         <div class="mt-3">
                           <h4><%=userInfo.firstName%> <%=userInfo.lastName%></h4>
                           <p class="text-secondary mb-1"><%=userInfo.occupation%></p>
