@@ -416,6 +416,8 @@ exports.getProfileInformation = async function(req, res){
                         profileInfo.linkedinLink = results[0].linkedinLink;
                     }
 
+                    conn.release();
+
                     res.render('portfolio', { userInfo: profileInfo });
                 }
             });

@@ -46,7 +46,7 @@ exports.verifyEmail = async function(req, res) {
                         '\n\nThis link expires in 10 minutes from the time you recieved this email.'
                 };
 
-                transporter.sendMail(mailOptions, function(err, info) { if(err) console.log(err); });
+                transporter.sendMail(mailOptions, function(err, info) { if (err) console.log(err); });
 
                 conn.release();
             });
