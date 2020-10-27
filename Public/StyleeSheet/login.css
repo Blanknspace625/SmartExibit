@@ -78,9 +78,8 @@ p.ex3{
 /* Login Logo style */
 #Smart_Exhibit{
     padding-top: 20%;
-    font-size: 50px;
+    font-size: 300%;
     color:white;
-    font-family:Sitka Heading;
     font-weight:bold;
 }
 
@@ -185,7 +184,7 @@ input[type=submit]:hover {
 }
 
 /* Responsive layout - when the screen is less than 650px wide, make the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 767px) {
     .col {
         width: 100%;
         margin-top: 0;
@@ -198,5 +197,27 @@ input[type=submit]:hover {
     .hide-md-lg {
         display: block;
         text-align: center;
+    }
+    #Smart_Exhibit{
+        font-size:200%;
+    }
+}
+/* Responsive layout - when the screen is less than 650px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 411px) {
+    .col {
+        width: 100%;
+        margin-top: 0;
+    }
+    /* hide the vertical line */
+    .vl {
+        display: none;
+    }
+    /* show the hidden text on small screens */
+    .hide-md-lg {
+        display: block;
+        text-align: center;
+    }
+    #Smart_Exhibit{
+        font-size:150%;
     }
 }
