@@ -22,6 +22,14 @@ exports.return_homepage = function(req, res) {
     res.sendFile(path.join(__dirname, '/views/homepage.html'));
 }
 
+exports.return_contact = function(req, res) {
+    res.sendFile(path.join(__dirname, '/views/contact-us.html'));
+}
+
+exports.return_about = function(req, res) {
+    res.sendFile(path.join(__dirname, '/views/about-us.html'));
+}
+
 exports.return_signin = function(req, res) {
     if (req.session.userInfo) {
         res.redirect('/dashboard');
@@ -185,10 +193,6 @@ exports.update_showcase = function(req, res) {
 
 exports.return_showcase_data = function(req, res) {
     showcase.getShowcaseData(req, res);
-}
-
-exports.return_contact = function(req, res) {
-    res.sendFile(path.join(__dirname, '/views/contact-us.html'));
 }
 
 exports.retrieve_media = function(req, res) {
