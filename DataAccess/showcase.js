@@ -5,8 +5,7 @@ var db = require('./db_interface');
 exports.newMedia = async function(req, res) {
     const userID = req.session.userInfo.userId;
     const showcaseName = req.body.showcaseName;
-    //const privacyParam = req.body.privacyParam;
-    const privacyParam = 'Public';
+    const privacyParam = req.body.privacyParam;
     const link = "./Resources/" + userID + "/" + req.file.originalname;
 
     db.getConnection(function(err, conn) {

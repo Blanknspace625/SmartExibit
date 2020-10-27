@@ -92,6 +92,12 @@
                                     <form action="/upload" enctype="multipart/form-data" method="POST">
                                         <label for="showcaseName">Showcase Name</label>
                                         <input id="showcaseName" type="text" name="showcaseName" value="Untitled" required><br><br>
+                                        <label for="privacyParam">Visibility</label>
+                                        <select id="privacyParam" name="privacyParam">
+                                            <option value="Public" selected>Public</option>
+                                            <option value="Link Only">Link Only</option>
+                                            <option value="Only Me">Only Me</option>
+                                        </select><br><br>
                                         <label for="media">Upload Files here</label>
                                         <input id="media" type="file" name="media" required/><br>
                                         <h6>Note: Upload one document-type file only and it cannot exceed 128MB</h6>
