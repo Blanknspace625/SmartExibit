@@ -87,6 +87,10 @@ exports.return_profile = function(req, res) {
     userManagement.extProfileView(req, res);
 }
 
+exports.return_profile_unavailable = function(req, res) {
+    res.sendFile(path.join(__dirname, '/views/privacynotice.html'));
+}
+
 exports.return_my_profile = function(req, res) {
     if (req.session.userInfo) {
         res.render('portfolioedit', req.session);

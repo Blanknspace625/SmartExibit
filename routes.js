@@ -17,6 +17,9 @@ module.exports = function(app) {
     app.route('/ext-profile')
         .get(task.return_profile);
 
+    app.route('/ext-private')
+        .get(task.return_profile_unavailable);
+
     app.route('/profile')
         .get(task.return_my_profile)
         .post(task.edit_profile_info);

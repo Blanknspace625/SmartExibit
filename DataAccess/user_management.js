@@ -268,7 +268,7 @@ exports.editProfile = async function(req, res) {
             "occupation = '"+occupation+"' " +
             "WHERE idUser = '"+userID+"'"
         conn.query(sql, function (err, results) {
-            if (err) throw err;
+            if (err) console.log(err);
 
             req.session.userInfo.phoneNumber = phoneNumber;
             req.session.userInfo.address = address;
@@ -374,15 +374,15 @@ exports.extProfileView = async function(req, res){
                             profileInfo.linkedin = profileInfo.firstName + "'s LinkedIn";
                             profileInfo.linkedinLink = results[0].linkedinLink;
                         }
+
+                        conn.release();
+
+                        res.render('portfolio', { userInfo: profileInfo });
                     }
                     else //CASE: profile is private
                     {
-                        res.status(401).send('This profile is set to private');
+                        res.redirect('/ext-private');
                     }
-
-                    conn.release();
-
-                    res.render('portfolio', { userInfo: profileInfo });
                 } else {
                     res.status(404).send('Invalid profile link!');
                 }
