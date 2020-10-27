@@ -1,3 +1,11 @@
+body{
+    background-color: #B8D8D8;
+}
+h2{
+    font-weight: bold;
+    margin-top: 0px;
+}
+
 .social-link {
     width: 30px;
     height: 30px;
@@ -26,10 +34,27 @@
     font-weight:bold;
 }
 
+#Back_Arrow{
+    font-size: 25px;
+    color:white;
+    font-family:Sitka Heading;
+    font-weight:bold;
+}
+
 /*  Top Level Container */
 #page-container {
     position: relative;
-    min-height: 8vh;
+    min-height: 5vh;
+}
+
+.container{
+    margin-top: 0px;
+}
+
+.card {
+    margin: 0 auto 20px auto; /* Added */
+    float: none; /* Added */
+    background-color: #B8D8D8;
 }
 
 .nav-item{
@@ -54,7 +79,7 @@
 }
 
 .se-sb{
-    color:#B8D8D8;
+    background-color:#B8D8D8;
 }
 
 .se-gb{
