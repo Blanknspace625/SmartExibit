@@ -25,6 +25,13 @@ body {
   font-weight:bold;
 }
 
+#Back_Arrow{
+  font-size: 25px;
+  color:white;
+  font-family:Sitka Heading;
+  font-weight:bold;
+}
+
 /*  Top Level Container */
 #page-container {
   position: relative;
@@ -38,22 +45,19 @@ body {
 .nav-item{
   padding-left: 40px;
   padding-right: 40px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-radius: 10px;
   font-size: 17px;
   font-family:Sitka Heading;
   color: #fff;
-  outline: none;
-  text-decoration: none;  
-
 }
 
 .nav-item:hover {
-  text-decoration: none;
   color: #fff;
-  text-align: center;
-  background-color: #FE5F55;
-  border-radius: 16px 16px 16px 16px;
-  transition: 0.4s;
-  padding: 14px 40px;
+  transition: 0.5s;
+  border-radius: 10px;
+  background-color:rgb(254, 95, 85);
 }
 
 .se-sb{

@@ -39,16 +39,15 @@
             <div class="collapse navbar-collapse " id="navbarSupportedContent">
               <ul class="navbar-nav ml-auto">
                 <li>
-                  <a class="nav-item" href="/dashboard">My Dashboard</a>
+                  <a type="button" class="btn btn-md nav-item" href="/dashboard">My Dashboard</a>
                 </li>
                 <li>
-                  <a class="nav-item" href="/settings">Settings</a>
+                  <a type="button" class="btn btn-md nav-item" href="/settings">Settings</a>
                 </li>
-      
                 <li>
-                  <a class="nav-item" href="/signout">Sign Out</a>
+                  <a type="button" class="btn btn-md nav-item" href="/signout">Sign Out</a>
                 </li>
-              </ul>
+            </ul>
             </div>
            </nav>
         
@@ -76,20 +75,20 @@
                           </div>
                         </div>
                       </div>
-
+                      <!-- About Me Card -->
                       <div class="card mt-3">
-                        <div class="card h-100">
-                          <div class="card-body">
-                            <h6 class="d-flex align-items-center mb-3">Showcase Documents <div style="padding-left: 43%"></div></h6>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                  <h6 class="d-flex align-items-center mb-0"> About Me<div style="padding-left: 70%"><h3><i class="fas fa-edit"></i></h3></div></h6>
+                                </div>
+                            </div>
                             <hr>
-                            <h5><i class="fas fa-folder"></i>          <a class="document-item" href="<%=userInfo.showcase1%>">Showcase 1</h5><br></a>
-                            <h5><i class="fas fa-folder"></i>          <a class="document-item" href="<%=userInfo.showcase2%>">Showcase 2</h5><br></a>
-                            <h5><i class="fas fa-folder"></i>          <a class="document-item" href="<%=userInfo.showcase3%>">Showcase 3</h5><br></a>
-                            <h5><i class="fas fa-folder"></i>          <a class="document-item" href="<%=userInfo.showcase4%>">Showcase 4</h5><br></a>
-                            <h5><i class="fas fa-folder"></i>          <a class="document-item" href="<%=userInfo.showcase5%>">Showcase 5</h5></a>
-                          </div>
+                            <div class="text-secondary">
+                              <textarea rows="10" class="form-control" name="aboutMe" id="aboutMe" placeholder="About Me" form="profileform" ><%=userInfo.aboutMe%></textarea>
+                            </div>
                         </div>
-                    </div>
+                      </div>
                     <!-- HIDE SKILLS
                         <div class="card mt-3">
                             <div class="card h-100">
@@ -162,20 +161,6 @@
                           </div>
                         </div>
                       </div>
-                      <!-- About Me Card -->
-                      <div class="card mb-3">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                  <h6 class="d-flex mb-0">About Me <div style="padding-left: 85%"><h3><i class="fas fa-edit"></i></h3></div></h6>
-                                </div>
-                              </div>
-                              <hr>
-                              <div class="text-secondary">
-                                <textarea rows="11" class="form-control" name="aboutMe" id="aboutMe" placeholder="About Me" form="profileform" ><%=userInfo.aboutMe%></textarea>
-                              </div>
-                            </div>
-                        </div>
                         <div class="card mb-3">
                             <div class="card-body">
                                 <h6 class="d-flex mb-0">Work Experience <div style="padding-left: 76.5%"><h3><i class="fas fa-edit"></i></h3></div></h6>
@@ -201,7 +186,7 @@
             <div class="container my-4">
               <hr>                       
               <div class="text-center">
-                  <button class="btn se-or" input type="submit">Save Changes</button>
+                  <button class="btn btn-primary btn-outline-dark" input type="submit">Save Changes</button>
               </div>
                 <p class="ex1"></p>
                 <div class="text-center">

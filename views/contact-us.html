@@ -29,22 +29,15 @@
     <title>Contact Us - SmartExhibit</title>
 </head>
 <body>
-<div id = "page-container">
+<div id ="page-container">
     <div id="content-wrap">
         <nav class="navbar navbar-expand-lg navbar-light se-db">
+            <button class="navbar-brand btn btn-sm" id="Back_Arrow" onclick="goBack()"><i class="fas fa-chevron-left"></i></button>
             <a class="navbar-brand ml-sm-1" href="/" id="Smart_Exhibit"><i class="fas fa-user-graduate"></i>       Smart Exhibit</a>
-            <div id="navbarSupportedContent">
-                <ul class="navbar-nav mr-0">
-                    <li>
-                        <a class="nav-item" href="/">Go Back</a>
-                    </li>
-                </ul>
-            </div>
         </nav>
     </div>
-
     <div class="container px-4 mt-32px">
-        <div class="row jumbotron">
+        <div class="row jumbotron" id="jumbo">
             <div class="col-12">
                 <h1>Contact Us</h1>
                 <hr>
@@ -53,7 +46,7 @@
                 <p class="lead"></p>Postal address: The University of Melbourne, Victoria 3010
                 <p class="lead"></p>Phone: Domestic: 13 MELB (13 6352) | International: + (61 3) 9035 5511
                 <p class="lead"></p>
-                <div id="googleMap" style="width:70%;height:500px;"></div>
+                <div id="googleMap" style="width:100%;height:465px;"></div>
             </div>
         </div>
         <div id="map"></div>
@@ -75,7 +68,11 @@
         </script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8yP3nTexwjMShuCeoLOsQlqdiXoYMMH4&amp;callback=myMap"></script>
     </div>
-
 </div>
+<script type="text/javascript">
+    function goBack() {
+        window.history.back()
+    }
+</script>
 </body>
 </html>
