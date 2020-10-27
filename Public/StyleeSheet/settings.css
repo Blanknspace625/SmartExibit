@@ -6,6 +6,40 @@
     border: 1px solid #ccc;
 }
 
+p.ex1 {
+    padding-top: 1px;
+}
+
+p.ex2{
+    font-size: 14px;
+}
+
+label.ex1{
+    font-size: 17px;
+}
+
+.nav-link{
+    font-size: 16px;
+    padding: 7px 7px 7px 20px;
+    border-radius: 5px;
+    color: rgb(0, 0, 0);
+    
+}
+
+.nav-link:hover {
+    text-decoration: none;
+    background-color:rgb(254, 95, 85);
+
+}
+
+.nav-link:active{
+    background-color:rgb(254, 95, 85);
+    color:#fff;
+
+
+}
+
+
 /* Style the buttons that are used to open the tab content */
 .tab button {
     display: block;
@@ -40,4 +74,9 @@
     width: 70%;
     border-left: none;
     border: 1px solid #ccc;
+}
+
+.se-or{
+    background-color:#FE5F55;
+    color:white;
 }

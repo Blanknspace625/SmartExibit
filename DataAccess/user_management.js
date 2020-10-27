@@ -84,9 +84,9 @@ exports.register = async function(req, res) {
         if (pwd.valueOf() == pwdAgain.valueOf()) {
             const pwd_ = await bcrypt.hash(req.body.password, 8);
 
-            var sql = "INSERT INTO User (firstName, lastName, email, profileImg, pwd, extLink) VALUES " +
+            var sql = "INSERT INTO User (firstName, lastName, email, profileImg, pwd) VALUES " +
                 "('" + firstName + "', '" + lastName + "', '" + email + "', '" + profilePicRef + "', " +
-                "'" + pwd_ + "', 'epf.johnnybread.com')";
+                "'" + pwd_ + "')";
             conn.query(sql, async function (err, results) {
                 if (err) throw err;
 
@@ -95,6 +95,8 @@ exports.register = async function(req, res) {
                 mail.verifyEmail(req, res);
                 res.redirect('/proceed-register');
             });
+        } else {
+            res.status(206).send('Your passwords don\'t agree!');
         }
     });
 }
@@ -209,7 +211,7 @@ exports.changePrivacySettings = async function(req,res){
     });
 }
 
-exports.changeSocialMediaLinks = async function(req, res){
+exports.changeSocialMediaLinks = async function(req, res) {
     const userID = req.session.userInfo.userId;
 
     const websiteLink = req.body.website;
@@ -219,7 +221,7 @@ exports.changeSocialMediaLinks = async function(req, res){
     const instagramLink = req.body.instagram;
     const githubLink = req.body.github;
 
-    db.getConnection(function(err, conn){
+    db.getConnection(function(err, conn) {
         var sql = "UPDATE User SET " +
             "websiteLink = '"+websiteLink+"', " +
             "facebookLink = '"+facebookLink+"', " +
@@ -229,7 +231,7 @@ exports.changeSocialMediaLinks = async function(req, res){
             "githubLink = '"+githubLink+"' " +
             "WHERE idUser = '"+userID+"'";
 
-        conn.query(sql, function (err, results){
+        conn.query(sql, function (err, results) {
             if (err) throw err;
 
             req.session.userInfo.websiteLink = websiteLink;
@@ -265,8 +267,8 @@ exports.editProfile = async function(req, res) {
             "education = '"+education+"', " +
             "occupation = '"+occupation+"' " +
             "WHERE idUser = '"+userID+"'"
-        conn.query(sql, function (err, results){
-            if (err) throw err;
+        conn.query(sql, function (err, results) {
+            if (err) console.log(err);
 
             req.session.userInfo.phoneNumber = phoneNumber;
             req.session.userInfo.address = address;
@@ -275,14 +277,14 @@ exports.editProfile = async function(req, res) {
             req.session.userInfo.workExperience = workExperience;
             req.session.userInfo.education = education;
 
-            res.redirect('/profile');
-
             conn.release();
+
+            res.redirect('/profile');
         });
     });
 }
 
-exports.getProfileInformation = async function(req, res){
+exports.extProfileView = async function(req, res){
     const userID = req.query.profileID;
 
     if (userID) {
@@ -291,132 +293,98 @@ exports.getProfileInformation = async function(req, res){
                 if (err) throw err;
 
                 if (results.length > 0) {
-                    var profileInfo;
-
-                    if (req.session.userInfo && req.session.userInfo.userId == userID) //CASE: all information is avaliable
+                    if (results[0].profilePrivate == "") //CASE: profile is not private
                     {
-                        var profileInfo = ({
+                        var profileInfo = {
                             userID: userID,
                             firstName: results[0].firstName,
                             lastName: results[0].lastName,
                             profileImg: results[0].profileImg,
 
-                            displayEmail: results[0].displayEmail,
-                            displayPhoneNumber: results[0].showPhoneNumber,
-                            displayAddress: results[0].showAddress,
-
-                            email: results[0].email,
-                            phoneNumber: results[0].phoneNumber,
-                            address: results[0].address,
+                            email: "",
+                            phoneNumber: "",
+                            address: "",
 
                             occupation: results[0].occupation,
                             aboutMe: results[0].aboutMe,
                             workExperience: results[0].workExperience,
                             education: results[0].education,
 
-                            document1: results[0].document1,
-                            document2: results[0].document2,
-                            document3: results[0].document3,
-                            document4: results[0].document4,
-                            document5: results[0].document5
-                        });
-                    } else if (results[0].profilePrivate == "") //CASE: profile is not private
+                            website: "",
+                            github: "",
+                            twitter: "",
+                            facebook: "",
+                            instagram: "",
+                            linkedin: "",
+
+                            showcase1: results[0].document1,
+                            showcase2: results[0].document2,
+                            showcase3: results[0].document3,
+                            showcase4: results[0].document4,
+                            showcase5: results[0].document5
+                        };
+
+                        if (results[0].displayEmail) //CASE: Check if a user wants their email publicly visible
+                        {
+                            profileInfo.email = results[0].email;
+                        }
+
+                        if (results[0].showPhoneNumber) //CASE check phone visibility
+                        {
+                            profileInfo.phoneNumber = results[0].phoneNumber;
+                        }
+
+                        if (results[0].showAddress) //CASE check Address visibility
+                        {
+                            profileInfo.address = results[0].address;
+                        }
+
+                        //website
+                        if (results[0].websiteLink) {
+                            profileInfo.website = profileInfo.firstName + "'s Website";
+                            profileInfo.websiteLink = results[0].websiteLink;
+                        }
+
+                        //github
+                        if (results[0].githubLink) {
+                            profileInfo.github = profileInfo.firstName + "'s GitHub";
+                            profileInfo.githubLink = results[0].githubLink;
+                        }
+
+                        //twitter
+                        if (results[0].twitterLink) {
+                            profileInfo.twitter = profileInfo.firstName + "'s Twitter";
+                            profileInfo.twitterLink = results[0].twitterLink;
+                        }
+
+                        //Instagram
+                        if (results[0].instagramLink) {
+                            profileInfo.instagram = profileInfo.firstName + "'s Instagram";
+                            profileInfo.instagramLink = results[0].instagramLink;
+                        }
+
+                        //Facebook
+                        if (results[0].facebookLink) {
+                            profileInfo.facebook = profileInfo.firstName + "'s Facebook";
+                            profileInfo.facebookLink = results[0].facebookLink;
+                        }
+
+                        //LinkedIn
+                        if (results[0].linkedinLink) {
+                            profileInfo.linkedin = profileInfo.firstName + "'s LinkedIn";
+                            profileInfo.linkedinLink = results[0].linkedinLink;
+                        }
+
+                        conn.release();
+
+                        res.render('portfolio', { userInfo: profileInfo });
+                    }
+                    else //CASE: profile is private
                     {
-                        var profileInfo = ({
-                            userID: userID,
-                            firstName: results[0].firstName,
-                            lastName: results[0].lastName,
-                            displayEmail: results[0].displayEmail,
-                            displayPhoneNumber: results[0].showPhoneNumber,
-                            displayAddress: results[0].showAddress,
-                            profileImg: results[0].profileImg,
-                            extLink: results[0].extLink,
-                            occupation: results[0].occupation,
-                            aboutMe: results[0].aboutMe,
-                            workExperience: results[0].workExperience,
-                            education: results[0].education,
-
-                            email: results[0].email,
-                            phoneNumber: results[0].phoneNumber,
-                            address: results[0].address,
-
-                            document1: results[0].document1,
-                            document2: results[0].document2,
-                            document3: results[0].document3,
-                            document4: results[0].document4,
-                            document5: results[0].document5
-                        });
-
-                        if (profileInfo.displayEmail == "") //CASE: Check if a user wants their email publicly visible
-                        {
-                            profileInfo.email = "";
-                        }
-
-                        if (profileInfo.displayPhoneNumber == "") //CASE check phone visibility
-                        {
-                            profileInfo.phoneNumber = "";
-                        }
-
-                        if (profileInfo.showAddress == "") //CASE check Address visibility
-                        {
-                            profileInfo.address = "";
-                        }
-                    } else //CASE: profile is private
-                    {
-                        res.status(401).send('This profile is set to private');
+                        res.redirect('/ext-private');
                     }
-
-                    //Get social media info
-                    profileInfo.website = "";
-                    profileInfo.websiteLink = "#"
-                    profileInfo.github = "";
-                    profileInfo.githubLink = "#"
-                    profileInfo.twitter = "";
-                    profileInfo.twitterLink = "#";
-                    profileInfo.instagram = "";
-                    profileInfo.instagramLink = "#";
-                    profileInfo.facebook = "";
-                    profileInfo.facebookLink = "#";
-                    profileInfo.linkedin = "";
-                    profileInfo.linkedinLink = "#";
-
-                    //website
-                    if (results[0].websiteLink) {
-                        profileInfo.website = profileInfo.firstName + "'s Website";
-                        profileInfo.websiteLink = results[0].websiteLink;
-                    }
-
-                    //github
-                    if (results[0].githubLink) {
-                        profileInfo.github = profileInfo.firstName + "'s GitHub";
-                        profileInfo.githubLink = results[0].githubLink;
-                    }
-
-                    //twitter
-                    if (results[0].twitterLink) {
-                        profileInfo.twitter = profileInfo.firstName + "'s Twitter";
-                        profileInfo.twitterLink = results[0].twitterLink;
-                    }
-
-                    //Instagram
-                    if (results[0].instagramLink) {
-                        profileInfo.instagram = profileInfo.firstName + "'s Instagram";
-                        profileInfo.instagramLink = results[0].instagramLink;
-                    }
-
-                    //Facebook
-                    if (results[0].facebookLink) {
-                        profileInfo.facebook = profileInfo.firstName + "'s Facebook";
-                        profileInfo.facebookLink = results[0].facebookLink;
-                    }
-
-                    //LinkedIn
-                    if (results[0].linkedinLink) {
-                        profileInfo.linkedin = profileInfo.firstName + "'s LinkedIn";
-                        profileInfo.linkedinLink = results[0].linkedinLink;
-                    }
-
-                    res.render('portfolio', { userInfo: profileInfo });
+                } else {
+                    res.status(404).send('Invalid profile link!');
                 }
             });
         });

@@ -22,10 +22,22 @@ h5 {
 p.ex1 {
     padding-top: 1px;
 }
+
+p.ex2 {
+    padding-left: 20px;
+}
+
   
 /* Logo style */
 #Smart_Exhibit{
     font-size: 27px;
+    color:white;
+    font-family:Sitka Heading;
+    font-weight:bold;
+}
+
+#Back_Arrow{
+    font-size: 25px;
     color:white;
     font-family:Sitka Heading;
     font-weight:bold;
@@ -42,21 +54,30 @@ p.ex1 {
 }
   
 .nav-item{
-    padding-left: 40px;
-    padding-right: 40px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 10px;
     font-size: 17px;
     font-family:Sitka Heading;
     color: #fff;
 }
-  
+
 .nav-item:hover {
-    text-decoration: none;
     color: #fff;
-    text-align: center;
-    background-color: #FE5F55;
-    border-radius: 16px 16px 16px 16px;
-    transition: 0.4s;
-    padding: 14px 40px;
+    transition: 0.5s;
+    border-radius: 10px;
+    background-color:rgb(254, 95, 85);
+}
+.btn-primary {
+    color: #fff;
+    background-color:rgb(254, 95, 85);
+    border-color:rgb(254, 95, 85); /*set the color you want here*/
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: rgb(230, 71, 61);
+    border-color: rgb(230, 71, 61); 
 }
 
 img{

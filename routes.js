@@ -6,6 +6,12 @@ module.exports = function(app) {
     
     app.route('/index')
         .get(task.return_homepage);
+
+    app.route('/contact')
+        .get(task.return_contact);
+
+    app.route('/about')
+        .get(task.return_about);
         
     app.route('/signup')
         .get(task.return_signup)
@@ -16,6 +22,9 @@ module.exports = function(app) {
 
     app.route('/ext-profile')
         .get(task.return_profile);
+
+    app.route('/ext-private')
+        .get(task.return_profile_unavailable);
 
     app.route('/profile')
         .get(task.return_my_profile)
@@ -81,9 +90,6 @@ module.exports = function(app) {
     app.route('/upload')
         .get(task.return_resource_upload)
         .post(task.create_resource);
-
-    app.route('/contact')
-        .get(task.return_contact);
 
     app.route('/message')
         .post(task.message_profile);

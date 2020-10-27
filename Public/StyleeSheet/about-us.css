@@ -1,0 +1,80 @@
+.social-link {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    border-radius: 50%;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+}
+
+.social-link:hover,
+.social-link:focus {
+    background: #ddd;
+    text-decoration: none;
+    color: #555;
+}
+
+/* Logo style */
+#Smart_Exhibit{
+    font-size: 27px;
+    color:white;
+    font-family:Sitka Heading;
+    font-weight:bold;
+}
+
+/*  Top Level Container */
+#page-container {
+    position: relative;
+    min-height: 8vh;
+}
+
+.nav-item{
+    padding-left: 40px;
+    padding-right: 40px;
+    font-size: 17px;
+    font-family:Sitka Heading;
+    color: #fff;
+    outline: none;
+    text-decoration: none;
+
+}
+
+.nav-item:hover {
+    text-decoration: none;
+    color: #fff;
+    text-align: center;
+    background-color: #FE5F55;
+    border-radius: 16px 16px 16px 16px;
+    transition: 0.4s;
+    padding: 14px 40px;
+}
+
+.se-sb{
+    color:#B8D8D8;
+}
+
+.se-gb{
+    color: #3C787A;
+}
+
+.se-db{
+    background-color:#4F6367;
+    color: #fff;
+}
+
+.se-wh{
+    color:#FFFFFF;
+}
+
+.se-or{
+    background-color:#FE5F55;
+    color:white;
+}
+
+@media (min-width: 768px){
+
+}

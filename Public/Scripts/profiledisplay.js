@@ -34,7 +34,7 @@ $(document).ready(function () {
     }
 
     //Education
-    if( $.trim($("#workExperienceContent").text()) == ''){
+    if( $.trim($("#educationContent").text()) == ''){
         $("#education").hide();
     }
 
