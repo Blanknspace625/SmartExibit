@@ -84,7 +84,7 @@ exports.return_dashboard = function(req, res) {
 }
 
 exports.return_profile = function(req, res) {
-    userManagement.getProfileInformation(req, res);
+    userManagement.extProfileView(req, res);
 }
 
 exports.return_my_profile = function(req, res) {
@@ -95,7 +95,7 @@ exports.return_my_profile = function(req, res) {
     }
 }
 
-exports.edit_profile_info = function(req, res){
+exports.edit_profile_info = function(req, res) {
     userManagement.editProfile(req, res);
 }
 
@@ -133,11 +133,11 @@ exports.change_sens_detail = function(req, res) {
     userManagement.changeSensitiveDetails(req, res);
 }
 
-exports.change_profile_privacy = function(req,res){
-    userManagement.changePrivacySettings(req,res);
+exports.change_profile_privacy = function(req, res) {
+    userManagement.changePrivacySettings(req, res);
 }
 
-exports.link_social_media = function(req, res){
+exports.link_social_media = function(req, res) {
     userManagement.changeSocialMediaLinks(req, res);
 }
 
@@ -197,7 +197,7 @@ exports.retrieve_media = function(req, res) {
     }
 }
 
-exports.return_stats_page = function(req, res){
+exports.return_stats_page = function(req, res) {
     if (req.session.userInfo) {
         showcase.getShowcaseStatistics(req, res);
     } else {

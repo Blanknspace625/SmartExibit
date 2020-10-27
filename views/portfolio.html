@@ -63,10 +63,9 @@
                             <div class="mt-3">
                               <h4><%=userInfo.firstName%> <%=userInfo.lastName%></h4>
                               <p class="text-secondary mb-1"><%=userInfo.occupation%></p>
-                              <p class="text-muted font-size-sm"><i class="fas fa-map-marker-alt"></i> <%=userInfo.address%></p>
                               <!-- Button trigger modal -->
                               <button type="button" class="btn btn-outline-dark se-or" data-toggle="modal" data-target="#exampleModalLong">
-                                Message
+                                Message Me
                               </button>
 
                               <!-- Modal -->
@@ -109,7 +108,7 @@
                                     </div>
                                     <div class="modal-footer">
                                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                      <button class="btn btn-outline-dark se-or" type="submit">Send message</button>
+                                      <button class="btn btn-outline-dark se-or" type="submit">Send</button>
                                     </div>
                                    </form>
                                   </div>
@@ -218,6 +217,15 @@
                             </div>
                             <div class="col-sm-9 text-secondary" id="phoneNumberContent">
                               <%=userInfo.phoneNumber%>
+                            </div>
+                          </div>
+                          <hr class="address">
+                          <div class="row address">
+                            <div class="col-sm-3">
+                              <h6 class="mb-0">Address</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary" id="addressContent">
+                              <%=userInfo.address%>
                             </div>
                           </div>
                         </div>
