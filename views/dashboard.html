@@ -93,11 +93,10 @@
             <div class="col-md-12 mb-10">
               <div class="card">
                 <div class="card-body">
-                  <div class="d-flex flex-column align-items-center text-left">
+                  <div class="d-flex flex-column align-items-left text-left">
                     <div class="mt-10">
                         <h3 id="greetings"></h3>
                         <hr>
-
                     </div>
                   </div>
                 </div>
@@ -142,7 +141,7 @@
                 greet = 'Good Evening';
 
             document.getElementById('greetings').innerHTML =
-              "<b>" +  greet + ' <%=userInfo.firstName%>,<br>Welcome back! <b>';
+              greet + ' <%=userInfo.firstName%>, Welcome back!';
         </script>
   </body>
 </html>

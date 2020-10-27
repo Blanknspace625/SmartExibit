@@ -8,16 +8,16 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../Public/StyleeSheet/dashboard.css">
-    <link rel="stylesheet" href="../Public/StyleeSheet/settings.css">
+    <link rel="stylesheet" href="/Public/StyleeSheet/settings.css">
+    <link rel="stylesheet" href="/Public/StyleeSheet/dashboard.css">
 
 
     <!-- Font Awesome JS -->
     <script src="https://kit.fontawesome.com/e564623181.js" crossorigin="anonymous"></script>
-    <script src="../Public/Scripts/jquery.min.js"></script>
-    <script src="../Public/Scripts/popper.js"></script>
-    <script src="../Public/Scripts/bootstrap.min.js"></script>
-    <script src="../Public/Scripts/main.js"></script>
+    <script src="/Public/Scripts/jquery.min.js"></script>
+    <script src="/Public/Scripts/popper.js"></script>
+    <script src="/Public/Scripts/bootstrap.min.js"></script>
+    <script src="/Public/Scripts/main.js"></script>
 
     <!-- Our Custom JS -->
     <script type="text/javascript" src="path-to-javascript-file.js"></script>
@@ -87,149 +87,134 @@
     <div id="content" class="p-5 p-md-5 pt-5">
         <div class="card">
             <div class="card-body">
-                <div class="d-flex flex-column align-items-center text-left">
+                <div class="d-flex flex-column align-items-left text-left">
                     <div class="col-sm-12">
                         <h3 class="p-md-2 mb-4"><b>Settings</b></h3>
                         <hr>
                         <p class="ex1"></p>
-                        <!-- Tab links -->
-                        <div class="tab">
-                            <button class="tablinks" id="defaultOpen" onclick="settingTabs(event, 'accountsettings') ">Account Settings</button>
-                            <button class="tablinks" onclick="settingTabs(event, 'uploadavatar') ">Change Profile Picture</button>
-                            <button class="tablinks" onclick="settingTabs(event, 'passwordsettings')">Change Password</button>
-                            <button class="tablinks" onclick="settingTabs(event, 'privacysettings')">Privacy Settings</button>
-                            <button class="tablinks" onclick="settingTabs(event, 'linkaccounts')">Link Social Accounts</button>
-                        </div>
-
-                        <!-- Tab content -->
-                        <div id="accountsettings" class="tabcontent col-sm-6">
-                            <form action ="/changedetail" method = "post" onSubmit="return confirm('Save changes?')">
-                                <div class="col-sm-12">
-                                    <br>
-                                    <div class="form-group">
-                                        <label for="firstName" class="ex1">First Name</label><br>
-                                        <input id="firstName" type="text" name="firstName" value=<%=userInfo.firstName%> required/><p class="ex1"></p>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                    <a class="nav-link active" id="v-pills-detail-tab" data-toggle="pill" href="#v-pills-detail" role="tab" aria-controls="v-pills-detail" aria-selected="true">Account Details</a>
+                                    <a class="nav-link" id="v-pills-avatar-tab" data-toggle="pill" href="#v-pills-avatar" role="tab" aria-controls="v-pills-avatar" aria-selected="false">Change Profile Picture</a>
+                                    <a class="nav-link" id="v-pills-password-tab" data-toggle="pill" href="#v-pills-password" role="tab" aria-controls="v-pills-password" aria-selected="false">Change Password</a>
+                                    <a class="nav-link" id="v-pills-privacy-tab" data-toggle="pill" href="#v-pills-privacy" role="tab" aria-controls="v-pills-privacy" aria-selected="false">Profile Visibilities</a>
+                                    <a class="nav-link" id="v-pills-socials-tab" data-toggle="pill" href="#v-pills-socials" role="tab" aria-controls="v-pills-socials" aria-selected="false">Link Social Media Accounts</a>
+                                </div>
+                            </div>
+                            <div class="col-9">
+                                <div class="tab-content" id="v-pills-tabContent">
+                                    <div class="tab-pane fade show active" id="v-pills-detail" role="tabpanel" aria-labelledby="v-pills-detail-tab">
+                                        <form action ="/changedetail" method = "post" onSubmit="return confirm('Save changes?')">
+                                            <div class="col-sm-11">
+                                                <div class="form-group">
+                                                    <label for="firstName" class="ex1">First Name</label><br>
+                                                    <input class="form-control col-5" id="firstName" type="text" name="firstName" value=<%=userInfo.firstName%> required/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="lastName" class="ex1">Last Name</label><br>
+                                                    <input class="form-control col-5" id="lastName" type="text" name="lastName" value=<%=userInfo.lastName%> required/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="email" class="ex1">Email Address</label><br>
+                                                    <input class="form-control col-5" id="email" type="email" name="email" value=<%=userInfo.email%> required/><p class="ex1"></p>
+                                                </div>
+                                                <hr>
+                                                <button type="submit" class="btn btn-secondary">Update</button>
+                                            </div>
+                                        </form>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="lastName" class="ex1">Last Name</label><br>
-                                        <input id="lastName" type="text" name="lastName" value= <%=userInfo.lastName%> required/><br>
+                                    <div class="tab-pane fade" id="v-pills-avatar" role="tabpanel" aria-labelledby="v-pills-avatar-tab">
+                                        <form action="/changeavatar" enctype="multipart/form-data" method="POST">
+                                            <div class="col-sm-11">
+                                                <label for="profileImg" class="ex1">Upload a Profile Picture</label><p class="ex1"></p>
+                                                <input id="profileImg" type="file" name="profileImg" required/><p class="ex1"></p>
+                                                <p class="ex2">Note: Only support jp(e)g, png, bmp file that is no larger than 5MB</p>
+                                                <hr>
+                                                <button type="submit" class="btn btn-secondary">Update</button>
+                                            </div>
+                                        </form>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="email" class="ex1">Email Address</label><br>
-                                        <!-- type = "email"-->
-                                        <input id="email" type="text" name="email" value=<%=userInfo.email%> required/><br>
+                                    <div class="tab-pane fade" id="v-pills-password" role="tabpanel" aria-labelledby="v-pills-password-tab">
+                                        <form action ="/changepassword" method = "post" onSubmit="return confirm('Save changes?')">
+                                            <div class="col-sm-11">
+                                                <div class="form-group">
+                                                    <label for="oldPassword" class="ex1">Old Password</label><br>
+                                                    <input class="form-control col-5" id="oldPassword" type="password" name="oldPassword" placeholder="Enter Old Password" required/>
+                                                    <!--<progress max="100" value="0" id="strength" style="width: 440px;"></progress>-->
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="newPassword" class="ex1">New Password</label><br>
+                                                    <input class="form-control col-5" id="newPassword" type="password" name="newPassword" placeholder="Enter New Password" required/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="newPasswordAgain" class="ex1">Confirm New Password</label><br>
+                                                    <input class="form-control col-5" id="newPasswordAgain" type="password" name="newPasswordAgain" placeholder="Confirm New Password" required/><p class="ex1"></p>
+                                                </div>
+                                                <hr>
+                                                <button type="submit" class="btn btn-secondary">Update</button>
+                                            </div>
+                                        </form>
                                     </div>
-                                    <hr>
-                                    <input type="submit" value="Update"/>
-                                </div>
-                            </form>
-                            <br>
-                        </div>
-
-                        <div id="uploadavatar" class="tabcontent col-sm-6">
-                            <form action="/changeavatar" enctype="multipart/form-data" method="POST">
-                                <div class="col-sm-12">
-                                    <br>
-                                    <label for="profileImg" class="ex1">Upload a Profile Picture</label><p class="ex1"></p>
-                                    <input id="profileImg" type="file" name="profileImg" required/><p class="ex1"></p>
-
-                                    <p class="ex2">Note: Only support jp(e)g, png, bmp file that is no larger than 5MB</p>
-                                    <hr>
-                                    <input type="submit" value="Upload"/>
-                                </div>
-                            </form>
-                            <br>
-                        </div>
-
-                        <div id="passwordsettings" class="tabcontent col-sm-6">
-                            <form action ="/changepassword" method = "post" onSubmit="return confirm('Save changes?')">
-                                <div class="col-sm-8">
-                                <br>
-                                <div class="row justify-content-center">
-                                    <div class="col-sm-8">
-                                        <div class="form-group">
-                                            <label for="oldPassword"><h5>   Old Password</h5></label><br>
-                                            <input id="oldPassword" type="password" name="oldPassword" placeholder="Enter Old Password" required/><br>
-                                            <!--<progress max="100" value="0" id="strength" style="width: 440px;"></progress>-->
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="newPassword"><h5>   New Password</h5></label><br>
-                                            <input id="newPassword" type="password" name="newPassword" placeholder="Enter New Password" required/><br>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="newPasswordAgain"> Confirm New Password</h5></label><br>
-                                            <input id="newPasswordAgain" type="password" name="newPasswordAgain" placeholder="Confirm New Password" required/><br>
-                                        </div>
-                                        <hr>
-                                        <input type="submit" value="Update"/>
+                                    <div class="tab-pane fade" id="v-pills-privacy" role="tabpanel" aria-labelledby="v-pills-privacy-tab">
+                                        <form action ="/changeprivacy" method = "post" onSubmit="return confirm('Save changes?')">
+                                            <div class="col-sm-11">
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" id="privatePortfolio" name ="privatePortfolio" value="1" <%=userInfo.privatePortfolio%>/>
+                                                    <label class="form-check-label ex2" for="privatePortfolio">Make Portfolio Private Only (Not Recommended)</label>
+                                                </div>
+                                                <br>
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" id="showEmail" name="showEmail" value="1" <%=userInfo.showEmail%>/>
+                                                    <label class="form-check-label ex2" for="showEmail">Make Email Publicly Visible</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" id="showPhone" name ="showPhone" value="1" <%=userInfo.showPhone%>/>
+                                                    <label class="form-check-label ex2" for="showPhone">Make Phone Number Publicly Visible</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input type="checkbox" class="form-check-input" id="showAddress" name="showAddress" value="1" <%=userInfo.showAddress%>/>
+                                                    <label class="form-check-label ex2" for="showAddress">Make Address Publicly Visible</label><p class="ex1"></p>
+                                                </div>
+                                                <hr>
+                                                <button type="submit" class="btn btn-secondary">Update</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="tab-pane fade" id="v-pills-socials" role="tabpanel" aria-labelledby="v-pills-socials-tab">
+                                        <form action ="/linkaccounts" method = "post" onSubmit="return confirm('Save changes?')">
+                                            <div class="col-sm-11">
+                                                <div class="form-group">
+                                                    <label for="facebook" class="ex1"> Facebook</label><br>
+                                                    <input class="form-control col-5" id="facebook" type="text" name="facebook" placeholder="Facebook Account" value=<%=userInfo.facebookLink%>>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="instagram" class="ex1"> Instagram</label><br>
+                                                    <input class="form-control col-5" id="instagram" type="text" name="instagram" placeholder="Instagram Account" value=<%=userInfo.instagramLink%>>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="twitter" class="ex1"> Twitter</label><br>
+                                                    <input class="form-control col-5" id="twitter" type="text" name="twitter" placeholder="Twitter Account" value=<%=userInfo.twitterLink%>>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="github" class="ex1"> Github</label><br>
+                                                    <input class="form-control col-5" id="github" type="text" name="github" placeholder="Github Account" value=<%=userInfo.githubLink%>>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="linkedin" class="ex1"> Linkedin</label><br>
+                                                    <input class="form-control col-5" id="linkedin" type="text" name="linkedin" placeholder="LinkedIn Account" value=<%=userInfo.linkedinLink%>>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="website" class="ex1"> Personal Website</label><br>
+                                                    <input class="form-control col-5" id="website" type="text" name="website" placeholder="Website URL" value=<%=userInfo.websiteLink%>><p class="ex1"></p>
+                                                </div>
+                                                <hr>
+                                                <button type="submit" class="btn btn-secondary">Update</button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
-                                </div>
-                            </form>
-                            <br>
-                        </div>
-
-                        <div id="privacysettings" class="tabcontent col-sm-6">
-                            <form action ="/changeprivacy" method = "post" onSubmit="return confirm('Save changes?')">
-                                <div class="col-sm-8">
-                                <br>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="privatePortfolio" name ="privatePortfolio" value="1" <%=userInfo.privatePortfolio%>/>
-                                    <label class="form-check-label" for="privatePortfolio">Make Portfolio Private Only (Not Recommended)</label>
-                                </div>
-                                <br>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="showEmail" name="showEmail" value="1" <%=userInfo.showEmail%>/>
-                                    <label class="form-check-label" for="showEmail">Make Email Publicly Visible</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="showPhone" name ="showPhone" value="1" <%=userInfo.showPhone%>/>
-                                    <label class="form-check-label" for="showPhone">Make Phone Number Publicly Visible</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="showAddress" name="showAddress" value="1" <%=userInfo.showAddress%>/>
-                                    <label class="form-check-label" for="showAddress">Make Address Publicly Visible</label>
-                                </div>
-                                <hr>
-                                <input type="submit" value="Update"/>
-                                </div>
-                            </form>
-                            <br>
-                        </div>
-
-                        <div id="linkaccounts" class="tabcontent col-sm-6">
-                            <form action ="/linkaccounts" method = "post" onSubmit="return confirm('Save changes?')">
-                                <div class="col-sm-8">
-                                <br>
-                                <div class="form-group">
-                                    <label for="facebook"> Facebook</label><br>
-                                    <input id="facebook" type="text" name="facebook" placeholder="Facebook Account" value=<%=userInfo.facebookLink%>/><br>
-                                </div>
-                                <div class="form-group">
-                                    <label for="instagram"> Instagram</label><br>
-                                    <input id="instagram" type="text" name="instagram" placeholder="Instagram Account" value=<%=userInfo.instagramLink%>/><br>
-                                </div>
-                                <div class="form-group">
-                                    <label for="twitter"> Twitter</label><br>
-                                    <input id="twitter" type="text" name="twitter" placeholder="Twitter Account" value=<%=userInfo.twitterLink%>/><br>
-                                </div>
-                                <div class="form-group">
-                                    <label for="github"> Github</label><br>
-                                    <input id="github" type="text" name="github" placeholder="Github Account" value=<%=userInfo.githubLink%>/><br>
-                                </div>
-                                <div class="form-group">
-                                    <label for="linkedin"> Linkedin</label><br>
-                                    <input id="linkedin" type="text" name="linkedin" placeholder="LinkedIn Account" value=<%=userInfo.linkedinLink%>/><br>
-                                </div>
-                                <div class="form-group">
-                                    <label for="website"> Personal Website</label><br>
-                                    <input id="website" type="text" name="website" placeholder="Website URL" value=<%=userInfo.websiteLink%>/><br>
-                                </div>
-                                <hr>
-                                <input type="submit" value="Update"/>
-                                </div>
-                            </form>
-                            <br>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -237,39 +222,12 @@
         </div>
     </div>
 
-
-
 <script type="text/javascript">
     $(document).ready(function () {
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
         });
     });
-
-    function settingTabs(evt, cityName) {
-        // Declare all variables
-        var i, tabcontent, tablinks;
-
-        // Get all elements with class="tabcontent" and hide them
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-
-        // Get all elements with class="tablinks" and remove the class "active"
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-
-        // Show the current tab, and add an "active" class to the button that opened the tab
-        document.getElementById(cityName).style.display = "block";
-        evt.currentTarget.className += " active";
-    }
-    // Get the element with id="defaultOpen" and click on it
-    document.getElementById("defaultOpen").click();
-
-
 </script>
 </div>
 </body>

@@ -10,6 +10,7 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/Public/StyleeSheet/dashboard.css">
+    <link rel="stylesheet" href="/Public/StyleeSheet/settings.css">
 
     <!-- Font Awesome JS -->
     <script src="https://kit.fontawesome.com/e564623181.js" crossorigin="anonymous"></script>
@@ -85,24 +86,24 @@
             <div class="col-md-12 mb-10">
                 <div class="card">
                     <div class="card-body">
-                        <div class="d-flex flex-column align-items-center text-left">
+                        <div class="ml-3 d-flex flex-column align-items-left text-left">
                             <div class="mt-10">
                                 <h3 class="p-md-2 mb-4"><b>Upload Files</b></h3>
                                 <hr>
                                     <form action="/upload" enctype="multipart/form-data" method="POST">
-                                        <label for="showcaseName">Showcase Name</label>
-                                        <input id="showcaseName" type="text" name="showcaseName" value="Untitled" required/><br><br>
-                                        <label for="privacyParam">Visibility</label>
-                                        <select class="custom-select custom-select-sm col-md-3" id="privacyParam" name="privacyParam">
+                                        <label class="ex1" for="showcaseName">Showcase Name</label>
+                                        <input class="form-control col-6" id="showcaseName" type="text" name="showcaseName" value="Untitled" required/><br>
+                                        <label class="ex1" for="privacyParam">Visibility</label><br>
+                                        <select class="custom-select col-md-3" id="privacyParam" name="privacyParam">
                                             <option value="Public" selected>Public</option>
                                             <option value="Link Only">Link Only</option>
                                             <option value="Only Me">Only Me</option>
                                         </select><br><br>
-                                        <label for="media">Choose A File here</label>
+                                        <label class="ex1" for="media">Choose A File here</label>
                                         <input id="media" type="file" name="media" required/><br>
-                                        <h6>Note: Upload one document-type file only and it cannot exceed 128MB</h6>
+                                        <p class="ex2">Note: Upload one document-type file only and it cannot exceed 128MB</p>
                                         <hr>
-                                        <input type="submit" value="Upload">
+                                        <button type="submit" class="btn btn-secondary">Upload</button>
                                     </form>
                             </div>
                         </div>
