@@ -19,8 +19,7 @@
     <script src="/Public/Scripts/bootstrap.min.js"></script>
     <script src="/Public/Scripts/main.js"></script>
 
-    <!-- Our Custom JS -->
-    <script type="text/javascript" src="path-to-javascript-file.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
 </head>
 
 <body>
@@ -127,8 +126,10 @@
                                     <div class="tab-pane fade" id="v-pills-avatar" role="tabpanel" aria-labelledby="v-pills-avatar-tab">
                                         <form action="/changeavatar" enctype="multipart/form-data" method="POST">
                                             <div class="col-sm-11">
-                                                <label for="profileImg" class="ex1">Upload a Profile Picture</label><p class="ex1"></p>
-                                                <input id="profileImg" type="file" name="profileImg" required/><p class="ex1"></p>
+                                                <div id="upload-box" class="custom-file col-5">
+                                                    <input type="file" class="custom-file-input" id="profileImg" name="profileImg" required/>
+                                                    <label class="custom-file-label" for="profileImg">Choose an image here</label>
+                                                </div><p class="ex1"></p>
                                                 <p class="ex2">Note: Only support jp(e)g, png, bmp file that is no larger than 5MB</p>
                                                 <hr>
                                                 <button type="submit" class="btn btn-secondary">Update</button>
@@ -221,7 +222,7 @@
             </div>
         </div>
     </div>
-
+</div>
 <script type="text/javascript">
     $(document).ready(function () {
         $('#sidebarCollapse').on('click', function () {
@@ -229,7 +230,10 @@
         });
     });
 </script>
-</div>
+<script>
+    $(document).ready(function () {
+        bsCustomFileInput.init()
+    })
+</script>
 </body>
-
 </html>
