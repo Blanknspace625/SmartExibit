@@ -17,7 +17,7 @@ exports.verifyEmail = async function(req, res) {
     const time = new Date();
 
     //Generate a random string for email
-    const code = crypto.randomBytes(128).toString('hex').slice(0,128);
+    const code = crypto.randomBytes(128).toString('hex').slice(0, 128);
 
     db.getConnection(function(err, conn) {
         // Get user id from db
@@ -125,7 +125,7 @@ exports.forgotPassword = async function (req, res) {
     const email = req.body.email;
 
     //Generate a random string for email
-    const code = crypto.randomBytes(128).toString('hex').slice(0,128);
+    const code = crypto.randomBytes(128).toString('hex').slice(0, 128);
 
     db.getConnection(function(err, conn) {
         // Get user id from db

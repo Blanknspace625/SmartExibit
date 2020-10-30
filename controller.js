@@ -7,9 +7,6 @@ var showcase = require('./DataAccess/showcase');
 var fileUpload = require('./services/file_upload');
 var fileBrowser = require('./services/file_browser');
 
-//var User = require('./services/user.js');
-//var Media = require('./services/media.js');
-
 exports.return_entry = function(req, res) {
     if (req.session.userInfo) {
         res.redirect('/dashboard');
@@ -79,8 +76,8 @@ exports.verification_email_sent = function(req, res) {
     res.sendFile(path.join(__dirname, '/views/verificationsent.html'));
 }
 
-exports.verify_email = function(req,res) {
-    mailer.verifyEmailResponse(req,res);
+exports.verify_email = function(req, res) {
+    mailer.verifyEmailResponse(req, res);
 }
 
 exports.return_dashboard = function(req, res) {
