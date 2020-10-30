@@ -209,4 +209,8 @@ exports.return_stats_page = function(req, res) {
         res.redirect('/signin');
     }
 }
+
+exports.return_not_found = function(req, res) {
+    res.sendFile(path.join(__dirname, '/views/notfound.html'));
+}
  
