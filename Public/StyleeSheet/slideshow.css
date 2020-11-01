@@ -1,33 +1,39 @@
 * {box-sizing:border-box}
 
-/* Slideshow container */
-.slideshow-container {
-  max-width: 1920px;
-  position: relative;
-  margin: auto;
+
+/* Carousel */
+.carousel {
+  background-color: #e8e8e8;
 }
 
-div.carousel-caption{
-  padding-bottom: 7%;
+.carousel-caption {
+  width: 100%;
+  left: 15%;
+  top: 50% !important;
+  transform: translateY(-50%);
   text-align: left;
+  bottom: initial;
+}
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 div.carousel-title{
   color: #4F6367;
+  width: 100%;
   font-family: Sitka Heading;
-  font-size: 55px;
+  font-size: 150%;
   text-align: left;
   font-weight: bold;
-  line-height: 120%;
 }
 
 div.carousel-description{
   color: #4F6367;
   font-family: Segoe UI;
-  font-size: 25px;
+  font-size: 100%;
   text-align: left;
   font-weight: lighter;
-  line-height: 150%;
 }
 
 /* Register button */
@@ -37,7 +43,7 @@ a.button {
   padding: 12px 30px;
   color: #fff;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 100%;
 }
 
 /* Hide the images by default */
@@ -45,32 +51,6 @@ a.button {
   display: none;
 }
 
-/* Next & previous buttons */
-.prev, .next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  margin-top: -22px;
-  padding: 16px;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
-}
-
-/* Position the "next button" to the right */
-.next {
-  right: 0;
-  border-radius: 2px 0 0 2px;
-}
-
-/* On hover, add a black background color with a little bit see-through */
-.prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
-}
 
 /* Caption text */
 .text {
@@ -125,4 +105,52 @@ a.button {
 @keyframes fade {
   from {opacity: .4}
   to {opacity: 1}
+}
+
+/* Responsive layout - when the screen is less than 650px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 425px) {
+  .carousel-caption {
+    width: 100%;
+    left: 15%;
+    top: 50% !important;
+    transform: translateY(-50%);
+    text-align: left;
+    bottom: initial;
+  }
+  div.carousel-title{
+    font-size: 10px;
+  }
+
+  div.carousel-description{
+    font-size: 10px;
+
+  }
+  /* Register button */
+  a.button {
+    border-radius: 16px 16px 16px 16px;
+    padding: 12px 30px;
+    font-weight: 600;
+    font-size: 100%;
+  }
+}
+/* Responsive layout - when the screen is less than 650px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 375px) {
+  .carousel-caption {
+    font-size: 5px;
+  }
+  .carousel-title{
+    font-size: 20px;
+  }
+
+ .carousel-description{
+    font-size: 5px;
+
+  }
+  /* Register button */
+  a.button {
+    border-radius: 16px 16px 16px 16px;
+    padding: 12px 30px;
+    font-weight: 600;
+    font-size: 100%;
+  }
 }
