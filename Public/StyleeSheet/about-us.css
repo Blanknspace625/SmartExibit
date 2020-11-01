@@ -1,9 +1,10 @@
 body{
-    background-color: #B8D8D8;
+    background-color: #272727;
 }
 h2{
-    font-weight: bold;
-    margin-top: 0px;
+    font-size: 34px;
+    color: #111111;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 .social-link {
@@ -30,8 +31,7 @@ h2{
 #Smart_Exhibit{
     font-size: 27px;
     color:white;
-    font-family:Sitka Heading;
-    font-weight:bold;
+    font-family:'Volkhov', serif;
 }
 
 #Back_Arrow{
@@ -78,27 +78,21 @@ h2{
     padding: 14px 40px;
 }
 
-.se-sb{
-    background-color:#B8D8D8;
+.se-db1{
+    background-color:#272727;
 }
 
-.se-gb{
-    color: #3C787A;
+.se-db2{
+    color: rgb(48, 48, 48);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 10px;
 }
 
-.se-db{
-    background-color:#4F6367;
-    color: #fff;
+.se-db3{
+    color: rgb(48, 48, 48);
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
-.se-wh{
-    color:#FFFFFF;
-}
-
-.se-or{
-    background-color:#FE5F55;
-    color:white;
-}
 
 @media (min-width: 768px){
 

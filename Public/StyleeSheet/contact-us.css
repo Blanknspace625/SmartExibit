@@ -1,14 +1,14 @@
 
 h1{
-    color: #111111;
-    font-family: Sitka Heading;
+    color: #1f1f1f;
+    font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 34px;
 }
 body{
-    font-family: Sitka Heading;
-    color: #111111;
-    background-color: #B8D8D8;
-    font-size: 18px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: #414141;
+    background-color: #272727;
+    font-size: 17px;
 }
 
 .jumbotron{

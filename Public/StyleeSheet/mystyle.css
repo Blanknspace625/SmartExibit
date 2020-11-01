@@ -14,15 +14,14 @@ body {
   margin: 0;
   font-family: Segoe UI;
   font-size: 20px;
-  color: #fff;
+  background-color: #272727;
 }
 
 /* Logo style */
 #Smart_Exhibit{
   font-size: 27px;
   color:white;
-  font-family:Sitka Heading;
-  font-weight:bold;
+  font-family:'Volkhov', serif;
 }
 
 #Back_Arrow{
@@ -82,3 +81,6 @@ body {
   color:white;
 }
 
+.se-db1{
+  background-color:#272727;
+}
