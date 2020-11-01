@@ -102,4 +102,7 @@ module.exports = function(app) {
 
     app.route('/stats')
         .get(task.return_stats_page);
+
+    app.route('*')
+        .get(task.return_not_found);
 }
