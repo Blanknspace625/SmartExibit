@@ -16,7 +16,7 @@ exports.return_entry = function(req, res) {
 }
 
 exports.return_homepage = function(req, res) {
-    res.sendFile(path.join(__dirname, '/views/homepage.html'));
+    res.sendFile(path.join(__dirname, '/views/index.html'));
 }
 
 exports.return_contact = function(req, res) {
