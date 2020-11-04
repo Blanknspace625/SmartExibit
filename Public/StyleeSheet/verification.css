@@ -1,25 +1,75 @@
-* {
-    box-sizing: border-box;
-}
-html,body{
-    display: grid;
-    height: 100%;
-    place-items: center;
-    text-align: center;
-    background: #B8D8D8;
-}
+body {
+    font-size: 13px;
+    line-height: 1.8;
+    color: #222;
+    background: #272727;
+    font-weight: 400;
+    font-family: Georgia, 'Times New Roman', Times, serif; }
+
+.container {
+    width: 900px;
+    background: #fff;
+    margin: 0 auto;
+    box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+    -webkit-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+    -o-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+    -ms-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -o-border-radius: 20px;
+    -ms-border-radius: 20px; }
+
+.display-flex {
+    justify-content: space-between;
+    -moz-justify-content: space-between;
+    -webkit-justify-content: space-between;
+    -o-justify-content: space-between;
+    -ms-justify-content: space-between;
+    align-items: center;
+    -moz-align-items: center;
+    -webkit-align-items: center;
+    -o-align-items: center;
+    -ms-align-items: center; }
+
+.display-flex-center {
+    justify-content: center;
+    -moz-justify-content: center;
+    -webkit-justify-content: center;
+    -o-justify-content: center;
+    -ms-justify-content: center;
+    align-items: center;
+    -moz-align-items: center;
+    -webkit-align-items: center;
+    -o-align-items: center;
+    -ms-align-items: center; }
+
+.position-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%); }
+
+
+
+/*# sourceMappingURL=style.css.map */
 h1 {
     font-family: Segoe UI;
     top: 20px;
     font-size: 20px;
-    color: #fff;
+    color: black;
 }
 
 h2{
     padding-top: 10%;
     font-family: Segoe UI;
     font-size: 35px;
-    color: #fff;
+    color: black;
 }
 
 hr.new1{
@@ -31,179 +81,51 @@ h3 {
     top: 20px;
     font-size: 17px;
     padding-top: 10%;
-    color: #fff;
+    color: black;
 }
 
 h5{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 17px;
-    color: #fff;
-    padding-top: 5%;
+    color: black;
+    padding-top: 10%;
     padding-bottom: 10%;
 
 }
-a {
-    color: #fff;
-    padding-left: 3%;
-}
 
-a:hover {
-    color: #fff;
-}
-
-/* Padding for the logins and page */
-
-p.ex1 {
-    padding-top: 2%;
-}
-
-p.ex2 {
-    padding-bottom: 1%;
-}
-
-p.ex3{
-    padding-top: 8%;
-}
-
-p.ex4{
-    padding-bottom: 30%;
-}
-
-
-.container {
-    position: relative;
-
-}
-
-.inner_container{
-    background-color:#4F6367 ;
-    padding: 0%  30%  10%;
-    border-radius: 20px;
-
-}
-
-/* Login Logo style */
-#Smart_Exhibit{
-    padding-top: 20%;
-    font-size: 50px;
-    color:white;
-    font-family:Sitka Heading;
-    font-weight:bold;
-}
-
-#ForgotPassword{
-    font-size: 89px;
-    color:white;
-    font-weight:bold;
-}
-
-/* style inputs and link buttons */
-input,
-.btn {
-    width: 100%;
-    padding: 14px;
-    padding-left: 20px;
-    border: none;
-    border-radius: 20px;
-    margin: 7px 0;
-    opacity: 0.85;
-    outline: none;
-    display: inline-block;
-    font-size: 17px;
-    line-height: 20px;
-    text-decoration: none; /* remove underline from anchors */
-}
-
-
-/* add appropriate colors to fb, twitter and google buttons */
-.fb {
-    background-color: #3B5998;
-    color: white;
-}
-
-.twitter {
-    background-color: #55ACEE;
-    color: white;
-}
-
-.google {
-    background-color: #dd4b39;
-    color: white;
-}
-
-/* style the submit button */
-input[type=submit] {
-    background-color: #FE553E;
-    color: white;
-    cursor: pointer;
-}
-
-input[type=submit]:hover {
-    background-color: #FE553E;
-    opacity: 1;
-}
-
-/* Two-column layout */
-.col {
-    float: left;
-    width: 50%;
-    margin: auto;
-    padding: 0 50px;
-    margin-top: 20%;
-}
-
-/* Clear floats after the columns */
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-/* vertical line */
-.vl {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%);
-    border: 2px solid #ddd;
-    height: 175px;
-}
-
-/* text inside the vertical line */
-.vl-innertext {
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #f1f1f1;
-    border: 1px solid #ccc;
-    border-radius: 50%;
-    padding: 8px 10px;
-}
-
-/* hide some text on medium and large screens */
-.hide-md-lg {
-    display: none;
-}
-
-/* bottom container */
-.bottom-container {
-    text-align: center;
-    background-color: #666;
-    border-radius: 0px 0px 0px 0px;
-}
-
-/* Responsive layout - when the screen is less than 650px wide, make the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 650px) {
-    .col {
-        width: 100%;
-        margin-top: 0;
+@media screen and (max-width: 1200px) {
+    .container {
+        width: calc( 100% - 30px);
+        max-width: 100%;
+        margin-top:10%;
     }
-    /* hide the vertical line */
-    .vl {
-        display: none;
+
+}
+@media screen and (min-width: 1024px) {
+    .container {
+        width: calc( 100% - 30px);
+        max-width: 100%;
+        margin-top:10%;
     }
-    /* show the hidden text on small screens */
-    .hide-md-lg {
-        display: block;
-        text-align: center;
+    h2{
+        font-size: 20px;
+    }
+
+}
+@media screen and (max-width: 768px) {
+    .container {
+        width: calc( 100% - 30px);
+        max-width: 100%;
+        margin-top:10%;
+    }
+}
+@media screen and (max-width: 400px) {
+    .container {
+        width: calc( 100% - 30px);
+        max-width: 100%;
+        margin-top:10%;
+    }
+    h2{
+        font-size: 20px;
     }
 }
