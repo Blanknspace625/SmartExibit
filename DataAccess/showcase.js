@@ -93,14 +93,7 @@ exports.getShowcaseData = async function(req, res)
                 {
                     res.status(401).send("Not Authorised to access this content!");
                 }
-                
-                //Record view on the showcase if not owning user
-                if(results[0].idUser != req.session.userID)
-                {
-                    conn.query("INSERT INTO View (idShowcase) VALUES ('"+showcaseID+"')", {
-                        
-                    });
-                }
+            
 
 
                 //Return Data as a json format
@@ -130,9 +123,7 @@ exports.getShowcaseStatistics = async function(req, res)
 	                "count(case WHEN View.timestamp_ >= DATE_SUB(NOW(), INTERVAL 7 DAY) THEN 1 ELSE null end) AS lastWeekViews, " +
                     "count(*) AS allTimeViews " +
                 "FROM View "+
-                "INNER JOIN Showcase " +
-                "ON View.idShowcase = Showcase.idUpload " +
-                "WHERE Showcase.idUser = ? ",
+                "WHERE idUser = ? ",
                 req.session.userInfo.userId,
                 async function(err, results){
 
@@ -153,3 +144,4 @@ exports.getShowcaseStatistics = async function(req, res)
         });
     });
 }
+
