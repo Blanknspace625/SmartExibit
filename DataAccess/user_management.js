@@ -284,6 +284,19 @@ exports.editProfile = async function(req, res) {
     });
 }
 
+function logView(req)
+{
+    const userID = req.query.profileID;
+
+    db.getConnection(function(err,conn){
+        conn.query("INSERT INTO View (idUser) VALUES (?)", userID, async function(err, results){
+            if(err) throw err;
+
+            conn.release();
+        });
+    });
+}
+
 exports.extProfileView = async function(req, res){
     const userID = req.query.profileID;
 
@@ -291,6 +304,8 @@ exports.extProfileView = async function(req, res){
         db.getConnection(function (err, conn) {
             conn.query("SELECT * FROM User WHERE idUser = ?", [userID], async function (err, results) {
                 if (err) throw err;
+
+                logView(req);
 
                 if (results.length > 0) {
                     if (results[0].profilePrivate == "") //CASE: profile is not private
@@ -392,3 +407,4 @@ exports.extProfileView = async function(req, res){
         res.status(404).send('Invalid profile link!');
     }
 }
+
