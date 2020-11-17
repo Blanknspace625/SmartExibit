@@ -77,6 +77,10 @@
                                 Message Me
                               </button>
 
+                              <button type="button" class="btn btn-outline-dark se-or" data-toggle="modal" data-target="#exampleModalShort">
+                                Share Profile Link
+                              </button>
+
                               <!-- Modal -->
                               <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -113,13 +117,36 @@
 
                                       <input type="hidden" name="id" value=<%=userInfo.userID%> />
 
-
                                     </div>
                                     <div class="modal-footer">
                                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                       <button class="btn btn-outline-dark se-or" type="submit">Send</button>
                                     </div>
                                    </form>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- Modal -->
+                              <div class="modal fade" id="exampleModalShort" tabindex="-1" role="dialog" aria-labelledby="exampleModalShortTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalShortTitle">Copy Link to Share</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <div class="md-form mb-4">
+                                        <input type="text" class="form-control" id="sharelink" name="sharelink" value="ext-profile?profileID= \'<%=userInfo.ID%>\'"/>
+                                        <br>
+                                        <!-- The button used to copy the text -->
+                                        <button class="btn btn-outline-dark se-or" onclick="copyclipboard()">Copy link to Clipboard</button>
+                                      </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -318,6 +345,22 @@
 <script type="text/javascript">
   function goBack() {
       window.history.back()
+  }
+
+
+  function copyclipboard() {
+    /* Get the text field */
+    var copyText = document.getElementById("sharelink");
+
+    /* Select the text field */
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+
+    /* Copy the text inside the text field */
+    document.execCommand("copy");
+
+    /* Alert the copied text */
+    alert("Copied the text: " + copyText.value);
   }
 </script>
 <script src="/Public/Scripts/bootstrap.min.js"></script>
