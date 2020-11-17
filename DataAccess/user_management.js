@@ -315,6 +315,7 @@ exports.extProfileView = async function(req, res){
                             firstName: results[0].firstName,
                             lastName: results[0].lastName,
                             profileImg: results[0].profileImg,
+                            extLink: results[0].extLink,
 
                             email: "",
                             phoneNumber: "",
