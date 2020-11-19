@@ -219,7 +219,7 @@ input {
     border: none;
     border-bottom: 1px solid #999;
     padding: 6px 30px;
-    font-family: Poppins;
+    font-family: Georgia, 'Times New Roman', Times, serif;
     box-sizing: border-box; }
 input::-webkit-input-placeholder {
     color: #999; }
@@ -286,7 +286,7 @@ input[type=checkbox]:not(old):checked + label > span:before {
     font-size: 11px;
     line-height: 1.2;
     text-align: center;
-    font-family: 'Material-Design-Iconic-Font';
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     font-weight: bold; }
 
 .agree-term {
@@ -325,7 +325,7 @@ label.valid {
     height: 20px;
     background: transparent; }
 label.valid:after {
-    font-family: 'Material-Design-Iconic-Font';
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     content: '\f269';
     width: 100%;
     height: 100%;
@@ -376,13 +376,21 @@ label.valid:after {
     .container {
         width: calc( 100% - 30px);
         max-width: 100%;
-        margin-top:5%;
+        margin-top:15%;
     } }
 @media screen and (min-width: 1024px) {
     .container {
         max-width: 1200px;
-        margin-top:5%;} }
+        margin-top:15%;} }
 @media screen and (max-width: 768px) {
+    .container{
+        max-width: 1200px;
+        margin-top:20%;
+    }
+    .register-form{
+        width: 50%;
+        margin: 5% 25% 0% 25%;
+    }
     .signup-content, .signin-content {
         flex-direction: column;
         -moz-flex-direction: column;
@@ -394,6 +402,12 @@ label.valid:after {
         -webkit-justify-content: center;
         -o-justify-content: center;
         -ms-justify-content: center; }
+@media screen and (max-width: 425px){
+    .register-form{
+        width: 100%;
+        margin: 0 0 0 0;
+    }
+}
 
     .signup-form {
         margin-left: 0px;
@@ -452,7 +466,7 @@ label.valid:after {
 
 /*# sourceMappingURL=style.css.map */
 h1 {
-    font-family: Segoe UI;
+    font-family: Georgia, 'Times New Roman', Times, serif;
     top: 20px;
     font-size: 20px;
     color: #fff;
