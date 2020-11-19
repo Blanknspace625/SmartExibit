@@ -10,6 +10,8 @@
         integrity='sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk'
         crossorigin='anonymous')>
   <link rel="stylesheet" href="/Public/StyleeSheet/portfolio.css">
+  <link rel="stylesheet" href="/Public/StyleeSheet/footer.css">
+
 
 
   <!-- jQuery library -->
@@ -35,7 +37,7 @@
       <form action ="/profile" id="profileform" method = "post">
         <div id="content-wrap">
           <nav class="navbar navbar-expand-lg navbar-light se-db">
-            <a class="navbar-brand ml-sm-1" href="/" id="Smart_Exhibit"><i class="fas fa-user-graduate"></i>       Smart Exhibit</a>
+            <a class="navbar-brand ml-sm-4"><div class="Smart_Exhibit" href="/index" title="Smart Exhibit">Smart Exhibit</div></a>
             <button class="navbar-toggler ml-sm-1" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -187,9 +189,8 @@
                 </div>
             </div>
             <div class="container my-4">
-              <hr>                       
               <div class="text-center">
-                  <button class="btn btn-primary btn-outline-dark" input type="submit">Save Changes</button>
+                  <button class="btn btn-save" input type="submit">Save Changes</button>
               </div>
                 <p class="ex1"></p>
                 <div class="text-center">
@@ -212,4 +213,54 @@
   return true;
 }  
 </script>
+<!-- Site footer -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-6">
+        <h6>About</h6>
+        <p class="text-justify">This was proudly developed by five students from The University of Melbourne as their undergraduate capstone project of Computer System & Software major.</p>
+      </div>
+
+      <div class="col-xs-6 col-md-3">
+        <h6>Navigation</h6>
+        <ul class="footer-links">
+          <li><a href="">Homepage</a></li>
+          <li><a href="">Dashboard</a></li>
+          <li><a href=""></a></li>
+          <li><a href=""></a></li>
+        </ul>
+      </div>
+
+      <div class="col-xs-6 col-md-3">
+        <h6>Support</h6>
+        <ul class="footer-links">
+          <li><a href="http://scanfcode.com/about/">About Us</a></li>
+          <li><a href="http://scanfcode.com/contact/">Contact Us</a></li>
+          <li><a href="http://scanfcode.com/privacy-policy/">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-sm-6 col-xs-12">
+        <p class="copyright-text">Copyright &copy; 2020 All Rights Reserved by
+          <a href="#">Smart Exhibit</a>.
+        </p>
+      </div>
+      <!--
+      <div class="col-md-4 col-sm-6 col-xs-12">
+        <ul class="social-icons">
+          <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+          <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+          <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
+          <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+        </ul>
+      </div>
+      -->
+    </div>
+  </div>
+</footer>
 </html>

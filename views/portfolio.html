@@ -41,7 +41,7 @@
           <nav class="navbar navbar-expand-lg navbar-light se-db">
             <button class="navbar-brand btn btn-sm" id="Back_Arrow" onclick="goBack()"><i class="fas fa-chevron-left"></i></button>
             <p class="ex2"></p>
-            <a class="navbar-brand ml-sm-1" href="/" id="Smart_Exhibit"><i class="fas fa-user-graduate"></i>       Smart Exhibit</a>
+            <div class="Smart_Exhibit" href="/index" title="Smart Exhibit">Smart Exhibit</div>
             <button class="navbar-toggler ml-sm-1" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -75,11 +75,11 @@
                               <p class="text-secondary mb-1"><%=userInfo.occupation%></p>
                               <p class="ex1"></p>
                               <!-- Button trigger modal -->
-                              <button type="button" class="btn btn-outline-dark se-or" data-toggle="modal" data-target="#exampleModalLong">
+                              <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalLong">
                                 Message Me
                               </button>
 
-                              <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#exampleModalShort">
+                              <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalShort">
                                 Share Profile Link
                               </button>
 
@@ -133,17 +133,17 @@
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                   <div class="modal-content">
                                     <div class="modal-header">
-                                      <h5 class="modal-title" id="exampleModalShortTitle">Copy Link to Share</h5>
-                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <h4 class="modal-title" id="exampleModalShortTitle">Copy Link to Share</h4>
+                                      <button type="button btn-dark" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                       </button>
                                     </div>
                                     <div class="modal-body">
-                                      <div class="md-form mb-4">
+                                      <div class="md-form mb-2">
                                         <input type="text" class="form-control" id="sharelink" name="sharelink" value="<%=userInfo.extLink%>"/>
                                         <br>
                                         <!-- The button used to copy the text -->
-                                        <button class="btn btn-outline-dark se-or" onclick="copyclipboard()">Copy to Clipboard</button>
+                                        <button class="btn btn-dark" onclick="copyclipboard()">Copy to Clipboard</button>
                                       </div>
                                     </div>
                                     <div class="modal-footer">
@@ -376,7 +376,7 @@
     <div class="row">
       <div class="col-sm-12 col-md-6">
         <h6>About</h6>
-        <p class="text-justify">This is proudly developed by 5 Students from University of Melbourne as the Undergraduate capstone project of Computer System & Software major.</p>
+        <p class="text-justify">This was proudly developed by five students from The University of Melbourne as their undergraduate capstone project of Computer System & Software major.</p>
       </div>
 
       <div class="col-xs-6 col-md-3">
@@ -407,7 +407,7 @@
           <a href="#">Smart Exhibit</a>.
         </p>
       </div>
-
+      <!--
       <div class="col-md-4 col-sm-6 col-xs-12">
         <ul class="social-icons">
           <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
@@ -416,6 +416,7 @@
           <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
         </ul>
       </div>
+      -->
     </div>
   </div>
 </footer>
