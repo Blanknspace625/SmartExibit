@@ -5,52 +5,16 @@ body {
     font-family: Georgia, 'Times New Roman', Times, serif; }
 
 .card {
-    margin-top: 10%;
-    box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
-    -moz-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
-    -webkit-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
-    -o-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
-    -ms-box-shadow: 0px 15px 16.83px 0.17px rgba(0, 0, 0, 0.05);
+    margin-top: 5%;
     border-radius: 20px;
     -moz-border-radius: 20px;
     -webkit-border-radius: 20px;
     -o-border-radius: 20px;
     -ms-border-radius: 20px; }
 
-.display-flex {
-    justify-content: space-between;
-    -moz-justify-content: space-between;
-    -webkit-justify-content: space-between;
-    -o-justify-content: space-between;
-    -ms-justify-content: space-between;
-    align-items: center;
-    -moz-align-items: center;
-    -webkit-align-items: center;
-    -o-align-items: center;
-    -ms-align-items: center; }
-
-.display-flex-center {
-    justify-content: center;
-    -moz-justify-content: center;
-    -webkit-justify-content: center;
-    -o-justify-content: center;
-    -ms-justify-content: center;
-    align-items: center;
-    -moz-align-items: center;
-    -webkit-align-items: center;
-    -o-align-items: center;
-    -ms-align-items: center; }
-
-.position-center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    -webkit-transform: translate(-50%, -50%);
-    -o-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%); }
-
+.site-footer{
+    margin-top: 20%;
+}
 
 
 /*# sourceMappingURL=style.css.map */
@@ -89,14 +53,13 @@ h5{
 
 }
 
-.verification {
-    font-size: 100px;
-    color: white;
+#verification {
+    font-size: 1.7rem;
     font-family: 'Volkhov', serif
 }
 
 @media screen and (max-width: 1200px) {
-    .container {
+    .card {
         width: calc( 100% - 30px);
         max-width: 100%;
         margin-top:10%;
@@ -104,7 +67,7 @@ h5{
 
 }
 @media screen and (min-width: 1024px) {
-    .container {
+    .card {
         width: calc( 100% - 30px);
         max-width: 100%;
         margin-top:10%;
@@ -115,14 +78,14 @@ h5{
 
 }
 @media screen and (max-width: 768px) {
-    .container {
+    .card {
         width: calc( 100% - 30px);
         max-width: 100%;
         margin-top:10%;
     }
 }
 @media screen and (max-width: 400px) {
-    .container {
+    .card {
         width: calc( 100% - 30px);
         max-width: 100%;
         margin-top:10%;
