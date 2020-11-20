@@ -93,7 +93,7 @@
                             <div class="mt-10">
                                 <h3 class="p-md-2 mb-4"><b>Upload Files</b></h3>
                                 <hr>
-                                <form action="/upload" enctype="multipart/form-data" method="POST">
+                                <form id="upload_form"action="/upload" enctype="multipart/form-data" method="POST">
                                     <label class="ex1" for="showcaseName">Showcase Name</label>
                                     <input class="form-control col-6" id="showcaseName" type="text" name="showcaseName" value="Untitled" required/><br>
                                     <label class="ex1" for="privacyParam">Visibility</label><br>
@@ -106,9 +106,6 @@
                                     <div id="upload-box" class="custom-file col-6">
                                         <input type="file" class="custom-file-input" id="media" name="media" required/>
                                         <label class="custom-file-label" for="media" >Choose A File here</label>
-                                        <progress id="progressBar" value="0" max="100" style="width:300px;"></progress>
-                                        <h3 id="status"></h3>
-                                        <p id="loaded_n_total"></p>
                                     </div>
                                     <p class="ex2">Note: Choose one document-type file only and it cannot exceed 128MB</p>
                                     <hr>
@@ -137,46 +134,6 @@ $(document).ready(function () {
 })
 </script>
 
-<script>
-function _(el) {
-    return document.getElementById(el);
-}
-
-function uploadFile() {
-    var file = _("media").files[0];
-    // alert(file.name+" | "+file.size+" | "+file.type);
-    var formdata = new FormData();
-    formdata.append("media", file);
-    var ajax = new XMLHttpRequest();
-    ajax.upload.addEventListener("progress", progressHandler, false);
-    ajax.addEventListener("load", completeHandler, false);
-    ajax.addEventListener("error", errorHandler, false);
-    ajax.addEventListener("abort", abortHandler, false);
-    ajax.open("POST", "file_upload_parser.php"); // http://www.developphp.com/video/JavaScript/File-Upload-Progress-Bar-Meter-Tutorial-Ajax-PHP
-    //use file_upload_parser.php from above url
-    ajax.send(formdata);
-}
-
-function progressHandler(event) {
-    _("loaded_n_total").innerHTML = "Uploaded " + event.loaded + " bytes of " + event.total;
-    var percent = (event.loaded / event.total) * 100;
-    _("progressBar").value = Math.round(percent);
-    _("status").innerHTML = Math.round(percent) + "% uploaded... please wait";
-}
-
-function completeHandler(event) {
-    _("status").innerHTML = event.target.responseText;
-    _("progressBar").value = 0; //wil clear progress bar after successful upload
-}
-
-function errorHandler(event) {
-    _("status").innerHTML = "Upload Failed";
-}
-
-function abortHandler(event) {
-    _("status").innerHTML = "Upload Aborted";
-}
-</script>
 
 </body>
 </html>
